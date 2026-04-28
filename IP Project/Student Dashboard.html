@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="Nav.css">
+    <style>
+      body{
+  background: #f8fafc;
+  color: #1f2937;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.main-content {
+  padding: 32px;
+}
+.welcome-header{
+  box-shadow: #666 0px 2px 4px;
+  background: #24358B;
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.welcome-header h1 {
+  color: white;
+  margin: 0 0 8px;
+  font-size: 32px;
+}
+
+.welcome-header p{
+  color: #f9f9f9;
+  margin: 0;
+  opacity: 0.9;
+}
+.quick-links {
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.quick-links h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #111827;
+}
+
+.quick-links a {
+  display: inline-block;
+  margin-right: 20px;
+  background: #f1f5f9;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+.quick-links a:hover {
+  background: #e2e8f0;
+}
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.stat-card {
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  flex: 1 1 220px;
+}
+.stat-card h2 {
+  margin: 0;
+  font-size: 36px;
+  color: #2563EB;
+}
+.stat-card p {
+  margin: 8px 0 0;
+  color: #6b7280;
+}
+.activity-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.activity-section h3 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #111827;
+}
+.activity-list {
+  padding: 0;
+  margin: 0;
+}
+.activity-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid  #2563EB;
+}
+.Complaint_list {
+  font-weight: 600px;
+  color: #111827;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 20px;
+  }
+
+  .welcome-header {
+    padding: 24px;
+  }
+
+  .welcome-header h1 {
+    font-size: 26px;
+  }
+
+  .quick-links a {
+    margin: 8px 8px 0 0;
+  }
+
+  .stat-card {
+    flex: 1 1 100%;
+  }
+
+  .activity-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 14px;
+  }
+
+  .welcome-header {
+    padding: 18px;
+  }
+
+  .welcome-header h1 {
+    font-size: 22px;
+  }
+
+  .quick-links {
+    text-align: left;
+  }
+
+  .quick-links a {
+    display: block;
+    margin: 8px 0 0;
+  }
+}
+
+    </style>
+      </head>
+    <body>
+    <nav class="Navbar">
+        <div class="logo">
+        <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+        <p> <b> Ambo University </b> </p>
+        </div>
+        <a href="Home.html">Home</a>
+        <a href="Student Dashboard.html">Students Dashboard</a>
+        <a href="Admin_Dashboard1.html">Admin Dashboard</a>
+        <a href="Teacher Dashboard.html">Teachers Dashboard</a>
+        <a href="Login.html">Logout</a>
+    </nav>
+      <div class="main-content">
+        <div class="welcome-header">
+          <h1>Welcome back, John Doe</h1>
+          <p>Information Technology Department | Second Year Student</p>
+        </div>
+
+        <div class="quick-links">
+          <h3>Quick Actions</h3>
+          <a href="Submit_Complaint.html">Submit Complaint</a>
+          <a href="#">My Dashboard</a>
+          <a href="#">Submission Guide</a>
+        </div>
+  
+        <div class="stats-row">
+          <div class="stat-card">
+            <h2>12</h2>
+            <p>Complaints submitted</p>
+          </div>
+          <div class="stat-card">
+            <h2>3</h2>
+            <p>Pending</p>
+          </div>
+          <div class="stat-card">
+            <h2>8</h2>
+            <p>Resolved</p>
+          </div>
+        </div>
+        <div class="activity-section">
+          <h3>Recent Activity</h3>
+          <ol class="activity-list">
+            <li>
+              <div class="Complaint_list">Unfair Grading System</div>
+               <p>Submitted 2 days ago</p>
+            </li>
+            <li>
+              <div class="Complaint_list">Lack of Communication</div>
+              <p>Submitted 3 days ago</p>
+            </li>
+            <li>
+              <div class="Complaint_list">Irregular Class Policy</div>
+              <p>Resolved 1 week ago</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    <footer class="Footer">
+      <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+     </footer>
+</body>
+</html>

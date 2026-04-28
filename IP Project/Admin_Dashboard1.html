@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="Nav.css">
+    <style>
+      body {
+        background: #f8fafc;
+        color: #1f2937;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .dashboard-container {
+        padding: 32px;
+        max-width: 1200px;
+        margin: 30px auto;
+      }
+      .welcome-header {
+        box-shadow: #666 0px 2px 4px;
+        background: #24358B;
+        border-radius: 8px;
+        padding: 32px;
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .welcome-header h1 {
+        color: white;
+        margin: 0 0 8px;
+        font-size: 32px;
+      }
+      .welcome-header p {
+        color: #f9f9f9;
+        margin: 0;
+        opacity: 0.9;
+      }
+      .quick-links {
+        text-align: center;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 28px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+      .quick-links h3 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 18px;
+        color: #111827;
+      }
+      .quick-links a {
+        display: inline-block;
+        margin: 0 8px;
+        background: #f1f5f9;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #374151;
+        font-weight: 500;
+      }
+      .quick-links a:hover {
+        background: #e2e8f0;
+      }
+      .activity-section {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+      .activity-section h3 {
+        margin-top: 0;
+        font-size: 22px;
+        color: #111827;
+      }
+      .complaints-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .complaints-table td {
+        padding: 12px 10px;
+        text-align: left;
+        border-bottom: 1px solid #2563EB;
+      }
+      .complaints-table th {
+        background: #f9fafb;
+        font-weight: 600;
+        color: #333;
+      }
+      .status-pending {
+        color: #B45309;
+        font-weight: 600;
+      }
+      .status-resolved {
+        color: #059669;
+        font-weight: 600;
+      }
+      .Button {
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 12px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-right: 6px;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+      }
+      .Button:hover {
+        transform: translateY(-1px);
+      }
+      .Button-view {
+        background-color: #0056B3;
+      }
+      .Button-view:hover {
+        background-color: #1D4ED8;
+      }
+      .Button-assign {
+        background-color: #059669;
+      }
+      .Button-assign:hover {
+        background-color: #047857;
+      }
+      .Button-decline {
+        background-color: #DC2626;
+      }
+      .Button-decline:hover {
+        background-color: #B91C1C;
+      }
+
+      .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+      }
+
+      @media (max-width: 768px) {
+        .dashboard-container {
+          padding: 18px;
+        }
+        .welcome-header {
+          padding: 22px;
+        }
+        .welcome-header h1 {
+          font-size: 26px;
+        }
+        .quick-links a {
+          margin: 6px 6px 0 0;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .dashboard-container {
+          padding: 12px;
+        }
+        .welcome-header h1 {
+          font-size: 22px;
+        }
+        .activity-section {
+          padding: 16px;
+        }
+        .complaints-table td:last-child {
+          white-space: normal;
+        }
+        .complaints-table td:last-child .Button {
+          display: block;
+          width: 100%;
+          margin: 0 0 6px 0;
+        }
+      }
+    </style>
+</head>
+<body>
+    <nav class="Navbar">
+        <div class="logo">
+        <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+        <p><b>Ambo University</b></p>
+        </div>
+         <a href="Home.html">Home</a>
+        <a href="Student Dashboard.html">Students Dashboard</a>
+        <a href="Admin_Dashboard1.html">Admin Dashboard</a>
+        <a href="Teacher Dashboard.html">Teachers Dashboard</a>
+        <a href="Login.html">Logout</a>
+    </nav>
+    <div class="dashboard-container">
+        <div class="welcome-header">
+          <h1>Admin Dashboard</h1>
+          <p>Complaint Management System — Administration</p>
+        </div>
+
+        <div class="quick-links">
+          <h3>Quick Actions</h3>
+          <a href="#">Unassigned Complaints</a>
+          <a href="#all-complaints">All Complaints</a>
+          <a href="#">Pending Approvals</a>
+        </div>
+
+        <div class="activity-section" id="all-complaints">
+          <h3>All Complaints</h3>
+          <div class="table-wrap">
+            <table class="complaints-table">
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td>101</td>
+              <td>Unfair Grading System</td>
+              <td><span class="status-pending">Pending</span></td>
+              <td>2026-04-08</td>
+              <td>
+                <button type="button" class="Button Button-view">View</button>
+                <button type="button" class="Button Button-assign">Assign</button>
+                <button type="button" class="Button Button-decline">Decline</button>
+              </td>
+            </tr>
+            <tr>
+              <td>102</td>
+              <td>Lack of Communication</td>
+              <td><span class="status-pending">Pending</span></td>
+              <td>2026-04-07</td>
+              <td>
+                <button type="button" class="Button Button-view">View</button>
+                <button type="button" class="Button Button-assign">Assign</button>
+                <button type="button" class="Button Button-decline">Decline</button>
+              </td>
+            </tr>
+            <tr>
+              <td>103</td>
+              <td>Irregular Class Policy</td>
+              <td><span class="status-resolved">Resolved</span></td>
+              <td>2026-03-28</td>
+              <td>
+                <button type="button" class="Button Button-view">View</button>
+                <button type="button" class="Button Button-assign">Assign</button>
+                <button type="button" class="Button Button-decline">Decline</button>
+              </td>
+            </tr>
+            <tr>
+              <td>104</td>
+              <td>Incorrect Grading</td>
+              <td><span class="status-resolved">Resolved</span></td>
+              <td>2026-03-15</td>
+              <td>
+                <button type="button" class="Button Button-view">View</button>
+                <button type="button" class="Button Button-assign">Assign</button>
+                <button type="button" class="Button Button-decline">Decline</button>
+              </td>
+            </tr>
+            </table>
+          </div>
+        </div>
+    </div>
+    <footer class="Footer">
+      <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+    </footer>
+</body>
+</html>

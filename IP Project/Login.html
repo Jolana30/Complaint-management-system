@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambo university Student to Teacher complaint system</title>
+     <style>
+      body{
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #F3F6FB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  color: #111827;
+}
+
+.login-container{
+  background: #FFFFFF;
+  margin: 10px;
+  padding: 30px;
+  width: 320px;
+  border: none;
+  text-align: center;
+  color:#0F172A;
+  border-radius: 14px; 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+h1{
+  margin-bottom:5px;
+  font-weight: 600;
+}
+p{
+  margin-bottom: 20px;
+  color: #6B7280;
+  font-weight: 400; 
+  font-size: 14px;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: 500;
+}
+input{
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 10px;
+  width: 92%;
+  font-size: 14px;
+  transition: 0.2s;
+}
+input:hover{
+  border-color: #2563EB;
+}
+
+.options{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+fieldset{
+  border: none;
+}
+#cbox{
+  width: 15px;
+}
+
+.options a{
+  text-decoration: none;
+  color: #2563EB;
+}
+
+.options a:hover{
+  text-decoration: underline;
+}
+
+button{
+  padding: 12px;
+  background: #2563EB;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor:pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+button:hover {
+  background: #1D4ED8;
+}
+
+button:active{
+  transform: scale(0.98);
+}
+
+img{
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+.Footer{
+  color: #6B7280;
+  text-align: center;
+  padding: 20px 10px;
+  border-top: 1px solid #E5E7EB;
+  margin-top: 30px;
+  font-size: 12px;
+
+}
+
+#name{
+  font-size: 1rem;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #1F2937;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+#motto{
+  font-size: 0.9rem;
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+#adress{
+  font-size: 0.85rem;
+  margin: 0;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 480px) {
+  .login-container{
+    width: calc(100% - 24px);
+    padding: 20px;
+  }
+
+  h1{
+    font-size: 24px;
+  }
+}
+     </style>
+  </head>
+<body>
+    <div class="login-container">
+      <img src="Pictures/download (1).jpg" alt="">
+      <h1>Ambo university</h1>
+    <p>Student to Teacher complaint system</p>
+    <form action="Home.html" method="get">
+      <fieldset>
+        <label for="Username">Username:</label><br>
+        <input type="text" placeholder="Enter your username" required> <br> <br>
+        <label for="password">Password:</label> <br>
+        <input type="password" placeholder="Enter your password" required>
+      </fieldset>
+      <div class="options">
+      <label>
+        <input type="checkbox" id="cbox">Remember Me
+      </label>
+      <a href="#">Forgot Password?</a>
+      </div>
+      <button  type="submit">Login</button>
+    </form>
+    <div class="Footer">
+<p id="name"> Ambo University </p>
+<p id="motto">Better future through Knowledge and Wisdom!</p>
+<p id="adress">P.O. Box 19, Ambo, Oromia, Ethiopia
+   Phone: (+251) 111 236 3160</p>
+  </div>
+    </div>
+</body>
+</html>
