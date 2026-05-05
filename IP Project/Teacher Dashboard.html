@@ -8,8 +8,8 @@
     <style>
       body{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #f8fafc;
+  color: #1f2937;
 }
 .dashboard-container {
   max-width: 1200px;
@@ -45,8 +45,8 @@
 .stat-box {
    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   background: #fff;
-  border-radius: 8px;
-  padding: 20px 60px 10px;
+  border-radius: 12px;
+  padding: 20px;
   text-align: center;
   flex: 1 1 220px;
 }
@@ -62,17 +62,16 @@
 }
 
 .content-section {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
 }
 .card {
   background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  padding-bottom: 60px;
+  border-radius: 12px;
+  padding: 24px;
   margin-bottom: 20px;
-  flex: 1 1 420px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .card h3 {
@@ -84,31 +83,55 @@
 .complaints-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 620px;
+  min-width: 900px;
 }
-.complaints-table td {
-  padding: 10px;
+.complaints-table td,
+.complaints-table th {
+  padding: 12px 10px;
   text-align: left;
-  border-bottom: 1px solid #007BFF;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .complaints-table th {
-  background: #f9f9f9;
+  background: #f9fafb;
   font-weight: 600;
   color: #333;
 }
 
 .Button{
-  background-color: #0056B3;
+  display: inline-block;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   padding: 8px 12px;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: none;
+  margin: 3px 4px 3px 0;
+  min-width: 64px;
+  text-align: center;
 }
-.Button:hover {
-  background-color: #45bdf9;
+.Button-view {
+  background-color: #2563EB;
+}
+.Button-respond {
+  background-color: #7C3AED;
+}
+.status-assigned {
+  color: #B45309;
+  font-weight: 700;
+}
+.status-progress {
+  color: #1D4ED8;
+  font-weight: 700;
+}
+.status-admin {
+  color: #7C3AED;
+  font-weight: 700;
+}
+.status-resolved {
+  color: #059669;
+  font-weight: 700;
 }
 .announcement-box {
   background: #e7f3ff;
@@ -143,9 +166,10 @@
     padding: 18px 18px 10px;
   }
   .card {
-    flex: 1 1 100%;
     padding: 16px;
-    padding-bottom: 20px;
+  }
+  .content-section {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -167,80 +191,97 @@
         <p> <b> Ambo University </b> </p>
         </div>
         <a href="Home.html">Home</a>
-        <a href="Student Dashboard.html">Students Dashboard</a>
-        <a href="Admin_Dashboard1.html">Admin Dashboard</a>
-        <a href="Teacher Dashboard.html">Teachers Dashboard</a>
-        <a href="/index.html">Logout</a>
+        <a href="Teacher_Dashboard.html">Teachers Dashboard</a>
+        <a href="Login.html">Logout</a>
     </nav>
     <div class="dashboard-container">
       <section class="header">
         <h1>Welcome,Mr.Eyuel</h1>
-        <p>Department of Information technology | Teacher Dashboard</p>
+        <p>IP and SAD Course Teacher | Teacher Dashboard</p>
       </section>
 
       <section class="stats-section">
         <div class="stat-box">
-          <h2>15</h2>
+          <h2>4</h2>
           <p>Assigned Complaints</p>
         </div>
         <div class="stat-box">
-          <h2>8</h2>
-          <p>Pending Review</p>
+          <h2>1</h2>
+          <p>In Progress</p>
         </div>
         <div class="stat-box">
-          <h2>7</h2>
-          <p>Resolved This Month</p>
+          <h2>1</h2>
+          <p>Sent to Admin</p>
+        </div>
+        <div class="stat-box">
+          <h2>1</h2>
+          <p>Resolved</p>
         </div>
       </section>
       <section class="content-section">
-        <div>
           <div class="card">
             <h3>Assigned Complaints</h3>
             <div class="table-wrap">
             <table class="complaints-table">
                 <tr>
+                  <th>ID</th>
                   <th>Student</th>
-                  <th>Issue</th>
+                  <th>Title</th>
+                  <th>Course</th>
                   <th>Status</th>
+                  <th>Last Update</th>
                   <th>Action</th>
                 </tr>
                 <tr>
+                  <td>CMP-101</td>
                   <td>John Doe</td>
-                  <td>Poor Communication</td>
-                  <td style="color: rgb(200, 200, 57);"><b>Pending</b></td>
-                  <td><button class="Button">Review</button></td>
+                  <td>Unfair Grading System</td>
+                  <td>SAD</td>
+                  <td><span class="status-assigned">Assigned</span></td>
+                  <td>Assigned by admin today</td>
+                  <td>
+                    <a class="Button Button-view" href="Teachers_Assigned_Complaint.html">Open</a>
+                  </td>
                 </tr>
                 <tr>
+                  <td>CMP-102</td>
                   <td>Seladin Bergecho</td>
-                  <td>Inconsistent Attendance Policy</td>
-                  <td style="color: #B45309;"><b>In Review</b></td>
-                  <td><button class="Button">Update</button></td>
+                  <td>Lack of Communication</td>
+                  <td>IP</td>
+                  <td><span class="status-progress">In Progress</span></td>
+                  <td>Accepted and under review</td>
+                  <td><a class="Button Button-respond" href="Teacher_Complaint_Details.html">Respond</a></td>
                 </tr>
                 <tr>
-                  <td>Adane Girma</td>
-                  <td>Unfair Grading in the lab Exam</td>
-                  <td style="color: green;"><b>Resolved</b></td>
-                  <td><button class="Button">View</button></td>
+                  <td>CMP-108</td>
+                  <td>Rahma Ahmed</td>
+                  <td>Late IP Assignment Feedback</td>
+                  <td>IP</td>
+                  <td><span class="status-admin">Sent to Admin</span></td>
+                  <td>Solution sent to admin yesterday</td>
+                  <td><a class="Button Button-view" href="Teacher_Sent_To_Admin.html">View</a></td>
                 </tr>
                 <tr>
-                  <td>Degu Debebe</td>
-                  <td> Incorrect Grading</td>
-                  <td style="color: green;"><b>Resolved</b></td>
-                  <td><button class="Button">View</button></td>
+                  <td>CMP-107</td>
+                  <td>Natnael Tadesse</td>
+                  <td>SAD Lab Mark Correction</td>
+                  <td>SAD</td>
+                  <td><span class="status-resolved">Resolved</span></td>
+                  <td>Admin confirmed resolution</td>
+                  <td><a class="Button Button-view" href="Teacher_Resolved_Complaint.html">View</a></td>
                 </tr>
             </table>
             </div>
           </div>
-        </div>
           <div class="card">
             <h3>Announcements</h3>
             <div class="announcement-box">
               <p><strong>Important Notice:</strong></p>
-              <p>Remember to review complaints within 48 hours of assignment for timely resolution.</p>
+              <p>Submit a clear response so the admin can confirm the resolution before the student sees the final result.</p>
             </div><br>
              <div class="announcement-box">
-              <p><strong>Meeting Reminder:</strong></p>
-              <p>Please note the upcoming team meeting on Friday at 2:00 PM.</p>
+              <p><strong>Workflow Reminder:</strong></p>
+              <p>Teachers should review assigned complaints, write a response, and send the solution back to admin for confirmation.</p>
             </div>
           </div>
       </section>
