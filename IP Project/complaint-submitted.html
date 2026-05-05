@@ -31,6 +31,31 @@
       border-radius: 10px;
       color: #374151;
     }
+    .id-box{
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .id-item{
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .id-item span{
+      display: block;
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .id-item strong{
+      color: #111827;
+      font-size: 18px;
+    }
+    .status-pending{
+      color: #B45309;
+    }
     .actions{
       margin-top: 18px;
       display: flex;
@@ -49,6 +74,11 @@
     .btn.secondary{
       background: #0f172a;
     }
+    @media (max-width: 600px){
+      .id-box{
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -62,6 +92,10 @@
         <a href="Admin_Dashboard1.html">Admin Dashboard</a>
         <a href="Teacher Dashboard.html">Teachers Dashboard</a>
         <a href="/index.html">Logout</a>
+        <a href="Student_Dashboard.html">Students Dashboard</a>
+        <a href="Submit_Complaint.html">Submit Complaint</a>
+        <a href="My_Complaints.html">My Complaints</a>
+        <a href="Login.html">Logout</a>
   </nav>
   <div class="wrap">
     <div class="card">
@@ -73,6 +107,22 @@
       <div class="actions">
         <a class="btn" href="Submit_Complaint.html">Submit another</a>
         <a class="btn secondary" href="Home.html">Home</a>
+      <div class="id-box">
+        <div class="id-item">
+          <span>Generated Complaint ID</span>
+          <strong>CMP-108</strong>
+        </div>
+        <div class="id-item">
+          <span>Current Status</span>
+          <strong class="status-pending">Pending</strong>
+        </div>
+      </div>
+      <div class="hint">
+        Thank you for submitting your complaint. Keep your complaint ID so you can track it from My Complaints.
+      </div>
+      <div class="actions">
+        <a class="btn" href="Submit_Complaint.html">Submit another</a>
+        <a class="btn secondary" href="My_Complaints.html">My Complaints</a>
       </div>
     </div>
   </div>

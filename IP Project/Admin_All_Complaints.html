@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Complaints</title>
+  <link rel="stylesheet" href="Nav.css">
+  <style>
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #1f2937;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 1250px;
+      margin: 30px auto;
+      padding: 0 24px;
+    }
+
+    .page-header {
+      background: #24358B;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 28px;
+      box-shadow: #666 0px 2px 4px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+
+    .page-header p {
+      margin: 0;
+      color: #f9f9f9;
+      opacity: 0.9;
+    }
+
+    .complaints-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .card-title h2 {
+      margin: 0;
+      color: #111827;
+      font-size: 22px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2563EB;
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1050px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      color: #374151;
+    }
+
+    th {
+      background: #f9fafb;
+      color: #111827;
+      font-weight: 600;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .status-progress {
+      background: #dbeafe;
+      color: #1D4ED8;
+    }
+
+    .status-confirm {
+      background: #f5f3ff;
+      color: #7C3AED;
+    }
+
+    .status-resolved {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .status-declined {
+      background: #fee2e2;
+      color: #DC2626;
+    }
+
+    .action-link {
+      color: #2563EB;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .page-header {
+        padding: 24px;
+      }
+
+      .page-header h1 {
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 12px;
+      }
+
+      .page-header h1 {
+        font-size: 22px;
+      }
+
+      .complaints-card {
+        padding: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="Navbar">
+    <div class="logo">
+      <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+      <p><b>Ambo University</b></p>
+    </div>
+    <a href="Home.html">Home</a>
+    <a href="Admin_Dashboard1.html">Admin Dashboard</a>
+    <a href="Admin_All_Complaints.html">All Complaints</a>
+    <a href="Login.html">Logout</a>
+  </nav>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>All Complaints</h1>
+      <p>Complete complaint record across all statuses.</p>
+    </section>
+
+    <section class="complaints-card">
+      <div class="card-title">
+        <h2>All Complaint List</h2>
+        <a class="btn" href="Admin_Dashboard1.html">Back to Dashboard</a>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Student</th>
+            <th>Title</th>
+            <th>Course</th>
+            <th>Category</th>
+            <th>Department</th>
+            <th>Status</th>
+            <th>Last Update</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>CMP-101</td>
+            <td>John Doe</td>
+            <td>Unfair Grading System</td>
+            <td>SAD</td>
+            <td>Assessment & Grading</td>
+            <td>Information Technology</td>
+            <td><span class="status status-pending">Pending</span></td>
+            <td>Submitted 2 days ago</td>
+            <td><a class="action-link" href="Admin_Complaint_Details.html">View</a></td>
+          </tr>
+          <tr>
+            <td>CMP-102</td>
+            <td>Seladin Bergecho</td>
+            <td>Lack of Communication</td>
+            <td>IP</td>
+            <td>Communication</td>
+            <td>Computer Science</td>
+            <td><span class="status status-progress">In Progress</span></td>
+            <td>Assigned to Mr. Eyuel</td>
+            <td><a class="action-link" href="Admin_Complaint_Details.html">View</a></td>
+          </tr>
+          <tr>
+            <td>CMP-103</td>
+            <td>Adane Girma</td>
+            <td>Irregular Class Policy</td>
+            <td>DSA</td>
+            <td>Attendance Policy</td>
+            <td>Electrical and Computer Engineering</td>
+            <td><span class="status status-confirm">Needs Confirmation</span></td>
+            <td>Teacher replied 1 week ago</td>
+            <td><a class="action-link" href="Admin_Confirm_Resolution.html">Confirm</a></td>
+          </tr>
+          <tr>
+            <td>CMP-104</td>
+            <td>Degu Debebe</td>
+            <td>Incorrect Grading</td>
+            <td>OS</td>
+            <td>Assessment & Grading</td>
+            <td>Civil Engineering</td>
+            <td><span class="status status-resolved">Resolved</span></td>
+            <td>Teacher replied 2 weeks ago</td>
+            <td><a class="action-link" href="Complaint_Reply.html">View Reply</a></td>
+          </tr>
+          <tr>
+            <td>CMP-105</td>
+            <td>Mahlet Kebede</td>
+            <td>Library Seating Problem</td>
+            <td>FDBS</td>
+            <td>Other</td>
+            <td>Mechanical Engineering</td>
+            <td><span class="status status-declined">Declined</span></td>
+            <td>Admin declined: not enough evidence</td>
+            <td><a class="action-link" href="Complaint_Declined.html">View Reason</a></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="Footer">
+    <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

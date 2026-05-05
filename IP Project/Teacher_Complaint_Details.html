@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Complaint Details</title>
+  <link rel="stylesheet" href="Nav.css">
+  <style>
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #1f2937;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .page-header {
+      background: #24358B;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: #666 0px 2px 4px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    .page-header p {
+      margin: 0;
+      color: #f9f9f9;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 22px;
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      color: #111827;
+      font-size: 22px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 22px;
+    }
+
+    .detail-item span {
+      display: block;
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .detail-item strong {
+      color: #111827;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1D4ED8;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .message-box {
+      background: #f1f5f9;
+      border-left: 4px solid #2563EB;
+      border-radius: 8px;
+      padding: 14px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .form-row {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn-primary {
+      background: #2563EB;
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    .btn-success {
+      background: #059669;
+      color: #ffffff;
+    }
+
+    @media (max-width: 640px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="Navbar">
+    <div class="logo">
+      <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+      <p><b>Ambo University</b></p>
+    </div>
+    <a href="Home.html">Home</a>
+    <a href="Teacher_Dashboard.html">Teachers Dashboard</a>
+    <a href="Login.html">Logout</a>
+  </nav>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>In Progress Complaint</h1>
+      <p>CMP-102 | IP course complaint currently under teacher review</p>
+    </section>
+
+    <section class="card">
+      <h2>Lack of Communication</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <span>Complaint ID</span>
+          <strong>CMP-102</strong>
+        </div>
+        <div class="detail-item">
+          <span>Status</span>
+          <strong><span class="status">In Progress</span></strong>
+        </div>
+        <div class="detail-item">
+          <span>Student</span>
+          <strong>Seladin Bergecho</strong>
+        </div>
+        <div class="detail-item">
+          <span>Course</span>
+          <strong>IP</strong>
+        </div>
+        <div class="detail-item">
+          <span>Category</span>
+          <strong>Communication</strong>
+        </div>
+        <div class="detail-item">
+          <span>Admin Remark</span>
+          <strong>Assigned to Mr. Eyuel for review.</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Student Complaint</h2>
+      <div class="message-box">
+        The student reported that course updates and class announcements were not communicated clearly.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Teacher Response</h2>
+      <form action="Teacher_Dashboard.html" method="post">
+        <input type="hidden" name="status" value="send_to_admin">
+
+        <div class="form-row">
+          <label for="response">Response</label>
+          <textarea id="response" name="response" rows="6" placeholder="Write your response to the student's complaint." required></textarea>
+        </div>
+
+        <div class="buttons">
+          <a class="btn btn-secondary" href="Teacher_Dashboard.html">Cancel</a>
+          <button class="btn btn-success" type="submit">Send to Admin</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="Footer">
+    <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

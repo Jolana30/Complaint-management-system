@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In Progress Complaints</title>
+  <link rel="stylesheet" href="Nav.css">
+  <style>
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #1f2937;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .page-container {
+      max-width: 1150px;
+      margin: 30px auto;
+      padding: 0 24px;
+    }
+    .page-header {
+      background: #24358B;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 28px;
+      box-shadow: #666 0px 2px 4px;
+    }
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+    .page-header p {
+      margin: 0;
+      color: #f9f9f9;
+      opacity: 0.9;
+    }
+    .toolbar {
+      margin-bottom: 18px;
+    }
+    .toolbar a {
+      color: #2563EB;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .toolbar a:hover {
+      text-decoration: underline;
+    }
+    .complaints-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .complaints-card h2 {
+      margin: 0 0 18px;
+      color: #111827;
+      font-size: 22px;
+    }
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .complaints-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+    .complaints-table th,
+    .complaints-table td {
+      text-align: left;
+      padding: 13px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      color: #374151;
+    }
+    .complaints-table th {
+      background: #f9fafb;
+      color: #111827;
+      font-weight: 600;
+    }
+    .status {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .status-progress {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+    .action-link {
+      color: #2563EB;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .note-box {
+      margin-top: 18px;
+      padding: 14px;
+      background: #f1f5f9;
+      border-left: 4px solid #2563EB;
+      border-radius: 8px;
+      color: #374151;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <nav class="Navbar">
+    <div class="logo">
+      <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+      <p><b>Ambo University</b></p>
+    </div>
+    <a href="Home.html">Home</a>
+    <a href="Student_Dashboard.html">Students Dashboard</a>
+    <a href="Submit_Complaint.html">Submit Complaint</a>
+    <a href="My_Complaints.html">My Complaints</a>
+    <a href="Submission_Guide.html">Submission Guide</a>
+    <a href="Login.html">Logout</a>
+  </nav>
+
+  <div class="page-container">
+    <div class="page-header">
+      <h1>In Progress Complaints</h1>
+      <p>Complaints that have been assigned and are being handled by a teacher.</p>
+    </div>
+
+    <div class="toolbar">
+      <a href="My_Complaints.html">Back to all complaints</a>
+    </div>
+
+    <div class="complaints-card">
+      <h2>Your complaints in progress</h2>
+      <div class="table-wrap">
+        <table class="complaints-table">
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Course</th>
+            <th>Category</th>
+            <th>Department</th>
+            <th>Submitted Date</th>
+            <th>Status</th>
+            <th>Assigned Teacher</th>
+            <th>Last Update</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>CMP-102</td>
+            <td>Lack of Communication</td>
+            <td>IP</td>
+            <td>Communication</td>
+            <td>Information Technology</td>
+            <td>2026-04-07</td>
+            <td><span class="status status-progress">In Progress</span></td>
+            <td>Mr. Eyuel</td>
+            <td>Assigned to Mr. Eyuel</td>
+            <td><a class="action-link" href="Complaint_Details.html">View Details</a></td>
+          </tr>
+        </table>
+      </div>
+      <div class="note-box">
+        When the teacher finishes work on your case, the status will change to Resolved or you will see a reply on My Complaints.
+      </div>
+    </div>
+  </div>
+
+  <footer class="Footer">
+    <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

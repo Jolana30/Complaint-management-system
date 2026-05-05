@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="Nav.css">
+    <style>
+      body{
+  background: #f8fafc;
+  color: #1f2937;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.main-content {
+  padding: 32px;
+}
+.welcome-header{
+  box-shadow: #666 0px 2px 4px;
+  background: #24358B;
+  border-radius: 8px;
+  padding: 32px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.welcome-header h1 {
+  color: white;
+  margin: 0 0 8px;
+  font-size: 32px;
+}
+
+.welcome-header p{
+  color: #f9f9f9;
+  margin: 0;
+  opacity: 0.9;
+}
+.quick-links {
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.quick-links h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #111827;
+}
+
+.quick-links a {
+  display: inline-block;
+  margin-right: 20px;
+  background: #f1f5f9;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+.quick-links a:hover {
+  background: #e2e8f0;
+}
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.stat-card {
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  flex: 1 1 220px;
+}
+.stat-card h2 {
+  margin: 0;
+  font-size: 36px;
+  color: #2563EB;
+}
+.stat-card p {
+  margin: 8px 0 0;
+  color: #6b7280;
+}
+.activity-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.activity-section h3 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #111827;
+}
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.activity-header h3 {
+  margin: 0;
+}
+.view-all {
+  background: #2563EB;
+  color: #ffffff;
+  padding: 9px 13px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.activity-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+.activity-table th,
+.activity-table td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #374151;
+}
+.activity-table th {
+  background: #f9fafb;
+  color: #111827;
+}
+.status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+.status-progress {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+.status-resolved {
+  background: #d1fae5;
+  color: #047857;
+}
+.status-declined {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+.action-btn {
+  display: inline-block;
+  margin: 3px 4px 3px 0;
+  padding: 7px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+}
+.action-view {
+  background: #2563EB;
+}
+.action-edit {
+  background: #059669;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 20px;
+  }
+
+  .welcome-header {
+    padding: 24px;
+  }
+
+  .welcome-header h1 {
+    font-size: 26px;
+  }
+
+  .quick-links a {
+    margin: 8px 8px 0 0;
+  }
+
+  .stat-card {
+    flex: 1 1 100%;
+  }
+
+  .activity-section {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 14px;
+  }
+
+  .welcome-header {
+    padding: 18px;
+  }
+
+  .welcome-header h1 {
+    font-size: 22px;
+  }
+
+  .quick-links {
+    text-align: left;
+  }
+
+  .quick-links a {
+    display: block;
+    margin: 8px 0 0;
+  }
+}
+
+    </style>
+      </head>
+    <body>
+    <nav class="Navbar">
+        <div class="logo">
+        <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+        <p> <b> Ambo University </b> </p>
+        </div>
+        <a href="Home.html">Home</a>
+        <a href="Student_Dashboard.html">Students Dashboard</a>
+        <a href="Login.html">Logout</a>
+    </nav>
+      <div class="main-content">
+        <div class="welcome-header">
+          <h1>Welcome back, John Doe</h1>
+          <p>Information Technology Department | Second Year Student</p>
+        </div>
+
+        <div class="quick-links">
+          <h3>Quick Actions</h3>
+          <a href="Submit_Complaint.html">Submit Complaint</a>
+          <a href="My_Complaints.html">My Complaints</a>
+          <a href="Submission_Guide.html">Submission Guide</a>
+        </div>
+  
+        <div class="stats-row">
+          <div class="stat-card">
+            <h2>12</h2>
+            <p>Complaints submitted</p>
+          </div>
+          <div class="stat-card">
+            <h2>2</h2>
+            <p>Pending</p>
+          </div>
+          <div class="stat-card">
+            <h2>8</h2>
+            <p>Resolved</p>
+          </div>
+          <div class="stat-card">
+            <h2>1</h2>
+            <p>Declined</p>
+          </div>
+        </div>
+        <div class="activity-section">
+          <div class="activity-header">
+            <h3>Recent Activity</h3>
+            <a class="view-all" href="My_Complaints.html">View All Complaints</a>
+          </div>
+          <div class="table-wrap">
+            <table class="activity-table">
+              <tr>
+                <th>Complaint ID</th>
+                <th>Title</th>
+                <th>Course</th>
+                <th>Status</th>
+                <th>Last Update</th>
+                <th>Action</th>
+              </tr>
+              <tr>
+                <td>CMP-101</td>
+                <td>Unfair Grading System</td>
+                <td>SAD</td>
+                <td><span class="status status-pending">Pending</span></td>
+                <td>Submitted 2 days ago</td>
+                <td>
+                  <a class="action-btn action-view" href="Complaint_Details.html">View</a>
+                  <a class="action-btn action-edit" href="Edit_Complaint.html">Edit</a>
+                </td>
+              </tr>
+              <tr>
+                <td>CMP-102</td>
+                <td>Lack of Communication</td>
+                <td>IP</td>
+                <td><span class="status status-progress">In Progress</span></td>
+                <td>Assigned to Mr. Eyuel</td>
+                <td>
+                  <a class="action-btn action-view" href="In_Progress_Complaints.html">View</a>
+                </td>
+              </tr>
+              <tr>
+                <td>CMP-103</td>
+                <td>Irregular Class Policy</td>
+                <td>DSA</td>
+                <td><span class="status status-resolved">Resolved</span></td>
+                <td>Teacher replied 1 week ago</td>
+                <td>
+                  <a class="action-btn action-view" href="Complaint_Reply.html">View Reply</a>
+                </td>
+              </tr>
+              <tr>
+                <td>CMP-105</td>
+                <td>Library Seating Problem</td>
+                <td>FDBS</td>
+                <td><span class="status status-declined">Declined</span></td>
+                <td>Admin declined: not enough evidence</td>
+                <td>
+                  <a class="action-btn action-view" href="Complaint_Declined.html">View Reason</a>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    <footer class="Footer">
+      <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+     </footer>
+</body>
+</html>

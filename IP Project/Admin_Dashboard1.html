@@ -67,6 +67,29 @@
         padding: 24px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       }
+      .stats-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-bottom: 28px;
+      }
+      .stat-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        flex: 1 1 180px;
+      }
+      .stat-card h2 {
+        margin: 0;
+        color: #2563EB;
+        font-size: 32px;
+      }
+      .stat-card p {
+        margin: 8px 0 0;
+        color: #6b7280;
+      }
       .activity-section h3 {
         margin-top: 0;
         font-size: 22px;
@@ -80,6 +103,13 @@
         padding: 12px 10px;
         text-align: left;
         border-bottom: 1px solid #2563EB;
+        min-width: 1100px;
+      }
+      .complaints-table td,
+      .complaints-table th {
+        padding: 12px 10px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
       }
       .complaints-table th {
         background: #f9fafb;
@@ -95,6 +125,20 @@
         font-weight: 600;
       }
       .Button {
+      .status-confirm {
+        color: #7C3AED;
+        font-weight: 600;
+      }
+      .status-declined {
+        color: #DC2626;
+        font-weight: 600;
+      }
+      .status-progress {
+        color: #1D4ED8;
+        font-weight: 600;
+      }
+      .Button {
+        display: inline-block;
         color: #fff;
         border: none;
         border-radius: 4px;
@@ -103,6 +147,19 @@
         cursor: pointer;
         margin-right: 6px;
         transition: background-color 0.2s ease, transform 0.2s ease;
+      }
+        text-decoration: none;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+      }
+      .action-cell {
+        min-width: 170px;
+        white-space: nowrap;
+      }
+      .action-cell .Button {
+        margin: 3px 6px 3px 0;
+      }
+      .action-cell .Button:last-child {
+        margin-right: 0;
       }
       .Button:hover {
         transform: translateY(-1px);
@@ -124,6 +181,12 @@
       }
       .Button-decline:hover {
         background-color: #B91C1C;
+      }
+      .Button-confirm {
+        background-color: #7C3AED;
+      }
+      .Button-confirm:hover {
+        background-color: #6D28D9;
       }
 
       .table-wrap {
@@ -163,6 +226,12 @@
           display: block;
           width: 100%;
           margin: 0 0 6px 0;
+        .action-cell {
+          min-width: 150px;
+          white-space: normal;
+        }
+        .action-cell .Button {
+          margin: 3px 4px 3px 0;
         }
       }
     </style>
@@ -178,6 +247,8 @@
         <a href="Admin_Dashboard1.html">Admin Dashboard</a>
         <a href="Teacher Dashboard.html">Teachers Dashboard</a>
         <a href="/index.html">Logout</a>
+        <a href="Admin_Dashboard1.html">Admin Dashboard</a>
+        <a href="Login.html">Logout</a>
     </nav>
     <div class="dashboard-container">
         <div class="welcome-header">
@@ -194,6 +265,39 @@
 
         <div class="activity-section" id="all-complaints">
           <h3>All Complaints</h3>
+          <a href="Admin_All_Complaints.html">All Complaints</a>
+          <a href="#recent-complaints">Recent Complaints</a>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card">
+            <h2>13</h2>
+            <p>Total Complaints</p>
+          </div>
+          <div class="stat-card">
+            <h2>3</h2>
+            <p>Pending</p>
+          </div>
+          <div class="stat-card">
+            <h2>1</h2>
+            <p>In Progress</p>
+          </div>
+          <div class="stat-card">
+            <h2>2</h2>
+            <p>Need Confirmation</p>
+          </div>
+          <div class="stat-card">
+            <h2>6</h2>
+            <p>Resolved</p>
+          </div>
+          <div class="stat-card">
+            <h2>1</h2>
+            <p>Declined</p>
+          </div>
+        </div>
+
+        <div class="activity-section" id="recent-complaints">
+          <h3>Recent Complaints</h3>
           <div class="table-wrap">
             <table class="complaints-table">
             <tr>
@@ -245,6 +349,80 @@
                 <button type="button" class="Button Button-view">View</button>
                 <button type="button" class="Button Button-assign">Assign</button>
                 <button type="button" class="Button Button-decline">Decline</button>
+              <th>Student</th>
+              <th>Title</th>
+              <th>Course</th>
+              <th>Category</th>
+              <th>Department</th>
+              <th>Status</th>
+              <th>Last Update</th>
+              <th>Action</th>
+            </tr>
+            <tr>
+              <td>CMP-101</td>
+              <td>John Doe</td>
+              <td>Unfair Grading System</td>
+              <td>SAD</td>
+              <td>Assessment & Grading</td>
+              <td>Information Technology</td>
+              <td><span class="status-pending">Pending</span></td>
+              <td>Submitted 2 days ago</td>
+              <td class="action-cell">
+                <a class="Button Button-view" href="Admin_Complaint_Details.html">View</a>
+                <a class="Button Button-assign" href="Assign_Complaint.html">Assign</a>
+                <a class="Button Button-decline" href="Decline_Complaint.html">Decline</a>
+              </td>
+            </tr>
+            <tr>
+              <td>CMP-102</td>
+              <td>Seladin Bergecho</td>
+              <td>Lack of Communication</td>
+              <td>Numeric Analysis</td>
+              <td>Communication</td>
+              <td>Computer Science</td>
+              <td><span class="status-progress">In Progress</span></td>
+              <td>Assigned to Mr. Eyuel</td>
+              <td class="action-cell">
+                <a class="Button Button-view" href="Admin_Complaint_Details.html">View</a>
+              </td>
+            </tr>
+            <tr>
+              <td>CMP-103</td>
+              <td>Adane Girma</td>
+              <td>Irregular Class Policy</td>
+              <td>Introduction to Electrical Engineering</td>
+              <td>Attendance Policy</td>
+              <td>Electrical and Computer Engineering</td>
+              <td><span class="status-confirm">Needs Confirmation</span></td>
+              <td>Teacher replied 1 week ago</td>
+              <td class="action-cell">
+                <a class="Button Button-confirm" href="Admin_Confirm_Resolution.html">Confirm</a>
+              </td>
+            </tr>
+            <tr>
+              <td>CMP-104</td>
+              <td>Degu Debebe</td>
+              <td>Incorrect Grading</td>
+              <td>Applied Mathematics</td>
+              <td>Assessment & Grading</td>
+              <td>Civil Engineering</td>
+              <td><span class="status-resolved">Resolved</span></td>
+              <td>Teacher replied 2 weeks ago</td>
+              <td class="action-cell">
+                <a class="Button Button-view" href="Complaint_Reply.html">View Reply</a>
+              </td>
+            </tr>
+            <tr>
+              <td>CMP-105</td>
+              <td>Mahlet Kebede</td>
+              <td>Favoritism When Grading</td>
+              <td>FDBS</td>
+              <td>Other</td>
+              <td>Mechanical Engineering</td>
+              <td><span class="status-declined">Declined</span></td>
+              <td>Admin declined: not enough evidence</td>
+              <td class="action-cell">
+                <a class="Button Button-view" href="Complaint_Declined.html">View Reason</a>
               </td>
             </tr>
             </table>
