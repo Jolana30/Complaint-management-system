@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Complaint Reply</title>
   <link rel="stylesheet" href="Nav.css">
+
   <style>
     body {
       margin: 0;
@@ -71,14 +72,10 @@
       color: #111827;
     }
 
-    .status {
-      display: inline-block;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: #d1fae5;
-      color: #047857;
-      font-size: 13px;
-      font-weight: 700;
+    /* ONLY status text green */
+    .detail-item .status {
+      color: #16a34a;
+      font-weight: 600;
     }
 
     .reply-box {
@@ -145,12 +142,14 @@
     }
   </style>
 </head>
+
 <body>
   <nav class="Navbar">
     <div class="logo">
       <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
       <p><b>Ambo University</b></p>
     </div>
+
     <a href="Home.html">Home</a>
     <a href="Student_Dashboard.html">Students Dashboard</a>
     <a href="Submit_Complaint.html">Submit Complaint</a>
@@ -167,31 +166,38 @@
 
     <section class="card">
       <h2>Irregular Class Policy</h2>
+
       <div class="details-grid">
         <div class="detail-item">
           <span>Complaint ID</span>
           <strong>CMP-103</strong>
         </div>
+
         <div class="detail-item">
           <span>Status</span>
-          <strong><span class="status">Resolved</span></strong>
+          <span class="status">Resolved</span>
         </div>
+
         <div class="detail-item">
           <span>Category</span>
           <strong>Attendance Policy</strong>
         </div>
+
         <div class="detail-item">
           <span>Course</span>
           <strong>DSA</strong>
         </div>
+
         <div class="detail-item">
           <span>Department</span>
           <strong>Information Technology</strong>
         </div>
+
         <div class="detail-item">
           <span>Submitted Date</span>
           <strong>2026-03-28</strong>
         </div>
+
         <div class="detail-item">
           <span>Assigned Teacher</span>
           <strong>Mr. Eyuel</strong>
@@ -201,20 +207,27 @@
 
     <section class="card">
       <h2>Teacher Response</h2>
+
       <div class="reply-box">
         <p><strong>Reply from Mr. Eyuel:</strong></p>
-        <p>The attendance policy issue has been reviewed. The class rule will be explained again to students, and future attendance decisions should follow the department guideline.</p>
+        <p>
+          The attendance policy issue has been reviewed. The class rule will be
+          explained again to students, and future attendance decisions should
+          follow the department guideline.
+        </p>
         <p><strong>Last update:</strong> Teacher replied 1 week ago.</p>
       </div>
     </section>
 
     <section class="card">
       <h2>Activity History</h2>
+
       <ul class="timeline">
         <li><strong>Submitted:</strong> Complaint sent to the department.</li>
         <li><strong>Assigned:</strong> Admin assigned the complaint to Mr. Eyuel.</li>
         <li><strong>Resolved:</strong> Teacher replied 1 week ago.</li>
       </ul>
+
       <a class="btn" href="My_Complaints.html">Back to My Complaints</a>
     </section>
   </main>
