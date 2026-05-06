@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Complaints</title>
+  <link rel="stylesheet" href="Nav.css">
+  <style>
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #1f2937;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .page-container {
+      max-width: 1150px;
+      margin: 30px auto;
+      padding: 0 24px;
+    }
+
+    .page-header {
+      background: #24358B;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 28px;
+      box-shadow: #666 0px 2px 4px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+
+    .page-header p {
+      margin: 0;
+      color: #f9f9f9;
+      opacity: 0.9;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      flex: 1 1 190px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .stat-card h2 {
+      margin: 0;
+      color: #2563EB;
+      font-size: 32px;
+    }
+
+    .stat-card p {
+      margin: 8px 0 0;
+      color: #6b7280;
+    }
+
+    a.stat-card-link {
+      text-decoration: none;
+      color: inherit;
+      box-sizing: border-box;
+    }
+
+    a.stat-card-link:hover {
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.15);
+    }
+
+    .complaints-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .card-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .card-title h2 {
+      margin: 0;
+      color: #111827;
+      font-size: 22px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2563EB;
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .complaints-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+
+    .complaints-table th,
+    .complaints-table td {
+      text-align: left;
+      padding: 13px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      color: #374151;
+    }
+
+    .complaints-table th {
+      background: #f9fafb;
+      color: #111827;
+      font-weight: 600;
+    }
+
+    .status {
+      font-weight: 600;
+    }
+
+    .status-pending {
+      color: #92400e;
+    }
+
+    .status-progress {
+      color: #1d4ed8;
+    }
+
+    .status-resolved {
+      color: #047857;
+    }
+
+    .status-declined {
+      color: #b91c1c;
+    }
+
+    .action-link {
+      color: #2563EB;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .note-box {
+      margin-top: 18px;
+      padding: 14px;
+      background: #f1f5f9;
+      border-left: 4px solid #2563EB;
+      border-radius: 8px;
+      color: #374151;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .page-container {
+        padding: 0 16px;
+      }
+
+      .page-header {
+        padding: 24px;
+      }
+
+      .page-header h1 {
+        font-size: 26px;
+      }
+
+      .stat-card {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-container {
+        padding: 0 12px;
+      }
+
+      .page-header h1 {
+        font-size: 22px;
+      }
+
+      .complaints-card {
+        padding: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="Navbar">
+    <div class="logo">
+      <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+      <p><b>Ambo University</b></p>
+    </div>
+    <a href="Home.html">Home</a>
+    <a href="Student_Dashboard.html">Students Dashboard</a>
+    <a href="Submit_Complaint.html">Submit Complaint</a>
+    <a href="My_Complaints.html">My Complaints</a>
+    <a href="Submission_Guide.html">Submission Guide</a>
+    <a href="Login.html">Logout</a>
+  </nav>
+
+  <main class="page-container">
+    <section class="page-header">
+      <h1>My Complaints</h1>
+      <p>Track submitted complaints, current status, and latest department updates.</p>
+    </section>
+
+    <section class="stats-row">
+      <div class="stat-card">
+        <h2>12</h2>
+        <p>Total Submitted</p>
+      </div>
+      <div class="stat-card">
+        <h2>2</h2>
+        <p>Pending</p>
+      </div>
+      <a class="stat-card stat-card-link" href="In_Progress_Complaints.html">
+        <h2>1</h2>
+        <p>In Progress</p>
+      </a>
+      <div class="stat-card">
+        <h2>8</h2>
+        <p>Resolved</p>
+      </div>
+      <div class="stat-card">
+        <h2>1</h2>
+        <p>Declined</p>
+      </div>
+    </section>
+
+    <section class="complaints-card">
+      <div class="card-title">
+        <h2>Complaint List</h2>
+        <a class="btn" href="Submit_Complaint.html">Submit New Complaint</a>
+      </div>
+
+      <div class="table-wrap">
+        <table class="complaints-table">
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Course</th>
+            <th>Category</th>
+            <th>Department</th>
+            <th>Submitted Date</th>
+            <th>Status</th>
+            <th>Assigned Teacher</th>
+            <th>Last Update</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>CMP-101</td>
+            <td>Unfair Grading System</td>
+            <td>SAD</td>
+            <td>Assessment & Grading</td>
+            <td>Information Technology</td>
+            <td>2026-04-08</td>
+            <td><span class="status status-pending">Pending</span></td>
+            <td>Not assigned</td>
+            <td>Submitted 2 days ago</td>
+            <td><a class="action-link" href="Complaint_Details.html">View Details</a></td>
+          </tr>
+          <tr>
+            <td>CMP-102</td>
+            <td>Lack of Communication</td>
+            <td>IP</td>
+            <td>Communication</td>
+            <td>Information Technology</td>
+            <td>2026-04-07</td>
+            <td><span class="status status-progress">In Progress</span></td>
+            <td>Mr. Eyuel</td>
+            <td>Assigned to Mr. Eyuel</td>
+            <td><a class="action-link" href="In_Progress_Complaints.html">View Details</a></td>
+          </tr>
+          <tr>
+            <td>CMP-103</td>
+            <td>Irregular Class Policy</td>
+            <td>DSA</td>
+            <td>Attendance Policy</td>
+            <td>Information Technology</td>
+            <td>2026-03-28</td>
+            <td><span class="status status-resolved">Resolved</span></td>
+            <td>Mr. Eyuel</td>
+            <td>Teacher replied 1 week ago</td>
+            <td><a class="action-link" href="Complaint_Reply.html">View Reply</a></td>
+          </tr>
+          <tr>
+            <td>CMP-104</td>
+            <td>Incorrect Grading</td>
+            <td>OS</td>
+            <td>Assessment & Grading</td>
+            <td>Information Technology</td>
+            <td>2026-03-15</td>
+            <td><span class="status status-resolved">Resolved</span></td>
+            <td>Mr. Eyuel</td>
+            <td>Teacher replied 2 weeks ago</td>
+            <td><a class="action-link" href="Complaint_Reply.html">View Reply</a></td>
+          </tr>
+          <tr>
+            <td>CMP-105</td>
+            <td>Library Seating Problem</td>
+            <td>FDBS</td>
+            <td>Other</td>
+            <td>Mechanical Engineering</td>
+            <td>2026-04-06</td>
+            <td><span class="status status-declined">Declined</span></td>
+            <td>Not assigned</td>
+            <td>Admin declined: not enough evidence</td>
+            <td><a class="action-link" href="Complaint_Declined.html">View Reason</a></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note-box">
+        New complaints start as Pending until the admin reviews and assigns them to the correct teacher.
+      </div>
+    </section>
+  </main>
+
+  <footer class="Footer">
+    <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

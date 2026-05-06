@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assign Complaint</title>
+  <link rel="stylesheet" href="Nav.css">
+  <style>
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #1f2937;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .page-header {
+      background: #24358B;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 28px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: #666 0px 2px 4px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    .page-header p {
+      margin: 0;
+      color: #f9f9f9;
+      opacity: 0.9;
+    }
+
+    .form-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .summary {
+      background: #f1f5f9;
+      border-left: 4px solid #2563EB;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 20px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .form-row {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn-primary {
+      background: #2563EB;
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    @media (max-width: 480px) {
+      .form-card {
+        padding: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="Navbar">
+    <div class="logo">
+      <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+      <p><b>Ambo University</b></p>
+    </div>
+    <a href="Home.html">Home</a>
+    <a href="Admin_Dashboard1.html">Admin Dashboard</a>
+    <a href="Admin_All_Complaints.html">All Complaints</a>
+    <a href="Login.html">Logout</a>
+  </nav>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>Assign Complaint</h1>
+      <p>Send the complaint to the correct teacher for review.</p>
+    </section>
+
+    <section class="form-card">
+      <div class="summary">
+        <strong>CMP-101:</strong> Unfair Grading System<br>
+        <strong>Student:</strong> John Doe | <strong>Course:</strong> SAD<br>
+        <strong>Department:</strong> Information Technology<br>
+        <strong>Current Status:</strong> Pending
+      </div>
+
+      <form action="Admin_Dashboard1.html" method="get">
+        <div class="form-row">
+          <label for="complaint_id">Complaint ID</label>
+          <input id="complaint_id" type="text" name="complaint_id" value="CMP-101" readonly>
+        </div>
+
+        <div class="form-row">
+          <label for="teacher">Assign To Teacher</label>
+          <select id="teacher" name="teacher" required>
+            <option value="">Select teacher</option>
+            <option value="Mr. Eyuel">Mr. Eyuel - SAD Teacher</option>
+            <option value="Mr. Bekele">Mr. Bekele</option>
+            <option value="Mrs. Hana">Mrs. Hana</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="status">New Status</label>
+          <select id="status" name="status" required>
+            <option value="Assigned">Assigned</option>
+            <option value="In Progress">In Progress</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="remark">Admin Remark</label>
+          <textarea id="remark" name="remark" rows="5" placeholder="Write a short note for the teacher."></textarea>
+        </div>
+
+        <div class="buttons">
+          <a class="btn btn-secondary" href="Admin_Dashboard1.html">Cancel</a>
+          <button class="btn btn-primary" type="submit">Assign Complaint</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="Footer">
+    <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>

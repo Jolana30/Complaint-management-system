@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="Nav.css">
+    <style>
+      body{
+         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F1F4FD;
+      }
+      .welcome-header {
+   text-align: center;
+  background-color: #24358B;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 32px 10px;
+  margin: 32px 16px;
+}
+.welcome-header h1 {
+  margin: 0 8px 8px;
+  font-size: 32px;
+}
+.welcome-header p {
+  margin: 0;
+  opacity: 0.9;
+}
+.comp{
+  text-align: center;
+  margin: 80px auto;
+  background: #ffffff;
+  padding: 40px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+.comp h1{ 
+  margin-bottom: 10px;
+  font-size: 28px;
+  color: #111827;
+}
+.comp p{
+  margin-top: 5px;
+  margin-bottom: 20px;
+  color: #6B7280;
+}
+.comp button{
+  background: #2563EB;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.comp button:hover {
+  background: #1D4ED8;
+  transform: translateY(-2px);
+}
+.Cards{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 40px auto;
+  flex-wrap: wrap;
+}
+.Cards h1{
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #000000;
+  text-decoration: none;
+  text-align: center;
+}
+.Card{
+  flex: 1;
+  background: #ffffff;
+  padding: 20px 10px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+  .comp{
+    margin: 40px auto;
+    padding: 22px;
+  }
+  .Card{
+    flex: 1 1 100%;
+  }
+}
+    </style>
+      </head>
+    <body>
+    <nav class="Navbar">
+        <div class="logo">
+        <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+        <p> <b> Ambo University </b> </p>
+        </div>
+        <a href="Home.html">Home</a>
+        <a href="Student_Dashboard.html">Students Dashboard</a>
+        <a href="Admin_Dashboard1.html">Admin Dashboard</a>
+        <a href="Teacher_Dashboard.html">Teachers Dashboard</a>
+        <a href="Login.html">Logout</a>
+    </nav>
+    <div class="welcome-header">
+          <h1>Welcome to Ambo University Complaint Management System</h1>
+          <p>Your gateway to efficient and effective complaint resolution</p>
+        </div>
+    <div class="comp">
+    <h1>Complaint Management System</h1>
+    <p>Better future through Knowledge </p>
+    <a href="Submit_Complaint.html">
+  <button>Submit Your Complaint</button>
+</a>
+    </div>
+    <div class="Cards">
+       <div class="Card">
+    <h1>📊 Track</h1>
+    <p>Monitor your complaints easily with real-time status updates.</p>
+    </div>
+    <div class="Card">
+      <h1>🔒 Secure</h1>
+      <p>Your complaints remain protected and are handled safely at all times.</p>
+    </div>
+    <div class="Card">
+      <h1>⚡ Fast</h1>
+      <p>We process your complaints quickly and respond without unnecessary delays.</p>
+    </div>
+     </div>
+     <footer class="Footer">
+      <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+     </footer>
+</body>
+</html>

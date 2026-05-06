@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Declined Complaint</title>
+  <link rel="stylesheet" href="Nav.css">
+  <style>
+    body {
+      margin: 0;
+      background: #f8fafc;
+      color: #1f2937;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .page-header {
+      background: #24358B;
+      color: #ffffff;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: #666 0px 2px 4px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    .page-header p {
+      margin: 0;
+      color: #f9f9f9;
+      opacity: 0.9;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 22px;
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      color: #111827;
+      font-size: 22px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 22px;
+    }
+
+    .detail-item span {
+      display: block;
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .detail-item strong {
+      color: #111827;
+    }
+
+    .status {
+      font-weight: 600;
+      color: #b91c1c;
+    }
+
+    .reason-box {
+      background: #fef2f2;
+      border-left: 4px solid #DC2626;
+      border-radius: 8px;
+      padding: 16px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2563EB;
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 640px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="Navbar">
+    <div class="logo">
+      <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
+      <p><b>Ambo University</b></p>
+    </div>
+    <a href="Home.html">Home</a>
+    <a href="Student_Dashboard.html">Students Dashboard</a>
+    <a href="Submit_Complaint.html">Submit Complaint</a>
+    <a href="My_Complaints.html">My Complaints</a>
+    <a href="Submission_Guide.html">Submission Guide</a>
+    <a href="Login.html">Logout</a>
+  </nav>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>Declined Complaint</h1>
+      <p>CMP-105 | Admin declined the complaint</p>
+    </section>
+
+    <section class="card">
+      <h2>Library Seating Problem</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <span>Complaint ID</span>
+          <strong>CMP-105</strong>
+        </div>
+        <div class="detail-item">
+          <span>Status</span>
+          <strong><span class="status">Declined</span></strong>
+        </div>
+        <div class="detail-item">
+          <span>Category</span>
+          <strong>Other</strong>
+        </div>
+        <div class="detail-item">
+          <span>Course</span>
+          <strong>FDBS</strong>
+        </div>
+        <div class="detail-item">
+          <span>Department</span>
+          <strong>Mechanical Engineering</strong>
+        </div>
+        <div class="detail-item">
+          <span>Submitted Date</span>
+          <strong>2026-04-06</strong>
+        </div>
+        <div class="detail-item">
+          <span>Last Update</span>
+          <strong>Admin declined: not enough evidence</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Admin Reason</h2>
+      <div class="reason-box">
+        Your complaint was declined because there was not enough evidence or detail for the admin to forward it to a teacher. Please submit a clearer complaint with the date, location, and supporting information.
+      </div>
+      <a class="btn" href="My_Complaints.html">Back to My Complaints</a>
+    </section>
+  </main>
+
+  <footer class="Footer">
+    <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+  </footer>
+</body>
+</html>
