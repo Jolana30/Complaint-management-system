@@ -15,6 +15,21 @@
   margin: 0;
   color: #111827;
 }
+select{
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 10px;
+  width: 99%;
+  font-size: 14px;
+  transition: 0.2s;
+  background: #FFFFFF;
+  color: #111827;
+}
+
+select:hover{
+  border-color: #2563EB;
+}
 
 .login-container{
   background: #FFFFFF;
@@ -159,6 +174,12 @@ img{
         <input type="text" placeholder="Enter your username" required> <br> <br>
         <label for="password">Password:</label> <br>
         <input type="password" placeholder="Enter your password" required>
+         <select id="user-role" name="role" required>
+          <option value="" disabled selected>Select your role</option>
+          <option value="teacher">Teacher</option>
+          <option value="student">Student</option>
+          <option value="admin">Admin</option>
+        </select>
       </fieldset>
       <div class="options">
       <label>
