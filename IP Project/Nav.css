@@ -1,55 +1,188 @@
+:root {
+  color-scheme: light;
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --surface-soft: #eef2ff;
+  --text: #0f172a;
+  --muted: #475569;
+  --border: rgba(15, 23, 42, 0.08);
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.12);
+  --shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0b1120;
+  --surface: #111827;
+  --surface-soft: #1f2937;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --border: rgba(148, 163, 184, 0.24);
+  --accent: #60a5fa;
+  --accent-soft: rgba(96, 165, 250, 0.15);
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
 nav {
-  background: #FFFFFF;
-  padding: 12px 30px;
+  background: var(--surface);
+  padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
   flex-wrap: wrap;
   gap: 10px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 nav a {
   display: inline-block;
   text-decoration: none;
-  color: #374151;
-  margin: 0 12px;
-  font-weight: 500;
-  padding: 6px 0;
+  color: var(--text);
+  margin: 0 14px;
+  font-weight: 600;
+  padding: 8px 0;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 nav a:hover {
-  color: #2563EB;
+  color: var(--accent);
+  transform: translateY(-1px);
 }
 
-nav img{
+nav img {
   width: 44px;
   height: 44px;
 }
 
-.logo{
+.logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
-.Footer{
-  color: #6B7280;
+
+.logo p {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.Footer {
+  color: var(--muted);
   text-align: center;
-  padding: 20px 10px;
-  border-top: 1px solid #E5E7EB;
-  margin-top: 30px;
-  font-size: 12px;
+  padding: 24px 10px;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+  font-size: 0.95rem;
+  background: transparent;
+}
+
+/* Site container to center content consistently */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Card */
+.card, .Card, .comp, .quick-links, .activity-section {
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(15,23,42,0.06);
+  padding: 18px;
+}
+
+/* Buttons */
+.btn, button, .view-all, .action-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.btn:hover, button:hover, .view-all:hover, .action-btn:hover { transform: translateY(-3px); }
+.btn.secondary, .action-edit { background: #059669 }
+
+/* Responsive grid for cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px }
+
+/* Tables responsive */
+.table-wrap { overflow-x: auto; }
+.activity-table { width: 100%; border-collapse: collapse; min-width: 640px }
+.activity-table th, .activity-table td { padding: 12px 14px }
+
+/* Polished small-screen adjustments */
+@media (max-width: 768px) {
+  nav { padding: 12px 16px }
+  .theme-toggle { position: fixed; right: 12px; bottom: 12px }
+  .logo p { display: none }
+  .container { padding: 0 12px }
+}
+
+@media (min-width: 1200px) {
+  .container { max-width: 1280px }
+}
+
+.theme-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 999;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  font-weight: 700;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.theme-toggle.login-toggle {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.theme-toggle .icon {
+  font-size: 1.2rem;
+}
+
+.theme-toggle .label {
+  display: inline-block;
 }
 
 @media (max-width: 768px) {
   nav {
-    padding: 12px 16px;
+    padding: 14px 18px;
     justify-content: flex-start;
-  }
-
-  .logo {
-    flex: 1 1 100%;
   }
 
   nav a {
@@ -59,7 +192,7 @@ nav img{
 
 @media (max-width: 480px) {
   nav {
-    padding: 10px 12px;
+    padding: 12px 14px;
     gap: 8px;
   }
 
@@ -70,5 +203,11 @@ nav img{
   nav a {
     margin: 4px 8px 0 0;
     font-size: 14px;
+  }
+
+  .theme-toggle {
+    right: 14px;
+    bottom: 14px;
+    padding: 12px 14px;
   }
 }

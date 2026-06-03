@@ -106,6 +106,7 @@
         <a href="Teacher_Dashboard.html">Teachers Dashboard</a>
         <a href="Login.html">Logout</a>
     </nav>
+    <div class="container">
     <div class="welcome-header">
           <h1>Welcome to Ambo University Complaint Management System</h1>
           <p>Your gateway to efficient and effective complaint resolution</p>
@@ -113,9 +114,9 @@
     <div class="comp">
     <h1>Complaint Management System</h1>
     <p>Better future through Knowledge </p>
-    <a href="Submit_Complaint.html">
-  <button>Submit Your Complaint</button>
-</a>
+    <a id="primaryAction" href="Submit_Complaint.html">
+      <button id="primaryActionBtn">Submit Your Complaint</button>
+    </a>
     </div>
     <div class="Cards">
        <div class="Card">
@@ -131,8 +132,47 @@
       <p>We process your complaints quickly and respond without unnecessary delays.</p>
     </div>
      </div>
+    </div>
      <footer class="Footer">
       <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
      </footer>
-</body>
+     <script>
+      const role = localStorage.getItem('userRole');
+      const linkAdmin = document.querySelector('nav a[href="Admin_Dashboard1.html"]');
+      const linkTeacher = document.querySelector('nav a[href="Teacher_Dashboard.html"]');
+      const linkStudent = document.querySelector('nav a[href="Student_Dashboard.html"]');
+      const linkLogin = document.querySelector('nav a[href="Login.html"]');
+      const primaryAction = document.getElementById('primaryAction');
+      const primaryBtn = document.getElementById('primaryActionBtn');
+
+       if (linkLogin) {
+         linkLogin.textContent = role ? 'Logout' : 'Login';
+       }
+
+       if (!role) {
+         if (linkAdmin) linkAdmin.style.display = 'none';
+         if (linkTeacher) linkTeacher.style.display = 'none';
+         if (linkStudent) linkStudent.style.display = 'none';
+        if (primaryBtn) { primaryBtn.textContent = 'Login to Continue'; }
+        if (primaryAction) { primaryAction.href = 'Login.html'; }
+       } else if (role === 'student') {
+         if (linkAdmin) linkAdmin.style.display = 'none';
+         if (linkTeacher) linkTeacher.style.display = 'none';
+        if (primaryBtn) { primaryBtn.textContent = 'Submit Your Complaint'; }
+        if (primaryAction) { primaryAction.href = 'Submit_Complaint.html'; }
+       } else if (role === 'admin') {
+         if (linkStudent) linkStudent.style.display = 'none';
+         if (linkTeacher) linkTeacher.style.display = 'none';
+        if (primaryBtn) { primaryBtn.textContent = 'Open Admin Panel'; }
+        if (primaryAction) { primaryAction.href = 'Admin_Dashboard1.html'; }
+       } else if (role === 'teacher') {
+         if (linkStudent) linkStudent.style.display = 'none';
+         if (linkAdmin) linkAdmin.style.display = 'none';
+        if (primaryBtn) { primaryBtn.textContent = 'View Assigned Complaints'; }
+        if (primaryAction) { primaryAction.href = 'Teachers_Assigned_Complaint.html'; }
+       }
+     </script>
+    <script src="shared.js" defer></script>
+  </body>
 </html>
+
