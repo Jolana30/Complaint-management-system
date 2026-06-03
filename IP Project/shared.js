@@ -1,12 +1,16 @@
 (() => {
   const roleKey = 'userRole';
   const themeKey = 'themeMode';
-  const currentPage = window.location.pathname.split('/').pop();
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   const root = document.documentElement;
 
   function getSavedTheme() {
     // Default to light unless the user explicitly selected a theme
     return localStorage.getItem(themeKey) || 'light';
+  }
+
+  function isLoginPage(name) {
+    return name === '' || name === 'Login.html' || name === 'index.html';
   }
 
   function applyTheme(theme) {
@@ -15,7 +19,7 @@
     const toggle = document.getElementById('themeToggleBtn');
     if (toggle) {
       const isDark = theme === 'dark';
-      if (currentPage === 'Login.html') {
+      if (isLoginPage(currentPage)) {
         toggle.innerHTML = isDark ? '<span class="icon">☀️</span>' : '<span class="icon">🕒</span>';
       } else {
         toggle.innerHTML = isDark
@@ -23,7 +27,7 @@
           : '<span class="icon">🕒</span><span class="label">Dark mode</span>';
       }
       toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-      if (currentPage === 'Login.html') {
+      if (isLoginPage(currentPage)) {
         toggle.classList.add('login-toggle');
       } else {
         toggle.classList.remove('login-toggle');
@@ -130,11 +134,11 @@
     ];
 
     function redirectToAllowed() {
-      if (!role) window.location.href = 'Login.html';
+      if (!role) window.location.href = '/index.html';
       else if (role === 'student') window.location.href = 'Student_Dashboard.html';
       else if (role === 'teacher') window.location.href = 'Teacher_Dashboard.html';
       else if (role === 'admin') window.location.href = 'Admin_Dashboard1.html';
-      else window.location.href = 'Home.html';
+      else window.location.href = '/index.html';
     }
 
     if (!currentPage) return;
@@ -148,24 +152,27 @@
     const links = document.querySelectorAll('nav a[href]');
     links.forEach((link) => {
       const href = link.getAttribute('href');
-      if (href === 'Login.html') {
+      const text = link.textContent.trim().toLowerCase();
+      const isLoginLink = /(?:^|\/)(?:index|Login)\.html$/.test(href) || href === '/';
+      const isHomeLink = /(?:^|\/)Home\.html$/.test(href) || text === 'home';
+      if (isLoginLink && !isHomeLink) {
         link.textContent = role ? 'Logout' : 'Login';
       }
-      if (href === 'Login.html' && role) {
+      if (isLoginLink && !isHomeLink && role) {
         link.addEventListener('click', (event) => {
           event.preventDefault();
           localStorage.removeItem(roleKey);
           localStorage.removeItem('username');
           createToast('Signed out', 'info');
           // ensure UI updates immediately
-          setTimeout(() => window.location.href = 'Login.html', 200);
+          setTimeout(() => window.location.href = '/index.html', 200);
         });
       }
       const isAdminLink = /Admin_/.test(href) || href === 'Admin_Dashboard1.html';
       const isTeacherLink = /Teacher_/.test(href) || href === 'Teacher_Dashboard.html';
       const isStudentLink = /Student_/.test(href) || href === 'Student_Dashboard.html';
       if (!role) {
-        link.style.display = href === 'Home.html' || href === 'Login.html' ? 'inline-block' : 'none';
+        link.style.display = isHomeLink || isLoginLink ? 'inline-block' : 'none';
       } else if (role === 'student') {
         link.style.display = isAdminLink || isTeacherLink ? 'none' : 'inline-block';
       } else if (role === 'teacher') {

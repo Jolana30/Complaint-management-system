@@ -100,11 +100,11 @@
         <img src="Pictures/download (1).jpg" alt="Ambo University Logo">
         <p> <b> Ambo University </b> </p>
         </div>
-        <a href="Home.html">Home</a>
+        <a href="/index.html">Home</a>
         <a href="Student_Dashboard.html">Students Dashboard</a>
         <a href="Admin_Dashboard1.html">Admin Dashboard</a>
         <a href="Teacher_Dashboard.html">Teachers Dashboard</a>
-        <a href="Login.html">Logout</a>
+        <a href="/index.html">Logout</a>
     </nav>
     <div class="container">
     <div class="welcome-header">
@@ -141,7 +141,7 @@
       const linkAdmin = document.querySelector('nav a[href="Admin_Dashboard1.html"]');
       const linkTeacher = document.querySelector('nav a[href="Teacher_Dashboard.html"]');
       const linkStudent = document.querySelector('nav a[href="Student_Dashboard.html"]');
-      const linkLogin = document.querySelector('nav a[href="Login.html"]');
+      const linkLogin = document.querySelector('nav a[href="/index.html"], nav a[href="index.html"], nav a[href="/index.html"], nav a[href="/"]');
       const primaryAction = document.getElementById('primaryAction');
       const primaryBtn = document.getElementById('primaryActionBtn');
 
@@ -154,7 +154,7 @@
          if (linkTeacher) linkTeacher.style.display = 'none';
          if (linkStudent) linkStudent.style.display = 'none';
         if (primaryBtn) { primaryBtn.textContent = 'Login to Continue'; }
-        if (primaryAction) { primaryAction.href = 'Login.html'; }
+        if (primaryAction) { primaryAction.href = '/index.html'; }
        } else if (role === 'student') {
          if (linkAdmin) linkAdmin.style.display = 'none';
          if (linkTeacher) linkTeacher.style.display = 'none';
@@ -175,4 +175,5 @@
     <script src="shared.js" defer></script>
   </body>
 </html>
+
 
