@@ -185,7 +185,7 @@ img{
   </head>
 <body>
     <div class="login-container">
-      <img src="/IP Project/Pictures/download (1).jpg" alt="Ambo university logo">
+      <img src="ip-project/Pictures/download (1).jpg" alt="Ambo university logo">
       <h1>Ambo university</h1>
     <p>Student to Teacher complaint system</p>
     <form id="loginForm" action="#" method="get">
@@ -218,7 +218,9 @@ img{
   </div>
     </div>
     <script>
-      // Handle login: store selected role and redirect to correct dashboard
+      // Handle login: store selected role and redirect to the correct dashboard.
+      // The app is deployed through Vercel with index.html at the project root
+      // and the role-specific pages inside the ip-project folder.
       (function(){
         const form = document.getElementById('loginForm');
         form.addEventListener('submit', function(e){
@@ -230,13 +232,12 @@ img{
           if(!role) return alert('Please select a role');
           localStorage.setItem('userRole', role);
           if(username) localStorage.setItem('username', username);
-          if(role === 'student') window.location.href = '/IP%20Project/Student_Dashboard.html';
-          else if(role === 'teacher') window.location.href = '/IP%20Project/Teacher_Dashboard.html';
-          else if(role === 'admin') window.location.href = '/IP%20Project/Admin_Dashboard1.html';
+          if(role === 'student') window.location.href = 'ip-project/Student_Dashboard.html';
+          else if(role === 'teacher') window.location.href = 'ip-project/Teacher_Dashboard.html';
+          else if(role === 'admin') window.location.href = 'ip-project/Admin_Dashboard1.html';
           else window.location.href = 'index.html';
         });
       })();
     </script>
 </body>
 </html>
-
