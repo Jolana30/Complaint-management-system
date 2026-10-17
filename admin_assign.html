@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Assign Complaint - Ambo University Admin</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container" style="max-width: 820px;">
+      <div class="page-header" style="padding: 24px 20px;">
+        <span class="header-badge">Triage & Routing</span>
+        <h1>Assign Academic Complaint</h1>
+        <p>Route the verified student grievance to the assigned course instructor for departmental investigation.</p>
+      </div>
+
+      <!-- Complaint Summary Card -->
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-title">
+          <h3 id="complaintHeader">Complaint #CMP-101</h3>
+          <span class="status-badge status-pending">Pending Triage</span>
+        </div>
+
+        <div style="background: var(--surface-alt); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.92rem; line-height: 1.6;">
+          <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 8px;">
+            <span><strong>Student:</strong> <span id="valStudent">-</span></span>
+            <span><strong>Course:</strong> <span id="valCourse">-</span></span>
+            <span><strong>Department:</strong> <span id="valDepartment">-</span></span>
+          </div>
+          <div><strong>Grievance:</strong> <span id="valMessage" style="color: var(--text-muted);">-</span></div>
+        </div>
+      </div>
+
+      <!-- Assignment Form -->
+      <div class="card">
+        <form id="assignForm">
+          <div class="form-group">
+            <label for="teacherSelect">Assign to Faculty Lecturer <span class="required">*</span></label>
+            <select id="teacherSelect" required>
+              <option value="" disabled selected>-- Select Faculty Member --</option>
+              <option value="Mr. Eyuel">Mr. Eyuel (SAD & IP Course Lecturer)</option>
+              <option value="Mr. Bekele">Mr. Bekele (OS & System Software Lecturer)</option>
+              <option value="Mrs. Hana">Mrs. Hana (DSA & Algorithms Lecturer)</option>
+              <option value="Dr. Tadesse">Dr. Tadesse (Department Head / Senior Advisor)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="adminRemark">Administrative Instructions / Remarks for Teacher</label>
+            <textarea id="adminRemark" rows="4" placeholder="e.g. Please check student exam script for question 4 and report score discrepancy back to admin..."></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+            <a href="admin_all_complaints.html" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn">Confirm Assignment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const complaintId = urlParams.get('id') || 'CMP-101';
+      const complaint = window.AmboCMS.getComplaintById(complaintId);
+
+      if (!complaint) {
+        alert('Complaint record not found');
+        window.location.href = 'admin_all_complaints.html';
+        return;
+      }
+
+      document.getElementById('complaintHeader').textContent = `${complaint.id}: ${complaint.title}`;
+      document.getElementById('valStudent').textContent = complaint.studentName;
+      document.getElementById('valCourse').textContent = complaint.course;
+      document.getElementById('valDepartment').textContent = complaint.department;
+      document.getElementById('valMessage').textContent = complaint.message;
+
+      const form = document.getElementById('assignForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const teacher = document.getElementById('teacherSelect').value;
+        const remark = document.getElementById('adminRemark').value.trim();
+
+        window.AmboCMS.updateComplaintStatus(complaint.id, {
+          status: 'in_progress',
+          assignedTeacher: teacher,
+          adminRemark: remark || 'Assigned to course teacher for investigation.',
+          timelineEvent: {
+            title: 'Assigned to Teacher',
+            text: `Admin assigned case to ${teacher}. Note: "${remark || 'Please review and respond.'}"`
+          }
+        });
+
+        window.AmboCMS.showToast(`Complaint ${complaint.id} successfully assigned to ${teacher}!`, 'success');
+        setTimeout(() => {
+          window.location.href = 'admin_all_complaints.html';
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

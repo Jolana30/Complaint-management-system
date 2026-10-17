@@ -32,19 +32,32 @@ A web-based **Student-to-Teacher Complaint Management System** designed for **Am
 ## 📂 Project Structure
 
 ```text
-Complaint-management-system/
-├── ip-project/                      # Core Web Application Prototype
-│   ├── Home.html                    # System Landing Page
-│   ├── Student_Dashboard.html       # Student Portal View
-│   ├── Submit_Complaint.html        # Complaint Submission Form
-│   ├── My_Complaints.html           # Student Complaint History
-│   ├── Teacher_Dashboard.html       # Teacher Portal View
-│   ├── Teacher_Complaint_Details.html # Teacher Complaint Processing
-│   ├── Admin_Dashboard1.html        # Department Admin Control Center
-│   ├── Assign_Complaint.html        # Admin Task Delegation
-│   ├── shared.js                    # Core Application Logic & State
-│   └── Nav.css                      # Unified Navigation Styling
-├── .gitignore                       # Repository Ignore Configuration
+CMS_PHP/
+├── assets/
+│   ├── css/
+│   │   ├── style.css                # Core design system & responsive layout
+│   │   └── nav.css                  # Unified responsive navigation & theme styles
+│   ├── js/
+│   │   └── app.js                   # State engine, localStorage store, workflow logic
+│   └── images/
+│       ├── logo.jpg                 # Official Ambo University emblem
+│       └── ...                      # PWA icons & favicons
+├── index.html                       # University CMS portal landing page
+├── login.html                       # Multi-role authentication portal (Student/Teacher/Admin)
+├── student_dashboard.html           # Student tracking & metrics overview
+├── submit_complaint.html            # Grievance submission form
+├── my_complaints.html               # Student's filed complaints ledger
+├── complaint_details.html           # Complaint audit trail & resolution timeline
+├── submission_guide.html            # Official grievance submission policy
+├── teacher_dashboard.html           # Faculty assigned grievance queue
+├── teacher_respond.html             # Faculty response & resolution submission
+├── admin_dashboard.html             # Department administrator overview & metrics
+├── admin_all_complaints.html        # Comprehensive complaints registry
+├── admin_assign.html                # Task delegation to departmental faculty
+├── admin_confirm.html               # Final closure & resolution confirmation
+├── manifest.json                    # PWA installation manifest
+├── sw.js                            # Offline caching service worker
+├── AGENTS.md / GEMINI.md            # Workspace isolation & engineering guidelines
 └── README.md                        # Documentation
 ```
 
@@ -56,11 +69,12 @@ Complaint-management-system/
    ```bash
    git clone https://github.com/Jolana30/Complaint-management-system.git
    ```
-2. Navigate to the project directory:
+2. Open `index.html` in your web browser, or serve locally with any static web server:
    ```bash
-   cd Complaint-management-system/ip-project
+   # Using Python 3:
+   python -m http.server 3000
    ```
-3. Open `Home.html` or `index.html` in your web browser.
+3. Navigate to `http://localhost:3000/` in your browser.
 
 ---
 

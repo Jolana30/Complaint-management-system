@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Admin Dashboard - Ambo University CMS</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Admin Header -->
+      <div class="page-header">
+        <span class="header-badge">Administrative Portal</span>
+        <h1>Academic Affairs Administration</h1>
+        <p>University-wide grievance triage, faculty assignments, and resolution confirmation center.</p>
+      </div>
+
+      <!-- Quick Action Navigation -->
+      <div class="quick-actions-bar">
+        <span>Admin Actions:</span>
+        <a href="admin_all_complaints.html" class="btn btn-sm">📋 All Complaints</a>
+        <a href="admin_all_complaints.html?status=pending" class="btn btn-secondary btn-sm">⚠️ Pending Triage</a>
+        <a href="admin_all_complaints.html?status=needs_confirmation" class="btn btn-secondary btn-sm">✅ Awaiting Confirmation</a>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3 id="statTotalAll">0</h3>
+          <p>Total Complaints</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="statAdminPending" style="color: var(--warning);">0</h3>
+          <p>Pending Assignment</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="statAdminConfirm" style="color: var(--purple);">0</h3>
+          <p>Needs Confirmation</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="statAdminResolved" style="color: var(--success);">0</h3>
+          <p>Closed & Resolved</p>
+        </div>
+      </div>
+
+      <!-- Action Required Table -->
+      <div class="card">
+        <div class="card-title">
+          <h3>Complaints Requiring Immediate Action</h3>
+          <a href="admin_all_complaints.html" class="btn btn-secondary btn-sm">View Complete List</a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Title</th>
+                <th>Department</th>
+                <th>Course</th>
+                <th>Status</th>
+                <th>Urgency</th>
+                <th>Administrative Action</th>
+              </tr>
+            </thead>
+            <tbody id="actionRequiredTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = window.AmboCMS.getCurrentUser();
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const all = window.AmboCMS.getComplaints();
+
+      // Counts
+      document.getElementById('statTotalAll').textContent = all.length;
+      document.getElementById('statAdminPending').textContent = all.filter(c => c.status === 'pending').length;
+      document.getElementById('statAdminConfirm').textContent = all.filter(c => c.status === 'needs_confirmation').length;
+      document.getElementById('statAdminResolved').textContent = all.filter(c => c.status === 'resolved').length;
+
+      // Filter for actionable items (Pending or Needs Confirmation)
+      const actionable = all.filter(c => c.status === 'pending' || c.status === 'needs_confirmation');
+      const tbody = document.getElementById('actionRequiredTableBody');
+
+      if (actionable.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 28px; color: var(--text-muted);">🎉 All complaints have been triaged and confirmed!</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = actionable.map(c => {
+        let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
+        let urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
+
+        let actionBtns = `<a href="complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm">View</a>`;
+
+        if (c.status === 'pending') {
+          actionBtns += `
+            <a href="admin_assign.html?id=${c.id}" class="btn btn-sm">Assign</a>
+          `;
+        } else if (c.status === 'needs_confirmation') {
+          actionBtns += `
+            <a href="admin_confirm.html?id=${c.id}" class="btn btn-purple btn-sm">Confirm</a>
+          `;
+        }
+
+        return `
+          <tr>
+            <td><strong>${c.id}</strong></td>
+            <td>${c.studentName}</td>
+            <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+            <td>${c.department}</td>
+            <td>${c.course}</td>
+            <td>${statusBadge}</td>
+            <td>${urgencyBadge}</td>
+            <td>
+              <div class="actions-cell">
+                ${actionBtns}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    });
+  </script>
+</body>
+</html>

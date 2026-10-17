@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Confirm Resolution - Ambo University Admin</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container" style="max-width: 860px;">
+      <div class="page-header" style="padding: 24px 20px;">
+        <span class="header-badge">Administrative Approval</span>
+        <h1>Confirm Resolution & Close Case</h1>
+        <p>Review the teacher's corrective response and approve official case resolution before publishing to the student.</p>
+      </div>
+
+      <!-- Grievance & Proposed Resolution Summary -->
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-title">
+          <h3 id="complaintHeader">Complaint #CMP-103</h3>
+          <span class="status-badge status-needs_confirmation">Needs Confirmation</span>
+        </div>
+
+        <!-- Student Grievance -->
+        <div style="margin-bottom: 18px;">
+          <h4 style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 6px;">STUDENT GRIEVANCE</h4>
+          <div style="background: var(--surface-alt); padding: 14px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.92rem; line-height: 1.6;" id="valMessage">
+            -
+          </div>
+        </div>
+
+        <!-- Teacher's Proposed Solution -->
+        <div>
+          <h4 style="font-size: 0.95rem; color: var(--purple); margin-bottom: 6px;">TEACHER'S PROPOSED RESOLUTION</h4>
+          <div style="background: var(--purple-subtle); padding: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(124, 58, 237, 0.25); font-size: 0.94rem; line-height: 1.6; color: var(--text-main);" id="valTeacherReply">
+            -
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirmation Form -->
+      <div class="card">
+        <form id="confirmForm">
+          <div class="form-group">
+            <label for="adminClosingRemark">Final Administrative Remark / Resolution Endorsement</label>
+            <textarea id="adminClosingRemark" rows="4" placeholder="e.g. Verified with department head. Registrar ledger corrected and case closed."></textarea>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+            <a href="admin_all_complaints.html" class="btn btn-secondary">Cancel</a>
+            <button type="button" class="btn btn-secondary" id="requestRevisionBtn">Request Teacher Revision</button>
+            <button type="submit" class="btn btn-purple">Confirm & Close Complaint</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const complaintId = urlParams.get('id') || 'CMP-103';
+      const complaint = window.AmboCMS.getComplaintById(complaintId);
+
+      if (!complaint) {
+        alert('Complaint record not found');
+        window.location.href = 'admin_all_complaints.html';
+        return;
+      }
+
+      document.getElementById('complaintHeader').textContent = `${complaint.id}: ${complaint.title}`;
+      document.getElementById('valMessage').textContent = complaint.message;
+      document.getElementById('valTeacherReply').textContent = complaint.teacherReply || 'No teacher response recorded.';
+
+      const form = document.getElementById('confirmForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const closingRemark = document.getElementById('adminClosingRemark').value.trim();
+
+        window.AmboCMS.updateComplaintStatus(complaint.id, {
+          status: 'resolved',
+          adminRemark: closingRemark || 'Resolution confirmed and closed by Administrator.',
+          timelineEvent: {
+            title: 'Resolved & Closed',
+            text: `Admin confirmed resolution. ${closingRemark ? `Remark: "${closingRemark}"` : 'Case officially closed.'}`
+          }
+        });
+
+        window.AmboCMS.showToast(`Complaint ${complaint.id} successfully resolved and closed!`, 'success');
+        setTimeout(() => {
+          window.location.href = 'admin_all_complaints.html';
+        }, 500);
+      });
+
+      document.getElementById('requestRevisionBtn').addEventListener('click', () => {
+        const revisionNote = prompt('Enter instructions for the teacher to revise their resolution:');
+        if (revisionNote && revisionNote.trim()) {
+          window.AmboCMS.updateComplaintStatus(complaint.id, {
+            status: 'in_progress',
+            adminRemark: `Revision requested: ${revisionNote.trim()}`,
+            timelineEvent: {
+              title: 'Revision Requested by Admin',
+              text: `Admin requested teacher revisions: "${revisionNote.trim()}"`
+            }
+          });
+
+          window.AmboCMS.showToast('Case returned to Teacher for revision.', 'warning');
+          setTimeout(() => {
+            window.location.href = 'admin_all_complaints.html';
+          }, 500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

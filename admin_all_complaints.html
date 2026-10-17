@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>All Complaints - Ambo University Admin</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="page-header" style="padding: 24px 20px;">
+        <span class="header-badge">Central Registry</span>
+        <h1>University Complaints Management</h1>
+        <p>Comprehensive register of all student submissions, teacher assignments, and resolution statuses.</p>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="card" style="padding: 18px 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <!-- Filter Buttons -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="adminFilterPills">
+            <button class="btn btn-sm btn-secondary active-filter" data-status="all">All Complaints</button>
+            <button class="btn btn-sm btn-secondary" data-status="pending">Pending</button>
+            <button class="btn btn-sm btn-secondary" data-status="in_progress">In Progress</button>
+            <button class="btn btn-sm btn-secondary" data-status="needs_confirmation">Needs Confirmation</button>
+            <button class="btn btn-sm btn-secondary" data-status="resolved">Resolved</button>
+            <button class="btn btn-sm btn-secondary" data-status="declined">Declined</button>
+          </div>
+
+          <!-- Department Filter & Search -->
+          <div style="display: flex; gap: 10px; align-items: center; flex: 1 1 300px; justify-content: flex-end; flex-wrap: wrap;">
+            <select id="departmentFilter" style="max-width: 180px; padding: 7px 10px; font-size: 0.88rem;">
+              <option value="all">All Departments</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Computer Science">Computer Science</option>
+              <option value="Electrical and Computer Engineering">Electrical & Computer Eng.</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+            </select>
+            <input type="text" id="adminSearchInput" placeholder="Search ID, title, student..." style="max-width: 220px; padding: 7px 12px; font-size: 0.88rem;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Card -->
+      <div class="card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Title</th>
+                <th>Course</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Assigned Teacher</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="allComplaintsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      let activeFilter = urlParams.get('status') || 'all';
+      let selectedDept = 'all';
+      let searchQuery = '';
+
+      // Initialize filter buttons if status in URL
+      const pillsContainer = document.getElementById('adminFilterPills');
+      if (activeFilter !== 'all') {
+        pillsContainer.querySelectorAll('button').forEach(btn => {
+          if (btn.dataset.status === activeFilter) {
+            btn.classList.add('active-filter');
+            btn.classList.remove('btn-secondary');
+          } else {
+            btn.classList.remove('active-filter');
+            btn.classList.add('btn-secondary');
+          }
+        });
+      }
+
+      function render() {
+        const all = window.AmboCMS.getComplaints();
+        let filtered = all;
+
+        if (activeFilter !== 'all') {
+          if (activeFilter === 'in_progress') {
+            filtered = filtered.filter(c => c.status === 'in_progress' || c.status === 'assigned');
+          } else {
+            filtered = filtered.filter(c => c.status === activeFilter);
+          }
+        }
+
+        if (selectedDept !== 'all') {
+          filtered = filtered.filter(c => c.department === selectedDept);
+        }
+
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          filtered = filtered.filter(c =>
+            c.id.toLowerCase().includes(q) ||
+            c.title.toLowerCase().includes(q) ||
+            c.studentName.toLowerCase().includes(q) ||
+            c.course.toLowerCase().includes(q)
+          );
+        }
+
+        const tbody = document.getElementById('allComplaintsTableBody');
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 28px; color: var(--text-muted);">No complaints match the selected filters.</td></tr>`;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(c => {
+          let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
+          let teacherText = c.assignedTeacher || '<span style="color:var(--text-muted);">Unassigned</span>';
+
+          let actions = `<a href="complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm">View</a>`;
+
+          if (c.status === 'pending') {
+            actions += `<a href="admin_assign.html?id=${c.id}" class="btn btn-sm">Assign</a>`;
+          } else if (c.status === 'needs_confirmation') {
+            actions += `<a href="admin_confirm.html?id=${c.id}" class="btn btn-purple btn-sm">Confirm</a>`;
+          }
+
+          return `
+            <tr>
+              <td><strong>${c.id}</strong></td>
+              <td>${c.studentName}</td>
+              <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+              <td>${c.course}</td>
+              <td>${c.department}</td>
+              <td>${statusBadge}</td>
+              <td>${teacherText}</td>
+              <td>${c.submittedDate}</td>
+              <td>
+                <div class="actions-cell">
+                  ${actions}
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Filter listeners
+      pillsContainer.addEventListener('click', (e) => {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+
+        pillsContainer.querySelectorAll('button').forEach(b => {
+          b.classList.remove('active-filter');
+          b.classList.add('btn-secondary');
+        });
+
+        btn.classList.add('active-filter');
+        btn.classList.remove('btn-secondary');
+
+        activeFilter = btn.dataset.status;
+        render();
+      });
+
+      document.getElementById('departmentFilter').addEventListener('change', (e) => {
+        selectedDept = e.target.value;
+        render();
+      });
+
+      document.getElementById('adminSearchInput').addEventListener('input', (e) => {
+        searchQuery = e.target.value.trim();
+        render();
+      });
+
+      render();
+    });
+  </script>
+</body>
+</html>

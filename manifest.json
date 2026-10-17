@@ -1,0 +1,64 @@
+{
+  "name": "Ambo University Complaint Management System",
+  "short_name": "Ambo CMS",
+  "description": "Official Student to Teacher Academic Complaint & Resolution System for Ambo University",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f1f5f9",
+  "theme_color": "#1e3a8a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "shortcuts": [
+    {
+      "name": "Submit Complaint",
+      "short_name": "Submit",
+      "description": "Lodge an academic or grading complaint",
+      "url": "./submit_complaint.html",
+      "icons": [{ "src": "assets/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "My Complaints",
+      "short_name": "Track",
+      "description": "View status of submitted complaints",
+      "url": "./my_complaints.html",
+      "icons": [{ "src": "assets/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Teacher Dashboard",
+      "short_name": "Teacher",
+      "description": "Review assigned academic grievances",
+      "url": "./teacher_dashboard.html",
+      "icons": [{ "src": "assets/images/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Admin Dashboard",
+      "short_name": "Admin",
+      "description": "Administrative triage and oversight",
+      "url": "./admin_dashboard.html",
+      "icons": [{ "src": "assets/images/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

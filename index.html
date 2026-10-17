@@ -1,243 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambo university Student to Teacher complaint system</title>
-     <style>
-      body{
-  font-family: 'Inter', Arial, sans-serif;
-  background-color: #F3F6FB;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-  color: #111827;
-}
-select{
-  padding: 10px;
-  margin-bottom: 12px;
-  border: 1px solid #D1D5DB;
-  border-radius: 10px;
-  width: 99%;
-  font-size: 14px;
-  transition: 0.2s;
-  background: #FFFFFF;
-  color: #111827;
-}
-
-select:hover{
-  border-color: #2563EB;
-}
-
-.login-container{
-  background: #FFFFFF;
-  margin: 10px;
-  padding: 30px;
-  width: 320px;
-  border: none;
-  text-align: center;
-  color:#0F172A;
-  border-radius: 14px; 
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-}
-h1{
-  margin-bottom:5px;
-  font-weight: 600;
-}
-p{
-  margin-bottom: 20px;
-  color: #6B7280;
-  font-weight: 400; 
-  font-size: 14px;
-}
-
-form{
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  font-weight: 500;
-}
-
-label{
-  display: block;
-  margin-bottom: 8px;
-  color: #334155;
-  font-size: 14px;
-}
-
-input,
-select{
-  padding: 10px 12px;
-  border: 1px solid #D1D5DB;
-  border-radius: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 14px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  background: #ffffff;
-  color: #0F172A;
-}
-
-input,
-select{
-  margin-bottom: 14px;
-}
-
-input:hover,
-select:hover{
-  border-color: #2563EB;
-}
-
-.options{
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-fieldset{
-  border: none;
-}
-#cbox{
-  width: 15px;
-}
-
-.options a{
-  text-decoration: none;
-  color: #2563EB;
-}
-
-.options a:hover{
-  text-decoration: underline;
-}
-
-button{
-  padding: 12px;
-  background: #2563EB;
-  border: none;
-  color: white;
-  border-radius: 10px;
-  cursor:pointer;
-  font-weight: 600;
-  transition: 0.25s;
-}
-
-button:hover {
-  background: #1D4ED8;
-}
-
-button:active{
-  transform: scale(0.98);
-}
-
-img{
-  width: 80px;
-  height: 80px;
-  margin-bottom: 10px;
-}
-
-.Footer{
-  color: #6B7280;
-  text-align: center;
-  padding: 20px 10px;
-  border-top: 1px solid #E5E7EB;
-  margin-top: 30px;
-  font-size: 12px;
-
-}
-
-#name{
-  font-size: 1rem;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: #1F2937;
-  letter-spacing: 1px;
-  margin-bottom: 6px;
-}
-
-#motto{
-  font-size: 0.9rem;
-  margin: 0;
-  margin-bottom: 6px;
-}
-
-#adress{
-  font-size: 0.85rem;
-  margin: 0;
-  margin-bottom: 6px;
-}
-
-@media (max-width: 480px) {
-  .login-container{
-    width: calc(100% - 24px);
-    padding: 20px;
-  }
-
-  h1{
-    font-size: 24px;
-  }
-}
-     </style>
-  </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Ambo University - Student to Teacher Complaint Management System</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
 <body>
-    <div class="login-container">
-      <img src="ip-project/Pictures/download (1).jpg" alt="Ambo university logo">
-      <h1>Ambo university</h1>
-    <p>Student to Teacher complaint system</p>
-    <form id="loginForm" action="#" method="get">
-      <fieldset>
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter your username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
-        <label for="user-role">Login as:</label>
-        <select id="user-role" name="role" required>
-          <option value="" disabled selected>Select your role</option>
-          <option value="teacher">Teacher</option>
-          <option value="student">Student</option>
-          <option value="admin">Admin</option>
-        </select>
-      </fieldset>
-      <div class="options">
-      <label>
-        <input type="checkbox" id="cbox">Remember Me
-      </label>
-      <a href="#">Forgot Password?</a>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu" id="navLinks"></ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
       </div>
-      <button type="submit">Login</button>
-    </form>
-    <div class="Footer">
-<p id="name"> Ambo University </p>
-<p id="motto">Better future through Knowledge and Wisdom!</p>
-<p id="adress">P.O. Box 19, Ambo, Oromia, Ethiopia
-   Phone: (+251) 111 236 3160</p>
-  </div>
     </div>
-    <script>
-      // Handle login: store selected role and redirect to the correct dashboard.
-      // The app is deployed through Vercel with index.html at the project root
-      // and the role-specific pages inside the ip-project folder.
-      (function(){
-        const form = document.getElementById('loginForm');
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          const roleSelect = document.getElementById('user-role');
-          const role = roleSelect.value;
-          const usernameEl = document.getElementById('username');
-          const username = usernameEl ? usernameEl.value.trim() : '';
-          if(!role) return alert('Please select a role');
-          localStorage.setItem('userRole', role);
-          if(username) localStorage.setItem('username', username);
-          if(role === 'student') window.location.href = 'ip-project/Student_Dashboard.html';
-          else if(role === 'teacher') window.location.href = 'ip-project/Teacher_Dashboard.html';
-          else if(role === 'admin') window.location.href = 'ip-project/Admin_Dashboard1.html';
-          else window.location.href = 'index.html';
-        });
-      })();
-    </script>
+  </nav>
+
+  <!-- Hero Banner -->
+  <main class="main-content">
+    <div class="container">
+      <div class="page-header" style="padding: 50px 24px; margin-bottom: 36px;">
+        <span class="header-badge">Official Academic Portal</span>
+        <h1 style="font-size: 2.3rem; margin-bottom: 14px;">Welcome to Ambo University CMS</h1>
+        <p style="font-size: 1.1rem; line-height: 1.6; max-width: 760px;">
+          A transparent, structured, and auditable platform for resolving academic, assessment, and departmental concerns between students and faculty.
+        </p>
+        <div style="margin-top: 24px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;" id="heroActionButtons">
+          <a href="login.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Login to Portal</a>
+          <a href="submission_guide.html" class="btn btn-secondary" style="padding: 12px 24px; font-size: 1rem;">Read Submission Guide</a>
+        </div>
+      </div>
+
+      <!-- Feature Cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px;">
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div style="font-size: 2.4rem; margin-bottom: 12px;">📊</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Live Tracking</h3>
+          <p style="color: var(--text-muted); font-size: 0.94rem;">
+            Monitor the exact stage of your complaint with chronological timeline updates from submission to resolution.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div style="font-size: 2.4rem; margin-bottom: 12px;">🛡️</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Administrative Oversight</h3>
+          <p style="color: var(--text-muted); font-size: 0.94rem;">
+            Department heads and university administrators review every teacher response before finalizing resolution.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div style="font-size: 2.4rem; margin-bottom: 12px;">⚡</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Fast Academic Remediation</h3>
+          <p style="color: var(--text-muted); font-size: 0.94rem;">
+            Direct routing to assigned course lecturers ensures academic and grading errors are resolved promptly.
+          </p>
+        </div>
+      </div>
+
+      <!-- Complaint Workflow Explanation -->
+      <div class="card" style="padding: 32px 28px;">
+        <div class="card-title" style="margin-bottom: 24px;">
+          <h2>Complaint Resolution Process</h2>
+          <span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 500;">4-Stage Workflow</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; background: var(--primary); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">1</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Submit Grievance</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Student selects department, course, urgency, and provides clear evidence.</p>
+          </div>
+
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; background: var(--warning); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">2</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Admin Assignment</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Admin verifies complaint validity and assigns it to the designated course teacher.</p>
+          </div>
+
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; background: var(--purple); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">3</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Teacher Response</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Teacher investigates, formulates a corrective action or clarification, and replies.</p>
+          </div>
+
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; background: var(--success); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">4</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Confirmation & Closure</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Admin confirms resolution; student is notified with official outcome in their dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p><strong>Ambo University Complaint Management System</strong></p>
+      <p>Better future through Knowledge and Wisdom!</p>
+      <p class="footer-contact">P.O. Box 19, Ambo, Oromia, Ethiopia &bull; Phone: (+251) 111 236 3160</p>
+      <p style="margin-top: 10px; font-size: 0.78rem;">&copy; 2026 Ambo University. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    // Customize hero CTA button based on active role
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = window.AmboCMS.getCurrentUser();
+      const heroButtons = document.getElementById('heroActionButtons');
+      if (user && heroButtons) {
+        if (user.role === 'student') {
+          heroButtons.innerHTML = `
+            <a href="submit_complaint.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Submit New Complaint</a>
+            <a href="student_dashboard.html" class="btn btn-secondary" style="padding: 12px 24px; font-size: 1rem;">My Student Dashboard</a>
+          `;
+        } else if (user.role === 'teacher') {
+          heroButtons.innerHTML = `
+            <a href="teacher_dashboard.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Open Teacher Dashboard</a>
+          `;
+        } else if (user.role === 'admin') {
+          heroButtons.innerHTML = `
+            <a href="admin_dashboard.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Open Admin Dashboard</a>
+            <a href="admin_all_complaints.html" class="btn btn-secondary" style="padding: 12px 24px; font-size: 1rem;">View All Complaints</a>
+          `;
+        }
+      }
+    });
+  </script>
 </body>
 </html>

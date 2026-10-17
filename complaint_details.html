@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Complaint Details - Ambo University CMS</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <style>
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+      background: var(--surface-alt);
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .meta-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+    .meta-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .resolution-card {
+      border-left: 4px solid var(--success);
+      background: var(--surface-alt);
+      padding: 20px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+    }
+    .decline-card {
+      border-left: 4px solid var(--danger);
+      background: var(--surface-alt);
+      padding: 20px;
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container" style="max-width: 920px;">
+      
+      <!-- Details Header -->
+      <div class="page-header" style="padding: 24px 20px; text-align: left; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <div>
+          <span class="header-badge" id="complaintIdBadge">CMP-101</span>
+          <h1 id="complaintTitle" style="font-size: 1.6rem; margin-top: 4px; margin-bottom: 0;">Unfair Grading System</h1>
+        </div>
+        <div id="statusBadgeContainer">
+          <!-- Status pill -->
+        </div>
+      </div>
+
+      <!-- Metadata Attributes -->
+      <div class="card">
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Student Name</span>
+            <span class="meta-value" id="valStudentName">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Student ID</span>
+            <span class="meta-value" id="valStudentId">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Department</span>
+            <span class="meta-value" id="valDepartment">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Course</span>
+            <span class="meta-value" id="valCourse">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Category</span>
+            <span class="meta-value" id="valCategory">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Urgency</span>
+            <span class="meta-value" id="valUrgency">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Assigned Teacher</span>
+            <span class="meta-value" id="valTeacher">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Submitted On</span>
+            <span class="meta-value" id="valDate">-</span>
+          </div>
+        </div>
+
+        <!-- Grievance Message -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-main);">Student Grievance Description</h3>
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); line-height: 1.6; color: var(--text-main);" id="valMessage">
+            -
+          </div>
+        </div>
+
+        <!-- Teacher's Resolution / Reply (if available) -->
+        <div id="teacherReplySection" style="display: none;">
+          <div class="resolution-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <h3 style="color: var(--success); font-size: 1.1rem; margin-bottom: 0;">👨‍🏫 Teacher's Resolution & Clarification</h3>
+              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);" id="valTeacherReplyName">-</span>
+            </div>
+            <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valTeacherReplyText">
+              -
+            </p>
+          </div>
+        </div>
+
+        <!-- Admin Decline Notice (if declined) -->
+        <div id="declineReasonSection" style="display: none;">
+          <div class="decline-card">
+            <h3 style="color: var(--danger); font-size: 1.1rem; margin-bottom: 8px;">❌ Administrative Rejection Reason</h3>
+            <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valDeclineReason">
+              -
+            </p>
+          </div>
+        </div>
+
+        <!-- Admin Remark (if available) -->
+        <div id="adminRemarkSection" style="display: none; margin-bottom: 24px;">
+          <div class="alert-box alert-info">
+            <span>🛡️</span>
+            <div>
+              <strong>Admin Instruction / Remark:</strong>
+              <div id="valAdminRemark" style="margin-top: 4px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div style="margin-top: 32px;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 14px;">Chronological Timeline</h3>
+          <div class="timeline" id="timelineList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Dynamic Role Context Action Buttons -->
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border-color); flex-wrap: wrap;" id="detailActionButtons">
+          <a href="my_complaints.html" class="btn btn-secondary" id="backBtn">Back to Complaints</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const complaintId = urlParams.get('id') || 'CMP-101';
+      const complaint = window.AmboCMS.getComplaintById(complaintId);
+      const user = window.AmboCMS.getCurrentUser();
+
+      if (!complaint) {
+        document.querySelector('.container').innerHTML = `
+          <div class="card" style="text-align: center; padding: 48px;">
+            <h2>Complaint Not Found</h2>
+            <p style="color: var(--text-muted); margin: 12px 0 24px;">Complaint record "${complaintId}" does not exist in the database.</p>
+            <a href="index.html" class="btn">Return to Home</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Populate Data
+      document.getElementById('complaintIdBadge').textContent = complaint.id;
+      document.getElementById('complaintTitle').textContent = complaint.title;
+      document.getElementById('statusBadgeContainer').innerHTML = `<span class="status-badge status-${complaint.status}" style="font-size:0.92rem; padding: 6px 14px;">${complaint.status.replace('_', ' ')}</span>`;
+
+      document.getElementById('valStudentName').textContent = complaint.studentName;
+      document.getElementById('valStudentId').textContent = complaint.studentId;
+      document.getElementById('valDepartment').textContent = complaint.department;
+      document.getElementById('valCourse').textContent = complaint.course;
+      document.getElementById('valCategory').textContent = complaint.category;
+      document.getElementById('valUrgency').innerHTML = `<span class="urgency-badge urgency-${complaint.urgency}">${complaint.urgency}</span>`;
+      document.getElementById('valTeacher').textContent = complaint.assignedTeacher || 'Not Assigned';
+      document.getElementById('valDate').textContent = complaint.submittedDate;
+      document.getElementById('valMessage').textContent = complaint.message;
+
+      // Teacher Reply
+      if (complaint.teacherReply) {
+        document.getElementById('teacherReplySection').style.display = 'block';
+        document.getElementById('valTeacherReplyName').textContent = `Assigned Teacher: ${complaint.assignedTeacher || 'Faculty'}`;
+        document.getElementById('valTeacherReplyText').textContent = complaint.teacherReply;
+      }
+
+      // Decline Reason
+      if (complaint.declineReason) {
+        document.getElementById('declineReasonSection').style.display = 'block';
+        document.getElementById('valDeclineReason').textContent = complaint.declineReason;
+      }
+
+      // Admin Remark
+      if (complaint.adminRemark) {
+        document.getElementById('adminRemarkSection').style.display = 'block';
+        document.getElementById('valAdminRemark').textContent = complaint.adminRemark;
+      }
+
+      // Timeline
+      const timelineEl = document.getElementById('timelineList');
+      timelineEl.innerHTML = complaint.timeline.map(item => `
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span>${item.title}</span>
+              <span class="timeline-time">${item.time}</span>
+            </div>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">${item.text}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Dynamic Context Action Buttons
+      const actionsEl = document.getElementById('detailActionButtons');
+      const backBtn = document.getElementById('backBtn');
+
+      if (user && user.role === 'admin') {
+        backBtn.href = 'admin_all_complaints.html';
+        backBtn.textContent = 'Back to All Complaints';
+
+        if (complaint.status === 'pending') {
+          const assignBtn = document.createElement('a');
+          assignBtn.href = `admin_assign.html?id=${complaint.id}`;
+          assignBtn.className = 'btn btn-success';
+          assignBtn.textContent = '👨‍🏫 Assign Teacher';
+          actionsEl.appendChild(assignBtn);
+
+          const declineBtn = document.createElement('button');
+          declineBtn.className = 'btn btn-danger';
+          declineBtn.textContent = '❌ Decline Complaint';
+          declineBtn.onclick = () => {
+            const reason = prompt('Enter administrative reason for declining this complaint:');
+            if (reason && reason.trim()) {
+              window.AmboCMS.updateComplaintStatus(complaint.id, {
+                status: 'declined',
+                declineReason: reason.trim(),
+                timelineEvent: { title: 'Declined by Admin', text: `Reason: ${reason.trim()}` }
+              });
+              window.AmboCMS.showToast('Complaint status updated to Declined', 'danger');
+              setTimeout(() => location.reload(), 400);
+            }
+          };
+          actionsEl.appendChild(declineBtn);
+        } else if (complaint.status === 'needs_confirmation') {
+          const confirmBtn = document.createElement('a');
+          confirmBtn.href = `admin_confirm.html?id=${complaint.id}`;
+          confirmBtn.className = 'btn btn-purple';
+          confirmBtn.textContent = '✅ Confirm Resolution';
+          actionsEl.appendChild(confirmBtn);
+        }
+      } else if (user && user.role === 'teacher') {
+        backBtn.href = 'teacher_dashboard.html';
+        backBtn.textContent = 'Back to Teacher Dashboard';
+
+        if (complaint.status === 'assigned' || complaint.status === 'in_progress') {
+          const respondBtn = document.createElement('a');
+          respondBtn.href = `teacher_respond.html?id=${complaint.id}`;
+          respondBtn.className = 'btn btn-primary';
+          respondBtn.textContent = '✍️ Write Response / Resolution';
+          actionsEl.appendChild(respondBtn);
+        }
+      } else {
+        backBtn.href = 'my_complaints.html';
+      }
+    });
+  </script>
+</body>
+</html>

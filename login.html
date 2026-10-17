@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Login - Ambo University CMS</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <style>
+    .login-wrapper {
+      max-width: 440px;
+      margin: 40px auto;
+    }
+    .demo-accounts {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border-color);
+      text-align: center;
+    }
+    .demo-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .demo-buttons button {
+      flex: 1 1 120px;
+      font-size: 0.82rem;
+      padding: 8px 10px;
+    }
+    .pwd-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .pwd-toggle-btn {
+      position: absolute;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="login-wrapper">
+        <div class="card" style="padding: 32px 28px;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <img src="assets/images/logo.jpg" alt="Ambo University" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 12px; box-shadow: var(--shadow-sm);">
+            <h1 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 4px;">Sign in to CMS</h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Select your institutional role to continue</p>
+          </div>
+
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="username">Username or ID <span class="required">*</span></label>
+              <input type="text" id="username" placeholder="e.g. jdoe or ugr/12345/16" required>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password <span class="required">*</span></label>
+              <div class="pwd-wrapper">
+                <input type="password" id="password" placeholder="Enter password" required>
+                <button type="button" class="pwd-toggle-btn" id="pwdToggle" aria-label="Show password">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="userRole">Login as Role <span class="required">*</span></label>
+              <select id="userRole" required>
+                <option value="" disabled selected>-- Select your role --</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher / Faculty</option>
+                <option value="admin">University Administrator</option>
+              </select>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.88rem;">
+              <label class="checkbox-label" style="font-weight: 400; margin-bottom: 0;">
+                <input type="checkbox" id="rememberMe"> Remember me
+              </label>
+              <a href="submission_guide.html">Need help?</a>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%; padding: 12px;">Login</button>
+          </form>
+
+          <!-- 1-Click Interactive Demo Switchers -->
+          <div class="demo-accounts">
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Quick 1-Click Demo Login</span>
+            <div class="demo-buttons">
+              <button type="button" class="btn btn-secondary btn-sm" id="demoStudentBtn">👤 Student</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="demoTeacherBtn">👨‍🏫 Teacher</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="demoAdminBtn">🛡️ Admin</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+      const pwdInput = document.getElementById('password');
+      const pwdToggle = document.getElementById('pwdToggle');
+
+      // Password toggle
+      pwdToggle.addEventListener('click', () => {
+        const isPwd = pwdInput.type === 'password';
+        pwdInput.type = isPwd ? 'text' : 'password';
+        pwdToggle.textContent = isPwd ? '🙈' : '👁️';
+      });
+
+      // Quick Demo Switchers
+      document.getElementById('demoStudentBtn').addEventListener('click', () => {
+        window.AmboCMS.setCurrentUser({
+          username: 'johndoe',
+          name: 'John Doe',
+          role: 'student',
+          studentId: 'ugr/12345/16',
+          department: 'Information Technology'
+        });
+        window.AmboCMS.showToast('Logged in as Student John Doe', 'success');
+        setTimeout(() => window.location.href = 'student_dashboard.html', 300);
+      });
+
+      document.getElementById('demoTeacherBtn').addEventListener('click', () => {
+        window.AmboCMS.setCurrentUser({
+          username: 'eyuel',
+          name: 'Mr. Eyuel',
+          role: 'teacher',
+          department: 'Information Technology',
+          courses: ['SAD', 'IP', 'DSA']
+        });
+        window.AmboCMS.showToast('Logged in as Teacher Mr. Eyuel', 'success');
+        setTimeout(() => window.location.href = 'teacher_dashboard.html', 300);
+      });
+
+      document.getElementById('demoAdminBtn').addEventListener('click', () => {
+        window.AmboCMS.setCurrentUser({
+          username: 'admin',
+          name: 'Dean of Academic Affairs',
+          role: 'admin'
+        });
+        window.AmboCMS.showToast('Logged in as University Administrator', 'success');
+        setTimeout(() => window.location.href = 'admin_dashboard.html', 300);
+      });
+
+      // Form Submit
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const role = document.getElementById('userRole').value;
+
+        if (!role) {
+          window.AmboCMS.showToast('Please select your role.', 'warning');
+          return;
+        }
+
+        let name = username;
+        if (role === 'student' && !name) name = 'John Doe';
+        if (role === 'teacher' && !name) name = 'Mr. Eyuel';
+        if (role === 'admin' && !name) name = 'Administrator';
+
+        window.AmboCMS.setCurrentUser({
+          username: username,
+          name: name,
+          role: role,
+          studentId: role === 'student' ? 'ugr/12345/16' : null,
+          department: 'Information Technology'
+        });
+
+        window.AmboCMS.showToast(`Welcome back, ${name}!`, 'success');
+
+        setTimeout(() => {
+          if (role === 'student') window.location.href = 'student_dashboard.html';
+          else if (role === 'teacher') window.location.href = 'teacher_dashboard.html';
+          else if (role === 'admin') window.location.href = 'admin_dashboard.html';
+        }, 300);
+      });
+    });
+  </script>
+</body>
+</html>
