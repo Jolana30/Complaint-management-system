@@ -3,7 +3,6 @@
 ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![React](https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![Ambo University](https://img.shields.io/badge/-Ambo%20University-10B981?style=for-the-badge)
 
 A web-based **Student-to-Teacher Complaint Management System** designed for **Ambo University** to streamline, track, and resolve academic and administrative complaints through a structured 3-tier user workflow (Student, Teacher, Admin).
@@ -45,7 +44,6 @@ Complaint-management-system/
 │   ├── Assign_Complaint.html        # Admin Task Delegation
 │   ├── shared.js                    # Core Application Logic & State
 │   └── Nav.css                      # Unified Navigation Styling
-├── react-app/                       # React Web Application Architecture
 ├── .gitignore                       # Repository Ignore Configuration
 └── README.md                        # Documentation
 ```
@@ -54,7 +52,6 @@ Complaint-management-system/
 
 ## 💻 Quick Start & Running Locally
 
-### Option A: Web Prototype (HTML/JS)
 1. Clone the repository:
    ```bash
    git clone https://github.com/Jolana30/Complaint-management-system.git
@@ -64,20 +61,6 @@ Complaint-management-system/
    cd Complaint-management-system/ip-project
    ```
 3. Open `Home.html` or `index.html` in your web browser.
-
-### Option B: React Application
-1. Navigate to the `react-app` folder:
-   ```bash
-   cd react-app
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
 
 ---
 
