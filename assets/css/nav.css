@@ -1,39 +1,40 @@
-/* Navigation Bar & Mobile Drawer */
+/* Clean & Spacious Ambo CMS Navigation Bar */
 .main-nav {
   background-color: var(--surface);
   border-bottom: 1px solid var(--border-color);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .nav-container {
-  max-width: 1140px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 68px;
+  height: 60px;
+  gap: 16px;
 }
 
 /* Brand & Logo */
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none !important;
   color: var(--text-main);
+  flex-shrink: 0;
 }
 
 .nav-brand img {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
   object-fit: cover;
-  box-shadow: var(--shadow-sm);
 }
 
 .brand-info {
@@ -42,7 +43,7 @@
 }
 
 .brand-title {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
   color: var(--text-main);
@@ -50,7 +51,7 @@
 }
 
 .brand-subtitle {
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -61,19 +62,19 @@
   align-items: center;
   list-style: none;
   gap: 4px;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
   color: var(--text-muted);
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 8px 14px;
+  font-size: 0.88rem;
+  padding: 6px 12px;
   border-radius: var(--radius-sm);
   text-decoration: none !important;
   transition: color 0.15s ease, background-color 0.15s ease;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
@@ -87,25 +88,80 @@
   font-weight: 700;
 }
 
-/* Nav Right Actions (Theme + Auth) */
+/* Nav Right Actions */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Unified Profile & Role Switcher Pill */
+.nav-user-select {
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: var(--surface-alt);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  max-width: 175px;
+}
+
+.nav-user-select:hover, .nav-user-select:focus {
+  border-color: var(--primary);
+}
+
+.nav-logout-btn {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.nav-logout-btn:hover {
+  color: var(--danger);
+  border-color: var(--danger-subtle);
+  background: var(--danger-subtle);
+}
+
+.nav-login-btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.nav-login-btn:hover {
+  background: var(--primary-hover);
 }
 
 .theme-toggle-btn {
   background: var(--surface-alt);
   border: 1px solid var(--border-color);
   color: var(--text-main);
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
@@ -114,54 +170,15 @@
   border-color: var(--text-muted);
 }
 
-.user-profile-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background: var(--surface-alt);
-  border: 1px solid var(--border-color);
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.user-role-pill {
-  background: var(--primary);
-  color: #ffffff;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.user-role-student { background: #134074; }
-.user-role-teacher { background: #b45309; }
-.user-role-admin { background: #6d28d9; }
-.user-role-committee { background: #991b1b; }
-
-.demo-role-select {
-  padding: 5px 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border-radius: var(--radius-sm);
-  background: var(--surface);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-  cursor: pointer;
-}
-
 /* Mobile Hamburger Toggle */
 .mobile-nav-toggle {
   display: none;
   background: transparent;
   border: none;
   color: var(--text-main);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   cursor: pointer;
-  padding: 6px;
+  padding: 4px 6px;
   border-radius: var(--radius-sm);
 }
 
@@ -170,7 +187,7 @@
 }
 
 /* Responsive Navigation Drawer */
-@media (max-width: 860px) {
+@media (max-width: 920px) {
   .mobile-nav-toggle {
     display: flex;
     align-items: center;
@@ -179,16 +196,16 @@
 
   .nav-menu {
     position: fixed;
-    top: 68px;
+    top: 60px;
     left: 0;
     right: 0;
     background-color: var(--surface);
     border-bottom: 1px solid var(--border-color);
     flex-direction: column;
     align-items: stretch;
-    padding: 16px 20px 24px;
-    gap: 8px;
-    box-shadow: var(--shadow-lg);
+    padding: 14px 20px 20px;
+    gap: 6px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     display: none;
   }
 
@@ -197,13 +214,12 @@
   }
 
   .nav-link {
-    padding: 12px 16px;
-    font-size: 0.95rem;
+    padding: 10px 14px;
+    font-size: 0.92rem;
   }
 
   .nav-actions {
     margin-left: auto;
-    margin-right: 8px;
   }
 
   .brand-subtitle {
@@ -211,11 +227,20 @@
   }
 }
 
-@media (max-width: 480px) {
-  .user-profile-badge span:first-child {
-    display: none;
-  }
+@media (max-width: 520px) {
   .nav-container {
-    padding: 0 14px;
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .nav-user-select {
+    max-width: 130px;
+    font-size: 0.76rem;
+    padding: 4px 6px;
+  }
+
+  .nav-logout-btn {
+    padding: 4px 8px;
+    font-size: 0.76rem;
   }
 }

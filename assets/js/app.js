@@ -447,64 +447,59 @@
       // Guest Links
       linksHtml += `
         <li><a class="nav-link ${currentPage === 'index.html' ? 'active' : ''}" href="index.html">Home</a></li>
-        <li><a class="nav-link ${currentPage === 'submission_guide.html' ? 'active' : ''}" href="submission_guide.html">Submission Guide</a></li>
+        <li><a class="nav-link ${currentPage === 'submission_guide.html' ? 'active' : ''}" href="submission_guide.html">Guide</a></li>
         <li><a class="nav-link ${currentPage === 'login.html' ? 'active' : ''}" href="login.html">Login</a></li>
       `;
     } else if (user.role === 'student') {
       linksHtml += `
         <li><a class="nav-link ${currentPage === 'index.html' ? 'active' : ''}" href="index.html">Home</a></li>
         <li><a class="nav-link ${currentPage === 'student_dashboard.html' ? 'active' : ''}" href="student_dashboard.html">Dashboard</a></li>
-        <li><a class="nav-link ${currentPage === 'submit_complaint.html' ? 'active' : ''}" href="submit_complaint.html">Submit Complaint</a></li>
         <li><a class="nav-link ${currentPage === 'my_complaints.html' ? 'active' : ''}" href="my_complaints.html">My Complaints</a></li>
-        <li><a class="nav-link ${currentPage === 'submission_guide.html' ? 'active' : ''}" href="submission_guide.html">Guide</a></li>
       `;
     } else if (user.role === 'teacher') {
       linksHtml += `
         <li><a class="nav-link ${currentPage === 'index.html' ? 'active' : ''}" href="index.html">Home</a></li>
-        <li><a class="nav-link ${currentPage === 'teacher_dashboard.html' ? 'active' : ''}" href="teacher_dashboard.html">Teacher Dashboard</a></li>
+        <li><a class="nav-link ${currentPage === 'teacher_dashboard.html' ? 'active' : ''}" href="teacher_dashboard.html">Dashboard</a></li>
       `;
     } else if (user.role === 'admin') {
       linksHtml += `
         <li><a class="nav-link ${currentPage === 'index.html' ? 'active' : ''}" href="index.html">Home</a></li>
-        <li><a class="nav-link ${currentPage === 'admin_dashboard.html' ? 'active' : ''}" href="admin_dashboard.html">Admin Dashboard</a></li>
+        <li><a class="nav-link ${currentPage === 'admin_dashboard.html' ? 'active' : ''}" href="admin_dashboard.html">Dashboard</a></li>
         <li><a class="nav-link ${currentPage === 'admin_all_complaints.html' ? 'active' : ''}" href="admin_all_complaints.html">All Complaints</a></li>
       `;
     } else if (user.role === 'committee') {
       linksHtml += `
         <li><a class="nav-link ${currentPage === 'index.html' ? 'active' : ''}" href="index.html">Home</a></li>
-        <li><a class="nav-link ${currentPage === 'committee_dashboard.html' ? 'active' : ''}" href="committee_dashboard.html">Committee Dashboard</a></li>
+        <li><a class="nav-link ${currentPage === 'committee_dashboard.html' ? 'active' : ''}" href="committee_dashboard.html">Docket</a></li>
       `;
     }
 
     navLinksContainer.innerHTML = linksHtml;
 
-    // Render User Badge & Demo Role Switcher in Navbar
+    // Render Compact Profile & Role Switcher in Navbar
     if (userBadgeContainer) {
-      let roleSwitcherHtml = `
-        <select id="quickDemoSwitch" class="demo-role-select" aria-label="Demo Role Switcher" title="Switch Demo User Role">
-          <option value="" disabled ${!user ? 'selected' : ''}>Demo Role ▾</option>
-          <option value="student" ${user && user.role === 'student' ? 'selected' : ''}>Student (Abebe)</option>
-          <option value="teacher" ${user && user.role === 'teacher' ? 'selected' : ''}>Teacher (Mr. Eyuel)</option>
-          <option value="admin" ${user && user.role === 'admin' ? 'selected' : ''}>Admin (Dr. Tadesse)</option>
-          <option value="committee" ${user && user.role === 'committee' ? 'selected' : ''}>Committee (Dr. Daniel)</option>
-        </select>
-      `;
-
       if (user) {
         userBadgeContainer.innerHTML = `
-          ${roleSwitcherHtml}
-          <div class="user-profile-badge">
-            <span>${user.name}</span>
-            <span class="user-role-pill user-role-${user.role}">${user.role}</span>
-          </div>
-          <button class="btn btn-secondary btn-sm" id="logoutBtn" style="padding:4px 10px; font-size:0.8rem;">Logout</button>
+          <select id="quickDemoSwitch" class="nav-user-select" title="Active Account & Role (Click to switch demo role)">
+            <option value="student" ${user.role === 'student' ? 'selected' : ''}>Abebe (Student)</option>
+            <option value="teacher" ${user.role === 'teacher' ? 'selected' : ''}>Mr. Eyuel (Teacher)</option>
+            <option value="admin" ${user.role === 'admin' ? 'selected' : ''}>Dr. Tadesse (Admin)</option>
+            <option value="committee" ${user.role === 'committee' ? 'selected' : ''}>Dr. Daniel (UDC)</option>
+          </select>
+          <button class="nav-logout-btn" id="logoutBtn" title="Log out">Logout</button>
         `;
         const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) logoutBtn.addEventListener('click', logout);
       } else {
         userBadgeContainer.innerHTML = `
-          ${roleSwitcherHtml}
-          <a class="btn btn-sm" href="login.html">Login</a>
+          <select id="quickDemoSwitch" class="nav-user-select" title="Select demo profile">
+            <option value="" disabled selected>Demo Profile ▾</option>
+            <option value="student">Student (Abebe)</option>
+            <option value="teacher">Teacher (Mr. Eyuel)</option>
+            <option value="admin">Admin (Dr. Tadesse)</option>
+            <option value="committee">Committee (Dr. Daniel)</option>
+          </select>
+          <a class="nav-login-btn" href="login.html">Login</a>
         `;
       }
 
