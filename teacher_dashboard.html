@@ -45,21 +45,22 @@
       </div>
 
       <!-- Statistics -->
+      <h2 class="sr-only">Assigned Grievance Overview & Metrics</h2>
       <div class="stats-grid">
         <div class="stat-card">
-          <h3 id="statAssigned">0</h3>
+          <h3 id="statAssigned" class="font-tabular">0</h3>
           <p>Total Assigned</p>
         </div>
         <div class="stat-card">
-          <h3 id="statNeedsResponse" style="color: var(--primary);">0</h3>
+          <h3 id="statNeedsResponse" class="font-tabular" style="color: var(--primary);">0</h3>
           <p>Requires Response</p>
         </div>
         <div class="stat-card">
-          <h3 id="statPendingAdmin" style="color: var(--purple);">0</h3>
+          <h3 id="statPendingAdmin" class="font-tabular" style="color: var(--purple);">0</h3>
           <p>Sent to Admin</p>
         </div>
         <div class="stat-card">
-          <h3 id="statResolvedTeacher" style="color: var(--success);">0</h3>
+          <h3 id="statResolvedTeacher" class="font-tabular" style="color: var(--success);">0</h3>
           <p>Resolved</p>
         </div>
       </div>
@@ -67,8 +68,8 @@
       <!-- Assigned Complaints Table -->
       <div class="card">
         <div class="card-title">
-          <h3>Complaints Assigned to You</h3>
-          <span style="font-size: 0.88rem; color: var(--text-muted);">Sorted by Urgency</span>
+          <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0;">Complaints Assigned to You</h2>
+          <span style="font-size: 0.88rem; color: var(--text-muted);">Departmental Queue</span>
         </div>
 
         <div class="table-responsive">
@@ -92,11 +93,11 @@
         </div>
       </div>
 
-      <!-- Academic Workflow Reminder Callout -->
-      <div class="card" style="background: var(--surface-alt);">
-        <h4 style="font-size: 1.05rem; margin-bottom: 8px;">Faculty Workflow Guidance</h4>
+      <!-- Academic Workflow Guidance -->
+      <div class="card" style="background: var(--surface-alt); border: 1px solid var(--border-color);">
+        <h3 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--text-main);">Faculty Workflow Guidance</h3>
         <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
-          When an academic complaint is assigned to you by the department head or administrator, review the student's submission, examine test/project records, and provide a clear, constructive resolution. Once submitted, the resolution will be sent to the administrator for final confirmation before being published to the student's dashboard.
+          Review the student's submission against grade rosters and lab logs. Formulate an objective explanation or proposed correction. Once submitted, your response is routed to the department administrator for official review and confirmation before release to the student.
         </p>
       </div>
     </div>
@@ -146,7 +147,19 @@
       // Populate Table
       const tbody = document.getElementById('teacherTableBody');
       if (assigned.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 28px; color: var(--text-muted);">No complaints currently assigned to you.</td></tr>`;
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8">
+              <div class="empty-state">
+                <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <div class="empty-state-title">No Complaints Currently Assigned</div>
+                <div class="empty-state-desc">You have no pending student grievances awaiting review or response.</div>
+              </div>
+            </td>
+          </tr>
+        `;
         return;
       }
 
@@ -166,13 +179,13 @@
 
         return `
           <tr>
-            <td><strong>${c.id}</strong></td>
+            <td class="font-tabular"><strong>${c.id}</strong></td>
             <td>${c.studentName}</td>
             <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
             <td>${c.course}</td>
             <td>${urgencyBadge}</td>
             <td>${statusBadge}</td>
-            <td>${c.submittedDate}</td>
+            <td class="font-tabular">${c.submittedDate}</td>
             <td>
               <div class="actions-cell">
                 ${actionBtns}

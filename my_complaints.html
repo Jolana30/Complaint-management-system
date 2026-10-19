@@ -45,21 +45,21 @@
 
       <!-- Filters & Search Toolbar -->
       <div class="card" style="padding: 18px 24px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+        <div class="filter-toolbar">
           <!-- Filter Buttons -->
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="statusFilterPills">
-            <button class="btn btn-sm btn-secondary active-filter" data-status="all">All (<span id="countAll">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="pending">Pending (<span id="countPending">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="in_progress">In Progress (<span id="countProgress">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="needs_confirmation">Needs Confirmation (<span id="countConfirm">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="resolved">Resolved (<span id="countResolved">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="declined">Declined (<span id="countDeclined">0</span>)</button>
+          <div class="filter-pills-group" id="statusFilterPills">
+            <button class="btn btn-sm btn-secondary active-filter" data-status="all">All (<span id="countAll" class="font-tabular">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="pending">Pending (<span id="countPending" class="font-tabular">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="in_progress">In Progress (<span id="countProgress" class="font-tabular">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="needs_confirmation">Needs Confirmation (<span id="countConfirm" class="font-tabular">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="resolved">Resolved (<span id="countResolved" class="font-tabular">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="declined">Declined (<span id="countDeclined" class="font-tabular">0</span>)</button>
           </div>
 
           <!-- Search Input & CTA -->
-          <div style="display: flex; gap: 10px; align-items: center; flex: 1 1 240px; justify-content: flex-end;">
+          <div class="filter-actions-group">
             <input type="text" id="searchInput" placeholder="Search by title, ID, course..." style="max-width: 260px; padding: 7px 12px; font-size: 0.88rem;">
-            <a href="submit_complaint.html" class="btn btn-sm" style="white-space: nowrap;">➕ New Complaint</a>
+            <a href="submit_complaint.html" class="btn btn-sm" style="white-space: nowrap;">New Complaint</a>
           </div>
         </div>
       </div>
@@ -140,28 +140,47 @@
 
         const tbody = document.getElementById('complaintsTableBody');
         if (filtered.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 28px; color: var(--text-muted);">No complaints matching your criteria.</td></tr>`;
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="9">
+                <div class="empty-state">
+                  <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                  <div class="empty-state-title">No Matching Complaints Found</div>
+                  <div class="empty-state-desc">No academic complaints match the selected filter criteria or search query.</div>
+                </div>
+              </td>
+            </tr>
+          `;
           return;
         }
 
         tbody.innerHTML = filtered.map(c => {
-          let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
+          let displayStatus = window.AmboCMS.getDisplayStatus(c.status, 'student');
+          let statusLabel = window.AmboCMS.getStatusLabel(c.status, 'student');
+          let statusBadge = `<span class="status-badge status-${displayStatus}">${statusLabel}</span>`;
           let urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
           let teacherText = c.assignedTeacher || '<span style="color:var(--text-muted);">Unassigned</span>';
 
+          let actions = `<a href="complaint_details.html?id=${c.id}" class="btn btn-sm">View</a>`;
+          if (c.status === 'pending') {
+            actions += `<a href="submit_complaint.html?edit=${c.id}" class="btn btn-secondary btn-sm" title="Edit while pending">Edit</a>`;
+          }
+
           return `
             <tr>
-              <td><strong>${c.id}</strong></td>
+              <td class="font-tabular"><strong>${c.id}</strong></td>
               <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
               <td>${c.course}</td>
               <td>${c.category}</td>
               <td>${urgencyBadge}</td>
               <td>${statusBadge}</td>
               <td>${teacherText}</td>
-              <td>${c.submittedDate}</td>
+              <td class="font-tabular">${c.submittedDate}</td>
               <td>
                 <div class="actions-cell">
-                  <a href="complaint_details.html?id=${c.id}" class="btn btn-sm">View</a>
+                  ${actions}
                 </div>
               </td>
             </tr>
@@ -187,12 +206,12 @@
         render();
       });
 
-      // Search input listener
+      // Debounced search input listener
       const searchInput = document.getElementById('searchInput');
-      searchInput.addEventListener('input', (e) => {
+      searchInput.addEventListener('input', window.AmboCMS.debounce((e) => {
         searchQuery = e.target.value.trim();
         render();
-      });
+      }, 200));
 
       render();
     });

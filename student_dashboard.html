@@ -44,39 +44,42 @@
         <p id="welcomeSubtitle">Information Technology Department &bull; ID: ugr/12345/16</p>
       </div>
 
-      <!-- Quick Action Pills -->
+      <!-- Quick Action Navigation -->
       <div class="quick-actions-bar">
         <span>Quick Actions:</span>
-        <a href="submit_complaint.html" class="btn btn-sm">➕ Submit New Complaint</a>
-        <a href="my_complaints.html" class="btn btn-secondary btn-sm">📋 My Complaints</a>
-        <a href="submission_guide.html" class="btn btn-secondary btn-sm">📖 Submission Guidelines</a>
+        <a href="submit_complaint.html" class="btn btn-sm">Submit Academic Complaint</a>
+        <a href="my_complaints.html" class="btn btn-secondary btn-sm">My Complaints</a>
+        <a href="submission_guide.html" class="btn btn-secondary btn-sm">Submission Guide</a>
       </div>
 
       <!-- Dynamic Statistics Cards -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h3 id="statTotal">0</h3>
-          <p>Total Submitted</p>
+      <section aria-labelledby="statsSectionTitle">
+        <h2 id="statsSectionTitle" class="sr-only">Complaint Overview Metrics</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3 id="statTotal" class="font-tabular">0</h3>
+            <p>Total Submitted</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statPending" class="font-tabular" style="color: var(--warning);">0</h3>
+            <p>Pending Review</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statProgress" class="font-tabular" style="color: var(--primary);">0</h3>
+            <p>In Progress</p>
+          </div>
+          <div class="stat-card">
+            <h3 id="statResolved" class="font-tabular" style="color: var(--success);">0</h3>
+            <p>Resolved</p>
+          </div>
         </div>
-        <div class="stat-card">
-          <h3 id="statPending" style="color: var(--warning);">0</h3>
-          <p>Pending Review</p>
-        </div>
-        <div class="stat-card">
-          <h3 id="statProgress" style="color: var(--primary);">0</h3>
-          <p>In Progress</p>
-        </div>
-        <div class="stat-card">
-          <h3 id="statResolved" style="color: var(--success);">0</h3>
-          <p>Resolved</p>
-        </div>
-      </div>
+      </section>
 
       <!-- Recent Complaints Activity -->
       <div class="card">
         <div class="card-title">
-          <h3>Recent Complaints Activity</h3>
-          <a href="my_complaints.html" class="btn btn-secondary btn-sm">View All</a>
+          <h2>Recent Complaints Activity</h2>
+          <a href="my_complaints.html" class="btn btn-secondary btn-sm">View All Complaints</a>
         </div>
 
         <div class="table-responsive">
@@ -143,7 +146,19 @@
       const recent = complaints.slice(0, 5);
 
       if (recent.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--text-muted);">No complaints recorded yet. Click "Submit New Complaint" to create one.</td></tr>`;
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8">
+              <div class="empty-state">
+                <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <div class="empty-state-title">No Academic Grievances Filed</div>
+                <div class="empty-state-desc">You have not submitted any complaints yet. Use the button above if you need to file an assessment or course grievance.</div>
+              </div>
+            </td>
+          </tr>
+        `;
         return;
       }
 
@@ -154,13 +169,13 @@
 
         return `
           <tr>
-            <td><strong>${c.id}</strong></td>
+            <td class="font-tabular"><strong>${c.id}</strong></td>
             <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
             <td>${c.course}</td>
             <td>${urgencyBadge}</td>
             <td>${statusBadge}</td>
             <td>${teacherText}</td>
-            <td>${c.submittedDate}</td>
+            <td class="font-tabular">${c.submittedDate}</td>
             <td>
               <div class="actions-cell">
                 <a href="complaint_details.html?id=${c.id}" class="btn btn-sm">View</a>

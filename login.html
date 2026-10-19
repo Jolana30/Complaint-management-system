@@ -74,17 +74,38 @@
   <main class="main-content">
     <div class="container">
       <div class="login-wrapper">
-        <div class="card" style="padding: 32px 28px;">
-          <div style="text-align: center; margin-bottom: 24px;">
-            <img src="assets/images/logo.jpg" alt="Ambo University" style="width: 64px; height: 64px; border-radius: 12px; margin-bottom: 12px; box-shadow: var(--shadow-sm);">
-            <h1 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 4px;">Sign in to CMS</h1>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Select your institutional role to continue</p>
+        <div class="card" style="padding: 36px 30px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
+          <div style="text-align: center; margin-bottom: 26px;">
+            <img src="assets/images/logo.jpg" alt="Ambo University" style="width: 68px; height: 68px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+            <h1 style="font-size: 1.45rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.015em;">Ambo University Portal</h1>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">Student-Faculty Complaint Management System</p>
+          </div>
+
+          <!-- Role Selector Tabs -->
+          <div style="margin-bottom: 20px;">
+            <label style="font-size: 0.84rem; margin-bottom: 8px;">Select Your Role</label>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;" id="roleSelectorGrid">
+              <button type="button" class="btn btn-secondary btn-sm role-tab active" data-role="student" style="padding: 10px 4px; font-size: 0.78rem; font-weight: 700;">
+                🎓 Student
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm role-tab" data-role="teacher" style="padding: 10px 4px; font-size: 0.78rem; font-weight: 700;">
+                👨‍🏫 Teacher
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm role-tab" data-role="admin" style="padding: 10px 4px; font-size: 0.78rem; font-weight: 700;">
+                🏛️ Admin
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm role-tab" data-role="committee" style="padding: 10px 4px; font-size: 0.78rem; font-weight: 700;">
+                ⚖️ Committee
+              </button>
+            </div>
           </div>
 
           <form id="loginForm">
+            <input type="hidden" id="userRole" value="student">
+
             <div class="form-group">
-              <label for="username">Username or ID <span class="required">*</span></label>
-              <input type="text" id="username" placeholder="e.g. jdoe or ugr/12345/16" required>
+              <label for="username" id="usernameLabel">Student ID or Username <span class="required">*</span></label>
+              <input type="text" id="username" placeholder="e.g. ugr/12345/16 or abebe" required>
             </div>
 
             <div class="form-group">
@@ -95,33 +116,24 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="userRole">Login as Role <span class="required">*</span></label>
-              <select id="userRole" required>
-                <option value="" disabled selected>-- Select your role --</option>
-                <option value="student">Student</option>
-                <option value="teacher">Teacher / Faculty</option>
-                <option value="admin">University Administrator</option>
-              </select>
-            </div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.88rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 0.86rem;">
               <label class="checkbox-label" style="font-weight: 400; margin-bottom: 0;">
                 <input type="checkbox" id="rememberMe"> Remember me
               </label>
               <a href="submission_guide.html">Need help?</a>
             </div>
 
-            <button type="submit" class="btn" style="width: 100%; padding: 12px;">Login</button>
+            <button type="submit" class="btn" style="width: 100%; padding: 12px; font-size: 0.95rem;">Sign In to Portal</button>
           </form>
 
           <!-- 1-Click Interactive Demo Switchers -->
           <div class="demo-accounts">
-            <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Quick 1-Click Demo Login</span>
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">1-Click Demo Accounts</span>
             <div class="demo-buttons">
-              <button type="button" class="btn btn-secondary btn-sm" id="demoStudentBtn">👤 Student</button>
-              <button type="button" class="btn btn-secondary btn-sm" id="demoTeacherBtn">👨‍🏫 Teacher</button>
-              <button type="button" class="btn btn-secondary btn-sm" id="demoAdminBtn">🛡️ Admin</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="demoStudentBtn">🎓 Abebe (Student)</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="demoTeacherBtn">👨‍🏫 Mr. Eyuel (Faculty)</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="demoAdminBtn">🏛️ Dr. Tadesse (Admin)</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="demoCommitteeBtn">⚖️ Dr. Daniel (Committee)</button>
             </div>
           </div>
         </div>
@@ -149,39 +161,62 @@
         pwdToggle.textContent = isPwd ? '🙈' : '👁️';
       });
 
+      // Role Tab Switcher
+      const roleTabs = document.querySelectorAll('.role-tab');
+      const userRoleInput = document.getElementById('userRole');
+      const usernameLabel = document.getElementById('usernameLabel');
+      const usernameInput = document.getElementById('username');
+
+      roleTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          roleTabs.forEach(t => {
+            t.classList.remove('btn-primary', 'active');
+            t.classList.add('btn-secondary');
+          });
+          tab.classList.remove('btn-secondary');
+          tab.classList.add('btn-primary', 'active');
+          const role = tab.dataset.role;
+          userRoleInput.value = role;
+
+          if (role === 'student') {
+            usernameLabel.innerHTML = 'Student ID or Username <span class="required">*</span>';
+            usernameInput.placeholder = 'e.g. ugr/12345/16 or jdoe';
+          } else if (role === 'teacher') {
+            usernameLabel.innerHTML = 'Staff / Faculty ID <span class="required">*</span>';
+            usernameInput.placeholder = 'e.g. fac/eyuel or eyuel@ambo.edu.et';
+          } else if (role === 'committee') {
+            usernameLabel.innerHTML = 'Committee Member ID <span class="required">*</span>';
+            usernameInput.placeholder = 'e.g. com/daniel or daniel@ambo.edu.et';
+          } else {
+            usernameLabel.innerHTML = 'Administrator Username <span class="required">*</span>';
+            usernameInput.placeholder = 'e.g. admin or tadesse@ambo.edu.et';
+          }
+        });
+      });
+
       // Quick Demo Switchers
       document.getElementById('demoStudentBtn').addEventListener('click', () => {
-        window.AmboCMS.setCurrentUser({
-          username: 'johndoe',
-          name: 'John Doe',
-          role: 'student',
-          studentId: 'ugr/12345/16',
-          department: 'Information Technology'
-        });
-        window.AmboCMS.showToast('Logged in as Student John Doe', 'success');
+        window.AmboCMS.setCurrentUser(window.AmboCMS.DEMO_USERS.student);
+        window.AmboCMS.showToast('Logged in as Student Abebe Kebede', 'success');
         setTimeout(() => window.location.href = 'student_dashboard.html', 300);
       });
 
       document.getElementById('demoTeacherBtn').addEventListener('click', () => {
-        window.AmboCMS.setCurrentUser({
-          username: 'eyuel',
-          name: 'Mr. Eyuel',
-          role: 'teacher',
-          department: 'Information Technology',
-          courses: ['SAD', 'IP', 'DSA']
-        });
+        window.AmboCMS.setCurrentUser(window.AmboCMS.DEMO_USERS.teacher);
         window.AmboCMS.showToast('Logged in as Teacher Mr. Eyuel', 'success');
         setTimeout(() => window.location.href = 'teacher_dashboard.html', 300);
       });
 
       document.getElementById('demoAdminBtn').addEventListener('click', () => {
-        window.AmboCMS.setCurrentUser({
-          username: 'admin',
-          name: 'Dean of Academic Affairs',
-          role: 'admin'
-        });
-        window.AmboCMS.showToast('Logged in as University Administrator', 'success');
+        window.AmboCMS.setCurrentUser(window.AmboCMS.DEMO_USERS.admin);
+        window.AmboCMS.showToast('Logged in as Administrator Dr. Tadesse', 'success');
         setTimeout(() => window.location.href = 'admin_dashboard.html', 300);
+      });
+
+      document.getElementById('demoCommitteeBtn').addEventListener('click', () => {
+        window.AmboCMS.setCurrentUser(window.AmboCMS.DEMO_USERS.committee);
+        window.AmboCMS.showToast('Logged in as Committee Chair Dr. Daniel', 'success');
+        setTimeout(() => window.location.href = 'committee_dashboard.html', 300);
       });
 
       // Form Submit
@@ -196,9 +231,10 @@
         }
 
         let name = username;
-        if (role === 'student' && !name) name = 'John Doe';
+        if (role === 'student' && !name) name = 'Abebe Kebede';
         if (role === 'teacher' && !name) name = 'Mr. Eyuel';
-        if (role === 'admin' && !name) name = 'Administrator';
+        if (role === 'admin' && !name) name = 'Dr. Tadesse';
+        if (role === 'committee' && !name) name = 'Dr. Daniel';
 
         window.AmboCMS.setCurrentUser({
           username: username,
@@ -214,6 +250,7 @@
           if (role === 'student') window.location.href = 'student_dashboard.html';
           else if (role === 'teacher') window.location.href = 'teacher_dashboard.html';
           else if (role === 'admin') window.location.href = 'admin_dashboard.html';
+          else if (role === 'committee') window.location.href = 'committee_dashboard.html';
         }, 300);
       });
     });

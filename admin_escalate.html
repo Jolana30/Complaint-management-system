@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Escalate Complaint - Ambo University Admin</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container container-narrow">
+      <div class="page-header">
+        <span class="header-badge">Statutory Escalation</span>
+        <h1>Escalate Complaint to Disciplinary Committee</h1>
+        <p>Transfer jurisdiction of severe misconduct, ethics violations, or retaliatory grading to the University Disciplinary Committee.</p>
+      </div>
+
+      <!-- Complaint Summary Dossier -->
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-title">
+          <h2 id="complaintHeader" style="font-size: 1.25rem; font-weight: 600; margin: 0;">Complaint #CMP-105</h2>
+          <span class="severity-badge severity-serious" id="valSeverityBadge">Serious Severity</span>
+        </div>
+
+        <div class="review-meta-grid">
+          <div class="review-meta-item">
+            <strong>Student Name</strong>
+            <span id="valStudent">-</span>
+          </div>
+          <div class="review-meta-item">
+            <strong>Department</strong>
+            <span id="valDepartment">-</span>
+          </div>
+          <div class="review-meta-item">
+            <strong>Category</strong>
+            <span id="valCategory">-</span>
+          </div>
+          <div class="review-meta-item">
+            <strong>Current Status</strong>
+            <span id="valStatus">-</span>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size: 0.88rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Student Grievance Description</h3>
+          <div class="review-quote-box" id="valMessage">
+            -
+          </div>
+        </div>
+      </div>
+
+      <!-- Escalation Form -->
+      <div class="card">
+        <h2 class="sr-only">Committee Escalation Protocol Form</h2>
+        <form id="escalateForm">
+          <div class="form-group">
+            <label for="escalationAuthority">Target Disciplinary Body <span class="required">*</span></label>
+            <select id="escalationAuthority" required>
+              <option value="University Disciplinary Committee" selected>University Disciplinary Committee (UDC - Institutional Ethics)</option>
+              <option value="College Academic Commission">College Academic Commission (CAC - Academic Integrity)</option>
+              <option value="Student Ombudsperson Directorate">Office of the Student Ombudsperson (Confidential Inquiry)</option>
+            </select>
+            <span class="form-hint">Department mediation will pause; the case is transferred to committee docket.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="escalationReason">Administrative Escalation Briefing & Justification <span class="required">*</span></label>
+            <textarea id="escalationReason" rows="5" placeholder="Detail why this complaint exceeds department-level mediation (e.g. allegations of severe intimidation, harassment, bribery, or persistent code of conduct breach)..." required></textarea>
+            <span class="form-hint">This justification is officially transmitted to the Committee Chair and logged in the tamper-evident audit history.</span>
+          </div>
+
+          <div class="alert-box alert-warning">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <div>
+              <strong>Department Scope Notice:</strong> Department mediation is limited to routine teaching and learning matters. Cases involving serious misconduct or retaliation must proceed to committee review.
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <a href="admin_all_complaints.html" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-danger">Confirm Escalation to Committee</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const complaintId = urlParams.get('id') || 'CMP-105';
+      const complaint = window.AmboCMS.getComplaintById(complaintId);
+
+      if (!complaint) {
+        alert('Complaint record not found');
+        window.location.href = 'admin_all_complaints.html';
+        return;
+      }
+
+      document.getElementById('complaintHeader').textContent = `${complaint.id}: ${complaint.title}`;
+      document.getElementById('valStudent').textContent = complaint.studentName;
+      document.getElementById('valDepartment').textContent = complaint.department;
+      document.getElementById('valCategory').textContent = complaint.category;
+      document.getElementById('valStatus').textContent = window.AmboCMS.getStatusLabel(complaint.status, 'admin');
+      document.getElementById('valMessage').textContent = complaint.message;
+
+      const form = document.getElementById('escalateForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const reason = document.getElementById('escalationReason').value.trim();
+        const authority = document.getElementById('escalationAuthority').value;
+
+        window.AmboCMS.escalateComplaint(complaint.id, `${authority}: ${reason}`);
+        window.AmboCMS.showToast(`Complaint ${complaint.id} successfully escalated to ${authority}!`, 'success');
+        setTimeout(() => {
+          window.location.href = 'admin_all_complaints.html';
+        }, 500);
+      });
+    });
+  </script>
+</body>
+</html>

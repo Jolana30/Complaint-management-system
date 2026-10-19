@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#991b1b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Disciplinary Committee Portal - Ambo University CMS</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Header -->
+      <div class="page-header" style="background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);">
+        <span class="header-badge" style="background: rgba(255, 255, 255, 0.22);">Statutory Ethics & Integrity</span>
+        <h1 id="committeeHeaderTitle">Disciplinary Committee Portal</h1>
+        <p id="committeeHeaderSubtitle">Statutory review, formal hearing adjudication, and sanction determination for severe misconduct cases.</p>
+      </div>
+
+      <!-- Statistics -->
+      <h2 class="sr-only">Disciplinary Docket Metrics Overview</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3 id="statTotalEscalated" class="font-tabular" style="color: var(--danger);">0</h3>
+          <p>Total Docket Cases</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="statAwaitingHearing" class="font-tabular" style="color: var(--warning);">0</h3>
+          <p>Awaiting Hearing / Decision</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="statDecisionsRendered" class="font-tabular" style="color: var(--success);">0</h3>
+          <p>Decisions Concluded</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="statSeriousSeverity" class="font-tabular" style="color: #991b1b;">0</h3>
+          <p>Serious / Critical Severity</p>
+        </div>
+      </div>
+
+      <!-- Active Docket Table Card -->
+      <div class="card">
+        <div class="card-title">
+          <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0;">Escalated Cases Awaiting Committee Review</h2>
+          <span style="font-size: 0.88rem; color: var(--text-muted);">Formal Statutory Inquiry Docket</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Case ID</th>
+                <th scope="col">Complainant</th>
+                <th scope="col">Grievance Subject</th>
+                <th scope="col">Department</th>
+                <th scope="col">Severity</th>
+                <th scope="col">Docket Status</th>
+                <th scope="col">Date Escalated</th>
+                <th scope="col">Judicial Action</th>
+              </tr>
+            </thead>
+            <tbody id="committeeTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Committee Jurisdiction Notice Card -->
+      <div class="card" style="background: var(--surface-alt); border: 1px solid var(--border-color);">
+        <h3 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--text-main);">Statutory Committee Jurisdiction & Charter</h3>
+        <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+          Under Ambo University Senate Legislation, the Disciplinary Committee exercises formal jurisdiction over complaints involving retaliatory grading threats, intimidation, academic integrity breaches, and ethical violations. Departmental mediation ceases once a complaint is formally escalated to this docket. All decisions are logged with a cryptographic audit signature.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = window.AmboCMS.getCurrentUser();
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      if (user.role !== 'committee' && user.role !== 'admin') {
+        window.AmboCMS.showToast('Access restricted: Committee portal is reserved for Disciplinary Committee members.', 'danger');
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1200);
+        return;
+      }
+
+      const all = window.AmboCMS.getComplaints();
+      const escalatedCases = all.filter(c => c.status === 'escalated' || c.status === 'committee_review' || (c.committeeDecision && c.committeeDecision.length > 0));
+      const awaiting = all.filter(c => c.status === 'escalated' || c.status === 'committee_review');
+      const resolvedByCommittee = all.filter(c => c.committeeDecision && c.committeeDecision.length > 0);
+      const seriousCases = all.filter(c => c.severity === 'serious');
+
+      document.getElementById('statTotalEscalated').textContent = escalatedCases.length;
+      document.getElementById('statAwaitingHearing').textContent = awaiting.length;
+      document.getElementById('statDecisionsRendered').textContent = resolvedByCommittee.length;
+      document.getElementById('statSeriousSeverity').textContent = seriousCases.length;
+
+      const tbody = document.getElementById('committeeTableBody');
+
+      if (escalatedCases.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8">
+              <div class="empty-state">
+                <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div class="empty-state-title">Docket Clear</div>
+                <div class="empty-state-desc">There are currently no cases referred to the University Disciplinary Committee.</div>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = escalatedCases.map(c => {
+        let statusBadge = `<span class="status-badge status-${c.status}">${c.status === 'resolved' ? 'Decision Concluded' : 'Committee Docket'}</span>`;
+        let severityBadge = c.severity === 'serious' 
+          ? `<span class="severity-badge severity-serious">Serious</span>`
+          : `<span class="badge" style="background:#f1f5f9; color:#475569; font-size:0.75rem;">Normal</span>`;
+
+        let actionBtns = `<a href="committee_complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm">Dossier</a>`;
+
+        if (c.status === 'escalated' || c.status === 'committee_review') {
+          actionBtns += `
+            <a href="committee_decision.html?id=${c.id}" class="btn btn-danger btn-sm">Render Decision</a>
+          `;
+        }
+
+        return `
+          <tr>
+            <td class="font-tabular"><strong>${c.id}</strong></td>
+            <td>${c.studentName}</td>
+            <td><a href="committee_complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+            <td>${c.department}</td>
+            <td>${severityBadge}</td>
+            <td>${statusBadge}</td>
+            <td class="font-tabular">${c.submittedDate}</td>
+            <td>
+              <div class="actions-cell">
+                ${actionBtns}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    });
+  </script>
+</body>
+</html>

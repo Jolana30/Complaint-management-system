@@ -36,8 +36,8 @@
   </nav>
 
   <main class="main-content">
-    <div class="container" style="max-width: 860px;">
-      <div class="page-header" style="padding: 28px 20px;">
+    <div class="container container-narrow">
+      <div class="page-header">
         <span class="header-badge">Complaint Filing</span>
         <h1>Submit Academic Complaint</h1>
         <p>Provide specific and verifiable details so your department can review and route your complaint promptly.</p>
@@ -87,20 +87,28 @@
             </div>
           </div>
 
-          <!-- Complaint Subject & Urgency -->
+          <!-- Complaint Subject, Urgency & Severity -->
           <div class="form-row">
-            <div class="form-group" style="flex: 2;">
+            <div class="form-group form-flex-2">
               <label for="complaintTitle">Complaint Subject / Title <span class="required">*</span></label>
-              <input type="text" id="complaintTitle" placeholder="e.g. Unfair Grading on Mid-Exam Question 4" required>
+              <input type="text" id="complaintTitle" placeholder="e.g. Discrepancy on Mid-Exam Question 4 Mark" required>
             </div>
 
-            <div class="form-group" style="flex: 1;">
+            <div class="form-group form-flex-1">
               <label for="urgency">Urgency Level <span class="required">*</span></label>
               <select id="urgency" required>
                 <option value="low">Low (General inquiry)</option>
                 <option value="medium" selected>Medium (Standard grievance)</option>
                 <option value="high">High (Impacting semester grading)</option>
                 <option value="critical">Critical (Immediate deadline)</option>
+              </select>
+            </div>
+
+            <div class="form-group form-flex-1">
+              <label for="severity">Severity Assessment <span class="required">*</span></label>
+              <select id="severity" required>
+                <option value="normal" selected>Normal Academic Grievance</option>
+                <option value="serious">Serious (Requests Committee Triage)</option>
               </select>
             </div>
           </div>
@@ -125,6 +133,9 @@
                 <input type="radio" name="category" value="Lab Resources"> Lab & Practical Resources
               </label>
               <label class="checkbox-label">
+                <input type="radio" name="category" value="Severe Misconduct / Harassment"> Severe Misconduct / Ethics
+              </label>
+              <label class="checkbox-label">
                 <input type="radio" name="category" value="Other"> Other Academic Issue
               </label>
             </div>
@@ -140,22 +151,26 @@
           <div class="form-group">
             <label for="attachment">Supporting Document / Evidence (Optional)</label>
             <input type="file" id="attachment" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx">
-            <span style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; display: block;">
+            <span class="form-hint">
               Accepted formats: PDF, JPG, PNG, DOCX (Max size: 5MB).
             </span>
           </div>
 
           <div class="alert-box alert-info">
-            <span>ℹ️</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
             <div>
               <strong>Academic Integrity Notice:</strong> All submissions are logged and linked to your student credentials. Factual and respectful communication expedites fair resolution.
             </div>
           </div>
 
           <!-- Actions -->
-          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <div class="form-actions">
             <a href="student_dashboard.html" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn">Submit Complaint</button>
+            <button type="submit" class="btn">Submit Academic Complaint</button>
           </div>
         </form>
       </div>
@@ -171,11 +186,42 @@
   <script src="assets/js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const editId = urlParams.get('edit');
+      let editingComplaint = null;
+
       const user = window.AmboCMS.getCurrentUser();
       if (user) {
         if (user.name) document.getElementById('studentName').value = user.name;
         if (user.studentId) document.getElementById('studentId').value = user.studentId;
         if (user.department) document.getElementById('department').value = user.department;
+      }
+
+      if (editId) {
+        editingComplaint = window.AmboCMS.getComplaintById(editId);
+        if (!editingComplaint || editingComplaint.status !== 'pending') {
+          alert('Complaints can only be modified while in Pending triage status.');
+          window.location.href = 'my_complaints.html';
+          return;
+        }
+
+        // Update UI for Edit Mode
+        document.querySelector('.page-header h1').textContent = `Edit Complaint (${editingComplaint.id})`;
+        document.querySelector('.page-header p').textContent = 'Update your grievance details before departmental triage begins.';
+        document.querySelector('#complaintForm button[type="submit"]').textContent = 'Save Changes';
+
+        // Pre-fill form fields
+        document.getElementById('studentName').value = editingComplaint.studentName || '';
+        document.getElementById('studentId').value = editingComplaint.studentId || '';
+        document.getElementById('department').value = editingComplaint.department || '';
+        document.getElementById('courseName').value = editingComplaint.course || '';
+        document.getElementById('complaintTitle').value = editingComplaint.title || '';
+        document.getElementById('urgency').value = editingComplaint.urgency || 'medium';
+        if (document.getElementById('severity')) document.getElementById('severity').value = editingComplaint.severity || 'normal';
+        document.getElementById('complaintMessage').value = editingComplaint.message || '';
+
+        const radio = document.querySelector(`input[name="category"][value="${editingComplaint.category}"]`);
+        if (radio) radio.checked = true;
       }
 
       const form = document.getElementById('complaintForm');
@@ -185,23 +231,45 @@
         const selectedCatEl = document.querySelector('input[name="category"]:checked');
         const category = selectedCatEl ? selectedCatEl.value : 'General';
 
-        const newComplaint = {
-          studentName: document.getElementById('studentName').value.trim(),
-          studentId: document.getElementById('studentId').value.trim(),
-          department: document.getElementById('department').value,
-          course: document.getElementById('courseName').value,
-          title: document.getElementById('complaintTitle').value.trim(),
-          urgency: document.getElementById('urgency').value,
-          category: category,
-          message: document.getElementById('complaintMessage').value.trim()
-        };
+        if (editingComplaint) {
+          const updates = {
+            studentName: document.getElementById('studentName').value.trim(),
+            studentId: document.getElementById('studentId').value.trim(),
+            department: document.getElementById('department').value,
+            course: document.getElementById('courseName').value,
+            title: document.getElementById('complaintTitle').value.trim(),
+            urgency: document.getElementById('urgency').value,
+            severity: document.getElementById('severity') ? document.getElementById('severity').value : 'normal',
+            category: category,
+            message: document.getElementById('complaintMessage').value.trim()
+          };
 
-        const created = window.AmboCMS.addComplaint(newComplaint);
-        window.AmboCMS.showToast(`Complaint ${created.id} submitted successfully!`, 'success');
+          window.AmboCMS.editComplaint(editingComplaint.id, updates);
+          window.AmboCMS.showToast(`Complaint ${editingComplaint.id} updated successfully!`, 'success');
 
-        setTimeout(() => {
-          window.location.href = `complaint_details.html?id=${created.id}`;
-        }, 500);
+          setTimeout(() => {
+            window.location.href = `complaint_details.html?id=${editingComplaint.id}`;
+          }, 400);
+        } else {
+          const newComplaint = {
+            studentName: document.getElementById('studentName').value.trim(),
+            studentId: document.getElementById('studentId').value.trim(),
+            department: document.getElementById('department').value,
+            course: document.getElementById('courseName').value,
+            title: document.getElementById('complaintTitle').value.trim(),
+            urgency: document.getElementById('urgency').value,
+            severity: document.getElementById('severity') ? document.getElementById('severity').value : 'normal',
+            category: category,
+            message: document.getElementById('complaintMessage').value.trim()
+          };
+
+          const created = window.AmboCMS.addComplaint(newComplaint);
+          window.AmboCMS.showToast(`Complaint ${created.id} submitted successfully!`, 'success');
+
+          setTimeout(() => {
+            window.location.href = `complaint_details.html?id=${created.id}`;
+          }, 500);
+        }
       });
     });
   </script>

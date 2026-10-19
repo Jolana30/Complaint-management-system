@@ -29,3 +29,7 @@ Thumbs.db
 .idea/
 *.suo
 *.user
+
+# Local tools & agents
+.agents/
+.gemini/

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#991b1b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <title>Committee Case Dossier - Ambo University CMS</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="main-nav">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">
+        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <div class="brand-info">
+          <span class="brand-title">Ambo University</span>
+          <span class="brand-subtitle">Complaint Management System</span>
+        </div>
+      </a>
+      <ul class="nav-menu" id="navLinks"></ul>
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <div id="navUserBadge"></div>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container" style="max-width: 920px;">
+      
+      <!-- Dossier Header -->
+      <div class="page-header" style="background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%); padding: 24px 20px; text-align: left; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <div>
+          <span class="header-badge" id="complaintIdBadge" style="background: rgba(255, 255, 255, 0.22);">CMP-105</span>
+          <h1 id="complaintTitle" style="font-size: 1.6rem; margin-top: 4px; margin-bottom: 0;">Case Dossier</h1>
+        </div>
+        <div id="statusBadgeContainer">
+          <!-- Status Badge -->
+        </div>
+      </div>
+
+      <!-- Dossier Metadata Card -->
+      <div class="card">
+        <h2 class="sr-only">Disciplinary Hearing Evidence & Dossier Details</h2>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Complainant Student</span>
+            <span class="meta-value" id="valStudentName">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Student ID</span>
+            <span class="meta-value font-tabular" id="valStudentId">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Department</span>
+            <span class="meta-value" id="valDepartment">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Course</span>
+            <span class="meta-value" id="valCourse">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Jurisdiction Category</span>
+            <span class="meta-value" id="valCategory">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Severity Assessment</span>
+            <span class="meta-value" id="valSeverity">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Assigned Faculty / Subject</span>
+            <span class="meta-value" id="valTeacher">-</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Date Submitted</span>
+            <span class="meta-value font-tabular" id="valDate">-</span>
+          </div>
+        </div>
+
+        <!-- Student Grievance Message -->
+        <div style="margin-bottom: 24px;">
+          <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-main);">Student Grievance Description</h3>
+          <div class="prose-reading" style="color: var(--text-main); line-height: 1.65; padding: 4px 0;" id="valMessage">
+            -
+          </div>
+        </div>
+
+        <!-- Administrative Escalation Rationale -->
+        <div id="adminRemarkSection" style="margin-bottom: 24px;">
+          <div class="alert-box alert-warning">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <div>
+              <strong>Department Head Referral Rationale:</strong>
+              <div id="valAdminRemark" style="margin-top: 4px;">-</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cryptographic Audit Chain Status -->
+        <div class="alert-box alert-info" style="margin-bottom: 24px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <div>
+            <strong>Tamper-Evident Audit Log Verification:</strong>
+            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--text-muted); font-family: monospace;">
+              Hash Chain: VALID | Block Algorithm: SHA-256 HMAC | State Nonce: Verified
+            </p>
+          </div>
+        </div>
+
+        <!-- Concluded Committee Decision Section (if already decided) -->
+        <div id="committeeDecisionSection" style="display: none; margin-bottom: 24px;">
+          <div class="resolution-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <h3 style="color: var(--success); font-size: 1.1rem; margin-bottom: 0; display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Formal Disciplinary Committee Ruling
+              </h3>
+            </div>
+            <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valCommitteeDecisionText">
+              -
+            </p>
+          </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div style="margin-top: 32px;">
+          <h3 style="font-size: 1.15rem; margin-bottom: 14px;">Procedural Case Timeline</h3>
+          <div class="timeline" id="timelineList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border-color); flex-wrap: wrap;" id="dossierActionButtons">
+          <a href="committee_dashboard.html" class="btn btn-secondary">Back to Committee Docket</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const complaintId = urlParams.get('id') || 'CMP-105';
+      const complaint = window.AmboCMS.getComplaintById(complaintId);
+      const user = window.AmboCMS.getCurrentUser();
+
+      if (!complaint) {
+        document.querySelector('.container').innerHTML = `
+          <div class="card" style="text-align: center; padding: 48px;">
+            <h2>Case File Not Found</h2>
+            <p style="color: var(--text-muted); margin: 12px 0 24px;">Case record "${complaintId}" does not exist on the committee docket.</p>
+            <a href="committee_dashboard.html" class="btn">Return to Docket</a>
+          </div>
+        `;
+        return;
+      }
+
+      // Populate Header & Badges
+      document.getElementById('complaintIdBadge').textContent = complaint.id;
+      document.getElementById('complaintTitle').textContent = complaint.title;
+      document.getElementById('statusBadgeContainer').innerHTML = `<span class="status-badge status-${complaint.status}" style="font-size:0.92rem; padding: 6px 14px;">${complaint.status === 'resolved' ? 'Decision Concluded' : 'Committee Review'}</span>`;
+
+      // Metadata
+      document.getElementById('valStudentName').textContent = complaint.studentName;
+      document.getElementById('valStudentId').textContent = complaint.studentId;
+      document.getElementById('valDepartment').textContent = complaint.department;
+      document.getElementById('valCourse').textContent = complaint.course;
+      document.getElementById('valCategory').textContent = complaint.category;
+      document.getElementById('valSeverity').innerHTML = complaint.severity === 'serious'
+        ? `<span class="severity-badge severity-serious">Serious Misconduct</span>`
+        : `<span class="badge" style="background:#f1f5f9; color:#475569;">Normal</span>`;
+      document.getElementById('valTeacher').textContent = complaint.assignedTeacher || 'Faculty Course Instructor';
+      document.getElementById('valDate').textContent = complaint.submittedDate;
+      document.getElementById('valMessage').textContent = complaint.message;
+
+      if (complaint.adminRemark) {
+        document.getElementById('valAdminRemark').textContent = complaint.adminRemark;
+      }
+
+      if (complaint.committeeDecision) {
+        document.getElementById('committeeDecisionSection').style.display = 'block';
+        document.getElementById('valCommitteeDecisionText').textContent = complaint.committeeDecision;
+      }
+
+      // Timeline
+      const timelineEl = document.getElementById('timelineList');
+      timelineEl.innerHTML = complaint.timeline.map(item => `
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <span>${item.title}</span>
+              <span class="timeline-time">${item.time}</span>
+            </div>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">${item.text}</p>
+          </div>
+        </div>
+      `).join('');
+
+      // Actions
+      const actionsEl = document.getElementById('dossierActionButtons');
+      if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
+        const renderBtn = document.createElement('a');
+        renderBtn.href = `committee_decision.html?id=${complaint.id}`;
+        renderBtn.className = 'btn btn-danger';
+        renderBtn.textContent = 'Render Statutory Decision';
+        actionsEl.appendChild(renderBtn);
+      }
+    });
+  </script>
+</body>
+</html>

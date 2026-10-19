@@ -12,15 +12,16 @@
     COMPLAINTS: 'ambo_cms_complaints',
   };
 
-  // 1. Initial Mock Dataset
+  // 1. Initial Mock Dataset (Canonical 6-Record Dataset with Disciplinary Committee Escalation)
   const DEFAULT_COMPLAINTS = [
     {
       id: 'CMP-101',
-      studentName: 'John Doe',
+      studentName: 'Abebe Kebede',
       studentId: 'ugr/12345/16',
       department: 'Information Technology',
       course: 'SAD',
       category: 'Assessment & Grading',
+      severity: 'normal',
       urgency: 'high',
       title: 'Unfair Grading on Mid-Exam Question 4',
       message: 'My final answer was mathematically correct according to the reference slides, but points were deducted without explanation. I request a re-evaluation.',
@@ -31,8 +32,8 @@
       declineReason: null,
       submittedDate: '2026-10-12',
       timeline: [
-        { time: '2026-10-12 09:30', title: 'Submitted', text: 'Complaint filed by student John Doe.' },
-        { time: '2026-10-12 09:31', title: 'Pending Review', text: 'Awaiting admin assignment to department teacher.' }
+        { time: '2026-10-12 09:30', title: 'Submitted', text: 'Complaint filed by student Abebe Kebede.' },
+        { time: '2026-10-12 09:31', title: 'Pending Triage', text: 'Awaiting admin triage and teacher assignment by academic affairs.' }
       ]
     },
     {
@@ -42,6 +43,7 @@
       department: 'Information Technology',
       course: 'IP',
       category: 'Communication',
+      severity: 'normal',
       urgency: 'medium',
       title: 'Lab Project Submission Schedule Not Communicated',
       message: 'The deadline for Project Milestone 2 was changed without prior notice in the lecture hall, affecting students commuting from distant campuses.',
@@ -64,6 +66,7 @@
       department: 'Electrical and Computer Engineering',
       course: 'DSA',
       category: 'Attendance Policy',
+      severity: 'normal',
       urgency: 'medium',
       title: 'Irregular Attendance Records During Field Trip',
       message: 'Students on an official university visit were marked absent for the Monday lab session.',
@@ -86,6 +89,7 @@
       department: 'Computer Science',
       course: 'OS',
       category: 'Assessment & Grading',
+      severity: 'normal',
       urgency: 'high',
       title: 'Missing Lab Assessment Result in Portal',
       message: 'My Lab Exam score of 15% was not submitted to the central database.',
@@ -104,23 +108,46 @@
     },
     {
       id: 'CMP-105',
-      studentName: 'Mahlet Kebede',
-      studentId: 'ugr/13441/16',
-      department: 'Mechanical Engineering',
-      course: 'FDBS',
+      studentName: 'Kenenisa Tola',
+      studentId: 'ugr/16789/16',
+      department: 'Computer Science',
+      course: 'OS',
+      category: 'Severe Misconduct / Harassment',
+      severity: 'serious',
+      urgency: 'critical',
+      title: 'Intimidation and Retaliatory Grading Threat',
+      message: 'Complainant reports direct threats of academic penalty after raising concerns regarding unauthorized textbook sales in class.',
+      status: 'escalated',
+      assignedTeacher: null,
+      adminRemark: 'Escalated by Department Head to Disciplinary Committee for formal statutory hearing.',
+      teacherReply: null,
+      declineReason: null,
+      submittedDate: '2026-10-14',
+      timeline: [
+        { time: '2026-10-14 11:20', title: 'Submitted', text: 'Severe complaint filed by student Kenenisa Tola.' },
+        { time: '2026-10-14 14:00', title: 'Escalated to Committee', text: 'Department Head escalated case to Disciplinary Committee for formal statutory hearing.' }
+      ]
+    },
+    {
+      id: 'CMP-106',
+      studentName: 'Tigist Alemu',
+      studentId: 'ugr/18901/16',
+      department: 'Information Technology',
+      course: 'SAD',
       category: 'Other',
+      severity: 'normal',
       urgency: 'low',
-      title: 'Library Computer Terminal Network Outage',
-      message: 'Computers in the 2nd floor lab lacked internet access during study week.',
+      title: 'Library Study Space Insufficient Heating',
+      message: 'Study cubicles in the engineering library branch lack functional power outlets and heating in the evening hours.',
       status: 'declined',
       assignedTeacher: null,
       adminRemark: null,
       teacherReply: null,
-      declineReason: 'Non-academic facility complaint. Please submit directly to ICT Support or Library Maintenance Office.',
-      submittedDate: '2026-10-01',
+      declineReason: 'Out of scope: Department grievance system handles teaching and learning processes. Routed to Campus Facilities Directorate.',
+      submittedDate: '2026-10-15',
       timeline: [
-        { time: '2026-10-01 16:45', title: 'Submitted', text: 'Complaint filed.' },
-        { time: '2026-10-02 10:10', title: 'Declined by Admin', text: 'Re-routed to university ICT Services; closed on teacher portal.' }
+        { time: '2026-10-15 08:45', title: 'Submitted', text: 'Complaint filed.' },
+        { time: '2026-10-15 11:30', title: 'Declined by Admin', text: 'Declined as out-of-scope non-teaching facility issue; routed to Campus Facilities Directorate.' }
       ]
     }
   ];
@@ -163,6 +190,7 @@
       department: data.department || 'Information Technology',
       course: data.course || 'General',
       category: data.category || 'General',
+      severity: data.severity || 'normal',
       urgency: data.urgency || 'medium',
       title: data.title || 'Untitled Complaint',
       message: data.message || '',
@@ -174,7 +202,7 @@
       submittedDate: dateStr,
       timeline: [
         { time: timeStr, title: 'Submitted', text: `Complaint registered by ${data.studentName || 'student'}.` },
-        { time: timeStr, title: 'Pending Admin Review', text: 'Awaiting review and teacher assignment by university administrator.' }
+        { time: timeStr, title: 'Pending Admin Review', text: 'Awaiting triage and assignment by department administrator.' }
       ]
     };
 
@@ -192,10 +220,12 @@
     const now = new Date().toISOString().replace('T', ' ').substring(0, 16);
 
     if (updates.status) item.status = updates.status;
-    if (updates.assignedTeacher) item.assignedTeacher = updates.assignedTeacher;
-    if (updates.adminRemark) item.adminRemark = updates.adminRemark;
-    if (updates.teacherReply) item.teacherReply = updates.teacherReply;
-    if (updates.declineReason) item.declineReason = updates.declineReason;
+    if (updates.severity) item.severity = updates.severity;
+    if (updates.assignedTeacher !== undefined) item.assignedTeacher = updates.assignedTeacher;
+    if (updates.adminRemark !== undefined) item.adminRemark = updates.adminRemark;
+    if (updates.teacherReply !== undefined) item.teacherReply = updates.teacherReply;
+    if (updates.declineReason !== undefined) item.declineReason = updates.declineReason;
+    if (updates.committeeDecision !== undefined) item.committeeDecision = updates.committeeDecision;
 
     if (updates.timelineEvent) {
       item.timeline.push({
@@ -208,6 +238,89 @@
     list[idx] = item;
     saveComplaints(list);
     return item;
+  }
+
+  function escalateComplaint(id, reason) {
+    return updateComplaintStatus(id, {
+      status: 'escalated',
+      severity: 'serious',
+      adminRemark: `Escalated by Department Head to Disciplinary Committee. Reason: "${reason}"`,
+      timelineEvent: {
+        title: 'Escalated to Disciplinary Committee',
+        text: `Department Head escalated case for statutory disciplinary review. Rationale: "${reason}"`
+      }
+    });
+  }
+
+  function submitCommitteeDecision(id, decisionData) {
+    return updateComplaintStatus(id, {
+      status: 'resolved',
+      committeeDecision: decisionData.decisionText,
+      adminRemark: `Disciplinary Committee Determination: ${decisionData.actionRecommended}`,
+      timelineEvent: {
+        title: 'Committee Decision Rendered',
+        text: `Hearing completed on ${decisionData.hearingDate || 'scheduled date'}. Finding: "${decisionData.decisionText}". Recommendation: "${decisionData.actionRecommended}". Case officially closed.`
+      }
+    });
+  }
+
+  function declineComplaint(id, reason) {
+    return updateComplaintStatus(id, {
+      status: 'declined',
+      declineReason: reason,
+      timelineEvent: {
+        title: 'Declined by Administrator',
+        text: `Complaint declined as out-of-scope. Reason: "${reason}"`
+      }
+    });
+  }
+
+  function editComplaint(id, updates) {
+    const list = getComplaints();
+    const idx = list.findIndex(c => c.id === id);
+    if (idx === -1) return null;
+    const item = list[idx];
+    if (item.status !== 'pending') {
+      throw new Error('Complaints can only be edited while in Pending status.');
+    }
+    if (updates.title) item.title = updates.title;
+    if (updates.message) item.message = updates.message;
+    if (updates.course) item.course = updates.course;
+    if (updates.department) item.department = updates.department;
+    if (updates.category) item.category = updates.category;
+    if (updates.severity) item.severity = updates.severity;
+    if (updates.urgency) item.urgency = updates.urgency;
+
+    const now = new Date().toISOString().replace('T', ' ').substring(0, 16);
+    item.timeline.push({
+      time: now,
+      title: 'Edited by Student',
+      text: 'Student updated grievance details during pending triage window.'
+    });
+
+    list[idx] = item;
+    saveComplaints(list);
+    return item;
+  }
+
+  function getDisplayStatus(status, userRole) {
+    if (userRole === 'student') {
+      if (status === 'needs_confirmation' || status === 'assigned') return 'in_progress';
+      if (status === 'escalated' || status === 'committee_review') return 'escalated';
+    }
+    return status;
+  }
+
+  function getStatusLabel(status, userRole) {
+    if (userRole === 'student') {
+      if (status === 'needs_confirmation' || status === 'assigned') return 'In Progress';
+      if (status === 'escalated' || status === 'committee_review') return 'Escalated to Committee';
+    }
+    if (status === 'needs_confirmation') return 'Needs Confirmation';
+    if (status === 'in_progress') return 'In Progress';
+    if (status === 'committee_review') return 'Committee Review';
+    if (status === 'escalated') return 'Escalated to Committee';
+    return status.charAt(0).toUpperCase() + status.slice(1);
   }
 
   // 3. User Authentication State
@@ -356,31 +469,162 @@
         <li><a class="nav-link ${currentPage === 'admin_dashboard.html' ? 'active' : ''}" href="admin_dashboard.html">Admin Dashboard</a></li>
         <li><a class="nav-link ${currentPage === 'admin_all_complaints.html' ? 'active' : ''}" href="admin_all_complaints.html">All Complaints</a></li>
       `;
+    } else if (user.role === 'committee') {
+      linksHtml += `
+        <li><a class="nav-link ${currentPage === 'index.html' ? 'active' : ''}" href="index.html">Home</a></li>
+        <li><a class="nav-link ${currentPage === 'committee_dashboard.html' ? 'active' : ''}" href="committee_dashboard.html">Committee Dashboard</a></li>
+      `;
     }
 
     navLinksContainer.innerHTML = linksHtml;
 
-    // Render User Badge in Navbar
+    // Render User Badge & Demo Role Switcher in Navbar
     if (userBadgeContainer) {
+      let roleSwitcherHtml = `
+        <select id="quickDemoSwitch" class="demo-role-select" aria-label="Demo Role Switcher" title="Switch Demo User Role">
+          <option value="" disabled ${!user ? 'selected' : ''}>Demo Role ▾</option>
+          <option value="student" ${user && user.role === 'student' ? 'selected' : ''}>Student (Abebe)</option>
+          <option value="teacher" ${user && user.role === 'teacher' ? 'selected' : ''}>Teacher (Mr. Eyuel)</option>
+          <option value="admin" ${user && user.role === 'admin' ? 'selected' : ''}>Admin (Dr. Tadesse)</option>
+          <option value="committee" ${user && user.role === 'committee' ? 'selected' : ''}>Committee (Dr. Daniel)</option>
+        </select>
+      `;
+
       if (user) {
         userBadgeContainer.innerHTML = `
+          ${roleSwitcherHtml}
           <div class="user-profile-badge">
             <span>${user.name}</span>
-            <span class="user-role-pill">${user.role}</span>
+            <span class="user-role-pill user-role-${user.role}">${user.role}</span>
           </div>
-          <button class="btn btn-secondary btn-sm" id="logoutBtn" style="padding:5px 10px;">Logout</button>
+          <button class="btn btn-secondary btn-sm" id="logoutBtn" style="padding:4px 10px; font-size:0.8rem;">Logout</button>
         `;
         const logoutBtn = document.getElementById('logoutBtn');
         if (logoutBtn) logoutBtn.addEventListener('click', logout);
       } else {
         userBadgeContainer.innerHTML = `
+          ${roleSwitcherHtml}
           <a class="btn btn-sm" href="login.html">Login</a>
         `;
+      }
+
+      const demoSelect = document.getElementById('quickDemoSwitch');
+      if (demoSelect) {
+        demoSelect.addEventListener('change', (e) => {
+          switchDemoRole(e.target.value);
+        });
       }
     }
   }
 
-  // 7. PWA Service Worker & Install Prompt
+  // 7. Demo Role Switcher Engine
+  const DEMO_USERS = {
+    student: { id: 1, name: 'Abebe Kebede', role: 'student', email: 'student@ambo.edu.et', studentId: 'ugr/12345/16', department: 'Information Technology' },
+    teacher: { id: 5, name: 'Mr. Eyuel', role: 'teacher', email: 'eyuel.t@ambo.edu.et', department: 'Information Technology' },
+    admin: { id: 7, name: 'Dr. Tadesse', role: 'admin', email: 'admin@ambo.edu.et', department: 'Information Technology' },
+    committee: { id: 8, name: 'Dr. Daniel', role: 'committee', email: 'committee@ambo.edu.et', department: 'Computer Science' }
+  };
+
+  function switchDemoRole(role) {
+    if (!DEMO_USERS[role]) return;
+    setCurrentUser(DEMO_USERS[role]);
+    showToast(`Switched to demo role: ${DEMO_USERS[role].name} (${role.toUpperCase()})`, 'success', 2000);
+    setTimeout(() => {
+      if (role === 'student') window.location.href = 'student_dashboard.html';
+      else if (role === 'teacher') window.location.href = 'teacher_dashboard.html';
+      else if (role === 'admin') window.location.href = 'admin_dashboard.html';
+      else if (role === 'committee') window.location.href = 'committee_dashboard.html';
+    }, 280);
+  }
+
+  // 8. Utility: Debounce Function for Real-Time Search & Inputs
+  function debounce(fn, delay = 250) {
+    let timer = null;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
+
+  // 9. Complaint Form Draft Auto-Save Engine
+  const DRAFT_STORAGE_KEY = 'ambo_cms_draft_complaint';
+
+  function initDraftAutoSave() {
+    const form = document.getElementById('complaintForm');
+    if (!form) return;
+
+    const monitoredFields = ['department', 'courseName', 'complaintTitle', 'urgency', 'complaintMessage'];
+
+    // Restore draft if exists
+    try {
+      const rawDraft = sessionStorage.getItem(DRAFT_STORAGE_KEY);
+      if (rawDraft) {
+        const draft = JSON.parse(rawDraft);
+        let restoredCount = 0;
+        monitoredFields.forEach(field => {
+          const el = document.getElementById(field);
+          if (el && draft[field] !== undefined && draft[field] !== '') {
+            el.value = draft[field];
+            restoredCount++;
+          }
+        });
+        if (draft.category) {
+          const radio = form.querySelector(`input[name="category"][value="${draft.category}"]`);
+          if (radio) {
+            radio.checked = true;
+            restoredCount++;
+          }
+        }
+        if (restoredCount > 0) {
+          showToast('Draft restored from your current session.', 'info', 2500);
+        }
+      }
+    } catch (e) {
+      console.warn('[Ambo CMS] Draft restoration error:', e);
+    }
+
+    // Auto-save on input with debouncing
+    const saveDraftDebounced = debounce(() => {
+      const draft = {};
+      monitoredFields.forEach(field => {
+        const el = document.getElementById(field);
+        if (el) draft[field] = el.value;
+      });
+      const selectedRadio = form.querySelector('input[name="category"]:checked');
+      if (selectedRadio) draft.category = selectedRadio.value;
+      sessionStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(draft));
+    }, 350);
+
+    form.addEventListener('input', saveDraftDebounced);
+    form.addEventListener('change', saveDraftDebounced);
+
+    // Clear draft on submission
+    form.addEventListener('submit', () => {
+      sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+    });
+  }
+
+  // 10. Student ID Format Validator (Ethiopian University Format: ugr/xxxxx/xx)
+  function initStudentIdValidator() {
+    const studentIdInput = document.getElementById('studentId');
+    if (!studentIdInput) return;
+
+    const pattern = /^ugr\/\d{5}\/\d{2}$/i;
+    studentIdInput.addEventListener('input', () => {
+      const val = studentIdInput.value.trim();
+      if (!val) {
+        studentIdInput.style.borderColor = '';
+        return;
+      }
+      if (pattern.test(val)) {
+        studentIdInput.style.borderColor = 'var(--success)';
+      } else {
+        studentIdInput.style.borderColor = 'var(--warning)';
+      }
+    });
+  }
+
+  // 11. PWA Service Worker & Install Prompt
   let deferredInstallPrompt = null;
 
   function initPWA() {
@@ -438,23 +682,35 @@
     navActions.prepend(installBtn);
   }
 
-  // 8. Expose Global CMS API
+  // 12. Expose Global CMS API
   window.AmboCMS = {
     getComplaints,
     getComplaintById,
     addComplaint,
     updateComplaintStatus,
+    escalateComplaint,
+    submitCommitteeDecision,
+    declineComplaint,
+    editComplaint,
+    getDisplayStatus,
+    getStatusLabel,
     getCurrentUser,
     setCurrentUser,
+    switchDemoRole,
     logout,
     showToast,
-    toggleTheme
+    toggleTheme,
+    debounce,
+    DEMO_USERS,
+    DEFAULT_COMPLAINTS
   };
 
   // Run on DOM ready
   document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     renderNavigation();
+    initDraftAutoSave();
+    initStudentIdValidator();
     initPWA();
   });
 

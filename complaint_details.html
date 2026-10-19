@@ -13,49 +13,6 @@
   <title>Complaint Details - Ambo University CMS</title>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/nav.css">
-  <style>
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-      background: var(--surface-alt);
-      padding: 18px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-    }
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-    }
-    .meta-label {
-      font-size: 0.76rem;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-      letter-spacing: 0.5px;
-    }
-    .meta-value {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-    .resolution-card {
-      border-left: 4px solid var(--success);
-      background: var(--surface-alt);
-      padding: 20px;
-      border-radius: var(--radius-md);
-      margin-bottom: 24px;
-    }
-    .decline-card {
-      border-left: 4px solid var(--danger);
-      background: var(--surface-alt);
-      padding: 20px;
-      border-radius: var(--radius-md);
-      margin-bottom: 24px;
-    }
-  </style>
 </head>
 <body>
 
@@ -94,6 +51,7 @@
 
       <!-- Metadata Attributes -->
       <div class="card">
+        <h2 class="sr-only">Complaint Dossier and Case Timeline</h2>
         <div class="meta-grid">
           <div class="meta-item">
             <span class="meta-label">Student Name</span>
@@ -101,7 +59,7 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">Student ID</span>
-            <span class="meta-value" id="valStudentId">-</span>
+            <span class="meta-value font-tabular" id="valStudentId">-</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Department</span>
@@ -125,14 +83,14 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">Submitted On</span>
-            <span class="meta-value" id="valDate">-</span>
+            <span class="meta-value font-tabular" id="valDate">-</span>
           </div>
         </div>
 
         <!-- Grievance Message -->
         <div style="margin-bottom: 24px;">
           <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-main);">Student Grievance Description</h3>
-          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); line-height: 1.6; color: var(--text-main);" id="valMessage">
+          <div class="prose-reading" style="color: var(--text-main); line-height: 1.65; padding: 4px 0;" id="valMessage">
             -
           </div>
         </div>
@@ -141,7 +99,12 @@
         <div id="teacherReplySection" style="display: none;">
           <div class="resolution-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-              <h3 style="color: var(--success); font-size: 1.1rem; margin-bottom: 0;">👨‍🏫 Teacher's Resolution & Clarification</h3>
+              <h3 style="color: var(--success); font-size: 1.1rem; margin-bottom: 0; display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Faculty Resolution & Corrective Action
+              </h3>
               <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);" id="valTeacherReplyName">-</span>
             </div>
             <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valTeacherReplyText">
@@ -153,7 +116,12 @@
         <!-- Admin Decline Notice (if declined) -->
         <div id="declineReasonSection" style="display: none;">
           <div class="decline-card">
-            <h3 style="color: var(--danger); font-size: 1.1rem; margin-bottom: 8px;">❌ Administrative Rejection Reason</h3>
+            <h3 style="color: var(--danger); font-size: 1.1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+              </svg>
+              Administrative Decline Justification
+            </h3>
             <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valDeclineReason">
               -
             </p>
@@ -163,11 +131,43 @@
         <!-- Admin Remark (if available) -->
         <div id="adminRemarkSection" style="display: none; margin-bottom: 24px;">
           <div class="alert-box alert-info">
-            <span>🛡️</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
             <div>
-              <strong>Admin Instruction / Remark:</strong>
+              <strong>Department Administrator Directive:</strong>
               <div id="valAdminRemark" style="margin-top: 4px;"></div>
             </div>
+          </div>
+        </div>
+
+        <!-- Escalated Notice Banner (if escalated) -->
+        <div id="escalatedBannerSection" style="display: none; margin-bottom: 24px;">
+          <div class="alert-box alert-warning">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <div>
+              <strong>University Disciplinary Committee Docket:</strong>
+              <div style="margin-top: 4px;">This matter has been escalated to the Disciplinary Committee for statutory inquiry. Routine departmental mediation is suspended pending formal committee findings.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Committee Decision (if resolved by committee) -->
+        <div id="committeeDecisionSection" style="display: none; margin-bottom: 24px;">
+          <div class="resolution-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <h3 style="color: var(--success); font-size: 1.1rem; margin-bottom: 0; display: flex; align-items: center; gap: 8px;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Disciplinary Committee Ruling & Final Determination
+              </h3>
+            </div>
+            <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valCommitteeDecision">
+              -
+            </p>
           </div>
         </div>
 
@@ -212,10 +212,14 @@
         return;
       }
 
+      const userRole = user ? user.role : 'student';
+      const displayStatus = window.AmboCMS.getDisplayStatus(complaint.status, userRole);
+      const statusLabel = window.AmboCMS.getStatusLabel(complaint.status, userRole);
+
       // Populate Data
       document.getElementById('complaintIdBadge').textContent = complaint.id;
       document.getElementById('complaintTitle').textContent = complaint.title;
-      document.getElementById('statusBadgeContainer').innerHTML = `<span class="status-badge status-${complaint.status}" style="font-size:0.92rem; padding: 6px 14px;">${complaint.status.replace('_', ' ')}</span>`;
+      document.getElementById('statusBadgeContainer').innerHTML = `<span class="status-badge status-${displayStatus}" style="font-size:0.92rem; padding: 6px 14px;">${statusLabel}</span>`;
 
       document.getElementById('valStudentName').textContent = complaint.studentName;
       document.getElementById('valStudentId').textContent = complaint.studentId;
@@ -246,6 +250,17 @@
         document.getElementById('valAdminRemark').textContent = complaint.adminRemark;
       }
 
+      // Escalated Banner Notice
+      if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
+        document.getElementById('escalatedBannerSection').style.display = 'block';
+      }
+
+      // Committee Decision
+      if (complaint.committeeDecision) {
+        document.getElementById('committeeDecisionSection').style.display = 'block';
+        document.getElementById('valCommitteeDecision').textContent = complaint.committeeDecision;
+      }
+
       // Timeline
       const timelineEl = document.getElementById('timelineList');
       timelineEl.innerHTML = complaint.timeline.map(item => `
@@ -273,20 +288,22 @@
           const assignBtn = document.createElement('a');
           assignBtn.href = `admin_assign.html?id=${complaint.id}`;
           assignBtn.className = 'btn btn-success';
-          assignBtn.textContent = '👨‍🏫 Assign Teacher';
+          assignBtn.textContent = 'Assign Faculty Lecturer';
           actionsEl.appendChild(assignBtn);
 
+          const escalateBtn = document.createElement('a');
+          escalateBtn.href = `admin_escalate.html?id=${complaint.id}`;
+          escalateBtn.className = 'btn btn-danger';
+          escalateBtn.textContent = 'Escalate to Committee';
+          actionsEl.appendChild(escalateBtn);
+
           const declineBtn = document.createElement('button');
-          declineBtn.className = 'btn btn-danger';
-          declineBtn.textContent = '❌ Decline Complaint';
+          declineBtn.className = 'btn btn-secondary';
+          declineBtn.textContent = 'Decline Grievance';
           declineBtn.onclick = () => {
             const reason = prompt('Enter administrative reason for declining this complaint:');
             if (reason && reason.trim()) {
-              window.AmboCMS.updateComplaintStatus(complaint.id, {
-                status: 'declined',
-                declineReason: reason.trim(),
-                timelineEvent: { title: 'Declined by Admin', text: `Reason: ${reason.trim()}` }
-              });
+              window.AmboCMS.declineComplaint(complaint.id, reason.trim());
               window.AmboCMS.showToast('Complaint status updated to Declined', 'danger');
               setTimeout(() => location.reload(), 400);
             }
@@ -296,8 +313,14 @@
           const confirmBtn = document.createElement('a');
           confirmBtn.href = `admin_confirm.html?id=${complaint.id}`;
           confirmBtn.className = 'btn btn-purple';
-          confirmBtn.textContent = '✅ Confirm Resolution';
+          confirmBtn.textContent = 'Confirm Resolution';
           actionsEl.appendChild(confirmBtn);
+        } else if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
+          const dossierBtn = document.createElement('a');
+          dossierBtn.href = `committee_complaint_details.html?id=${complaint.id}`;
+          dossierBtn.className = 'btn btn-secondary';
+          dossierBtn.textContent = 'View Committee Dossier';
+          actionsEl.appendChild(dossierBtn);
         }
       } else if (user && user.role === 'teacher') {
         backBtn.href = 'teacher_dashboard.html';
@@ -307,11 +330,29 @@
           const respondBtn = document.createElement('a');
           respondBtn.href = `teacher_respond.html?id=${complaint.id}`;
           respondBtn.className = 'btn btn-primary';
-          respondBtn.textContent = '✍️ Write Response / Resolution';
+          respondBtn.textContent = 'Draft Faculty Resolution';
           actionsEl.appendChild(respondBtn);
+        }
+      } else if (user && user.role === 'committee') {
+        backBtn.href = 'committee_dashboard.html';
+        backBtn.textContent = 'Back to Committee Docket';
+
+        if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
+          const decisionBtn = document.createElement('a');
+          decisionBtn.href = `committee_decision.html?id=${complaint.id}`;
+          decisionBtn.className = 'btn btn-danger';
+          decisionBtn.textContent = 'Render Decision';
+          actionsEl.appendChild(decisionBtn);
         }
       } else {
         backBtn.href = 'my_complaints.html';
+        if (complaint.status === 'pending') {
+          const editBtn = document.createElement('a');
+          editBtn.href = `submit_complaint.html?edit=${complaint.id}`;
+          editBtn.className = 'btn btn-primary';
+          editBtn.textContent = 'Edit Grievance';
+          actionsEl.appendChild(editBtn);
+        }
       }
     });
   </script>
