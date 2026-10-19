@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1e3a8a">
+  <meta name="theme-color" content="#24358B">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Ambo CMS">
@@ -11,8 +11,124 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>Ambo University - Student to Teacher Complaint Management System</title>
-  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #F1F4FD;
+    }
+    .welcome-header {
+      text-align: center;
+      background-color: #24358B;
+      color: #ffffff;
+      border-radius: 16px;
+      padding: 36px 16px;
+      margin: 28px 0 36px;
+      box-shadow: 0 8px 24px rgba(36, 53, 139, 0.22);
+    }
+    .welcome-header h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .welcome-header p {
+      margin: 0;
+      opacity: 0.92;
+      font-size: 16px;
+      color: #f9f9f9;
+    }
+    .comp {
+      text-align: center;
+      margin: 36px auto;
+      background: #ffffff;
+      padding: 36px 24px;
+      width: 100%;
+      max-width: 440px;
+      border-radius: 16px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.07);
+    }
+    .comp h2 {
+      margin-bottom: 8px;
+      font-size: 24px;
+      color: #111827;
+      font-weight: 700;
+    }
+    .comp p {
+      margin-top: 4px;
+      margin-bottom: 22px;
+      color: #6B7280;
+      font-size: 15px;
+    }
+    .comp .btn-action {
+      background: #2563EB;
+      padding: 12px 26px;
+      border-radius: 10px;
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .comp .btn-action:hover {
+      background: #1D4ED8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+    }
+    .Cards {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      max-width: 1050px;
+      margin: 36px auto 48px;
+      flex-wrap: wrap;
+    }
+    .Card {
+      flex: 1 1 280px;
+      background: #ffffff;
+      padding: 26px 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .Card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    }
+    .Card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: #111827;
+      font-weight: 700;
+    }
+    .Card p {
+      color: #4b5563;
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      .welcome-header {
+        padding: 24px 14px;
+        margin: 18px 0 24px;
+      }
+      .welcome-header h1 {
+        font-size: 24px;
+      }
+      .comp {
+        margin: 20px auto;
+        padding: 24px 18px;
+      }
+      .Card {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -26,9 +142,7 @@
           <span class="brand-subtitle">Complaint Management System</span>
         </div>
       </a>
-
       <ul class="nav-menu" id="navLinks"></ul>
-
       <div class="nav-actions">
         <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
         <div id="navUserBadge"></div>
@@ -37,85 +151,41 @@
     </div>
   </nav>
 
-  <!-- Hero Banner -->
   <main class="main-content">
     <div class="container">
-      <div class="page-header" style="padding: 50px 24px; margin-bottom: 36px;">
-        <span class="header-badge">Official Academic Portal</span>
-        <h1 style="font-size: 2.3rem; margin-bottom: 14px;">Welcome to Ambo University CMS</h1>
-        <p style="font-size: 1.1rem; line-height: 1.6; max-width: 760px;">
-          A transparent, structured, and auditable platform for resolving academic, assessment, and departmental concerns between students and faculty.
-        </p>
-        <div style="margin-top: 24px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;" id="heroActionButtons">
-          <a href="login.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Login to Portal</a>
-          <a href="submission_guide.html" class="btn btn-secondary" style="padding: 12px 24px; font-size: 1rem;">Read Submission Guide</a>
-        </div>
+      <!-- Style A: Welcome Header -->
+      <div class="welcome-header">
+        <h1>Welcome to Ambo University Complaint Management System</h1>
+        <p>Your gateway to efficient and effective complaint resolution</p>
       </div>
 
-      <!-- Feature Cards -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px;">
-        <div class="card" style="text-align: center; padding: 32px 24px;">
-          <div style="font-size: 2.4rem; margin-bottom: 12px;">📊</div>
-          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Live Tracking</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem;">
-            Monitor the exact stage of your complaint with chronological timeline updates from submission to resolution.
-          </p>
-        </div>
-
-        <div class="card" style="text-align: center; padding: 32px 24px;">
-          <div style="font-size: 2.4rem; margin-bottom: 12px;">🛡️</div>
-          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Administrative Oversight</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem;">
-            Department heads and university administrators review every teacher response before finalizing resolution.
-          </p>
-        </div>
-
-        <div class="card" style="text-align: center; padding: 32px 24px;">
-          <div style="font-size: 2.4rem; margin-bottom: 12px;">⚡</div>
-          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Fast Academic Remediation</h3>
-          <p style="color: var(--text-muted); font-size: 0.94rem;">
-            Direct routing to assigned course lecturers ensures academic and grading errors are resolved promptly.
-          </p>
-        </div>
+      <!-- Style A: Floating Action Card -->
+      <div class="comp">
+        <h2>Complaint Management System</h2>
+        <p>Better future through Knowledge</p>
+        <a id="primaryAction" href="login.html" class="btn-action">
+          <span id="primaryActionText">Login to Continue</span>
+        </a>
       </div>
 
-      <!-- Complaint Workflow Explanation -->
-      <div class="card" style="padding: 32px 28px;">
-        <div class="card-title" style="margin-bottom: 24px;">
-          <h2>Complaint Resolution Process</h2>
-          <span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 500;">4-Stage Workflow</span>
+      <!-- Style A: 3 Cards -->
+      <div class="Cards">
+        <div class="Card">
+          <h3>📊 Track</h3>
+          <p>Monitor your complaints easily with real-time status updates and transparent timelines.</p>
         </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-            <div style="width: 32px; height: 32px; background: var(--primary); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">1</div>
-            <h4 style="font-size: 1rem; margin-bottom: 6px;">Submit Grievance</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">Student selects department, course, urgency, and provides clear evidence.</p>
-          </div>
-
-          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-            <div style="width: 32px; height: 32px; background: var(--warning); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">2</div>
-            <h4 style="font-size: 1rem; margin-bottom: 6px;">Admin Assignment</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">Admin verifies complaint validity and assigns it to the designated course teacher.</p>
-          </div>
-
-          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-            <div style="width: 32px; height: 32px; background: var(--purple); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">3</div>
-            <h4 style="font-size: 1rem; margin-bottom: 6px;">Teacher Response</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">Teacher investigates, formulates a corrective action or clarification, and replies.</p>
-          </div>
-
-          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-            <div style="width: 32px; height: 32px; background: var(--success); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">4</div>
-            <h4 style="font-size: 1rem; margin-bottom: 6px;">Confirmation & Closure</h4>
-            <p style="font-size: 0.88rem; color: var(--text-muted);">Admin confirms resolution; student is notified with official outcome in their dashboard.</p>
-          </div>
+        <div class="Card">
+          <h3>🔒 Secure</h3>
+          <p>Your complaints remain protected, authenticated, and handled safely under university standards.</p>
+        </div>
+        <div class="Card">
+          <h3>⚡ Fast</h3>
+          <p>We process your complaints quickly and route them directly without unnecessary delays.</p>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <p><strong>Ambo University Complaint Management System</strong></p>
@@ -127,26 +197,26 @@
 
   <script src="assets/js/app.js"></script>
   <script>
-    // Customize hero CTA button based on active role
     document.addEventListener('DOMContentLoaded', () => {
       const user = window.AmboCMS.getCurrentUser();
-      const heroButtons = document.getElementById('heroActionButtons');
-      if (user && heroButtons) {
-        if (user.role === 'student') {
-          heroButtons.innerHTML = `
-            <a href="submit_complaint.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Submit New Complaint</a>
-            <a href="student_dashboard.html" class="btn btn-secondary" style="padding: 12px 24px; font-size: 1rem;">My Student Dashboard</a>
-          `;
-        } else if (user.role === 'teacher') {
-          heroButtons.innerHTML = `
-            <a href="teacher_dashboard.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Open Teacher Dashboard</a>
-          `;
-        } else if (user.role === 'admin') {
-          heroButtons.innerHTML = `
-            <a href="admin_dashboard.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Open Admin Dashboard</a>
-            <a href="admin_all_complaints.html" class="btn btn-secondary" style="padding: 12px 24px; font-size: 1rem;">View All Complaints</a>
-          `;
-        }
+      const primaryAction = document.getElementById('primaryAction');
+      const primaryActionText = document.getElementById('primaryActionText');
+
+      if (!user) {
+        if (primaryActionText) primaryActionText.textContent = 'Login to Continue';
+        if (primaryAction) primaryAction.href = 'login.html';
+      } else if (user.role === 'student') {
+        if (primaryActionText) primaryActionText.textContent = 'Submit Your Complaint';
+        if (primaryAction) primaryAction.href = 'submit_complaint.html';
+      } else if (user.role === 'teacher') {
+        if (primaryActionText) primaryActionText.textContent = 'View Assigned Complaints';
+        if (primaryAction) primaryAction.href = 'teacher_dashboard.html';
+      } else if (user.role === 'admin') {
+        if (primaryActionText) primaryActionText.textContent = 'Open Admin Panel';
+        if (primaryAction) primaryAction.href = 'admin_dashboard.html';
+      } else if (user.role === 'committee') {
+        if (primaryActionText) primaryActionText.textContent = 'Open Committee Docket';
+        if (primaryAction) primaryAction.href = 'committee_dashboard.html';
       }
     });
   </script>

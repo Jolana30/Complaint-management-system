@@ -35,76 +35,90 @@
     </div>
   </nav>
 
-  <main class="main-content">
+  <main class="main-content" style="padding: 24px 0 40px;">
     <div class="container">
-      <!-- Header -->
-      <div class="page-header">
-        <span class="header-badge">Faculty Portal</span>
-        <h1 id="teacherHeaderName">Teacher Dashboard</h1>
-        <p id="teacherHeaderDetails">Review academic grievances assigned to your courses and draft official resolutions.</p>
+      <!-- Style A Welcome Header -->
+      <div class="welcome-header">
+        <h1 id="teacherHeaderName">Welcome, Mr. Eyuel</h1>
+        <p id="teacherHeaderDetails">IP and SAD Course Lecturer | Faculty Portal</p>
       </div>
 
-      <!-- Statistics -->
-      <div class="stats-grid">
+      <!-- Style A Quick Actions -->
+      <div class="quick-links">
+        <h3>Quick Actions</h3>
+        <a href="#assignedTable">Assigned Complaints</a>
+        <a href="index.html">CMS Home</a>
+      </div>
+
+      <!-- Style A Stats Row -->
+      <div class="stats-row">
         <div class="stat-card">
-          <h3 id="statAssigned">0</h3>
-          <p>Total Assigned</p>
+          <h2 id="statAssigned">0</h2>
+          <p>Assigned Complaints</p>
         </div>
         <div class="stat-card">
-          <h3 id="statNeedsResponse" style="color: var(--primary);">0</h3>
-          <p>Requires Response</p>
+          <h2 id="statNeedsResponse" style="color: #2563EB;">0</h2>
+          <p>In Progress / Requires Response</p>
         </div>
         <div class="stat-card">
-          <h3 id="statPendingAdmin" style="color: var(--purple);">0</h3>
+          <h2 id="statPendingAdmin" style="color: #7C3AED;">0</h2>
           <p>Sent to Admin</p>
         </div>
         <div class="stat-card">
-          <h3 id="statResolvedTeacher" style="color: var(--success);">0</h3>
+          <h2 id="statResolvedTeacher" style="color: #059669;">0</h2>
           <p>Resolved</p>
         </div>
       </div>
 
-      <!-- Assigned Complaints Table -->
-      <div class="card">
-        <div class="card-title">
-          <h3>Complaints Assigned to You</h3>
-          <span style="font-size: 0.88rem; color: var(--text-muted);">Sorted by Urgency</span>
+      <!-- Style A Content Section: Split Layout -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <!-- Left: Assigned Complaints Table -->
+        <div class="card" id="assignedTable" style="flex: 2;">
+          <div class="card-title">
+            <h3>Complaints Assigned to You</h3>
+            <span style="font-size: 0.88rem; color: var(--text-muted);">Sorted by Urgency</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Student</th>
+                  <th>Subject / Title</th>
+                  <th>Course</th>
+                  <th>Urgency</th>
+                  <th>Status</th>
+                  <th>Last Update</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="teacherTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <div class="table-responsive">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Student</th>
-                <th>Subject / Title</th>
-                <th>Course</th>
-                <th>Urgency</th>
-                <th>Status</th>
-                <th>Last Update</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="teacherTableBody">
-              <!-- Dynamically populated -->
-            </tbody>
-          </table>
+        <!-- Right: Announcements & Workflow Callout -->
+        <div class="card" style="flex: 1;">
+          <h3 style="margin-top: 0; font-size: 20px; color: #111827; margin-bottom: 16px;">Announcements</h3>
+          <div class="announcement-box">
+            <p><strong>Important Notice:</strong></p>
+            <p>Submit a clear response so the administrator can confirm the resolution before the student sees the final result.</p>
+          </div>
+          <div class="announcement-box">
+            <p><strong>Workflow Guidance:</strong></p>
+            <p>Teachers review assigned complaints, examine assessment records, formulate a constructive resolution, and submit to admin for confirmation.</p>
+          </div>
         </div>
-      </div>
-
-      <!-- Academic Workflow Reminder Callout -->
-      <div class="card" style="background: var(--surface-alt);">
-        <h4 style="font-size: 1.05rem; margin-bottom: 8px;">Faculty Workflow Guidance</h4>
-        <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
-          When an academic complaint is assigned to you by the department head or administrator, review the student's submission, examine test/project records, and provide a clear, constructive resolution. Once submitted, the resolution will be sent to the administrator for final confirmation before being published to the student's dashboard.
-        </p>
       </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+      <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
     </div>
   </footer>
 
@@ -155,12 +169,12 @@
         let urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
 
         let actionBtns = `
-          <a href="complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm">View</a>
+          <a href="complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">View</a>
         `;
 
         if (c.status === 'assigned' || c.status === 'in_progress') {
           actionBtns += `
-            <a href="teacher_respond.html?id=${c.id}" class="btn btn-sm">Respond</a>
+            <a href="teacher_respond.html?id=${c.id}" class="action-btn-a action-confirm-a">Respond</a>
           `;
         }
 
@@ -168,7 +182,7 @@
           <tr>
             <td><strong>${c.id}</strong></td>
             <td>${c.studentName}</td>
-            <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+            <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
             <td>${c.course}</td>
             <td>${urgencyBadge}</td>
             <td>${statusBadge}</td>

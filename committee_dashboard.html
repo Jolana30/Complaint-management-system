@@ -35,40 +35,45 @@
     </div>
   </nav>
 
-  <main class="main-content">
+  <main class="main-content" style="padding: 24px 0 40px;">
     <div class="container">
-      <!-- Header -->
-      <div class="page-header" style="background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);">
-        <span class="header-badge" style="background: rgba(255, 255, 255, 0.22);">Statutory Ethics & Integrity</span>
+      <!-- Style A Committee Header -->
+      <div class="welcome-header committee-header">
         <h1 id="committeeHeaderTitle">Disciplinary Committee Portal</h1>
         <p id="committeeHeaderSubtitle">Statutory review, formal hearing adjudication, and sanction determination for severe misconduct cases.</p>
       </div>
 
-      <!-- Statistics -->
-      <h2 class="sr-only">Disciplinary Docket Metrics Overview</h2>
-      <div class="stats-grid">
+      <!-- Style A Quick Actions -->
+      <div class="quick-links">
+        <h3>Docket Actions</h3>
+        <a href="#docketTable">Active Inquiries</a>
+        <a href="admin_all_complaints.html">All System Complaints</a>
+      </div>
+
+      <!-- Style A Stats Row -->
+      <div class="stats-row">
         <div class="stat-card">
-          <h3 id="statTotalEscalated" class="font-tabular" style="color: var(--danger);">0</h3>
+          <h2 id="statTotalEscalated" style="color: #991b1b;">0</h2>
           <p>Total Docket Cases</p>
         </div>
         <div class="stat-card">
-          <h3 id="statAwaitingHearing" class="font-tabular" style="color: var(--warning);">0</h3>
+          <h2 id="statAwaitingHearing" style="color: #b45309;">0</h2>
           <p>Awaiting Hearing / Decision</p>
         </div>
         <div class="stat-card">
-          <h3 id="statDecisionsRendered" class="font-tabular" style="color: var(--success);">0</h3>
+          <h2 id="statDecisionsRendered" style="color: #059669;">0</h2>
           <p>Decisions Concluded</p>
         </div>
         <div class="stat-card">
-          <h3 id="statSeriousSeverity" class="font-tabular" style="color: #991b1b;">0</h3>
+          <h2 id="statSeriousSeverity" style="color: #dc2626;">0</h2>
           <p>Serious / Critical Severity</p>
         </div>
       </div>
 
       <!-- Active Docket Table Card -->
-      <div class="card">
+      <div class="card" id="docketTable">
         <div class="card-title">
-          <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0;">Escalated Cases Awaiting Committee Review</h2>
+          <h3>Escalated Cases Awaiting Committee Review</h3>
           <span style="font-size: 0.88rem; color: var(--text-muted);">Formal Statutory Inquiry Docket</span>
         </div>
 
@@ -76,14 +81,14 @@
           <table class="data-table">
             <thead>
               <tr>
-                <th scope="col">Case ID</th>
-                <th scope="col">Complainant</th>
-                <th scope="col">Grievance Subject</th>
-                <th scope="col">Department</th>
-                <th scope="col">Severity</th>
-                <th scope="col">Docket Status</th>
-                <th scope="col">Date Escalated</th>
-                <th scope="col">Judicial Action</th>
+                <th>Case ID</th>
+                <th>Complainant</th>
+                <th>Grievance Subject</th>
+                <th>Department</th>
+                <th>Severity</th>
+                <th>Docket Status</th>
+                <th>Date Escalated</th>
+                <th>Judicial Action</th>
               </tr>
             </thead>
             <tbody id="committeeTableBody">
@@ -94,8 +99,8 @@
       </div>
 
       <!-- Committee Jurisdiction Notice Card -->
-      <div class="card" style="background: var(--surface-alt); border: 1px solid var(--border-color);">
-        <h3 style="font-size: 1.05rem; margin-bottom: 6px; color: var(--text-main);">Statutory Committee Jurisdiction & Charter</h3>
+      <div class="card">
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px; color: #111827;">Statutory Committee Jurisdiction & Charter</h3>
         <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
           Under Ambo University Senate Legislation, the Disciplinary Committee exercises formal jurisdiction over complaints involving retaliatory grading threats, intimidation, academic integrity breaches, and ethical violations. Departmental mediation ceases once a complaint is formally escalated to this docket. All decisions are logged with a cryptographic audit signature.
         </p>
@@ -105,7 +110,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+      <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
     </div>
   </footer>
 
@@ -142,14 +147,8 @@
       if (escalatedCases.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="8">
-              <div class="empty-state">
-                <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div class="empty-state-title">Docket Clear</div>
-                <div class="empty-state-desc">There are currently no cases referred to the University Disciplinary Committee.</div>
-              </div>
+            <td colspan="8" style="text-align: center; padding: 28px; color: var(--text-muted);">
+              <strong>Docket Clear</strong> — There are currently no cases referred to the University Disciplinary Committee.
             </td>
           </tr>
         `;
@@ -162,23 +161,23 @@
           ? `<span class="severity-badge severity-serious">Serious</span>`
           : `<span class="badge" style="background:#f1f5f9; color:#475569; font-size:0.75rem;">Normal</span>`;
 
-        let actionBtns = `<a href="committee_complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm">Dossier</a>`;
+        let actionBtns = `<a href="committee_complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">Review Case</a>`;
 
         if (c.status === 'escalated' || c.status === 'committee_review') {
           actionBtns += `
-            <a href="committee_decision.html?id=${c.id}" class="btn btn-danger btn-sm">Render Decision</a>
+            <a href="committee_decision.html?id=${c.id}" class="action-btn-a action-escalate-a">Render Decision</a>
           `;
         }
 
         return `
           <tr>
-            <td class="font-tabular"><strong>${c.id}</strong></td>
+            <td><strong>${c.id}</strong></td>
             <td>${c.studentName}</td>
-            <td><a href="committee_complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+            <td><a href="committee_complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
             <td>${c.department}</td>
             <td>${severityBadge}</td>
             <td>${statusBadge}</td>
-            <td class="font-tabular">${c.submittedDate}</td>
+            <td>${c.submittedDate}</td>
             <td>
               <div class="actions-cell">
                 ${actionBtns}

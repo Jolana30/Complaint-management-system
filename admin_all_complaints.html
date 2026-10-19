@@ -161,27 +161,27 @@
           let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
           let teacherText = c.assignedTeacher || '<span style="color:var(--text-muted);">Unassigned</span>';
 
-          let actions = `<a href="complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm">View</a>`;
+          let actions = `<a href="complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">View</a>`;
 
           if (c.status === 'pending') {
-            actions += `<a href="admin_assign.html?id=${c.id}" class="btn btn-sm">Assign</a>`;
-            actions += `<a href="admin_escalate.html?id=${c.id}" class="btn btn-danger btn-sm" title="Escalate to Committee">Escalate</a>`;
+            actions += `<a href="admin_assign.html?id=${c.id}" class="action-btn-a action-assign-a">Assign</a>`;
+            actions += `<a href="admin_escalate.html?id=${c.id}" class="action-btn-a action-escalate-a" title="Escalate to Committee">Escalate</a>`;
           } else if (c.status === 'needs_confirmation') {
-            actions += `<a href="admin_confirm.html?id=${c.id}" class="btn btn-purple btn-sm">Confirm</a>`;
+            actions += `<a href="admin_confirm.html?id=${c.id}" class="action-btn-a action-confirm-a">Confirm</a>`;
           } else if (c.status === 'escalated' || c.status === 'committee_review') {
-            actions += `<a href="committee_complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm">Dossier</a>`;
+            actions += `<a href="committee_complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">Dossier</a>`;
           }
 
           return `
             <tr>
-              <td class="font-tabular"><strong>${c.id}</strong></td>
+              <td><strong>${c.id}</strong></td>
               <td>${c.studentName}</td>
-              <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+              <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
               <td>${c.course}</td>
               <td>${c.department}</td>
               <td>${statusBadge}</td>
               <td>${teacherText}</td>
-              <td class="font-tabular">${c.submittedDate}</td>
+              <td>${c.submittedDate}</td>
               <td>
                 <div class="actions-cell">
                   ${actions}

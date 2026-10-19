@@ -35,49 +35,56 @@
     </div>
   </nav>
 
-  <main class="main-content">
+  <main class="main-content" style="padding: 24px 0 40px;">
     <div class="container">
-      <!-- Admin Header -->
-      <div class="page-header">
-        <span class="header-badge">Administrative Portal</span>
-        <h1>Academic Affairs Administration</h1>
-        <p>University-wide grievance triage, faculty assignments, and resolution confirmation center.</p>
+      <!-- Style A Welcome Header -->
+      <div class="welcome-header">
+        <h1>Admin Dashboard</h1>
+        <p>Complaint Management System — Department Head & Administration</p>
       </div>
 
-      <!-- Quick Action Navigation -->
-      <div class="quick-actions-bar">
-        <span>Admin Actions:</span>
-        <a href="admin_all_complaints.html" class="btn btn-sm">📋 All Complaints</a>
-        <a href="admin_all_complaints.html?status=pending" class="btn btn-secondary btn-sm">⚠️ Pending Triage</a>
-        <a href="admin_all_complaints.html?status=needs_confirmation" class="btn btn-secondary btn-sm">✅ Awaiting Confirmation</a>
-        <a href="admin_all_complaints.html?status=escalated" class="btn btn-secondary btn-sm">⚖️ Escalated Cases</a>
+      <!-- Style A Quick Actions -->
+      <div class="quick-links">
+        <h3>Quick Actions</h3>
+        <a href="admin_all_complaints.html">All Complaints</a>
+        <a href="admin_all_complaints.html?status=pending">Pending Triage</a>
+        <a href="admin_all_complaints.html?status=needs_confirmation">Awaiting Confirmation</a>
+        <a href="admin_all_complaints.html?status=escalated">Escalated to Committee</a>
       </div>
 
-      <!-- Stats Grid -->
-      <div class="stats-grid">
+      <!-- Style A Stats Row -->
+      <div class="stats-row">
         <div class="stat-card">
-          <h3 id="statTotalAll">0</h3>
+          <h2 id="statTotalAll">0</h2>
           <p>Total Complaints</p>
         </div>
         <div class="stat-card">
-          <h3 id="statAdminPending" style="color: var(--warning);">0</h3>
-          <p>Pending Assignment</p>
+          <h2 id="statAdminPending" style="color: #b45309;">0</h2>
+          <p>Pending Triage</p>
         </div>
         <div class="stat-card">
-          <h3 id="statAdminConfirm" style="color: var(--purple);">0</h3>
+          <h2 id="statAdminProgress" style="color: #2563EB;">0</h2>
+          <p>In Progress</p>
+        </div>
+        <div class="stat-card">
+          <h2 id="statAdminConfirm" style="color: #7c3aed;">0</h2>
           <p>Needs Confirmation</p>
         </div>
         <div class="stat-card">
-          <h3 id="statAdminResolved" style="color: var(--success);">0</h3>
-          <p>Closed & Resolved</p>
+          <h2 id="statAdminEscalated" style="color: #dc2626;">0</h2>
+          <p>Escalated Cases</p>
+        </div>
+        <div class="stat-card">
+          <h2 id="statAdminResolved" style="color: #059669;">0</h2>
+          <p>Resolved</p>
         </div>
       </div>
 
-      <!-- Action Required Table -->
+      <!-- Action Required Table Card -->
       <div class="card">
         <div class="card-title">
           <h3>Complaints Requiring Immediate Action</h3>
-          <a href="admin_all_complaints.html" class="btn btn-secondary btn-sm">View Complete List</a>
+          <a href="admin_all_complaints.html" class="action-btn-a action-view-a">View All Complaints</a>
         </div>
 
         <div class="table-responsive">
@@ -105,7 +112,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+      <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
     </div>
   </footer>
 
@@ -123,7 +130,9 @@
       // Counts
       document.getElementById('statTotalAll').textContent = all.length;
       document.getElementById('statAdminPending').textContent = all.filter(c => c.status === 'pending').length;
+      document.getElementById('statAdminProgress').textContent = all.filter(c => c.status === 'in_progress' || c.status === 'assigned').length;
       document.getElementById('statAdminConfirm').textContent = all.filter(c => c.status === 'needs_confirmation').length;
+      document.getElementById('statAdminEscalated').textContent = all.filter(c => c.status === 'escalated' || c.status === 'committee_review').length;
       document.getElementById('statAdminResolved').textContent = all.filter(c => c.status === 'resolved').length;
 
       // Filter for actionable items (Pending or Needs Confirmation)
@@ -139,16 +148,16 @@
         let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
         let urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
 
-        let actionBtns = `<a href="complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm">View</a>`;
+        let actionBtns = `<a href="complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">View</a>`;
 
         if (c.status === 'pending') {
           actionBtns += `
-            <a href="admin_assign.html?id=${c.id}" class="btn btn-sm">Assign</a>
-            <a href="admin_escalate.html?id=${c.id}" class="btn btn-danger btn-sm" title="Escalate to Committee">Escalate</a>
+            <a href="admin_assign.html?id=${c.id}" class="action-btn-a action-assign-a">Assign</a>
+            <a href="admin_escalate.html?id=${c.id}" class="action-btn-a action-escalate-a" title="Escalate to Committee">Escalate</a>
           `;
         } else if (c.status === 'needs_confirmation') {
           actionBtns += `
-            <a href="admin_confirm.html?id=${c.id}" class="btn btn-purple btn-sm">Confirm</a>
+            <a href="admin_confirm.html?id=${c.id}" class="action-btn-a action-confirm-a">Confirm</a>
           `;
         }
 
@@ -156,7 +165,7 @@
           <tr>
             <td><strong>${c.id}</strong></td>
             <td>${c.studentName}</td>
-            <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+            <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
             <td>${c.department}</td>
             <td>${c.course}</td>
             <td>${statusBadge}</td>

@@ -163,15 +163,15 @@
           let urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
           let teacherText = c.assignedTeacher || '<span style="color:var(--text-muted);">Unassigned</span>';
 
-          let actions = `<a href="complaint_details.html?id=${c.id}" class="btn btn-sm">View</a>`;
+          let actions = `<a href="complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">View</a>`;
           if (c.status === 'pending') {
-            actions += `<a href="submit_complaint.html?edit=${c.id}" class="btn btn-secondary btn-sm" title="Edit while pending">Edit</a>`;
+            actions += `<a href="submit_complaint.html?edit=${c.id}" class="action-btn-a action-edit-a" title="Edit while pending">Edit</a>`;
           }
 
           return `
             <tr>
-              <td class="font-tabular"><strong>${c.id}</strong></td>
-              <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+              <td><strong>${c.id}</strong></td>
+              <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
               <td>${c.course}</td>
               <td>${c.category}</td>
               <td>${urgencyBadge}</td>

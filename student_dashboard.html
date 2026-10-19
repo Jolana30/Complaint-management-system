@@ -3,16 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1e3a8a">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Ambo CMS">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
-  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+  <meta name="theme-color" content="#24358B">
   <title>Student Dashboard - Ambo University CMS</title>
-  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body {
+      background: #f8fafc;
+      color: #1f2937;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .welcome-header {
+      box-shadow: #666 0px 2px 4px;
+      background: #24358B;
+      border-radius: 8px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .welcome-header h1 {
+      color: white;
+      margin: 0 0 8px;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .welcome-header p {
+      color: #f9f9f9;
+      margin: 0;
+      opacity: 0.9;
+      font-size: 16px;
+    }
+    .quick-links {
+      text-align: center;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .quick-links h3 {
+      margin-top: 0;
+      margin-bottom: 14px;
+      font-size: 20px;
+      color: #111827;
+      font-weight: 700;
+    }
+    .quick-links a {
+      display: inline-block;
+      margin: 4px 10px;
+      background: #f1f5f9;
+      padding: 12px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #374151;
+      font-weight: 500;
+      transition: background 0.25s, transform 0.15s;
+    }
+    .quick-links a:hover {
+      background: #e2e8f0;
+      transform: translateY(-1px);
+    }
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .stat-card-a {
+      text-align: center;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      flex: 1 1 200px;
+    }
+    .stat-card-a h2 {
+      margin: 0;
+      font-size: 36px;
+      color: #2563EB;
+      font-weight: 700;
+    }
+    .stat-card-a p {
+      margin: 8px 0 0;
+      color: #6b7280;
+      font-size: 14px;
+    }
+    .activity-section {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .activity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .activity-header h3 {
+      margin: 0;
+      font-size: 22px;
+      color: #111827;
+      font-weight: 700;
+    }
+    .view-all-btn {
+      background: #2563EB;
+      color: #ffffff !important;
+      padding: 9px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .view-all-btn:hover {
+      background: #1d4ed8;
+    }
+    .action-btn-a {
+      display: inline-block;
+      margin: 2px 4px 2px 0;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #ffffff !important;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .action-view-a {
+      background: #2563EB;
+    }
+    .action-view-a:hover {
+      background: #1d4ed8;
+    }
+    .action-edit-a {
+      background: #059669;
+    }
+    .action-edit-a:hover {
+      background: #047857;
+    }
+    @media (max-width: 768px) {
+      .welcome-header {
+        padding: 22px 14px;
+      }
+      .welcome-header h1 {
+        font-size: 24px;
+      }
+      .stat-card-a {
+        flex: 1 1 45%;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -35,51 +178,49 @@
     </div>
   </nav>
 
-  <main class="main-content">
+  <main class="main-content" style="padding: 24px 0 40px;">
     <div class="container">
-      <!-- Welcome Header -->
-      <div class="page-header">
-        <span class="header-badge">Student Portal</span>
-        <h1 id="welcomeTitle">Welcome back, John Doe</h1>
-        <p id="welcomeSubtitle">Information Technology Department &bull; ID: ugr/12345/16</p>
+      <!-- Style A Welcome Header -->
+      <div class="welcome-header">
+        <h1 id="welcomeTitle">Welcome back, Abebe Kebede</h1>
+        <p id="welcomeSubtitle">Information Technology Department | Second Year Student</p>
       </div>
 
-      <!-- Quick Action Pills -->
-      <div class="quick-actions-bar">
-        <span>Quick Actions:</span>
-        <a href="submit_complaint.html" class="btn btn-sm">➕ Submit New Complaint</a>
-        <a href="my_complaints.html" class="btn btn-secondary btn-sm">📋 My Complaints</a>
-        <a href="submission_guide.html" class="btn btn-secondary btn-sm">📖 Submission Guidelines</a>
+      <!-- Style A Quick Actions -->
+      <div class="quick-links">
+        <h3>Quick Actions</h3>
+        <a href="submit_complaint.html">Submit Complaint</a>
+        <a href="my_complaints.html">My Complaints</a>
+        <a href="submission_guide.html">Submission Guide</a>
       </div>
 
-      <!-- Dynamic Statistics Cards -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h3 id="statTotal">0</h3>
-          <p>Total Submitted</p>
+      <!-- Style A Stats Row -->
+      <div class="stats-row">
+        <div class="stat-card-a">
+          <h2 id="statTotal">0</h2>
+          <p>Complaints Submitted</p>
         </div>
-        <div class="stat-card">
-          <h3 id="statPending" style="color: var(--warning);">0</h3>
-          <p>Pending Review</p>
+        <div class="stat-card-a">
+          <h2 id="statPending" style="color: #b45309;">0</h2>
+          <p>Pending</p>
         </div>
-        <div class="stat-card">
-          <h3 id="statProgress" style="color: var(--primary);">0</h3>
+        <div class="stat-card-a">
+          <h2 id="statProgress" style="color: #2563EB;">0</h2>
           <p>In Progress</p>
         </div>
-        <div class="stat-card">
-          <h3 id="statResolved" style="color: var(--success);">0</h3>
+        <div class="stat-card-a">
+          <h2 id="statResolved" style="color: #047857;">0</h2>
           <p>Resolved</p>
         </div>
       </div>
 
-      <!-- Recent Complaints Activity -->
-      <div class="card">
-        <div class="card-title">
-          <h3>Recent Complaints Activity</h3>
-          <a href="my_complaints.html" class="btn btn-secondary btn-sm">View All</a>
+      <!-- Style A Activity Section -->
+      <div class="activity-section">
+        <div class="activity-header">
+          <h3>Recent Activity</h3>
+          <a class="view-all-btn" href="my_complaints.html">View All Complaints</a>
         </div>
-
-        <div class="table-responsive">
+        <div class="table-responsive" style="border: none;">
           <table class="data-table">
             <thead>
               <tr>
@@ -88,12 +229,11 @@
                 <th>Course</th>
                 <th>Urgency</th>
                 <th>Status</th>
-                <th>Assigned Teacher</th>
-                <th>Submitted Date</th>
+                <th>Last Update</th>
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody id="recentComplaintsBody">
+            <tbody id="recentTableBody">
               <!-- Dynamically populated -->
             </tbody>
           </table>
@@ -104,14 +244,13 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+      <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
     </div>
   </footer>
 
   <script src="assets/js/app.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Role Guard
       const user = window.AmboCMS.getCurrentUser();
       if (!user) {
         window.location.href = 'login.html';
@@ -121,49 +260,50 @@
       if (user.name) {
         document.getElementById('welcomeTitle').textContent = `Welcome back, ${user.name}`;
       }
-      if (user.department || user.studentId) {
-        document.getElementById('welcomeSubtitle').textContent = `${user.department || 'Academic Department'} • ID: ${user.studentId || 'N/A'}`;
+      if (user.department) {
+        document.getElementById('welcomeSubtitle').textContent = `${user.department} Department | Student ID: ${user.studentId || 'ugr/12345/16'}`;
       }
 
-      // Load complaints and calculate statistics
-      const complaints = window.AmboCMS.getComplaints();
-      
-      const total = complaints.length;
-      const pending = complaints.filter(c => c.status === 'pending').length;
-      const progress = complaints.filter(c => c.status === 'in_progress' || c.status === 'assigned' || c.status === 'needs_confirmation').length;
-      const resolved = complaints.filter(c => c.status === 'resolved').length;
+      const all = window.AmboCMS.getComplaints();
+      const complaints = all.filter(c => c.studentId === user.studentId || !user.studentId || c.studentName === user.name);
 
-      document.getElementById('statTotal').textContent = total;
-      document.getElementById('statPending').textContent = pending;
-      document.getElementById('statProgress').textContent = progress;
-      document.getElementById('statResolved').textContent = resolved;
+      // Populate Stats
+      document.getElementById('statTotal').textContent = complaints.length;
+      document.getElementById('statPending').textContent = complaints.filter(c => c.status === 'pending').length;
+      document.getElementById('statProgress').textContent = complaints.filter(c => c.status === 'in_progress' || c.status === 'assigned' || c.status === 'needs_confirmation').length;
+      document.getElementById('statResolved').textContent = complaints.filter(c => c.status === 'resolved').length;
 
-      // Populate table (latest 5)
-      const tbody = document.getElementById('recentComplaintsBody');
+      // Populate Recent Table
+      const tbody = document.getElementById('recentTableBody');
       const recent = complaints.slice(0, 5);
 
       if (recent.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 24px; color: var(--text-muted);">No complaints recorded yet. Click "Submit New Complaint" to create one.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding: 24px; color: var(--text-muted);">No complaints recorded yet. Click "Submit Complaint" above to file one.</td></tr>`;
         return;
       }
 
       tbody.innerHTML = recent.map(c => {
-        let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
+        let displayStatus = window.AmboCMS.getDisplayStatus(c.status, 'student');
+        let statusLabel = window.AmboCMS.getStatusLabel(c.status, 'student');
+        let statusBadge = `<span class="status-badge status-${displayStatus}">${statusLabel}</span>`;
         let urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
-        let teacherText = c.assignedTeacher || '<span style="color:var(--text-muted);">Unassigned</span>';
+
+        let actionHtml = `<a class="action-btn-a action-view-a" href="complaint_details.html?id=${c.id}">View</a>`;
+        if (c.status === 'pending') {
+          actionHtml += `<a class="action-btn-a action-edit-a" href="submit_complaint.html?edit=${c.id}">Edit</a>`;
+        }
 
         return `
           <tr>
             <td><strong>${c.id}</strong></td>
-            <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
+            <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
             <td>${c.course}</td>
             <td>${urgencyBadge}</td>
             <td>${statusBadge}</td>
-            <td>${teacherText}</td>
             <td>${c.submittedDate}</td>
             <td>
               <div class="actions-cell">
-                <a href="complaint_details.html?id=${c.id}" class="btn btn-sm">View</a>
+                ${actionHtml}
               </div>
             </td>
           </tr>
