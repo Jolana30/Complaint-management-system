@@ -40,113 +40,78 @@
   <!-- Hero Banner -->
   <main class="main-content">
     <div class="container">
-      <!-- Hero Banner -->
-      <section class="hero-portal" aria-labelledby="heroTitle">
-        <span class="hero-badge">Official Academic Grievance Portal</span>
-        <h1 id="heroTitle">Ambo University Complaint Management System</h1>
-        <p>
-          A transparent, structured, and auditable academic grievance platform ensuring fair review of grading, assessment, and departmental matters between students and faculty.
+      <div class="page-header" style="padding: 50px 24px; margin-bottom: 36px;">
+        <span class="header-badge">Official Academic Portal</span>
+        <h1 style="font-size: 2.3rem; margin-bottom: 14px;">Welcome to Ambo University CMS</h1>
+        <p style="font-size: 1.1rem; line-height: 1.6; max-width: 760px;">
+          A transparent, structured, and auditable platform for resolving academic, assessment, and departmental concerns between students and faculty.
         </p>
-        <div class="hero-actions" id="heroActionButtons">
-          <a href="login.html" class="btn">Login to Portal</a>
-          <a href="submission_guide.html" class="btn btn-secondary">Read Submission Guide</a>
+        <div style="margin-top: 24px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;" id="heroActionButtons">
+          <a href="login.html" class="btn" style="padding: 12px 24px; font-size: 1rem;">Login to Portal</a>
+          <a href="submission_guide.html" class="btn btn-secondary" style="padding: 12px 24px; font-size: 1rem;">Read Submission Guide</a>
         </div>
-      </section>
+      </div>
 
-      <!-- Institutional Features Grid -->
-      <section class="portal-features-grid" aria-labelledby="featuresTitle">
-        <h2 id="featuresTitle" class="sr-only">Platform Core Capabilities</h2>
-
-        <article class="feature-card">
-          <div class="feature-card-header">
-            <div class="feature-icon-wrapper" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-            </div>
-            <h3>Verifiable Audit Trail</h3>
-          </div>
-          <p>
-            Every grievance generates an immutable chronological timeline documenting submission, administrative delegation, teacher feedback, and final sign-off.
+      <!-- Feature Cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px;">
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div style="font-size: 2.4rem; margin-bottom: 12px;">📊</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Live Tracking</h3>
+          <p style="color: var(--text-muted); font-size: 0.94rem;">
+            Monitor the exact stage of your complaint with chronological timeline updates from submission to resolution.
           </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-card-header">
-            <div class="feature-icon-wrapper" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <h3>Departmental Oversight</h3>
-          </div>
-          <p>
-            Academic department heads inspect all complaints, verify course contexts, and review teacher replies before certifying official case closure.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <div class="feature-card-header">
-            <div class="feature-icon-wrapper" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
-              </svg>
-            </div>
-            <h3>Fair Academic Recourse</h3>
-          </div>
-          <p>
-            Structured dispute resolution for mid-term assessments, lab scoring, lecture communication, and attendance records directly with course lecturers.
-          </p>
-        </article>
-      </section>
-
-      <!-- Connected 4-Stage Workflow -->
-      <section class="workflow-section" aria-labelledby="workflowTitle">
-        <div class="workflow-header">
-          <h2 id="workflowTitle">Academic Grievance Resolution Workflow</h2>
-          <span class="workflow-tag">Standard University Operating Procedure</span>
         </div>
 
-        <div class="workflow-grid">
-          <div class="step-card">
-            <div class="step-card-header">
-              <span class="step-index-pill">1</span>
-              <span class="step-role-badge">Student</span>
-            </div>
-            <h3>Lodge Grievance</h3>
-            <p>Select department and course, specify category and urgency level, and provide supporting academic evidence.</p>
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div style="font-size: 2.4rem; margin-bottom: 12px;">🛡️</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Administrative Oversight</h3>
+          <p style="color: var(--text-muted); font-size: 0.94rem;">
+            Department heads and university administrators review every teacher response before finalizing resolution.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 32px 24px;">
+          <div style="font-size: 2.4rem; margin-bottom: 12px;">⚡</div>
+          <h3 style="font-size: 1.2rem; margin-bottom: 10px;">Fast Academic Remediation</h3>
+          <p style="color: var(--text-muted); font-size: 0.94rem;">
+            Direct routing to assigned course lecturers ensures academic and grading errors are resolved promptly.
+          </p>
+        </div>
+      </div>
+
+      <!-- Complaint Workflow Explanation -->
+      <div class="card" style="padding: 32px 28px;">
+        <div class="card-title" style="margin-bottom: 24px;">
+          <h2>Complaint Resolution Process</h2>
+          <span style="font-size: 0.88rem; color: var(--text-muted); font-weight: 500;">4-Stage Workflow</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; background: var(--primary); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">1</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Submit Grievance</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Student selects department, course, urgency, and provides clear evidence.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-card-header">
-              <span class="step-index-pill">2</span>
-              <span class="step-role-badge">Admin</span>
-            </div>
-            <h3>Review & Assign</h3>
-            <p>Department administrator validates grievance admissibility and assigns case to the designated instructor.</p>
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; background: var(--warning); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">2</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Admin Assignment</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Admin verifies complaint validity and assigns it to the designated course teacher.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-card-header">
-              <span class="step-index-pill">3</span>
-              <span class="step-role-badge">Faculty</span>
-            </div>
-            <h3>Teacher Investigation</h3>
-            <p>Course instructor reviews submission, re-evaluates assessment materials, and drafts official corrective findings.</p>
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; background: var(--purple); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">3</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Teacher Response</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Teacher investigates, formulates a corrective action or clarification, and replies.</p>
           </div>
 
-          <div class="step-card">
-            <div class="step-card-header">
-              <span class="step-index-pill">4</span>
-              <span class="step-role-badge">Admin</span>
-            </div>
-            <h3>Confirmation & Closure</h3>
-            <p>Department head confirms resolution, updates student academic ledger, and issues final determination notice.</p>
+          <div style="background: var(--surface-alt); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+            <div style="width: 32px; height: 32px; background: var(--success); color:#fff; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-weight:700; margin-bottom: 10px;">4</div>
+            <h4 style="font-size: 1rem; margin-bottom: 6px;">Confirmation & Closure</h4>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Admin confirms resolution; student is notified with official outcome in their dashboard.</p>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   </main>
 

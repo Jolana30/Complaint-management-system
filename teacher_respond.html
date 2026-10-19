@@ -36,77 +36,59 @@
   </nav>
 
   <main class="main-content">
-    <div class="container container-narrow">
-      <div class="page-header">
+    <div class="container" style="max-width: 860px;">
+      <div class="page-header" style="padding: 24px 20px;">
         <span class="header-badge">Faculty Response</span>
         <h1>Respond to Student Complaint</h1>
         <p>Review the student's grievance, examine academic records, and draft an official resolution for administrative confirmation.</p>
       </div>
 
-      <!-- Grievance Summary Dossier -->
+      <!-- Grievance Summary Box -->
       <div class="card" style="margin-bottom: 24px;">
         <div class="card-title">
-          <h2 id="complaintHeader" style="font-size: 1.25rem; font-weight: 600; margin: 0;">Complaint #CMP-102</h2>
+          <h3 id="complaintHeader">Complaint #CMP-102</h3>
           <span id="statusBadge"></span>
         </div>
 
-        <div class="review-meta-grid">
-          <div class="review-meta-item">
-            <strong>Student Name</strong>
-            <span id="valStudent">-</span>
+        <div style="background: var(--surface-alt); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); margin-bottom: 16px;">
+          <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.9rem; margin-bottom: 8px;">
+            <span><strong>Student:</strong> <span id="valStudent">-</span></span>
+            <span><strong>Course:</strong> <span id="valCourse">-</span></span>
+            <span><strong>Category:</strong> <span id="valCategory">-</span></span>
+            <span><strong>Urgency:</strong> <span id="valUrgency">-</span></span>
           </div>
-          <div class="review-meta-item">
-            <strong>Course</strong>
-            <span id="valCourse">-</span>
-          </div>
-          <div class="review-meta-item">
-            <strong>Category</strong>
-            <span id="valCategory">-</span>
-          </div>
-          <div class="review-meta-item">
-            <strong>Urgency</strong>
-            <span id="valUrgency">-</span>
-          </div>
-        </div>
-
-        <div style="margin-bottom: 16px;">
-          <h3 style="font-size: 0.88rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Student's Stated Issue</h3>
-          <div class="review-quote-box" id="valMessage">
+          <p style="margin: 0; font-size: 0.94rem; line-height: 1.6; color: var(--text-main);" id="valMessage">
             -
-          </div>
+          </p>
         </div>
 
         <div id="adminRemarkCallout" style="display: none;" class="alert-box alert-info">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
+          <span>🛡️</span>
           <div>
-            <strong>Administrative Instruction:</strong> <span id="valAdminRemark"></span>
+            <strong>Admin Note:</strong> <span id="valAdminRemark"></span>
           </div>
         </div>
       </div>
 
       <!-- Response Form -->
       <div class="card">
-        <h2 class="sr-only">Faculty Response Form</h2>
         <form id="respondForm">
           <div class="form-group">
-            <label for="teacherResponse">Official Faculty Resolution / Finding <span class="required">*</span></label>
-            <textarea id="teacherResponse" rows="6" placeholder="Detail your findings (e.g. mark sheet review, recalculated score, rescheduled makeup session, or curriculum clarification) to resolve this grievance..." required></textarea>
-            <span class="form-hint">Your response will be reviewed by the department administrator before publication to the student.</span>
+            <label for="teacherResponse">Official Resolution / Explanation <span class="required">*</span></label>
+            <textarea id="teacherResponse" rows="6" placeholder="Detail your findings (e.g. mark sheet correction, rescheduled session, policy clarification) to resolve this grievance..." required></textarea>
           </div>
 
           <div class="form-group">
-            <label for="actionType">Routing Decision</label>
+            <label for="actionType">Resolution Action</label>
             <select id="actionType" required>
-              <option value="needs_confirmation" selected>Submit to Department Head for Final Confirmation (Ready)</option>
-              <option value="in_progress">Keep In Progress (Under Continued Departmental Investigation)</option>
+              <option value="needs_confirmation" selected>Submit to Admin for Final Confirmation (Resolution Ready)</option>
+              <option value="in_progress">Keep In Progress (Under Continued Investigation)</option>
             </select>
           </div>
 
-          <div class="form-actions">
+          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
             <a href="teacher_dashboard.html" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn">Submit Resolution</button>
+            <button type="submit" class="btn">Submit Response</button>
           </div>
         </form>
       </div>

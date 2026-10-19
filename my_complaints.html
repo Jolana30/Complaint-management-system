@@ -45,21 +45,21 @@
 
       <!-- Filters & Search Toolbar -->
       <div class="card" style="padding: 18px 24px;">
-        <div class="filter-toolbar">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
           <!-- Filter Buttons -->
-          <div class="filter-pills-group" id="statusFilterPills">
-            <button class="btn btn-sm btn-secondary active-filter" data-status="all">All (<span id="countAll" class="font-tabular">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="pending">Pending (<span id="countPending" class="font-tabular">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="in_progress">In Progress (<span id="countProgress" class="font-tabular">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="needs_confirmation">Needs Confirmation (<span id="countConfirm" class="font-tabular">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="resolved">Resolved (<span id="countResolved" class="font-tabular">0</span>)</button>
-            <button class="btn btn-sm btn-secondary" data-status="declined">Declined (<span id="countDeclined" class="font-tabular">0</span>)</button>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="statusFilterPills">
+            <button class="btn btn-sm btn-secondary active-filter" data-status="all">All (<span id="countAll">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="pending">Pending (<span id="countPending">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="in_progress">In Progress (<span id="countProgress">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="needs_confirmation">Needs Confirmation (<span id="countConfirm">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="resolved">Resolved (<span id="countResolved">0</span>)</button>
+            <button class="btn btn-sm btn-secondary" data-status="declined">Declined (<span id="countDeclined">0</span>)</button>
           </div>
 
           <!-- Search Input & CTA -->
-          <div class="filter-actions-group">
+          <div style="display: flex; gap: 10px; align-items: center; flex: 1 1 240px; justify-content: flex-end;">
             <input type="text" id="searchInput" placeholder="Search by title, ID, course..." style="max-width: 260px; padding: 7px 12px; font-size: 0.88rem;">
-            <a href="submit_complaint.html" class="btn btn-sm" style="white-space: nowrap;">New Complaint</a>
+            <a href="submit_complaint.html" class="btn btn-sm" style="white-space: nowrap;">➕ New Complaint</a>
           </div>
         </div>
       </div>

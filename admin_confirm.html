@@ -36,8 +36,8 @@
   </nav>
 
   <main class="main-content">
-    <div class="container container-narrow">
-      <div class="page-header">
+    <div class="container" style="max-width: 860px;">
+      <div class="page-header" style="padding: 24px 20px;">
         <span class="header-badge">Administrative Approval</span>
         <h1>Confirm Resolution & Close Case</h1>
         <p>Review the teacher's corrective response and approve official case resolution before publishing to the student.</p>
@@ -46,22 +46,22 @@
       <!-- Grievance & Proposed Resolution Summary -->
       <div class="card" style="margin-bottom: 24px;">
         <div class="card-title">
-          <h2 id="complaintHeader" style="font-size: 1.25rem; font-weight: 600; margin: 0;">Complaint #CMP-103</h2>
+          <h3 id="complaintHeader">Complaint #CMP-103</h3>
           <span class="status-badge status-needs_confirmation">Needs Confirmation</span>
         </div>
 
         <!-- Student Grievance -->
-        <div style="margin-bottom: 20px;">
-          <h3 style="font-size: 0.88rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Student Grievance</h3>
-          <div class="review-quote-box" id="valMessage">
+        <div style="margin-bottom: 18px;">
+          <h4 style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 6px;">STUDENT GRIEVANCE</h4>
+          <div style="background: var(--surface-alt); padding: 14px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.92rem; line-height: 1.6;" id="valMessage">
             -
           </div>
         </div>
 
         <!-- Teacher's Proposed Solution -->
         <div>
-          <h3 style="font-size: 0.88rem; color: var(--purple); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Faculty Proposed Resolution</h3>
-          <div class="review-solution-box" id="valTeacherReply">
+          <h4 style="font-size: 0.95rem; color: var(--purple); margin-bottom: 6px;">TEACHER'S PROPOSED RESOLUTION</h4>
+          <div style="background: var(--purple-subtle); padding: 16px; border-radius: var(--radius-sm); border: 1px solid rgba(124, 58, 237, 0.25); font-size: 0.94rem; line-height: 1.6; color: var(--text-main);" id="valTeacherReply">
             -
           </div>
         </div>
@@ -69,18 +69,16 @@
 
       <!-- Confirmation Form -->
       <div class="card">
-        <h2 class="sr-only">Administrative Resolution Decision</h2>
         <form id="confirmForm">
           <div class="form-group">
-            <label for="adminClosingRemark">Administrative Endorsement / Resolution Remark</label>
-            <textarea id="adminClosingRemark" rows="4" placeholder="e.g. Verified with department head and instructor. Score adjusted in registrar records and case confirmed closed."></textarea>
-            <span class="form-hint">This remark will appear in the student's official case timeline.</span>
+            <label for="adminClosingRemark">Final Administrative Remark / Resolution Endorsement</label>
+            <textarea id="adminClosingRemark" rows="4" placeholder="e.g. Verified with department head. Registrar ledger corrected and case closed."></textarea>
           </div>
 
-          <div class="form-actions">
+          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
             <a href="admin_all_complaints.html" class="btn btn-secondary">Cancel</a>
-            <button type="button" class="btn btn-secondary" id="requestRevisionBtn">Return to Faculty for Revision</button>
-            <button type="submit" class="btn btn-purple">Approve & Finalize Resolution</button>
+            <button type="button" class="btn btn-secondary" id="requestRevisionBtn">Request Teacher Revision</button>
+            <button type="submit" class="btn btn-purple">Confirm & Close Complaint</button>
           </div>
         </form>
       </div>

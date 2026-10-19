@@ -288,18 +288,18 @@
           const assignBtn = document.createElement('a');
           assignBtn.href = `admin_assign.html?id=${complaint.id}`;
           assignBtn.className = 'btn btn-success';
-          assignBtn.textContent = 'Assign Faculty Lecturer';
+          assignBtn.textContent = '👨‍🏫 Assign Teacher';
           actionsEl.appendChild(assignBtn);
 
           const escalateBtn = document.createElement('a');
           escalateBtn.href = `admin_escalate.html?id=${complaint.id}`;
           escalateBtn.className = 'btn btn-danger';
-          escalateBtn.textContent = 'Escalate to Committee';
+          escalateBtn.textContent = '⚖️ Escalate to Committee';
           actionsEl.appendChild(escalateBtn);
 
           const declineBtn = document.createElement('button');
           declineBtn.className = 'btn btn-secondary';
-          declineBtn.textContent = 'Decline Grievance';
+          declineBtn.textContent = '❌ Decline Complaint';
           declineBtn.onclick = () => {
             const reason = prompt('Enter administrative reason for declining this complaint:');
             if (reason && reason.trim()) {
@@ -313,13 +313,13 @@
           const confirmBtn = document.createElement('a');
           confirmBtn.href = `admin_confirm.html?id=${complaint.id}`;
           confirmBtn.className = 'btn btn-purple';
-          confirmBtn.textContent = 'Confirm Resolution';
+          confirmBtn.textContent = '✅ Confirm Resolution';
           actionsEl.appendChild(confirmBtn);
         } else if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
           const dossierBtn = document.createElement('a');
           dossierBtn.href = `committee_complaint_details.html?id=${complaint.id}`;
           dossierBtn.className = 'btn btn-secondary';
-          dossierBtn.textContent = 'View Committee Dossier';
+          dossierBtn.textContent = '⚖️ View Committee Dossier';
           actionsEl.appendChild(dossierBtn);
         }
       } else if (user && user.role === 'teacher') {
@@ -330,7 +330,7 @@
           const respondBtn = document.createElement('a');
           respondBtn.href = `teacher_respond.html?id=${complaint.id}`;
           respondBtn.className = 'btn btn-primary';
-          respondBtn.textContent = 'Draft Faculty Resolution';
+          respondBtn.textContent = '✍️ Write Response / Resolution';
           actionsEl.appendChild(respondBtn);
         }
       } else if (user && user.role === 'committee') {
@@ -341,7 +341,7 @@
           const decisionBtn = document.createElement('a');
           decisionBtn.href = `committee_decision.html?id=${complaint.id}`;
           decisionBtn.className = 'btn btn-danger';
-          decisionBtn.textContent = 'Render Decision';
+          decisionBtn.textContent = '⚖️ Render Decision';
           actionsEl.appendChild(decisionBtn);
         }
       } else {
@@ -350,7 +350,7 @@
           const editBtn = document.createElement('a');
           editBtn.href = `submit_complaint.html?edit=${complaint.id}`;
           editBtn.className = 'btn btn-primary';
-          editBtn.textContent = 'Edit Grievance';
+          editBtn.textContent = '✏️ Edit Grievance';
           actionsEl.appendChild(editBtn);
         }
       }

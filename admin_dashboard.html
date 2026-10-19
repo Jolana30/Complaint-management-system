@@ -46,30 +46,29 @@
 
       <!-- Quick Action Navigation -->
       <div class="quick-actions-bar">
-        <span>Quick Navigation:</span>
-        <a href="admin_all_complaints.html" class="btn btn-sm">All Complaints</a>
-        <a href="admin_all_complaints.html?status=pending" class="btn btn-secondary btn-sm">Pending Triage</a>
-        <a href="admin_all_complaints.html?status=needs_confirmation" class="btn btn-secondary btn-sm">Awaiting Confirmation</a>
-        <a href="admin_all_complaints.html?status=escalated" class="btn btn-secondary btn-sm">Escalated Cases</a>
+        <span>Admin Actions:</span>
+        <a href="admin_all_complaints.html" class="btn btn-sm">📋 All Complaints</a>
+        <a href="admin_all_complaints.html?status=pending" class="btn btn-secondary btn-sm">⚠️ Pending Triage</a>
+        <a href="admin_all_complaints.html?status=needs_confirmation" class="btn btn-secondary btn-sm">✅ Awaiting Confirmation</a>
+        <a href="admin_all_complaints.html?status=escalated" class="btn btn-secondary btn-sm">⚖️ Escalated Cases</a>
       </div>
 
       <!-- Stats Grid -->
-      <h2 class="sr-only">Administrative Metrics Overview</h2>
       <div class="stats-grid">
         <div class="stat-card">
-          <h3 id="statTotalAll" class="font-tabular">0</h3>
+          <h3 id="statTotalAll">0</h3>
           <p>Total Complaints</p>
         </div>
         <div class="stat-card">
-          <h3 id="statAdminPending" class="font-tabular" style="color: var(--warning);">0</h3>
+          <h3 id="statAdminPending" style="color: var(--warning);">0</h3>
           <p>Pending Assignment</p>
         </div>
         <div class="stat-card">
-          <h3 id="statAdminConfirm" class="font-tabular" style="color: var(--purple);">0</h3>
+          <h3 id="statAdminConfirm" style="color: var(--purple);">0</h3>
           <p>Needs Confirmation</p>
         </div>
         <div class="stat-card">
-          <h3 id="statAdminResolved" class="font-tabular" style="color: var(--success);">0</h3>
+          <h3 id="statAdminResolved" style="color: var(--success);">0</h3>
           <p>Closed & Resolved</p>
         </div>
       </div>
@@ -77,8 +76,8 @@
       <!-- Action Required Table -->
       <div class="card">
         <div class="card-title">
-          <h2 style="font-size: 1.15rem; font-weight: 600; margin: 0;">Complaints Requiring Immediate Action</h2>
-          <a href="admin_all_complaints.html" class="btn btn-secondary btn-sm">View Complete Register</a>
+          <h3>Complaints Requiring Immediate Action</h3>
+          <a href="admin_all_complaints.html" class="btn btn-secondary btn-sm">View Complete List</a>
         </div>
 
         <div class="table-responsive">
@@ -132,19 +131,7 @@
       const tbody = document.getElementById('actionRequiredTableBody');
 
       if (actionable.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="8">
-              <div class="empty-state">
-                <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <div class="empty-state-title">All Actions Completed</div>
-                <div class="empty-state-desc">There are currently no complaints awaiting assignment or final administrative confirmation.</div>
-              </div>
-            </td>
-          </tr>
-        `;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 28px; color: var(--text-muted);">🎉 All complaints have been triaged and confirmed!</td></tr>`;
         return;
       }
 
@@ -157,7 +144,7 @@
         if (c.status === 'pending') {
           actionBtns += `
             <a href="admin_assign.html?id=${c.id}" class="btn btn-sm">Assign</a>
-            <a href="admin_escalate.html?id=${c.id}" class="btn btn-danger btn-sm" title="Escalate severe case to Disciplinary Committee">Escalate</a>
+            <a href="admin_escalate.html?id=${c.id}" class="btn btn-danger btn-sm" title="Escalate to Committee">Escalate</a>
           `;
         } else if (c.status === 'needs_confirmation') {
           actionBtns += `
@@ -167,7 +154,7 @@
 
         return `
           <tr>
-            <td class="font-tabular"><strong>${c.id}</strong></td>
+            <td><strong>${c.id}</strong></td>
             <td>${c.studentName}</td>
             <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600;">${c.title}</a></td>
             <td>${c.department}</td>
