@@ -1,9 +1,4 @@
-/**
- * Ambo University CMS - Progressive Web App (PWA) Service Worker
- * Provides offline caching, lightning-fast re-loads, and app shell resilience.
- */
-
-const CACHE_NAME = 'ambo-cms-shell-v1';
+const CACHE_NAME = 'ambo-cms-shell-v21';
 
 const APP_ASSETS = [
   './',
@@ -23,6 +18,7 @@ const APP_ASSETS = [
   './assets/css/style.css',
   './assets/css/nav.css',
   './assets/js/app.js',
+  './assets/images/logo.png',
   './assets/images/logo.jpg',
   './assets/images/icon-192.png',
   './assets/images/icon-512.png',
@@ -31,17 +27,16 @@ const APP_ASSETS = [
   './manifest.json'
 ];
 
-// 1. Install Event: Pre-cache App Shell
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
       console.log('[ServiceWorker] Pre-caching offline app shell');
       return cache.addAll(APP_ASSETS);
-    }).then(() => self.skipWaiting())
+    })
   );
 });
 
-// 2. Activate Event: Clean up legacy caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keyList) => {
@@ -57,10 +52,30 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// 3. Fetch Event: Stale-While-Revalidate strategy
 self.addEventListener('fetch', (event) => {
-  // Only handle HTTP/HTTPS GET requests
   if (event.request.method !== 'GET') return;
+
+  const isHtml = event.request.mode === 'navigate' || 
+    (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html'));
+
+  if (isHtml) {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const copy = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return caches.match(event.request).then((cached) => {
+            return cached || caches.match('./index.html');
+          });
+        })
+    );
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
@@ -72,17 +87,8 @@ self.addEventListener('fetch', (event) => {
           });
         }
         return networkResponse;
-      }).catch(() => {
-        // Network failed (offline)
-        if (cachedResponse) return cachedResponse;
-        
-        // If navigating to an HTML page while offline and not cached, return index.html
-        if (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) {
-          return caches.match('./index.html');
-        }
-      });
+      }).catch(() => cachedResponse);
 
-      // Return cached version immediately if available, while fetching update in background
       return cachedResponse || fetchPromise;
     })
   );

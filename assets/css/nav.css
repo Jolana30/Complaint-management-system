@@ -1,10 +1,13 @@
-/* Clean & Spacious Ambo CMS Navigation Bar */
 .main-nav {
   background-color: var(--surface);
   border-bottom: 1px solid var(--border-color);
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 1000;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   transition: background-color 0.25s ease, border-color 0.25s ease;
 }
@@ -20,7 +23,6 @@
   gap: 16px;
 }
 
-/* Brand & Logo */
 .nav-brand {
   display: flex;
   align-items: center;
@@ -31,10 +33,26 @@
 }
 
 .nav-brand img {
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  object-fit: cover;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  display: block;
+  transition: transform 0.15s ease;
+}
+
+.nav-brand:hover img {
+  transform: scale(1.05);
+}
+
+[data-theme="dark"] .nav-brand img {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .brand-info {
@@ -56,7 +74,6 @@
   font-weight: 500;
 }
 
-/* Nav Menu Items */
 .nav-menu {
   display: flex;
   align-items: center;
@@ -82,13 +99,23 @@
   background-color: var(--primary-subtle);
 }
 
+.nav-link {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  text-decoration: none !important;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+}
+
 .nav-link.active {
   color: var(--primary);
   background-color: var(--primary-subtle);
-  font-weight: 700;
+  font-weight: 600;
 }
 
-/* Nav Right Actions */
 .nav-actions {
   display: flex;
   align-items: center;
@@ -96,19 +123,27 @@
   flex-shrink: 0;
 }
 
-/* Unified Profile & Role Switcher Pill */
+#navUserBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .nav-user-select {
-  padding: 5px 12px;
+  height: 34px;
+  padding: 0 12px;
   font-size: 0.82rem;
   font-weight: 600;
-  border-radius: 9999px;
+  border-radius: var(--radius-sm);
   background: var(--surface-alt);
   color: var(--text-main);
   border: 1px solid var(--border-color);
   cursor: pointer;
   outline: none;
   transition: border-color 0.15s ease, background-color 0.15s ease;
-  max-width: 175px;
+  max-width: 190px;
+  display: flex;
+  align-items: center;
 }
 
 .nav-user-select:hover, .nav-user-select:focus {
@@ -116,16 +151,20 @@
 }
 
 .nav-logout-btn {
-  padding: 5px 10px;
+  height: 34px;
+  padding: 0 12px;
   font-size: 0.8rem;
   font-weight: 600;
   border-radius: var(--radius-sm);
-  background: transparent;
+  background: var(--surface-alt);
   color: var(--text-muted);
   border: 1px solid var(--border-color);
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-logout-btn:hover {
@@ -151,26 +190,41 @@
 }
 
 .theme-toggle-btn {
-  background: var(--surface-alt);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  display: flex;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 0.95rem;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  outline: none;
+  border-radius: 9999px;
+  line-height: 1;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 }
 
 .theme-toggle-btn:hover {
-  background: var(--surface-hover);
-  border-color: var(--text-muted);
+  transform: scale(1.06);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* Mobile Hamburger Toggle */
+.theme-toggle-btn:active {
+  transform: scale(0.96);
+}
+
+.theme-switch-svg {
+  display: block;
+  overflow: visible;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .mobile-nav-toggle {
   display: none;
   background: transparent;
@@ -186,7 +240,6 @@
   outline: 2px solid var(--primary);
 }
 
-/* Responsive Navigation Drawer */
 @media (max-width: 920px) {
   .mobile-nav-toggle {
     display: flex;
@@ -243,4 +296,163 @@
     padding: 4px 8px;
     font-size: 0.76rem;
   }
+}
+
+.nav-profile-pill {
+  height: 34px;
+  padding: 0 12px 0 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: var(--surface-alt);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.nav-profile-pill:hover, .nav-profile-pill.active {
+  border-color: var(--primary);
+  background: var(--primary-subtle);
+  color: var(--primary);
+}
+
+.nav-profile-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.telegram-popover {
+  position: fixed;
+  top: 68px;
+  right: 20px;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.18), 0 4px 14px -2px rgba(0, 0, 0, 0.08);
+  z-index: 1050;
+  overflow: hidden;
+  transform-origin: top right;
+  transform: scale(0.92) translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.18s ease;
+}
+
+.telegram-popover.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.telegram-card-header {
+  padding: 16px 18px 14px;
+  background: var(--surface-alt);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.telegram-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.telegram-avatar-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+  flex-shrink: 0;
+}
+
+.telegram-meta h3 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.telegram-meta p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 2px 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.telegram-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.telegram-close-btn:hover {
+  color: var(--text-main);
+  background: var(--surface-hover);
+}
+
+.telegram-card-body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.telegram-detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.telegram-detail-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.telegram-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.telegram-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
 }

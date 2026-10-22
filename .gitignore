@@ -33,3 +33,7 @@ Thumbs.db
 # Local tools & agents
 .agents/
 .gemini/
+
+AGENTS.md
+GEMINI.md
+skills-lock.json

@@ -11,16 +11,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>Escalate Complaint - Ambo University Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -28,9 +33,15 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -43,7 +54,6 @@
         <p>Transfer jurisdiction of severe misconduct, ethics violations, or retaliatory grading to the University Disciplinary Committee.</p>
       </div>
 
-      <!-- Complaint Summary Dossier -->
       <div class="card" style="margin-bottom: 24px;">
         <div class="card-title">
           <h2 id="complaintHeader" style="font-size: 1.25rem; font-weight: 600; margin: 0;">Complaint #CMP-105</h2>
@@ -70,20 +80,19 @@
         </div>
 
         <div>
-          <h3 style="font-size: 0.88rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Student Grievance Description</h3>
+          <h3 style="font-size: 0.88rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Student Complaint Description</h3>
           <div class="review-quote-box" id="valMessage">
             -
           </div>
         </div>
       </div>
 
-      <!-- Escalation Form -->
       <div class="card">
         <h2 class="sr-only">Committee Escalation Protocol Form</h2>
         <form id="escalateForm">
           <div class="form-group">
             <label for="escalationAuthority">Target Disciplinary Body <span class="required">*</span></label>
-            <select id="escalationAuthority" required>
+            <select id="escalationAuthority" name="escalationAuthority" required>
               <option value="University Disciplinary Committee" selected>University Disciplinary Committee (UDC - Institutional Ethics)</option>
               <option value="College Academic Commission">College Academic Commission (CAC - Academic Integrity)</option>
               <option value="Student Ombudsperson Directorate">Office of the Student Ombudsperson (Confidential Inquiry)</option>
@@ -93,7 +102,7 @@
 
           <div class="form-group">
             <label for="escalationReason">Administrative Escalation Briefing & Justification <span class="required">*</span></label>
-            <textarea id="escalationReason" rows="5" placeholder="Detail why this complaint exceeds department-level mediation (e.g. allegations of severe intimidation, harassment, bribery, or persistent code of conduct breach)..." required></textarea>
+            <textarea id="escalationReason" name="escalationReason" rows="5" placeholder="Detail why this complaint exceeds department-level mediation (e.g. allegations of severe intimidation, harassment, bribery, or persistent code of conduct breach)..." required></textarea>
             <span class="form-hint">This justification is officially transmitted to the Committee Chair and logged in the tamper-evident audit history.</span>
           </div>
 
@@ -124,8 +133,7 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const complaintId = urlParams.get('id') || 'CMP-105';
       const complaint = window.AmboCMS.getComplaintById(complaintId);

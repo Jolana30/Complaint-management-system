@@ -14,10 +14,10 @@ A web-based **Student-to-Teacher Complaint Management System** designed for **Am
 ## 🚀 Key Features & User Roles
 
 ### 🎓 1. Student Portal
-* **Submit Complaints**: User-friendly form to log academic or departmental grievances with draft auto-save and Ethiopian Student ID format validation.
+* **Submit Complaints**: User-friendly form to log academic or departmental complaints with draft auto-save and Ethiopian Student ID format validation.
 * **My Complaints Dashboard**: View real-time complaint status (*Pending*, *In Progress*, *Resolved*, *Declined*, or *Escalated to Committee*).
-* **Edit While Pending**: Modify grievance details before departmental triage begins.
-* **Submission Guide**: Clear instructions on university grievance procedures and SLAs.
+* **Edit While Pending**: Modify complaint details before departmental triage begins.
+* **Submission Guide**: Clear instructions on university complaint procedures and SLAs.
 
 ### 👨‍🏫 2. Teacher Portal
 * **Teacher Dashboard**: Overview of complaints assigned to specific course lecturers.
@@ -32,7 +32,7 @@ A web-based **Student-to-Teacher Complaint Management System** designed for **Am
 
 ### ⚖️ 4. Disciplinary Committee Portal (UDC)
 * **Committee Docket**: Track escalated severe cases awaiting hearing and review.
-* **Case Dossier**: Review confidential grievances, evidence, and tamper-evident audit history.
+* **Case Dossier**: Review confidential complaints, evidence, and tamper-evident audit history.
 * **Hearing Adjudication**: Record formal committee rulings, corrective orders/sanctions, and institutional sign-off.
 
 ---
@@ -59,15 +59,15 @@ CMS_PHP/
 │   └── seed.sql                     # Canonical 6-record benchmark dataset
 ├── docs/
 │   ├── MILESTONE_25_REPORT.md       # 25% technical submission & demo guide
-│   └── INSTITUTIONAL_POLICY.md      # University grievance hierarchy & procedures
+│   └── INSTITUTIONAL_POLICY.md      # University complaint hierarchy & procedures
 ├── index.html                       # University CMS portal landing page
 ├── login.html                       # Multi-role authentication portal (Instant 1-click demos)
 ├── student_dashboard.html           # Student tracking & metrics overview
-├── submit_complaint.html            # Grievance submission form with edit mode
+├── submit_complaint.html            # Complaint submission form with edit mode
 ├── my_complaints.html               # Student's filed complaints ledger
 ├── complaint_details.html           # Complaint audit trail & resolution timeline
-├── submission_guide.html            # Official grievance submission policy
-├── teacher_dashboard.html           # Faculty assigned grievance queue
+├── submission_guide.html            # Official complaint submission policy
+├── teacher_dashboard.html           # Faculty assigned complaint queue
 ├── teacher_respond.html             # Faculty response & resolution submission
 ├── admin_dashboard.html             # Department administrator overview & metrics
 ├── admin_all_complaints.html        # Comprehensive complaints registry

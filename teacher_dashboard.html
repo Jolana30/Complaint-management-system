@@ -11,16 +11,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>Teacher Dashboard - Ambo University CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -28,29 +33,37 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
 
   <main class="main-content" style="padding: 24px 0 40px;">
-    <div class="container">
-      <!-- Style A Welcome Header -->
+    <div class="container container-wide">
+      
       <div class="welcome-header">
         <h1 id="teacherHeaderName">Welcome, Mr. Eyuel</h1>
         <p id="teacherHeaderDetails">IP and SAD Course Lecturer | Faculty Portal</p>
       </div>
 
-      <!-- Style A Quick Actions -->
       <div class="quick-links">
-        <h3>Quick Actions</h3>
-        <a href="#assignedTable">Assigned Complaints</a>
-        <a href="index.html">CMS Home</a>
+        <h3>Faculty Quick Actions</h3>
+        <a href="#assignedTable">Assigned Complaints Queue</a>
+        <button type="button" id="quickDrawerTrigger" style="background: none; border: none; cursor: pointer; color: inherit; font-size: inherit; font-family: inherit; padding: 0;">
+          <span style="display: inline-block; background: var(--surface-alt); border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 8px; font-weight: 500; font-size: 0.92rem; color: var(--text-main);">
+            Academic Bulletins & Policy Guidelines (2)
+          </span>
+        </button>
       </div>
 
-      <!-- Style A Stats Row -->
       <div class="stats-row">
         <div class="stat-card">
           <h2 id="statAssigned">0</h2>
@@ -70,47 +83,41 @@
         </div>
       </div>
 
-      <!-- Style A Content Section: Split Layout -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
-        <!-- Left: Assigned Complaints Table -->
-        <div class="card" id="assignedTable" style="flex: 2;">
-          <div class="card-title">
-            <h3>Complaints Assigned to You</h3>
-            <span style="font-size: 0.88rem; color: var(--text-muted);">Sorted by Urgency</span>
+      <div class="card" id="assignedTable" style="width: 100%;">
+        <div class="card-title" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+          <div>
+            <h3 style="margin: 0; font-size: 1.25rem;">Complaints Assigned to You</h3>
+            <span style="font-size: 0.86rem; color: var(--text-muted);">Active assessment & academic complaints under your instructional review</span>
           </div>
-
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Student</th>
-                  <th>Subject / Title</th>
-                  <th>Course</th>
-                  <th>Urgency</th>
-                  <th>Status</th>
-                  <th>Last Update</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="teacherTableBody">
-                <!-- Dynamically populated -->
-              </tbody>
-            </table>
-          </div>
+          
+          <button type="button" id="openFacultyDrawerBtn" class="btn btn-secondary" style="font-size: 0.84rem; padding: 7px 14px; display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span>Faculty Bulletins & Guidelines</span>
+            <span class="status-badge status-pending" style="padding: 1px 7px; font-size: 0.72rem; border-radius: 9999px;">2</span>
+          </button>
         </div>
 
-        <!-- Right: Announcements & Workflow Callout -->
-        <div class="card" style="flex: 1;">
-          <h3 style="margin-top: 0; font-size: 20px; color: #111827; margin-bottom: 16px;">Announcements</h3>
-          <div class="announcement-box">
-            <p><strong>Important Notice:</strong></p>
-            <p>Submit a clear response so the administrator can confirm the resolution before the student sees the final result.</p>
-          </div>
-          <div class="announcement-box">
-            <p><strong>Workflow Guidance:</strong></p>
-            <p>Teachers review assigned complaints, examine assessment records, formulate a constructive resolution, and submit to admin for confirmation.</p>
-          </div>
+        <div class="table-responsive">
+          <table class="data-table" style="width: 100%;">
+            <thead>
+              <tr>
+                <th style="min-width: 90px;">ID</th>
+                <th style="min-width: 140px;">Student</th>
+                <th style="min-width: 240px;">Subject / Title</th>
+                <th style="min-width: 90px;">Course</th>
+                <th style="min-width: 110px;">Urgency</th>
+                <th style="min-width: 130px;">Status</th>
+                <th style="min-width: 120px;">Last Update</th>
+                <th style="min-width: 140px; text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="teacherTableBody">
+              
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -123,8 +130,7 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const user = window.AmboCMS.getCurrentUser();
       if (!user) {
         window.location.href = 'login.html';
@@ -137,7 +143,6 @@
 
       const allComplaints = window.AmboCMS.getComplaints();
       
-      // Filter for this teacher or show assigned/relevant complaints
       const assigned = allComplaints.filter(c => 
         c.assignedTeacher === user.name ||
         c.status === 'in_progress' ||
@@ -146,7 +151,6 @@
         c.course === 'SAD' || c.course === 'IP'
       );
 
-      // Counts
       const totalAssigned = assigned.length;
       const needsResponse = assigned.filter(c => c.status === 'assigned' || c.status === 'in_progress').length;
       const pendingAdmin = assigned.filter(c => c.status === 'needs_confirmation').length;
@@ -157,7 +161,6 @@
       document.getElementById('statPendingAdmin').textContent = pendingAdmin;
       document.getElementById('statResolvedTeacher').textContent = resolved;
 
-      // Populate Table
       const tbody = document.getElementById('teacherTableBody');
       if (assigned.length === 0) {
         tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 28px; color: var(--text-muted);">No complaints currently assigned to you.</td></tr>`;
@@ -181,8 +184,8 @@
         return `
           <tr>
             <td><strong>${c.id}</strong></td>
-            <td>${c.studentName}</td>
-            <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
+            <td>${c.severity === 'serious' ? '<span style="color:#b45309; font-style:italic; font-size:0.82rem;">[Protected Identity]</span>' : c.studentName}</td>
+            <td><a href="complaint_details.html?id=${c.id}" class="table-link">${c.title}</a></td>
             <td>${c.course}</td>
             <td>${urgencyBadge}</td>
             <td>${statusBadge}</td>
@@ -196,6 +199,90 @@
         `;
       }).join('');
     });
+  </script>
+
+  <div id="facultyDrawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="facultyDrawer" class="slide-drawer" role="dialog" aria-label="Faculty Bulletins and Workflow Guidance" aria-modal="true">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <div class="drawer-icon-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
+        <div>
+          <h3>Faculty Bulletins</h3>
+          <p>Ambo University Academic Affairs</p>
+        </div>
+      </div>
+      <button type="button" id="closeFacultyDrawerBtn" class="drawer-close-btn" aria-label="Close Faculty Bulletins">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="drawer-notice-card highlight">
+        <h4>Important Administrative Notice</h4>
+        <p>Submit a clear, evidenced response with your exam or assignment marking criteria attached so the department administrator can confirm the resolution before the student sees the final result.</p>
+        <span class="drawer-notice-meta">Academic Affairs Directive &bull; AY 2026/27</span>
+      </div>
+
+      <div class="drawer-notice-card">
+        <h4>Standard Workflow Guidance</h4>
+        <p>Teachers review assigned complaints, re-examine assessment records in the presence of marking keys, formulate a constructive resolution, and submit to the department chair for confirmation.</p>
+        <span class="drawer-notice-meta">Faculty Operating Guidelines</span>
+      </div>
+
+      <div class="drawer-notice-card">
+        <h4>Assessment Revision Rule</h4>
+        <p>Any score revision exceeding 10% of total assessment weight requires departmental chair sign-off alongside your formal response statement.</p>
+        <span class="drawer-notice-meta">Academic Assessment Guidelines</span>
+      </div>
+    </div>
+
+    <div class="drawer-footer">
+      <button type="button" id="closeDrawerFooterBtn" class="btn btn-secondary" style="width: 100%; justify-content: center;">Close Bulletins</button>
+    </div>
+  </aside>
+
+  <script>    (function setupDrawer() {
+      const drawer = document.getElementById('facultyDrawer');
+      const backdrop = document.getElementById('facultyDrawerBackdrop');
+      const openBtn = document.getElementById('openFacultyDrawerBtn');
+      const quickBtn = document.getElementById('quickDrawerTrigger');
+      const closeBtn = document.getElementById('closeFacultyDrawerBtn');
+      const footerCloseBtn = document.getElementById('closeDrawerFooterBtn');
+
+      function openDrawer() {
+        if (!drawer || !backdrop) return;
+        backdrop.classList.add('active');
+        drawer.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        if (!drawer || !backdrop) return;
+        drawer.classList.remove('open');
+        backdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openDrawer);
+      if (quickBtn) quickBtn.addEventListener('click', openDrawer);
+      if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+      if (footerCloseBtn) footerCloseBtn.addEventListener('click', closeDrawer);
+      if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer && drawer.classList.contains('open')) {
+          closeDrawer();
+        }
+      });
+    })();
   </script>
 </body>
 </html>

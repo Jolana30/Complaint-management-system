@@ -11,16 +11,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>Render Committee Decision - Ambo University CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -28,9 +33,15 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -39,11 +50,10 @@
     <div class="container container-narrow">
       <div class="page-header" style="background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);">
         <span class="header-badge" style="background: rgba(255, 255, 255, 0.22);">Statutory Adjudication</span>
-        <h1>Render Disciplinary Decision</h1>
-        <p>Record formal hearing findings, corrective sanctions, and institutional ruling for this escalated case.</p>
+        <h1>Register Committee Meeting Decision</h1>
+        <p>Register official findings, agreed resolutions, and corrective actions decided during the disciplinary committee meeting.</p>
       </div>
 
-      <!-- Case Summary Card -->
       <div class="card" style="margin-bottom: 24px;">
         <div class="card-title">
           <h2 id="complaintHeader" style="font-size: 1.25rem; font-weight: 600; margin: 0;">Case #CMP-105</h2>
@@ -77,18 +87,17 @@
         </div>
       </div>
 
-      <!-- Decision Form Card -->
       <div class="card">
         <h2 class="sr-only">Formal Hearing Adjudication Form</h2>
         <form id="decisionForm">
           <div class="form-row">
             <div class="form-group">
-              <label for="hearingDate">Hearing Concluded Date <span class="required">*</span></label>
-              <input type="date" id="hearingDate" required>
+              <label for="hearingDate">Meeting Concluded Date <span class="required">*</span></label>
+              <input type="date" id="hearingDate" name="hearingDate" required>
             </div>
             <div class="form-group">
               <label for="findingRuling">Formal Committee Finding <span class="required">*</span></label>
-              <select id="findingRuling" required>
+              <select id="findingRuling" name="findingRuling" required>
                 <option value="Substantiated" selected>Substantiated (Violation Proven)</option>
                 <option value="Partially Substantiated">Partially Substantiated (Mitigated)</option>
                 <option value="Unsubstantiated">Unsubstantiated (Allegation Dismissed)</option>
@@ -99,7 +108,7 @@
 
           <div class="form-group">
             <label for="actionRecommended">Sanction & Corrective Action Ordered <span class="required">*</span></label>
-            <select id="actionRecommended" required>
+            <select id="actionRecommended" name="actionRecommended" required>
               <option value="Grade Re-evaluation by Independent Committee Panel" selected>Independent Grade Re-evaluation Panel Convened</option>
               <option value="Formal Written Warning & Faculty Conduct Reprimand">Formal Written Warning & Faculty Conduct Reprimand</option>
               <option value="Course Re-assignment for Impacted Cohort">Course Re-assignment for Impacted Cohort</option>
@@ -108,21 +117,21 @@
           </div>
 
           <div class="form-group">
-            <label for="decisionText">Written Findings & Official Institutional Rationale <span class="required">*</span></label>
-            <textarea id="decisionText" rows="6" placeholder="Detail the evidence reviewed during the hearing, witness statements, committee unanimous findings, and statutory basis under Ambo University Senate Legislation..." required></textarea>
-            <span class="form-hint">This text will be officially sealed in the permanent grievance ledger and visible to the Department Head.</span>
+            <label for="decisionText">Committee Meeting Resolution & Minutes <span class="required">*</span></label>
+            <textarea id="decisionText" name="decisionText" rows="6" placeholder="Detail the evidence reviewed during the committee meeting, findings, agreed sanctions, and institutional rationale..." required></textarea>
+            <span class="form-hint">This text will be officially sealed in the permanent complaint audit ledger and visible to the Department Head.</span>
           </div>
 
           <div class="form-group">
             <label class="checkbox-label" style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer;">
-              <input type="checkbox" id="signoffCheck" required style="margin-top: 4px;">
-              <span><strong>Institutional Sign-off:</strong> I certify as a designated Disciplinary Committee Hearing Officer that this decision was rendered following due process and quorum deliberation.</span>
+              <input type="checkbox" id="signoffCheck" name="signoffCheck" required style="margin-top: 4px;">
+              <span><strong>Institutional Sign-off:</strong> I certify as a designated Disciplinary Committee Committee Member that this decision was officially agreed upon during the committee meeting.</span>
             </label>
           </div>
 
           <div class="form-actions">
             <a href="committee_dashboard.html" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-danger">Seal & Submit Formal Decision</button>
+            <button type="submit" class="btn btn-danger">Register & Save Committee Decision</button>
           </div>
         </form>
       </div>
@@ -136,8 +145,7 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const complaintId = urlParams.get('id') || 'CMP-105';
       const complaint = window.AmboCMS.getComplaintById(complaintId);
@@ -154,7 +162,6 @@
       document.getElementById('valCourse').textContent = complaint.course;
       document.getElementById('valMessage').textContent = complaint.message;
 
-      // Set default hearing date to today
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('hearingDate').value = today;
 

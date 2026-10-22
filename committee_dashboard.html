@@ -11,16 +11,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>Disciplinary Committee Portal - Ambo University CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -28,29 +33,33 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
 
   <main class="main-content" style="padding: 24px 0 40px;">
     <div class="container">
-      <!-- Style A Committee Header -->
+      
       <div class="welcome-header committee-header">
         <h1 id="committeeHeaderTitle">Disciplinary Committee Portal</h1>
-        <p id="committeeHeaderSubtitle">Statutory review, formal hearing adjudication, and sanction determination for severe misconduct cases.</p>
+        <p id="committeeHeaderSubtitle">Review escalated misconduct cases and register official decisions and actions reached during committee meetings.</p>
       </div>
 
-      <!-- Style A Quick Actions -->
       <div class="quick-links">
         <h3>Docket Actions</h3>
         <a href="#docketTable">Active Inquiries</a>
         <a href="admin_all_complaints.html">All System Complaints</a>
       </div>
 
-      <!-- Style A Stats Row -->
       <div class="stats-row">
         <div class="stat-card">
           <h2 id="statTotalEscalated" style="color: #991b1b;">0</h2>
@@ -58,7 +67,7 @@
         </div>
         <div class="stat-card">
           <h2 id="statAwaitingHearing" style="color: #b45309;">0</h2>
-          <p>Awaiting Hearing / Decision</p>
+          <p>Awaiting Committee Meeting Decision</p>
         </div>
         <div class="stat-card">
           <h2 id="statDecisionsRendered" style="color: #059669;">0</h2>
@@ -70,7 +79,6 @@
         </div>
       </div>
 
-      <!-- Active Docket Table Card -->
       <div class="card" id="docketTable">
         <div class="card-title">
           <h3>Escalated Cases Awaiting Committee Review</h3>
@@ -83,24 +91,23 @@
               <tr>
                 <th>Case ID</th>
                 <th>Complainant</th>
-                <th>Grievance Subject</th>
+                <th>Complaint Subject</th>
                 <th>Department</th>
                 <th>Severity</th>
                 <th>Docket Status</th>
                 <th>Date Escalated</th>
-                <th>Judicial Action</th>
+                <th>Committee Action</th>
               </tr>
             </thead>
             <tbody id="committeeTableBody">
-              <!-- Dynamically populated -->
+              
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Committee Jurisdiction Notice Card -->
       <div class="card">
-        <h3 style="font-size: 1.05rem; margin-bottom: 8px; color: #111827;">Statutory Committee Jurisdiction & Charter</h3>
+        <h3 style="font-size: 1.05rem; margin-bottom: 8px; color: var(--text-main);">Statutory Committee Jurisdiction & Charter</h3>
         <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
           Under Ambo University Senate Legislation, the Disciplinary Committee exercises formal jurisdiction over complaints involving retaliatory grading threats, intimidation, academic integrity breaches, and ethical violations. Departmental mediation ceases once a complaint is formally escalated to this docket. All decisions are logged with a cryptographic audit signature.
         </p>
@@ -115,8 +122,7 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const user = window.AmboCMS.getCurrentUser();
       if (!user) {
         window.location.href = 'login.html';
@@ -165,7 +171,7 @@
 
         if (c.status === 'escalated' || c.status === 'committee_review') {
           actionBtns += `
-            <a href="committee_decision.html?id=${c.id}" class="action-btn-a action-escalate-a">Render Decision</a>
+            <a href="committee_decision.html?id=${c.id}" class="action-btn-a action-escalate-a">Record Meeting Decision</a>
           `;
         }
 
@@ -173,7 +179,7 @@
           <tr>
             <td><strong>${c.id}</strong></td>
             <td>${c.studentName}</td>
-            <td><a href="committee_complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
+            <td><a href="committee_complaint_details.html?id=${c.id}" class="table-link">${c.title}</a></td>
             <td>${c.department}</td>
             <td>${severityBadge}</td>
             <td>${statusBadge}</td>

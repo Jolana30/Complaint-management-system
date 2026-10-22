@@ -11,16 +11,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>Assign Complaint - Ambo University Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -28,9 +33,15 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -40,10 +51,9 @@
       <div class="page-header" style="padding: 24px 20px;">
         <span class="header-badge">Triage & Routing</span>
         <h1>Assign Academic Complaint</h1>
-        <p>Route the verified student grievance to the assigned course instructor for departmental investigation.</p>
+        <p>Route the verified student complaint to the assigned course instructor for departmental investigation.</p>
       </div>
 
-      <!-- Complaint Summary Card -->
       <div class="card" style="margin-bottom: 24px;">
         <div class="card-title">
           <h3 id="complaintHeader">Complaint #CMP-101</h3>
@@ -56,16 +66,46 @@
             <span><strong>Course:</strong> <span id="valCourse">-</span></span>
             <span><strong>Department:</strong> <span id="valDepartment">-</span></span>
           </div>
-          <div><strong>Grievance:</strong> <span id="valMessage" style="color: var(--text-muted);">-</span></div>
+          <div><strong>Complaint:</strong> <span id="valMessage" style="color: var(--text-muted);">-</span></div>
         </div>
       </div>
 
-      <!-- Assignment Form -->
       <div class="card">
+        
+        <div style="background: var(--surface-alt); border: 1px solid var(--border-color); border-radius: 10px; padding: 16px 18px; margin-bottom: 22px;">
+          <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--text-main); margin: 0 0 10px; display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            Administrative Screening & Evidence Verification
+          </h4>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: var(--text-main);">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="checkEnrolled" required>
+              <span>Student enrollment verified on official department grade roster</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="checkTeacher" required>
+              <span>Course instructor matches departmental lecture assignment</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="checkScope" required>
+              <span>Valid academic teaching and learning complaint within department mandate</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="adminSevereBanner" style="display: none; background: rgba(220, 38, 38, 0.08); border: 1px solid rgba(220, 38, 38, 0.25); border-radius: 8px; padding: 14px 16px; margin-bottom: 20px;">
+          <strong style="color: #dc2626; font-size: 0.9rem;">Severe Misconduct Classification:</strong>
+          <p style="font-size: 0.84rem; color: var(--text-main); margin: 4px 0 10px;">This complaint is classified as serious. If administrative screening confirms severe conduct violations beyond academic grading, escalate directly to the Senate Disciplinary Committee.</p>
+          <a href="#" id="escalateDirectBtn" class="btn btn-sm btn-danger" style="font-size: 0.82rem; padding: 6px 14px;">Escalate to Disciplinary Committee &rarr;</a>
+        </div>
+
         <form id="assignForm">
           <div class="form-group">
             <label for="teacherSelect">Assign to Faculty Lecturer <span class="required">*</span></label>
-            <select id="teacherSelect" required>
+            <select id="teacherSelect" name="assignedTeacher" required>
               <option value="" disabled selected>-- Select Faculty Member --</option>
               <option value="Mr. Eyuel">Mr. Eyuel (SAD & IP Course Lecturer)</option>
               <option value="Mr. Bekele">Mr. Bekele (OS & System Software Lecturer)</option>
@@ -76,14 +116,45 @@
 
           <div class="form-group">
             <label for="adminRemark">Administrative Instructions / Remarks for Teacher</label>
-            <textarea id="adminRemark" rows="4" placeholder="e.g. Please check student exam script for question 4 and report score discrepancy back to admin..."></textarea>
+            <textarea id="adminRemark" name="adminRemark" rows="4" placeholder="e.g. Please check student exam script for question 4 and report score discrepancy back to admin..."></textarea>
           </div>
 
-          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
-            <a href="admin_all_complaints.html" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn">Confirm Assignment</button>
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 24px; flex-wrap: wrap;">
+            <button type="button" id="toggleDeclineBtn" class="btn btn-secondary" style="color: #dc2626; border-color: rgba(220, 38, 38, 0.3);">
+              Decline / Flag Issue...
+            </button>
+            <div style="display: flex; gap: 10px;">
+              <a href="admin_all_complaints.html" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">Confirm Assignment</button>
+            </div>
           </div>
         </form>
+
+        <div id="declinePanel" style="display: none; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-color); background: var(--surface-alt); padding: 18px; border-radius: 10px;">
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: #dc2626; margin: 0 0 8px;">Decline Complaint or Flag Malicious Claim</h4>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0 0 14px;">Select the precise institutional reason. Lack of evidence is never treated as a false accusation.</p>
+
+          <form id="declineForm">
+            <div class="form-group">
+              <label for="declineReasonType">Decline / Flag Category <span class="required">*</span></label>
+              <select id="declineReasonType" name="declineReasonType" required style="width: 100%; padding: 9px; border-radius: 6px; border: 1px solid var(--border-color);">
+                <option value="insufficient_evidence" selected>Declined: Insufficient Evidence Provided (Student may re-submit with proof)</option>
+                <option value="out_of_scope">Declined: Out of Scope (Non-teaching issue routed to campus facilities)</option>
+                <option value="suspected_false">Flagged: Suspected Malicious / Deliberate False Accusation (Refer to Committee)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="declineDetailReason">Administrative Reason & Explanation for Complainant <span class="required">*</span></label>
+              <textarea id="declineDetailReason" name="declineDetailReason" rows="3" placeholder="Explain why this complaint was declined or flagged..." required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color);"></textarea>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
+              <button type="button" id="cancelDeclineBtn" class="btn btn-secondary btn-sm">Close</button>
+              <button type="submit" class="btn btn-danger btn-sm">Confirm Decline / Flag</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </main>
@@ -95,8 +166,7 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const complaintId = urlParams.get('id') || 'CMP-101';
       const complaint = window.AmboCMS.getComplaintById(complaintId);
@@ -113,9 +183,90 @@
       document.getElementById('valDepartment').textContent = complaint.department;
       document.getElementById('valMessage').textContent = complaint.message;
 
+      if (complaint.severity === 'serious') {
+        const severeBanner = document.getElementById('adminSevereBanner');
+        if (severeBanner) {
+          severeBanner.style.display = 'block';
+          const escBtn = document.getElementById('escalateDirectBtn');
+          if (escBtn) escBtn.href = `admin_escalate.html?id=${complaint.id}`;
+        }
+      }
+
+      const toggleDeclineBtn = document.getElementById('toggleDeclineBtn');
+      const declinePanel = document.getElementById('declinePanel');
+      const cancelDeclineBtn = document.getElementById('cancelDeclineBtn');
+
+      if (toggleDeclineBtn && declinePanel) {
+        toggleDeclineBtn.addEventListener('click', () => {
+          declinePanel.style.display = declinePanel.style.display === 'none' ? 'block' : 'none';
+          if (declinePanel.style.display === 'block') {
+            declinePanel.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      }
+
+      if (cancelDeclineBtn && declinePanel) {
+        cancelDeclineBtn.addEventListener('click', () => {
+          declinePanel.style.display = 'none';
+        });
+      }
+
+      const declineForm = document.getElementById('declineForm');
+      if (declineForm) {
+        declineForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const reasonType = document.getElementById('declineReasonType').value;
+          const detailReason = document.getElementById('declineDetailReason').value.trim();
+
+          if (!detailReason) {
+            alert('Please provide an administrative explanation.');
+            return;
+          }
+
+          let finalStatus = 'declined';
+          let eventTitle = 'Complaint Declined by Admin';
+          let eventText = `Administrative Review: ${detailReason}`;
+
+          if (reasonType === 'suspected_false') {
+            finalStatus = 'flagged_investigation';
+            eventTitle = 'Flagged: Suspected False Complaint';
+            eventText = `Case flagged for Disciplinary Committee investigation regarding suspected malicious claim: ${detailReason}`;
+          }
+
+          window.AmboCMS.updateComplaintStatus(complaint.id, {
+            status: finalStatus,
+            declineReasonType: reasonType,
+            declineReason: detailReason,
+            timelineEvent: {
+              title: eventTitle,
+              text: eventText
+            }
+          });
+
+          const msg = reasonType === 'suspected_false' 
+            ? `Complaint ${complaint.id} flagged for committee investigation.` 
+            : `Complaint ${complaint.id} declined.`;
+          window.AmboCMS.showToast(msg, 'info');
+
+          setTimeout(() => {
+            window.location.href = 'admin_all_complaints.html';
+          }, 600);
+        });
+      }
+
       const form = document.getElementById('assignForm');
       form.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const c1 = document.getElementById('checkEnrolled').checked;
+        const c2 = document.getElementById('checkTeacher').checked;
+        const c3 = document.getElementById('checkScope').checked;
+
+        if (!c1 || !c2 || !c3) {
+          alert('Please verify all administrative screening checkpoints before assigning to faculty.');
+          return;
+        }
+
         const teacher = document.getElementById('teacherSelect').value;
         const remark = document.getElementById('adminRemark').value.trim();
 
@@ -133,8 +284,7 @@
         setTimeout(() => {
           window.location.href = 'admin_all_complaints.html';
         }, 500);
-      });
-    });
+      });});
   </script>
 </body>
 </html>

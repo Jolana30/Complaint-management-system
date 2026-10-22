@@ -10,17 +10,94 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-  <title>Complaint Details - Ambo University CMS</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Complaint Dossier - Ambo University CMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .back-breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-bottom: 16px;
+      transition: color 0.15s ease, transform 0.15s ease;
+    }
+    .back-breadcrumb:hover {
+      color: var(--primary);
+      text-decoration: none;
+      transform: translateX(-2px);
+    }
+    .dossier-directive-banner {
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin: 22px 0;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .dossier-directive-banner.warning {
+      background: rgba(245, 158, 11, 0.08);
+      border-color: rgba(245, 158, 11, 0.28);
+    }
+    .dossier-directive-banner.danger {
+      background: rgba(220, 38, 38, 0.08);
+      border-color: rgba(220, 38, 38, 0.28);
+    }
+    .dossier-directive-banner.success {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: rgba(16, 185, 129, 0.28);
+    }
+    .dossier-directive-banner.info {
+      background: rgba(37, 99, 235, 0.08);
+      border-color: rgba(37, 99, 235, 0.28);
+    }
+    .directive-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .directive-icon.warning { background: rgba(245, 158, 11, 0.18); color: #b45309; }
+    .directive-icon.danger { background: rgba(220, 38, 38, 0.18); color: #b91c1c; }
+    .directive-icon.success { background: rgba(16, 185, 129, 0.18); color: #047857; }
+    .directive-icon.info { background: rgba(37, 99, 235, 0.18); color: #1d4ed8; }
+
+    [data-theme="dark"] .directive-icon.warning { color: #fbbf24; }
+    [data-theme="dark"] .directive-icon.danger { color: #fca5a5; }
+    [data-theme="dark"] .directive-icon.success { color: #6ee7b7; }
+    [data-theme="dark"] .directive-icon.info { color: #93c5fd; }
+
+    .directive-content h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0 0 4px;
+    }
+    .directive-content p {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--text-main);
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -28,174 +105,218 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+            <path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/>
+            <circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/>
+            <g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g>
+          </svg>
+        </button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
 
   <main class="main-content">
-    <div class="container" style="max-width: 920px;">
+    <div class="container" style="max-width: 940px;">
       
-      <!-- Details Header -->
-      <div class="page-header" style="padding: 24px 20px; text-align: left; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
-        <div>
-          <span class="header-badge" id="complaintIdBadge">CMP-101</span>
-          <h1 id="complaintTitle" style="font-size: 1.6rem; margin-top: 4px; margin-bottom: 0;">Unfair Grading System</h1>
+      <a href="my_complaints.html" class="back-breadcrumb" id="topBackLink">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span id="backLinkLabel">Back to Complaints History</span>
+      </a>
+
+      <div class="page-header" style="padding: 24px 28px; text-align: left; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div style="flex: 1 1 340px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span class="header-badge" id="complaintIdBadge" style="font-family: monospace; font-size: 0.82rem; margin-bottom: 0; letter-spacing: 0.04em;">CMP-101</span>
+            <span style="font-size: 0.82rem; color: rgba(255, 255, 255, 0.85); font-weight: 500;" id="headerCategory">Assessment & Grading</span>
+          </div>
+          <h1 id="complaintTitle" style="font-size: 1.65rem; margin: 0; line-height: 1.25; color: #ffffff; letter-spacing: -0.02em;">Complaint Title</h1>
         </div>
         <div id="statusBadgeContainer">
-          <!-- Status pill -->
+          
         </div>
       </div>
 
-      <!-- Metadata Attributes -->
-      <div class="card">
-        <h2 class="sr-only">Complaint Dossier and Case Timeline</h2>
-        <div class="meta-grid">
-          <div class="meta-item">
-            <span class="meta-label">Student Name</span>
-            <span class="meta-value" id="valStudentName">-</span>
+      <div class="card" style="padding: 30px 32px;">
+
+        <div class="dossier-spec-grid">
+          
+          <div class="spec-item">
+            <span class="spec-label">Student Name</span>
+            <span class="spec-value" id="valStudentName">-</span>
           </div>
-          <div class="meta-item">
-            <span class="meta-label">Student ID</span>
-            <span class="meta-value font-tabular" id="valStudentId">-</span>
+
+          <div class="spec-item">
+            <span class="spec-label">Student ID</span>
+            <span class="spec-value font-tabular" id="valStudentId" style="font-family: monospace;">-</span>
           </div>
-          <div class="meta-item">
-            <span class="meta-label">Department</span>
-            <span class="meta-value" id="valDepartment">-</span>
+
+          <div class="spec-item">
+            <span class="spec-label">Department</span>
+            <span class="spec-value" id="valDepartment">-</span>
           </div>
-          <div class="meta-item">
-            <span class="meta-label">Course</span>
-            <span class="meta-value" id="valCourse">-</span>
+
+          <div class="spec-item">
+            <span class="spec-label">Course</span>
+            <span class="spec-value" id="valCourse">-</span>
           </div>
-          <div class="meta-item">
-            <span class="meta-label">Category</span>
-            <span class="meta-value" id="valCategory">-</span>
+
+          <div class="spec-item">
+            <span class="spec-label">Category</span>
+            <span class="spec-value" id="valCategory">-</span>
           </div>
-          <div class="meta-item">
-            <span class="meta-label">Urgency</span>
-            <span class="meta-value" id="valUrgency">-</span>
+
+          <div class="spec-item">
+            <span class="spec-label">Priority Level</span>
+            <span class="spec-value" id="valUrgency">-</span>
           </div>
-          <div class="meta-item">
-            <span class="meta-label">Assigned Teacher</span>
-            <span class="meta-value" id="valTeacher">-</span>
+
+          <div class="spec-item">
+            <span class="spec-label">Assigned Faculty</span>
+            <span class="spec-value" id="valTeacher">-</span>
           </div>
-          <div class="meta-item">
-            <span class="meta-label">Submitted On</span>
-            <span class="meta-value font-tabular" id="valDate">-</span>
+
+          <div class="spec-item">
+            <span class="spec-label">Date Submitted</span>
+            <span class="spec-value font-tabular" id="valDate">-</span>
+          </div>
+
+          <div class="spec-item">
+            <span class="spec-label">Incident Date</span>
+            <span class="spec-value font-tabular" id="valIncidentDate">-</span>
           </div>
         </div>
 
-        <!-- Grievance Message -->
-        <div style="margin-bottom: 24px;">
-          <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-main);">Student Grievance Description</h3>
-          <div class="prose-reading" style="color: var(--text-main); line-height: 1.65; padding: 4px 0;" id="valMessage">
-            -
+        <div class="dossier-statement-block">
+          <div class="dossier-statement-title">Student Complaint Statement</div>
+          <p class="dossier-statement-text" id="valMessage">-</p>
+          <div id="studentAttachmentSection" style="display: none; margin-top: 14px; align-items: center; gap: 8px; background: var(--surface-alt); border: 1px solid var(--border-color); padding: 8px 14px; border-radius: 8px; font-size: 0.86rem;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);">
+              <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+            </svg>
+            <span><strong>Complainant Evidence File:</strong> <span id="valAttachmentName" style="color: var(--text-main); font-weight: 600;">-</span></span>
           </div>
         </div>
 
-        <!-- Teacher's Resolution / Reply (if available) -->
-        <div id="teacherReplySection" style="display: none;">
-          <div class="resolution-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-              <h3 style="color: var(--success); font-size: 1.1rem; margin-bottom: 0; display: flex; align-items: center; gap: 8px;">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                Faculty Resolution & Corrective Action
-              </h3>
-              <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);" id="valTeacherReplyName">-</span>
-            </div>
-            <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valTeacherReplyText">
-              -
-            </p>
-          </div>
-        </div>
-
-        <!-- Admin Decline Notice (if declined) -->
-        <div id="declineReasonSection" style="display: none;">
-          <div class="decline-card">
-            <h3 style="color: var(--danger); font-size: 1.1rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+        <div id="escalatedBannerSection" style="display: none;">
+          <div class="dossier-directive-banner warning">
+            <div class="directive-icon warning">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
               </svg>
-              Administrative Decline Justification
-            </h3>
-            <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valDeclineReason">
-              -
-            </p>
-          </div>
-        </div>
-
-        <!-- Admin Remark (if available) -->
-        <div id="adminRemarkSection" style="display: none; margin-bottom: 24px;">
-          <div class="alert-box alert-info">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-            <div>
-              <strong>Department Administrator Directive:</strong>
-              <div id="valAdminRemark" style="margin-top: 4px;"></div>
+            </div>
+            <div class="directive-content">
+              <h4>University Disciplinary Committee Docket</h4>
+              <p>This case involves high-severity conduct under statutory faculty code. Routine departmental mediation is formally suspended pending formal committee adjudication.</p>
             </div>
           </div>
         </div>
 
-        <!-- Escalated Notice Banner (if escalated) -->
-        <div id="escalatedBannerSection" style="display: none; margin-bottom: 24px;">
-          <div class="alert-box alert-warning">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-            <div>
-              <strong>University Disciplinary Committee Docket:</strong>
-              <div style="margin-top: 4px;">This matter has been escalated to the Disciplinary Committee for statutory inquiry. Routine departmental mediation is suspended pending formal committee findings.</div>
+        <div id="adminRemarkSection" style="display: none;">
+          <div class="dossier-directive-banner info">
+            <div class="directive-icon info">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <div class="directive-content">
+              <h4>Department Administrator Directive</h4>
+              <p id="valAdminRemark">-</p>
             </div>
           </div>
         </div>
 
-        <!-- Committee Decision (if resolved by committee) -->
-        <div id="committeeDecisionSection" style="display: none; margin-bottom: 24px;">
-          <div class="resolution-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-              <h3 style="color: var(--success); font-size: 1.1rem; margin-bottom: 0; display: flex; align-items: center; gap: 8px;">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+        <div id="teacherReplySection" style="display: none;">
+          <div class="dossier-directive-banner success">
+            <div class="directive-icon success">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="directive-content" style="width: 100%;">
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
+                <h4>Faculty Resolution & Corrective Action</h4>
+                <span style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted);" id="valTeacherReplyName">-</span>
+              </div>
+              <p id="valTeacherReplyText">-</p>
+              <div id="teacherAttachmentSection" style="display: none; margin-top: 10px; align-items: center; gap: 8px; background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.3); padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; color: #166534;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
                 </svg>
-                Disciplinary Committee Ruling & Final Determination
-              </h3>
+                <span><strong>Instructor Evidence & Script File:</strong> <span id="valTeacherAttachment" style="font-weight: 600;">-</span></span>
+              </div>
             </div>
-            <p style="line-height: 1.6; color: var(--text-main); margin-bottom: 0;" id="valCommitteeDecision">
-              -
-            </p>
           </div>
         </div>
 
-        <!-- Activity Timeline -->
-        <div style="margin-top: 32px;">
-          <h3 style="font-size: 1.15rem; margin-bottom: 14px;">Chronological Timeline</h3>
+        <div id="committeeDecisionSection" style="display: none;">
+          <div class="dossier-directive-banner success">
+            <div class="directive-icon success">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            </div>
+            <div class="directive-content">
+              <h4>Disciplinary Committee Ruling & Final Determination</h4>
+              <p id="valCommitteeDecision">-</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="declineReasonSection" style="display: none;">
+          <div class="dossier-directive-banner danger">
+            <div class="directive-icon danger">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+              </svg>
+            </div>
+            <div class="directive-content">
+              <h4>Administrative Decline Justification</h4>
+              <p id="valDeclineReason">-</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <div class="dossier-statement-title" style="margin-bottom: 6px;">Chronological Audit Timeline</div>
           <div class="timeline" id="timelineList">
-            <!-- Dynamically populated -->
+            
           </div>
         </div>
 
-        <!-- Dynamic Role Context Action Buttons -->
         <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border-color); flex-wrap: wrap;" id="detailActionButtons">
           <a href="my_complaints.html" class="btn btn-secondary" id="backBtn">Back to Complaints</a>
         </div>
+
       </div>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
+      <p>&copy; 2026 Ambo University Complaint Management System. Academic Quality & Student Support Directorate.</p>
     </div>
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const complaintId = urlParams.get('id') || 'CMP-101';
       const complaint = window.AmboCMS.getComplaintById(complaintId);
@@ -204,9 +325,9 @@
       if (!complaint) {
         document.querySelector('.container').innerHTML = `
           <div class="card" style="text-align: center; padding: 48px;">
-            <h2>Complaint Not Found</h2>
-            <p style="color: var(--text-muted); margin: 12px 0 24px;">Complaint record "${complaintId}" does not exist in the database.</p>
-            <a href="index.html" class="btn">Return to Home</a>
+            <h2>Complaint Dossier Not Found</h2>
+            <p style="color: var(--text-muted); margin: 12px 0 24px;">Complaint record "${complaintId}" does not exist in the academic registry.</p>
+            <a href="index.html" class="btn btn-primary">Return to Home</a>
           </div>
         `;
         return;
@@ -216,90 +337,152 @@
       const displayStatus = window.AmboCMS.getDisplayStatus(complaint.status, userRole);
       const statusLabel = window.AmboCMS.getStatusLabel(complaint.status, userRole);
 
-      // Populate Data
       document.getElementById('complaintIdBadge').textContent = complaint.id;
+      document.getElementById('headerCategory').textContent = complaint.category || 'Academic Complaint';
       document.getElementById('complaintTitle').textContent = complaint.title;
-      document.getElementById('statusBadgeContainer').innerHTML = `<span class="status-badge status-${displayStatus}" style="font-size:0.92rem; padding: 6px 14px;">${statusLabel}</span>`;
+      document.getElementById('statusBadgeContainer').innerHTML = `<span class="status-badge status-${displayStatus}" style="font-size:0.86rem; padding: 5px 14px;">${statusLabel}</span>`;
 
-      document.getElementById('valStudentName').textContent = complaint.studentName;
-      document.getElementById('valStudentId').textContent = complaint.studentId;
+      if (userRole === 'teacher' && complaint.severity === 'serious') {
+        document.getElementById('valStudentName').textContent = '[Complainant Identity Protected]';
+        document.getElementById('valStudentId').textContent = '[Protected by Disciplinary Code]';
+      } else {
+        document.getElementById('valStudentName').textContent = complaint.studentName;
+        document.getElementById('valStudentId').textContent = complaint.studentId;
+      }
+
       document.getElementById('valDepartment').textContent = complaint.department;
       document.getElementById('valCourse').textContent = complaint.course;
       document.getElementById('valCategory').textContent = complaint.category;
       document.getElementById('valUrgency').innerHTML = `<span class="urgency-badge urgency-${complaint.urgency}">${complaint.urgency}</span>`;
       document.getElementById('valTeacher').textContent = complaint.assignedTeacher || 'Not Assigned';
       document.getElementById('valDate').textContent = complaint.submittedDate;
+      const incEl = document.getElementById('valIncidentDate');
+      if (incEl) incEl.textContent = complaint.incidentDate || complaint.submittedDate;
       document.getElementById('valMessage').textContent = complaint.message;
 
-      // Teacher Reply
-      if (complaint.teacherReply) {
-        document.getElementById('teacherReplySection').style.display = 'block';
-        document.getElementById('valTeacherReplyName').textContent = `Assigned Teacher: ${complaint.assignedTeacher || 'Faculty'}`;
-        document.getElementById('valTeacherReplyText').textContent = complaint.teacherReply;
+      if (complaint.attachmentName) {
+        const attEl = document.getElementById('studentAttachmentSection');
+        if (attEl) {
+          attEl.style.display = 'inline-flex';
+          document.getElementById('valAttachmentName').textContent = complaint.attachmentName;
+        }
       }
 
-      // Decline Reason
+      if (complaint.teacherReply) {
+        document.getElementById('teacherReplySection').style.display = 'block';
+        document.getElementById('valTeacherReplyName').textContent = `Assigned Faculty: ${complaint.assignedTeacher || 'Instructor'}`;
+        document.getElementById('valTeacherReplyText').textContent = complaint.teacherReply;
+
+        if (complaint.teacherAttachment) {
+          const tAttEl = document.getElementById('teacherAttachmentSection');
+          if (tAttEl) {
+            tAttEl.style.display = 'inline-flex';
+            document.getElementById('valTeacherAttachment').textContent = complaint.teacherAttachment;
+          }
+        }
+      }
+
       if (complaint.declineReason) {
         document.getElementById('declineReasonSection').style.display = 'block';
+        const decTitle = document.querySelector('#declineReasonSection h4');
+        if (complaint.declineReasonType === 'suspected_false' || complaint.status === 'flagged_investigation') {
+          if (decTitle) decTitle.textContent = 'Administrative Inquest: Suspected False / Malicious Accusation';
+        } else {
+          if (decTitle) decTitle.textContent = 'Administrative Decline Justification';
+        }
         document.getElementById('valDeclineReason').textContent = complaint.declineReason;
       }
 
-      // Admin Remark
       if (complaint.adminRemark) {
         document.getElementById('adminRemarkSection').style.display = 'block';
         document.getElementById('valAdminRemark').textContent = complaint.adminRemark;
       }
 
-      // Escalated Banner Notice
       if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
         document.getElementById('escalatedBannerSection').style.display = 'block';
       }
 
-      // Committee Decision
       if (complaint.committeeDecision) {
         document.getElementById('committeeDecisionSection').style.display = 'block';
         document.getElementById('valCommitteeDecision').textContent = complaint.committeeDecision;
       }
 
-      // Timeline
       const timelineEl = document.getElementById('timelineList');
-      timelineEl.innerHTML = complaint.timeline.map(item => `
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <span>${item.title}</span>
-              <span class="timeline-time">${item.time}</span>
+      if (complaint.timeline && complaint.timeline.length) {
+        timelineEl.innerHTML = complaint.timeline.map(item => `
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-title">${item.title}</span>
+                <span class="timeline-time">${item.time}</span>
+              </div>
+              <p class="timeline-text">${item.text}</p>
             </div>
-            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">${item.text}</p>
           </div>
-        </div>
-      `).join('');
+        `).join('');
+      } else {
+        timelineEl.innerHTML = `
+          <div class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span>Complaint Submitted</span>
+                <span class="timeline-time">${complaint.submittedDate}</span>
+              </div>
+              <p class="timeline-text">Complaint registered into Ambo University CMS registry.</p>
+            </div>
+          </div>
+        `;
+      }
 
-      // Dynamic Context Action Buttons
       const actionsEl = document.getElementById('detailActionButtons');
       const backBtn = document.getElementById('backBtn');
+      const topBackLink = document.getElementById('topBackLink');
+      const backLabel = document.getElementById('backLinkLabel');
 
       if (user && user.role === 'admin') {
         backBtn.href = 'admin_all_complaints.html';
         backBtn.textContent = 'Back to All Complaints';
+        topBackLink.href = 'admin_all_complaints.html';
+        backLabel.textContent = 'Back to All Complaints';
 
         if (complaint.status === 'pending') {
           const assignBtn = document.createElement('a');
           assignBtn.href = `admin_assign.html?id=${complaint.id}`;
-          assignBtn.className = 'btn btn-success';
-          assignBtn.textContent = '👨‍🏫 Assign Teacher';
+          assignBtn.className = 'btn btn-primary';
+          assignBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="8.5" cy="7" r="4"></circle>
+              <line x1="20" y1="8" x2="20" y2="14"></line>
+              <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg>
+            <span>Assign Teacher</span>
+          `;
           actionsEl.appendChild(assignBtn);
 
           const escalateBtn = document.createElement('a');
           escalateBtn.href = `admin_escalate.html?id=${complaint.id}`;
           escalateBtn.className = 'btn btn-danger';
-          escalateBtn.textContent = '⚖️ Escalate to Committee';
+          escalateBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>Escalate to Committee</span>
+          `;
           actionsEl.appendChild(escalateBtn);
 
           const declineBtn = document.createElement('button');
           declineBtn.className = 'btn btn-secondary';
-          declineBtn.textContent = '❌ Decline Complaint';
+          declineBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+            <span>Decline Complaint</span>
+          `;
           declineBtn.onclick = () => {
             const reason = prompt('Enter administrative reason for declining this complaint:');
             if (reason && reason.trim()) {
@@ -313,44 +496,82 @@
           const confirmBtn = document.createElement('a');
           confirmBtn.href = `admin_confirm.html?id=${complaint.id}`;
           confirmBtn.className = 'btn btn-purple';
-          confirmBtn.textContent = '✅ Confirm Resolution';
+          confirmBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span>Confirm Resolution</span>
+          `;
           actionsEl.appendChild(confirmBtn);
         } else if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
           const dossierBtn = document.createElement('a');
           dossierBtn.href = `committee_complaint_details.html?id=${complaint.id}`;
           dossierBtn.className = 'btn btn-secondary';
-          dossierBtn.textContent = '⚖️ View Committee Dossier';
+          dossierBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            <span>View Committee Docket</span>
+          `;
           actionsEl.appendChild(dossierBtn);
         }
       } else if (user && user.role === 'teacher') {
         backBtn.href = 'teacher_dashboard.html';
         backBtn.textContent = 'Back to Teacher Dashboard';
+        topBackLink.href = 'teacher_dashboard.html';
+        backLabel.textContent = 'Back to Teacher Dashboard';
 
         if (complaint.status === 'assigned' || complaint.status === 'in_progress') {
           const respondBtn = document.createElement('a');
           respondBtn.href = `teacher_respond.html?id=${complaint.id}`;
           respondBtn.className = 'btn btn-primary';
-          respondBtn.textContent = '✍️ Write Response / Resolution';
+          respondBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>Write Faculty Resolution</span>
+          `;
           actionsEl.appendChild(respondBtn);
         }
       } else if (user && user.role === 'committee') {
         backBtn.href = 'committee_dashboard.html';
         backBtn.textContent = 'Back to Committee Docket';
+        topBackLink.href = 'committee_dashboard.html';
+        backLabel.textContent = 'Back to Committee Docket';
 
         if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
           const decisionBtn = document.createElement('a');
           decisionBtn.href = `committee_decision.html?id=${complaint.id}`;
           decisionBtn.className = 'btn btn-danger';
-          decisionBtn.textContent = '⚖️ Render Decision';
+          decisionBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>Render Statutory Decision</span>
+          `;
           actionsEl.appendChild(decisionBtn);
         }
       } else {
         backBtn.href = 'my_complaints.html';
+        topBackLink.href = 'my_complaints.html';
+        backLabel.textContent = 'Back to Complaints History';
+
         if (complaint.status === 'pending') {
           const editBtn = document.createElement('a');
           editBtn.href = `submit_complaint.html?edit=${complaint.id}`;
           editBtn.className = 'btn btn-primary';
-          editBtn.textContent = '✏️ Edit Grievance';
+          editBtn.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            <span>Edit Complaint</span>
+          `;
           actionsEl.appendChild(editBtn);
         }
       }

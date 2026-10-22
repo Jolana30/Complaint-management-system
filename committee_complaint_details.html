@@ -11,16 +11,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>Committee Case Dossier - Ambo University CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -28,9 +33,15 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -38,18 +49,16 @@
   <main class="main-content">
     <div class="container" style="max-width: 920px;">
       
-      <!-- Dossier Header -->
       <div class="page-header" style="background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%); padding: 24px 20px; text-align: left; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
         <div>
           <span class="header-badge" id="complaintIdBadge" style="background: rgba(255, 255, 255, 0.22);">CMP-105</span>
           <h1 id="complaintTitle" style="font-size: 1.6rem; margin-top: 4px; margin-bottom: 0;">Case Dossier</h1>
         </div>
         <div id="statusBadgeContainer">
-          <!-- Status Badge -->
+          
         </div>
       </div>
 
-      <!-- Dossier Metadata Card -->
       <div class="card">
         <h2 class="sr-only">Disciplinary Hearing Evidence & Dossier Details</h2>
         <div class="meta-grid">
@@ -87,15 +96,13 @@
           </div>
         </div>
 
-        <!-- Student Grievance Message -->
         <div style="margin-bottom: 24px;">
-          <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-main);">Student Grievance Description</h3>
+          <h3 style="font-size: 1.1rem; margin-bottom: 10px; color: var(--text-main);">Student Complaint Description</h3>
           <div class="prose-reading" style="color: var(--text-main); line-height: 1.65; padding: 4px 0;" id="valMessage">
             -
           </div>
         </div>
 
-        <!-- Administrative Escalation Rationale -->
         <div id="adminRemarkSection" style="margin-bottom: 24px;">
           <div class="alert-box alert-warning">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
@@ -110,21 +117,6 @@
           </div>
         </div>
 
-        <!-- Cryptographic Audit Chain Status -->
-        <div class="alert-box alert-info" style="margin-bottom: 24px;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
-          <div>
-            <strong>Tamper-Evident Audit Log Verification:</strong>
-            <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--text-muted); font-family: monospace;">
-              Hash Chain: VALID | Block Algorithm: SHA-256 HMAC | State Nonce: Verified
-            </p>
-          </div>
-        </div>
-
-        <!-- Concluded Committee Decision Section (if already decided) -->
         <div id="committeeDecisionSection" style="display: none; margin-bottom: 24px;">
           <div class="resolution-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -141,15 +133,13 @@
           </div>
         </div>
 
-        <!-- Activity Timeline -->
         <div style="margin-top: 32px;">
           <h3 style="font-size: 1.15rem; margin-bottom: 14px;">Procedural Case Timeline</h3>
           <div class="timeline" id="timelineList">
-            <!-- Dynamically populated -->
+            
           </div>
         </div>
 
-        <!-- Action Buttons -->
         <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border-color); flex-wrap: wrap;" id="dossierActionButtons">
           <a href="committee_dashboard.html" class="btn btn-secondary">Back to Committee Docket</a>
         </div>
@@ -164,8 +154,7 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const complaintId = urlParams.get('id') || 'CMP-105';
       const complaint = window.AmboCMS.getComplaintById(complaintId);
@@ -182,12 +171,10 @@
         return;
       }
 
-      // Populate Header & Badges
       document.getElementById('complaintIdBadge').textContent = complaint.id;
       document.getElementById('complaintTitle').textContent = complaint.title;
       document.getElementById('statusBadgeContainer').innerHTML = `<span class="status-badge status-${complaint.status}" style="font-size:0.92rem; padding: 6px 14px;">${complaint.status === 'resolved' ? 'Decision Concluded' : 'Committee Review'}</span>`;
 
-      // Metadata
       document.getElementById('valStudentName').textContent = complaint.studentName;
       document.getElementById('valStudentId').textContent = complaint.studentId;
       document.getElementById('valDepartment').textContent = complaint.department;
@@ -195,7 +182,7 @@
       document.getElementById('valCategory').textContent = complaint.category;
       document.getElementById('valSeverity').innerHTML = complaint.severity === 'serious'
         ? `<span class="severity-badge severity-serious">Serious Misconduct</span>`
-        : `<span class="badge" style="background:#f1f5f9; color:#475569;">Normal</span>`;
+        : `<span class="severity-badge severity-normal">Normal</span>`;
       document.getElementById('valTeacher').textContent = complaint.assignedTeacher || 'Faculty Course Instructor';
       document.getElementById('valDate').textContent = complaint.submittedDate;
       document.getElementById('valMessage').textContent = complaint.message;
@@ -209,28 +196,26 @@
         document.getElementById('valCommitteeDecisionText').textContent = complaint.committeeDecision;
       }
 
-      // Timeline
       const timelineEl = document.getElementById('timelineList');
       timelineEl.innerHTML = complaint.timeline.map(item => `
         <div class="timeline-item">
           <div class="timeline-marker"></div>
           <div class="timeline-content">
             <div class="timeline-header">
-              <span>${item.title}</span>
+              <span class="timeline-title">${item.title}</span>
               <span class="timeline-time">${item.time}</span>
             </div>
-            <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">${item.text}</p>
+            <p class="timeline-text">${item.text}</p>
           </div>
         </div>
       `).join('');
 
-      // Actions
       const actionsEl = document.getElementById('dossierActionButtons');
       if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
         const renderBtn = document.createElement('a');
         renderBtn.href = `committee_decision.html?id=${complaint.id}`;
         renderBtn.className = 'btn btn-danger';
-        renderBtn.textContent = 'Render Statutory Decision';
+        renderBtn.textContent = 'Register Committee Meeting Decision';
         actionsEl.appendChild(renderBtn);
       }
     });

@@ -11,16 +11,21 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>All Complaints - Ambo University Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -28,9 +33,15 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
@@ -43,10 +54,9 @@
         <p>Comprehensive register of all student submissions, teacher assignments, and resolution statuses.</p>
       </div>
 
-      <!-- Filters & Search Toolbar -->
       <div class="card" style="padding: 18px 24px;">
         <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
-          <!-- Filter Buttons -->
+          
           <div style="display: flex; gap: 8px; flex-wrap: wrap;" id="adminFilterPills">
             <button class="btn btn-sm btn-secondary active-filter" data-status="all">All Complaints</button>
             <button class="btn btn-sm btn-secondary" data-status="pending">Pending</button>
@@ -57,7 +67,6 @@
             <button class="btn btn-sm btn-secondary" data-status="declined">Declined</button>
           </div>
 
-          <!-- Department Filter & Search -->
           <div style="display: flex; gap: 10px; align-items: center; flex: 1 1 300px; justify-content: flex-end; flex-wrap: wrap;">
             <select id="departmentFilter" style="max-width: 180px; padding: 7px 10px; font-size: 0.88rem;">
               <option value="all">All Departments</option>
@@ -71,7 +80,6 @@
         </div>
       </div>
 
-      <!-- Table Card -->
       <div class="card">
         <div class="table-responsive">
           <table class="data-table">
@@ -89,7 +97,7 @@
               </tr>
             </thead>
             <tbody id="allComplaintsTableBody">
-              <!-- Dynamically populated -->
+              
             </tbody>
           </table>
         </div>
@@ -104,14 +112,12 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       let activeFilter = urlParams.get('status') || 'all';
       let selectedDept = 'all';
       let searchQuery = '';
 
-      // Initialize filter buttons if status in URL
       const pillsContainer = document.getElementById('adminFilterPills');
       if (activeFilter !== 'all') {
         pillsContainer.querySelectorAll('button').forEach(btn => {
@@ -176,7 +182,7 @@
             <tr>
               <td><strong>${c.id}</strong></td>
               <td>${c.studentName}</td>
-              <td><a href="complaint_details.html?id=${c.id}" style="font-weight:600; color: #111827;">${c.title}</a></td>
+              <td><a href="complaint_details.html?id=${c.id}" class="table-link">${c.title}</a></td>
               <td>${c.course}</td>
               <td>${c.department}</td>
               <td>${statusBadge}</td>
@@ -192,7 +198,6 @@
         }).join('');
       }
 
-      // Filter listeners
       pillsContainer.addEventListener('click', (e) => {
         const btn = e.target.closest('button');
         if (!btn) return;
@@ -214,7 +219,6 @@
         render();
       });
 
-      // Debounced search input listener
       document.getElementById('adminSearchInput').addEventListener('input', window.AmboCMS.debounce((e) => {
         searchQuery = e.target.value.trim();
         render();

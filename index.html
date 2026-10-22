@@ -3,140 +3,624 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#24358B">
+  <meta name="theme-color" content="#1e3a8a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Ambo CMS">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-  <title>Ambo University - Student to Teacher Complaint Management System</title>
-  <link rel="stylesheet" href="assets/css/nav.css">
+  <title>Ambo University - Complaint Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #F1F4FD;
+    /* Split-Screen Official Gateway (Direction 2) */
+/* Direction 2: Split-Screen Official Gateway */
+    .portal-split-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 32px;
+      max-width: 1200px;
+      margin: 24px auto 60px;
+      align-items: stretch;
     }
-    .welcome-header {
-      text-align: center;
-      background-color: #24358B;
-      color: #ffffff;
+    @media (max-width: 920px) {
+      .portal-split-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Gateway Pane */
+    .portal-gateway-pane {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
       border-radius: 16px;
-      padding: 36px 16px;
-      margin: 28px 0 36px;
-      box-shadow: 0 8px 24px rgba(36, 53, 139, 0.22);
-    }
-    .welcome-header h1 {
-      margin: 0 0 10px;
-      font-size: 32px;
-      color: #ffffff;
-      font-weight: 700;
-    }
-    .welcome-header p {
-      margin: 0;
-      opacity: 0.92;
-      font-size: 16px;
-      color: #f9f9f9;
-    }
-    .comp {
-      text-align: center;
-      margin: 36px auto;
-      background: #ffffff;
-      padding: 36px 24px;
-      width: 100%;
-      max-width: 440px;
-      border-radius: 16px;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.07);
-    }
-    .comp h2 {
-      margin-bottom: 8px;
-      font-size: 24px;
-      color: #111827;
-      font-weight: 700;
-    }
-    .comp p {
-      margin-top: 4px;
-      margin-bottom: 22px;
-      color: #6B7280;
-      font-size: 15px;
-    }
-    .comp .btn-action {
-      background: #2563EB;
-      padding: 12px 26px;
-      border-radius: 10px;
-      border: none;
-      color: white;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.25s ease;
-      cursor: pointer;
-    }
-    .comp .btn-action:hover {
-      background: #1D4ED8;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
-    }
-    .Cards {
+      padding: 34px 30px;
+      box-shadow: var(--shadow-md);
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .portal-crest-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .portal-crest-img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+    .portal-institution-titles h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+    .portal-institution-titles p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin: 3px 0 0;
+      font-weight: 500;
+    }
+
+    .portal-main-heading {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0 0 10px;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+    .portal-main-sub {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin: 0 0 24px;
+    }
+
+    /* Production-grade Institutional Login & Access Form */
+    .gateway-auth-box {
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 24px;
+    }
+    .gateway-auth-box h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0 0 4px;
+    }
+    .gateway-auth-box p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin: 0 0 16px;
+    }
+
+    .gateway-charter-note {
+      border-top: 1px solid var(--border-color);
+      padding-top: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+    .gateway-charter-note svg {
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Right Checkpoint & Status Pane */
+    .portal-info-pane {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .portal-timeline-card {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 34px 30px;
+      box-shadow: var(--shadow-md);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .portal-timeline-card h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0 0 8px;
+    }
+    .portal-timeline-card p.timeline-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin: 0 0 28px;
+      line-height: 1.5;
+    }
+
+    .checkpoints-list {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      position: relative;
+      padding-left: 14px;
+      flex: 1;
       justify-content: center;
-      gap: 22px;
-      max-width: 1050px;
-      margin: 36px auto 48px;
+    }
+    .checkpoints-list::before {
+      content: '';
+      position: absolute;
+      top: 14px;
+      bottom: 14px;
+      left: 27px;
+      width: 2px;
+      background: var(--border-color);
+    }
+
+    .checkpoint-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      position: relative;
+    }
+    .checkpoint-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.76rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      z-index: 1;
+      border: 3px solid var(--surface);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+    }
+    .checkpoint-content h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0 0 4px;
+    }
+    .checkpoint-content p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .timeline-footer-link {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.84rem;
+    }
+  
+    /* ==========================================================================
+       Authenticated Home Hub (Personalized View after Login)
+       ========================================================================== */
+    .auth-home-section {
+      margin-top: 8px;
+      margin-bottom: 48px;
+    }
+
+    .auth-welcome-banner {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+      border-radius: 16px;
+      padding: 28px 32px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.22);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       flex-wrap: wrap;
     }
-    .Card {
-      flex: 1 1 280px;
-      background: #ffffff;
-      padding: 26px 20px;
-      border-radius: 14px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-      text-align: center;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    .auth-welcome-banner.committee-banner {
+      background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
+      box-shadow: 0 10px 25px -5px rgba(127, 29, 29, 0.25);
     }
-    .Card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+
+    .auth-user-identity {
+      display: flex;
+      align-items: center;
+      gap: 18px;
     }
-    .Card h3 {
-      margin-bottom: 10px;
-      font-size: 20px;
-      color: #111827;
+
+    .auth-user-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      color: #ffffff;
+      font-size: 1.55rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      backdrop-filter: blur(6px);
+    }
+
+    .auth-user-meta h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .auth-user-meta p {
+      font-size: 0.90rem;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .auth-user-role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 0.76rem;
       font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
-    .Card p {
-      color: #4b5563;
-      font-size: 14px;
-      line-height: 1.55;
+
+    .auth-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .auth-metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .auth-metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .auth-metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .auth-metric-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .auth-metric-card.action-card {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.02) 100%);
+      border: 1px dashed var(--primary);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .auth-metric-card.action-card:hover {
+      background: rgba(37, 99, 235, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .auth-metric-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 6px;
+    }
+
+    .auth-metric-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .auth-recent-box {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 24px 26px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .auth-recent-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .auth-recent-header h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
       margin: 0;
     }
-    @media (max-width: 768px) {
-      .welcome-header {
-        padding: 24px 14px;
-        margin: 18px 0 24px;
-      }
-      .welcome-header h1 {
-        font-size: 24px;
-      }
-      .comp {
-        margin: 20px auto;
-        padding: 24px 18px;
-      }
-      .Card {
-        flex: 1 1 100%;
+
+    .auth-complaint-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .auth-complaint-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+      flex-wrap: wrap;
+    }
+
+    .auth-complaint-item:hover {
+      border-color: var(--primary);
+      transform: translateX(2px);
+    }
+
+    .auth-complaint-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .auth-complaint-id {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--primary);
+    }
+
+    .auth-complaint-title {
+      font-weight: 600;
+      color: var(--text-main);
+      font-size: 0.94rem;
+      margin: 0 0 2px;
+    }
+
+    .auth-complaint-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .auth-complaint-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .auth-shortcuts-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+    }
+
+    .auth-shortcuts-label {
+      font-size: 0.80rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-right: 6px;
+    }
+
+    .auth-shortcut-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-main);
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .auth-shortcut-pill:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      text-decoration: none;
+    }
+
+    .auth-shortcut-pill.primary {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .auth-shortcut-pill.primary:hover {
+      background: var(--primary-hover);
+    }
+
+    /* ==========================================================================
+       Workflow Section (The 4 Lifecycle Stages)
+       ========================================================================== */
+    .home-workflow-section {
+      max-width: 1140px;
+      margin: 0 auto 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .workflow-stepper-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 960px) {
+      .workflow-stepper-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
-  </style>
+
+    @media (max-width: 540px) {
+      .workflow-stepper-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .workflow-step-card {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .workflow-step-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+    }
+
+    .workflow-step-card.highlight {
+      border-color: rgba(37, 99, 235, 0.4);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-alt) 100%);
+    }
+
+    .workflow-step-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .workflow-step-num {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      opacity: 0.85;
+    }
+
+    .workflow-step-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--primary-subtle);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .workflow-step-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .workflow-step-card p {
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+      margin: 0;
+      flex: 1;
+    }
+
+    .step-meta-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      padding-top: 10px;
+      border-top: 1px solid var(--border-color);
+      display: block;
+    }
+
+    /* ==========================================================================
+       Submission Guide & Admissibility Criteria Matrix
+       ========================================================================== */
+    </style>
 </head>
 <body>
-
-  <!-- Navigation -->
+  
   <nav class="main-nav">
     <div class="nav-container">
       <a href="index.html" class="nav-brand">
-        <img src="assets/images/logo.jpg" alt="Ambo University Logo">
+        <img src="assets/images/logo.png" alt="Ambo University Logo">
         <div class="brand-info">
           <span class="brand-title">Ambo University</span>
           <span class="brand-subtitle">Complaint Management System</span>
@@ -144,46 +628,153 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">🌙</button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
         <div id="navUserBadge"></div>
-        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">☰</button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
 
   <main class="main-content">
     <div class="container">
-      <!-- Style A: Welcome Header -->
-      <div class="welcome-header">
-        <h1>Welcome to Ambo University Complaint Management System</h1>
-        <p>Your gateway to efficient and effective complaint resolution</p>
-      </div>
 
-      <!-- Style A: Floating Action Card -->
-      <div class="comp">
-        <h2>Complaint Management System</h2>
-        <p>Better future through Knowledge</p>
-        <a id="primaryAction" href="login.html" class="btn-action">
-          <span id="primaryActionText">Login to Continue</span>
-        </a>
-      </div>
+      <section class="portal-split-layout" id="guestHeroSection">
+        
+        <div class="portal-gateway-pane">
+          <div>
+            <div class="portal-crest-header">
+              <img src="assets/images/logo.png" alt="Ambo Crest" class="portal-crest-img">
+              <div class="portal-institution-titles">
+                <h2>Ambo University</h2>
+                <p>Office of Academic Affairs &bull; Academic Appeals Office</p>
+              </div>
+            </div>
 
-      <!-- Style A: 3 Cards -->
-      <div class="Cards">
-        <div class="Card">
-          <h3>📊 Track</h3>
-          <p>Monitor your complaints easily with real-time status updates and transparent timelines.</p>
+            <h1 class="portal-main-heading">Academic Complaint Resolution Gateway</h1>
+            <p class="portal-main-sub">The official channel for undergraduate and postgraduate students to submit and resolve exam mark errors, grading disputes, and course assessment issues.</p>
+
+            <div class="gateway-auth-box">
+              <h4>Institutional Portal Sign In</h4>
+              <p>Enter your Student ID (<code>ugr/xxxxx/xx</code>) or Faculty Staff username:</p>
+
+              <form id="gatewayLoginForm" style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label for="gatewayUsername" style="font-size: 0.8rem; font-weight: 600; color: var(--text-main); margin-bottom: 4px; display: block;">Institutional ID / Username</label>
+                  <input type="text" id="gatewayUsername" placeholder="e.g. ugr/12345/16 or eyuel" required style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.9rem; background: var(--surface); color: var(--text-main);">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label for="gatewayPassword" style="font-size: 0.8rem; font-weight: 600; color: var(--text-main); margin-bottom: 4px; display: block;">Password</label>
+                  <input type="password" id="gatewayPassword" placeholder="Enter your password" required style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.9rem; background: var(--surface); color: var(--text-main);">
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%; justify-content: center; padding: 11px 18px; font-size: 0.92rem; margin-top: 4px;">
+                  <span>Sign In to Portal &rarr;</span>
+                </button>
+              </form>
+
+              <div style="display: flex; align-items: center; justify-content: flex-end; margin-top: 14px; font-size: 0.82rem;">
+                <a href="submission_guide.html" style="color: var(--text-muted); text-decoration: none; font-weight: 500;">Read Senate Guidelines &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="gateway-charter-note">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <div>
+              <strong>Senate Anti-Retaliation Protection:</strong> Submitting a documented assessment dispute is an official student right. All grade adjustments require Department Head confirmation and are permanently sealed in the audit registry.
+            </div>
+          </div>
         </div>
-        <div class="Card">
-          <h3>🔒 Secure</h3>
-          <p>Your complaints remain protected, authenticated, and handled safely under university standards.</p>
+
+        <div class="portal-info-pane">
+          
+          <div class="portal-timeline-card">
+            <div>
+              <h3>The 3 Steps to Complaint Resolution</h3>
+              <p class="timeline-sub">Every case moves through three auditable checkpoints to ensure fairness and procedural integrity:</p>
+
+              <div class="checkpoints-list">
+                <div class="checkpoint-item">
+                  <div class="checkpoint-dot">1</div>
+                  <div class="checkpoint-content">
+                    <h4>Submission &amp; Evidence Review</h4>
+                    <p>Student registers the course code, assessment type, and original marked quiz or exam script showing the arithmetic or rubric discrepancy.</p>
+                  </div>
+                </div>
+
+                <div class="checkpoint-item">
+                  <div class="checkpoint-dot">2</div>
+                  <div class="checkpoint-content">
+                    <h4>Independent Academic Review</h4>
+                    <p>Course lecturer evaluates the script against the published answer key. Serious misconduct bypasses the department directly to the Senate Disciplinary Committee.</p>
+                  </div>
+                </div>
+
+                <div class="checkpoint-item">
+                  <div class="checkpoint-dot">3</div>
+                  <div class="checkpoint-content">
+                    <h4>Department Confirmation &amp; Registrar Update</h4>
+                    <p>Department Head verifies the resolution and certifies any grade amendment before submitting it to the University Registrar.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-footer-link">
+              <span style="color: var(--text-muted);">Need step-by-step submission instructions?</span>
+              <a href="submission_guide.html" style="color: var(--primary); font-weight: 700; text-decoration: none;">View Process Guide &rarr;</a>
+            </div>
+          </div>
         </div>
-        <div class="Card">
-          <h3>⚡ Fast</h3>
-          <p>We process your complaints quickly and route them directly without unnecessary delays.</p>
+      </section>
+
+      <section class="auth-home-section" id="authHomeSection" style="display: none;">
+        
+        <div class="auth-welcome-banner" id="authWelcomeBanner">
+          <div class="auth-user-identity">
+            <div class="auth-user-avatar" id="authAvatar">U</div>
+            <div class="auth-user-meta">
+              <h2 id="authGreeting">Welcome back, Abebe Kebede</h2>
+              <p id="authMetaLine">
+                <span id="authIdLine">Student ID: ugr/12345/16</span>
+                <span>&bull;</span>
+                <span id="authDeptLine">Department: Information Technology</span>
+              </p>
+            </div>
+          </div>
+          <span class="auth-user-role-badge" id="authRoleTag">Student Portal</span>
         </div>
+
+        <div class="auth-metrics-grid" id="authMetricsGrid">
+          
+        </div>
+
+        <div class="auth-recent-box" id="authRecentBox">
+          <div class="auth-recent-header">
+            <h3 id="authRecentTitle">Your Active Complaints</h3>
+            <a id="authRecentViewAllBtn" href="my_complaints.html" class="btn btn-secondary" style="font-size: 0.84rem; padding: 6px 14px;">View All on Dashboard &rarr;</a>
+          </div>
+          <div class="auth-complaint-cards" id="authRecentList">
+            
+          </div>
+        </div>
+
+        <div class="auth-shortcuts-bar" id="authShortcutsBar">
+          <span class="auth-shortcuts-label">Academic Shortcuts:</span>
+          
+        </div>
+      </section>
+
       </div>
-    </div>
   </main>
 
   <footer class="site-footer">
@@ -196,27 +787,353 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const user = window.AmboCMS.getCurrentUser();
-      const primaryAction = document.getElementById('primaryAction');
-      const primaryActionText = document.getElementById('primaryActionText');
+  <script>    document.addEventListener('DOMContentLoaded', () => {
+      const cms = window.AmboCMS;
+      const user = cms.getCurrentUser();
+      const allComplaints = cms.getComplaints();
 
-      if (!user) {
-        if (primaryActionText) primaryActionText.textContent = 'Login to Continue';
-        if (primaryAction) primaryAction.href = 'login.html';
-      } else if (user.role === 'student') {
-        if (primaryActionText) primaryActionText.textContent = 'Submit Your Complaint';
-        if (primaryAction) primaryAction.href = 'submit_complaint.html';
-      } else if (user.role === 'teacher') {
-        if (primaryActionText) primaryActionText.textContent = 'View Assigned Complaints';
-        if (primaryAction) primaryAction.href = 'teacher_dashboard.html';
-      } else if (user.role === 'admin') {
-        if (primaryActionText) primaryActionText.textContent = 'Open Admin Panel';
-        if (primaryAction) primaryAction.href = 'admin_dashboard.html';
-      } else if (user.role === 'committee') {
-        if (primaryActionText) primaryActionText.textContent = 'Open Committee Docket';
-        if (primaryAction) primaryAction.href = 'committee_dashboard.html';
+      const guestHero = document.getElementById('guestHeroSection');
+      const authHome = document.getElementById('authHomeSection');
+      const guestRoles = document.getElementById('guestRolesSection');
+
+      const gatewayForm = document.getElementById('gatewayLoginForm');
+      if (gatewayForm) {
+        gatewayForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const username = document.getElementById('gatewayUsername').value.trim();
+          let role = 'student';
+          let name = 'Abebe Kebede';
+          let studentId = username;
+
+          if (username.toLowerCase().includes('eyuel') || username.toLowerCase().includes('teach')) {
+            role = 'teacher';
+            name = 'Mr. Eyuel';
+            studentId = null;
+          } else if (username.toLowerCase().includes('admin') || username.toLowerCase().includes('tadesse')) {
+            role = 'admin';
+            name = 'Dr. Tadesse';
+            studentId = null;
+          } else if (username.toLowerCase().includes('daniel') || username.toLowerCase().includes('udc') || username.toLowerCase().includes('commit')) {
+            role = 'committee';
+            name = 'Dr. Daniel';
+            studentId = null;
+          }
+
+          cms.setCurrentUser({
+            username: username,
+            name: name,
+            role: role,
+            studentId: role === 'student' ? (username.includes('/') ? username : 'ugr/12345/16') : null,
+            department: 'Information Technology'
+          });
+
+          cms.showToast(`Welcome, ${name}! Signed in successfully.`, 'success');
+
+          setTimeout(() => {
+            if (role === 'student') window.location.href = 'student_dashboard.html';
+            else if (role === 'teacher') window.location.href = 'teacher_dashboard.html';
+            else if (role === 'admin') window.location.href = 'admin_dashboard.html';
+            else if (role === 'committee') window.location.href = 'committee_dashboard.html';
+          }, 350);
+        });
+      }
+
+      if (user) {
+        if (guestHero) guestHero.style.display = 'none';
+        if (guestRoles) guestRoles.style.display = 'none';
+        if (authHome) authHome.style.display = 'block';
+
+        renderAuthenticatedHome(user, allComplaints);
+      } else {
+        if (guestHero) guestHero.style.display = 'flex';
+        if (guestRoles) guestRoles.style.display = 'block';
+        if (authHome) authHome.style.display = 'none';
+      }
+
+      function renderAuthenticatedHome(currentUser, complaints) {
+        const avatarEl = document.getElementById('authAvatar');
+        const greetingEl = document.getElementById('authGreeting');
+        const idLineEl = document.getElementById('authIdLine');
+        const deptLineEl = document.getElementById('authDeptLine');
+        const roleTagEl = document.getElementById('authRoleTag');
+        const bannerEl = document.getElementById('authWelcomeBanner');
+        const metricsGrid = document.getElementById('authMetricsGrid');
+        const recentTitle = document.getElementById('authRecentTitle');
+        const recentViewAllBtn = document.getElementById('authRecentViewAllBtn');
+        const recentList = document.getElementById('authRecentList');
+        const shortcutsBar = document.getElementById('authShortcutsBar');
+
+        const initial = (currentUser.name || 'U').charAt(0).toUpperCase();
+        if (avatarEl) avatarEl.textContent = initial;
+
+        if (currentUser.role === 'student') {
+          greetingEl.textContent = `Welcome back, ${currentUser.name}`;
+          idLineEl.textContent = `Student ID: ${currentUser.studentId || 'ugr/12345/16'}`;
+          deptLineEl.textContent = `Department: ${currentUser.department || 'Information Technology'}`;
+          roleTagEl.textContent = 'Student Portal';
+          if (bannerEl) bannerEl.className = 'auth-welcome-banner';
+
+          const myComplaints = complaints.filter(c => 
+            c.studentName === currentUser.name || 
+            (c.studentId && c.studentId === currentUser.studentId) ||
+            (currentUser.name === 'Abebe Kebede' && (c.studentName || '').includes('Abebe'))
+          );
+
+          const totalCount = myComplaints.length;
+          const activeCount = myComplaints.filter(c => {
+            const st = cms.getDisplayStatus(c.status, 'student');
+            return st === 'pending' || st === 'in_progress' || st === 'escalated';
+          }).length;
+          const resolvedCount = myComplaints.filter(c => c.status === 'resolved').length;
+
+          metricsGrid.innerHTML = `
+            <div class="auth-metric-card">
+              <span class="auth-metric-val">${totalCount}</span>
+              <span class="auth-metric-label">Total Complaints Submitted</span>
+            </div>
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #ea580c;">${activeCount}</span>
+              <span class="auth-metric-label">Under Active Review</span>
+            </div>
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #10b981;">${resolvedCount}</span>
+              <span class="auth-metric-label">Resolved Complaints</span>
+            </div>
+            <a href="submit_complaint.html" class="auth-metric-card action-card">
+              <span style="font-size: 1.5rem; color: var(--primary); margin-bottom: 4px;">+</span>
+              <span class="auth-metric-label" style="color: var(--primary);">File New Complaint</span>
+            </a>
+          `;
+
+          recentTitle.textContent = 'Your Active Complaints';
+          recentViewAllBtn.href = 'my_complaints.html';
+          recentViewAllBtn.textContent = 'View All on Dashboard →';
+
+          if (myComplaints.length === 0) {
+            recentList.innerHTML = `
+              <div style="text-align: center; padding: 24px; color: var(--text-muted); font-size: 0.92rem;">
+                You currently have no registered complaints. Use the button above to submit a new complaint if needed.
+              </div>
+            `;
+          } else {
+            recentList.innerHTML = myComplaints.slice(0, 4).map(c => {
+              const displayStatus = cms.getDisplayStatus(c.status, 'student');
+              const statusLabel = cms.getStatusLabel(c.status, 'student');
+              return `
+                <div class="auth-complaint-item">
+                  <div class="auth-complaint-info">
+                    <span class="auth-complaint-id">${c.id}</span>
+                    <div>
+                      <h4 class="auth-complaint-title">${c.title}</h4>
+                      <p class="auth-complaint-meta">${c.department} &bull; Course: <strong>${c.course}</strong> &bull; Filed: ${c.date}</p>
+                    </div>
+                  </div>
+                  <div class="auth-complaint-actions">
+                    <span class="status-badge status-${displayStatus}">${statusLabel}</span>
+                    <a href="complaint_details.html?id=${c.id}" class="btn btn-secondary btn-sm" style="font-size: 0.8rem; padding: 4px 10px;">Details &rarr;</a>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          }
+
+          shortcutsBar.innerHTML = `
+            <span class="auth-shortcuts-label">Academic Shortcuts:</span>
+            <a href="submit_complaint.html" class="auth-shortcut-pill primary">+ File Academic Complaint</a>
+            <a href="my_complaints.html" class="auth-shortcut-pill">My Complaints Timeline</a>
+            <a href="student_dashboard.html" class="auth-shortcut-pill">Student Dashboard</a>
+            <a href="#workflowSection" class="auth-shortcut-pill">Review Complaint SLAs &amp; Guide</a>
+          `;
+
+        } else if (currentUser.role === 'teacher') {
+          greetingEl.textContent = `Welcome, ${currentUser.name}`;
+          idLineEl.textContent = `Staff ID: ${currentUser.staffId || 'FAC/4891/08'}`;
+          deptLineEl.textContent = `Faculty of Informatics &bull; IP &amp; SAD Lecturer`;
+          roleTagEl.textContent = 'Faculty Portal';
+          if (bannerEl) bannerEl.className = 'auth-welcome-banner';
+
+          const assigned = complaints.filter(c => 
+            c.assignedTeacher === currentUser.name ||
+            c.status === 'in_progress' ||
+            c.status === 'assigned'
+          );
+          const awaitingResponse = assigned.filter(c => c.status === 'assigned' || c.status === 'in_progress').length;
+          const resolved = complaints.filter(c => c.status === 'resolved').length;
+
+          metricsGrid.innerHTML = `
+            <div class="auth-metric-card">
+              <span class="auth-metric-val">${assigned.length}</span>
+              <span class="auth-metric-label">Assigned In Queue</span>
+            </div>
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #ea580c;">${awaitingResponse}</span>
+              <span class="auth-metric-label">Awaiting Your Reply</span>
+            </div>
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #10b981;">${resolved}</span>
+              <span class="auth-metric-label">Resolved / Closed</span>
+            </div>
+            <a href="teacher_dashboard.html#assignedTable" class="auth-metric-card action-card">
+              <span style="font-size: 1.5rem; color: var(--primary); margin-bottom: 4px;">&rarr;</span>
+              <span class="auth-metric-label" style="color: var(--primary);">Open Assigned Queue</span>
+            </a>
+          `;
+
+          recentTitle.textContent = 'Cases Requiring Your Faculty Clarification';
+          recentViewAllBtn.href = 'teacher_dashboard.html';
+          recentViewAllBtn.textContent = 'Go to Teacher Dashboard →';
+
+          if (assigned.length === 0) {
+            recentList.innerHTML = `<div style="text-align:center; padding: 24px; color: var(--text-muted);">No complaints currently assigned to you.</div>`;
+          } else {
+            recentList.innerHTML = assigned.slice(0, 4).map(c => `
+              <div class="auth-complaint-item">
+                <div class="auth-complaint-info">
+                  <span class="auth-complaint-id">${c.id}</span>
+                  <div>
+                    <h4 class="auth-complaint-title">${c.title}</h4>
+                    <p class="auth-complaint-meta">Student: <strong>${c.studentName}</strong> &bull; Course: ${c.course} &bull; Urgency: ${c.urgency}</p>
+                  </div>
+                </div>
+                <div class="auth-complaint-actions">
+                  <span class="status-badge status-${c.status}">${cms.getStatusLabel(c.status, 'teacher')}</span>
+                  <a href="teacher_respond.html?id=${c.id}" class="btn btn-sm btn-primary" style="font-size: 0.8rem; padding: 4px 10px;">Respond &rarr;</a>
+                </div>
+              </div>
+            `).join('');
+          }
+
+          shortcutsBar.innerHTML = `
+            <span class="auth-shortcuts-label">Faculty Shortcuts:</span>
+            <a href="teacher_dashboard.html#assignedTable" class="auth-shortcut-pill primary">Assigned Queue (${assigned.length})</a>
+            <a href="teacher_dashboard.html" class="auth-shortcut-pill">Faculty Dashboard</a>
+            <a href="#workflowSection" class="auth-shortcut-pill">Standard Operating Workflow</a>
+          `;
+
+        } else if (currentUser.role === 'admin') {
+          greetingEl.textContent = `Welcome, ${currentUser.name}`;
+          idLineEl.textContent = `Administration Authority: Dean of Academic Affairs`;
+          deptLineEl.textContent = `Department Administrator`;
+          roleTagEl.textContent = 'Administration';
+          if (bannerEl) bannerEl.className = 'auth-welcome-banner';
+
+          const pendingTriage = complaints.filter(c => c.status === 'pending').length;
+          const awaitingConfirm = complaints.filter(c => c.status === 'needs_confirmation').length;
+          const escalated = complaints.filter(c => c.status === 'escalated' || c.status === 'committee_review').length;
+
+          metricsGrid.innerHTML = `
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #dc2626;">${pendingTriage}</span>
+              <span class="auth-metric-label">Pending Triage</span>
+            </div>
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #d97706;">${awaitingConfirm}</span>
+              <span class="auth-metric-label">Needs Confirmation</span>
+            </div>
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #7f1d1d;">${escalated}</span>
+              <span class="auth-metric-label">Escalated to UDC</span>
+            </div>
+            <a href="admin_all_complaints.html" class="auth-metric-card action-card">
+              <span style="font-size: 1.5rem; color: var(--primary); margin-bottom: 4px;">&rarr;</span>
+              <span class="auth-metric-label" style="color: var(--primary);">All Complaints Log</span>
+            </a>
+          `;
+
+          recentTitle.textContent = 'Priority Triage & Confirmation Queue';
+          recentViewAllBtn.href = 'admin_dashboard.html';
+          recentViewAllBtn.textContent = 'Admin Dashboard →';
+
+          const actionable = complaints.filter(c => c.status === 'pending' || c.status === 'needs_confirmation');
+          if (actionable.length === 0) {
+            recentList.innerHTML = `<div style="text-align:center; padding: 24px; color: var(--text-muted);">No pending triage or confirmation tasks at this time.</div>`;
+          } else {
+            recentList.innerHTML = actionable.slice(0, 4).map(c => `
+              <div class="auth-complaint-item">
+                <div class="auth-complaint-info">
+                  <span class="auth-complaint-id">${c.id}</span>
+                  <div>
+                    <h4 class="auth-complaint-title">${c.title}</h4>
+                    <p class="auth-complaint-meta">Student: ${c.studentName} &bull; Dept: ${c.department} &bull; Course: ${c.course}</p>
+                  </div>
+                </div>
+                <div class="auth-complaint-actions">
+                  <span class="status-badge status-${c.status}">${cms.getStatusLabel(c.status, 'admin')}</span>
+                  ${c.status === 'pending' 
+                    ? `<a href="admin_assign.html?id=${c.id}" class="btn btn-sm btn-primary" style="font-size:0.8rem; padding:4px 10px;">Assign &rarr;</a>` 
+                    : `<a href="admin_confirm.html?id=${c.id}" class="btn btn-sm btn-secondary" style="font-size:0.8rem; padding:4px 10px;">Review &rarr;</a>`}
+                </div>
+              </div>
+            `).join('');
+          }
+
+          shortcutsBar.innerHTML = `
+            <span class="auth-shortcuts-label">Admin Shortcuts:</span>
+            <a href="admin_dashboard.html" class="auth-shortcut-pill primary">Admin Triage Dashboard</a>
+            <a href="admin_all_complaints.html" class="auth-shortcut-pill">Complete Complaints Ledger</a>
+            <a href="#workflowSection" class="auth-shortcut-pill">Admissibility Guidelines</a>
+          `;
+
+        } else if (currentUser.role === 'committee') {
+          greetingEl.textContent = `Welcome, ${currentUser.name}`;
+          idLineEl.textContent = `Committee Member &bull; Staff ID: ${currentUser.staffId || 'UDC/7710/05'}`;
+          deptLineEl.textContent = `Authority: University Disciplinary Committee (UDC)`;
+          roleTagEl.textContent = 'Statutory Committee';
+          if (bannerEl) bannerEl.className = 'auth-welcome-banner committee-banner';
+
+          const activeDocket = complaints.filter(c => c.status === 'escalated' || c.status === 'committee_review');
+          const resolved = complaints.filter(c => c.status === 'resolved');
+
+          metricsGrid.innerHTML = `
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #7f1d1d;">${activeDocket.length}</span>
+              <span class="auth-metric-label">Cases for Committee Review</span>
+            </div>
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #ea580c;">${activeDocket.filter(c => c.severity === 'serious').length}</span>
+              <span class="auth-metric-label">Direct Serious Referrals</span>
+            </div>
+            <div class="auth-metric-card">
+              <span class="auth-metric-val" style="color: #10b981;">${resolved.length}</span>
+              <span class="auth-metric-label">Resolved Complaints</span>
+            </div>
+            <a href="committee_dashboard.html" class="auth-metric-card action-card">
+              <span style="font-size: 1.5rem; color: #7f1d1d; margin-bottom: 4px;">&rarr;</span>
+              <span class="auth-metric-label" style="color: #7f1d1d;">Open UDC Docket</span>
+            </a>
+          `;
+
+          recentTitle.textContent = 'Escalated Complaints on Senate Committee Docket';
+          recentViewAllBtn.href = 'committee_dashboard.html';
+          recentViewAllBtn.textContent = 'Committee Docket →';
+
+          if (activeDocket.length === 0) {
+            recentList.innerHTML = `<div style="text-align:center; padding: 24px; color: var(--text-muted);">No cases currently pending on the Disciplinary Committee docket.</div>`;
+          } else {
+            recentList.innerHTML = activeDocket.slice(0, 4).map(c => `
+              <div class="auth-complaint-item">
+                <div class="auth-complaint-info">
+                  <span class="auth-complaint-id">${c.id}</span>
+                  <div>
+                    <h4 class="auth-complaint-title">${c.title}</h4>
+                    <p class="auth-complaint-meta">Student: ${c.studentName} &bull; Teacher: ${c.assignedTeacher || 'Pending'} &bull; Severity: <strong>${(c.severity || 'serious').toUpperCase()}</strong></p>
+                  </div>
+                </div>
+                <div class="auth-complaint-actions">
+                  <span class="status-badge status-${c.status}">${cms.getStatusLabel(c.status, 'committee')}</span>
+                  <a href="committee_complaint_details.html?id=${c.id}" class="btn btn-sm btn-secondary" style="font-size:0.8rem; padding:4px 10px;">Review & Record Decision &rarr;</a>
+                </div>
+              </div>
+            `).join('');
+          }
+
+          shortcutsBar.innerHTML = `
+            <span class="auth-shortcuts-label">Committee Shortcuts:</span>
+            <a href="committee_dashboard.html" class="auth-shortcut-pill primary" style="background:#7f1d1d; border-color:#7f1d1d;">Open Committee Docket</a>
+            <a href="committee_dashboard.html#docketTable" class="auth-shortcut-pill">Pending Meeting Decisions</a>
+            <a href="#workflowSection" class="auth-shortcut-pill">Senate Legislation Guidelines</a>
+          `;
+        }
       }
     });
   </script>
