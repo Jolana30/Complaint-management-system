@@ -206,6 +206,8 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
   flex-shrink: 0;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .theme-toggle-btn:hover {
@@ -245,6 +247,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
   }
 
   .nav-menu {
