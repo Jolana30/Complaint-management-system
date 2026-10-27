@@ -19,6 +19,186 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
+  <style>
+    :root {
+      --ambo-brand-navy: #1e3a8a;
+      --ambo-brand-blue: #2563eb;
+      --ambo-brand-cobalt: #1e40af;
+      --ambo-brand-amber: #f59e0b;
+      --ambo-brand-amber-hover: #d97706;
+      --ambo-brand-amber-subtle: rgba(245, 158, 11, 0.15);
+      --ambo-brand-subtle: #eff6ff;
+      --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .submit-header-banner {
+      background: radial-gradient(circle at 85% 25%, rgba(37, 99, 235, 0.35) 0%, transparent 60%), linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+      border-radius: 20px;
+      padding: 30px 34px;
+      color: #ffffff;
+      margin: 16px 0 28px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 20px 40px -10px rgba(30, 58, 138, 0.35);
+    }
+    .submit-header-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 50%, #f59e0b 100%);
+    }
+
+    .submit-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: var(--ambo-brand-amber);
+    }
+    .kicker-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ambo-brand-amber);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.9);
+      flex-shrink: 0;
+    }
+
+    .submit-header-banner h1 {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+    .submit-header-banner p {
+      font-size: 0.92rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 680px;
+      margin: 0 0 20px;
+      line-height: 1.55;
+    }
+
+    .submit-stepper-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+    .step-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+    .step-chip.active {
+      background: rgba(245, 158, 11, 0.25);
+      border-color: rgba(245, 158, 11, 0.6);
+      color: #fef3c7;
+    }
+    .step-chip-num {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.70rem;
+      font-weight: 800;
+    }
+    .step-chip.active .step-chip-num {
+      background: var(--ambo-brand-amber);
+      color: #1e3a8a;
+    }
+
+    .card-elevated {
+      background: var(--surface);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 34px 32px;
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), var(--shadow-sm);
+    }
+    @media (max-width: 640px) {
+      .card-elevated {
+        padding: 22px 18px;
+      }
+    }
+
+    .whistleblower-plate {
+      background: rgba(56, 189, 248, 0.06);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 22px;
+      transition: all 0.2s ease;
+    }
+    .whistleblower-plate:hover {
+      border-color: rgba(56, 189, 248, 0.45);
+      background: rgba(56, 189, 248, 0.09);
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+    }
+    .checkbox-label {
+      background: var(--surface-alt);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .checkbox-label:hover {
+      border-color: var(--ambo-brand-blue);
+      background: rgba(37, 99, 235, 0.04);
+    }
+
+    .btn-submit-action {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+      color: #ffffff;
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25);
+      transition: all 0.2s ease;
+      font-size: 0.92rem;
+    }
+    .btn-submit-action:hover {
+      background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
+    }
+  </style>
 </head>
 <body>
 
@@ -48,13 +228,32 @@
 
   <main class="main-content">
     <div class="container container-narrow">
-      <div class="page-header">
-        <span class="header-badge">Complaint Filing</span>
-        <h1>Submit Academic Complaint</h1>
-        <p>Provide specific and verifiable details so your department can review and route your complaint promptly.</p>
-      </div>
+      <!-- Elevated Institutional Intake Banner -->
+      <section class="submit-header-banner">
+        <div class="submit-kicker">
+          <span class="kicker-dot"></span>
+          <span>Academic Appeals Office &bull; Senate Protected Intake</span>
+        </div>
+        <h1>Formal Academic &amp; Assessment Appeal</h1>
+        <p>Register continuous assessment discrepancies, exam mark arithmetic errors, or departmental grievances. Submissions are auditable and protected under Senate anti-retaliation rules.</p>
+        
+        <div class="submit-stepper-row">
+          <div class="step-chip active">
+            <span class="step-chip-num">1</span>
+            <span>Appeal Details &amp; Category</span>
+          </div>
+          <div class="step-chip">
+            <span class="step-chip-num">2</span>
+            <span>Documentary Evidence</span>
+          </div>
+          <div class="step-chip">
+            <span class="step-chip-num">3</span>
+            <span>Faculty &amp; Registrar Review</span>
+          </div>
+        </div>
+      </section>
 
-      <div class="card">
+      <div class="card card-elevated">
         <form id="complaintForm">
           
           <div class="form-row">
@@ -68,16 +267,16 @@
             </div>
           </div>
 
-          <div style="background: var(--surface-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 20px;">
+          <div class="whistleblower-plate">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-              <label for="anonymousToggle" style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin: 0; font-size: 0.88rem; font-weight: 600; color: var(--text-main);">
-                <input type="checkbox" id="anonymousToggle" name="isAnonymous" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
-                <span>Submit as Confidential Whistleblower (Mask my identity)</span>
+              <label for="anonymousToggle" style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin: 0; font-size: 0.88rem; font-weight: 700; color: var(--text-main);">
+                <input type="checkbox" id="anonymousToggle" name="isAnonymous" style="width: 18px; height: 18px; cursor: pointer; accent-color: #0284c7;">
+                <span>Submit as Confidential Whistleblower (Mask Complainant Identity)</span>
               </label>
-              <span style="font-size: 0.74rem; font-weight: 600; background: rgba(245, 158, 11, 0.12); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 4px;">Whistleblower Track</span>
+              <span style="font-size: 0.74rem; font-weight: 700; background: rgba(56, 189, 248, 0.15); color: #0284c7; border: 1px solid rgba(56, 189, 248, 0.35); padding: 3px 10px; border-radius: 999px;">Senate Masked Docket</span>
             </div>
-            <div id="anonymousNotice" style="display: none; margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; border-top: 1px dashed var(--border-color); padding-top: 8px;">
-              <strong>Whistleblower Privacy Notice:</strong> Your identity will be recorded as <em>[Anonymous Whistleblower]</em> on the official complaint dossier. Note: Individual exam/paper remarking cannot be processed anonymously because teachers require student credentials to locate scripts; this track is routed for departmental oversight and misconduct inquiry.
+            <div id="anonymousNotice" style="display: none; margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; border-top: 1px dashed rgba(56, 189, 248, 0.3); padding-top: 8px;">
+              <strong>Whistleblower Safeguard Protocol:</strong> Your identity will be masked as <em>[Anonymous Complainant]</em> on the departmental dossier. For mark recalculations, academic scripts are audited objectively under Department Academic Committee supervision to eliminate faculty bias.
             </div>
           </div>
 
@@ -102,7 +301,7 @@
                 <option value="SAD">System Analysis & Design (SAD) — Mr. Eyuel</option>
                 <option value="IP">Internet Programming (IP) — Mr. Eyuel</option>
                 <option value="DSA">Data Structures & Algorithms (DSA) — Dr. Daniel</option>
-                <option value="FDBS">Fundamentals of Database Systems (FDBS) — Dr. Tadesse</option>
+                <option value="FDBS">Fundamentals of Database Systems (FDBS) — Dept Faculty</option>
                 <option value="OS">Operating Systems (OS) — Mr. Bekele</option>
                 <option value="Discrete Maths">Discrete Mathematics — Dr. Worku</option>
                 <option value="Other">Other Academic Subject</option>
@@ -220,7 +419,7 @@
 
           <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
             <a href="student_dashboard.html" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn">Submit Complaint</button>
+            <button type="submit" class="btn btn-submit-action"><span>Submit Academic Appeal &rarr;</span></button>
           </div>
         </form>
 
