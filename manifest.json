@@ -35,7 +35,7 @@
     {
       "name": "Submit Complaint",
       "short_name": "Submit",
-      "description": "Lodge an academic or grading complaint",
+      "description": "Submit an academic or grading complaint",
       "url": "./submit_complaint.html",
       "icons": [{ "src": "assets/images/icon-192.png", "sizes": "192x192" }]
     },

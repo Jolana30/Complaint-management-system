@@ -68,6 +68,19 @@
             </div>
           </div>
 
+          <div style="background: var(--surface-alt); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+              <label for="anonymousToggle" style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin: 0; font-size: 0.88rem; font-weight: 600; color: var(--text-main);">
+                <input type="checkbox" id="anonymousToggle" name="isAnonymous" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary);">
+                <span>Submit as Confidential Whistleblower (Mask my identity)</span>
+              </label>
+              <span style="font-size: 0.74rem; font-weight: 600; background: rgba(245, 158, 11, 0.12); color: #d97706; border: 1px solid rgba(245, 158, 11, 0.3); padding: 3px 8px; border-radius: 4px;">Whistleblower Track</span>
+            </div>
+            <div id="anonymousNotice" style="display: none; margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; border-top: 1px dashed var(--border-color); padding-top: 8px;">
+              <strong>Whistleblower Privacy Notice:</strong> Your identity will be recorded as <em>[Anonymous Whistleblower]</em> on the official complaint dossier. Note: Individual exam/paper remarking cannot be processed anonymously because teachers require student credentials to locate scripts; this track is routed for departmental oversight and misconduct inquiry.
+            </div>
+          </div>
+
           <div class="form-row">
             <div class="form-group">
               <label for="department">Department <span class="required">*</span></label>
@@ -298,10 +311,26 @@
       const nameInput = document.getElementById('studentName');
       const idInput = document.getElementById('studentId');
       const deptInput = document.getElementById('department');
+      const anonToggle = document.getElementById('anonymousToggle');
+      const anonNotice = document.getElementById('anonymousNotice');
 
       if (nameInput) nameInput.value = user.name || 'Abebe Kebede';
       if (idInput) idInput.value = user.studentId || 'ugr/12345/16';
       if (deptInput && user.department) deptInput.value = user.department;
+
+      if (anonToggle) {
+        anonToggle.addEventListener('change', () => {
+          if (anonToggle.checked) {
+            if (nameInput) nameInput.value = '[Anonymous Whistleblower]';
+            if (idInput) idInput.value = 'ugr/ANON/2026';
+            if (anonNotice) anonNotice.style.display = 'block';
+          } else {
+            if (nameInput) nameInput.value = user.name || 'Abebe Kebede';
+            if (idInput) idInput.value = user.studentId || 'ugr/12345/16';
+            if (anonNotice) anonNotice.style.display = 'none';
+          }
+        });
+      }
 
       const incidentDateInput = document.getElementById('incidentDate');
       const today = new Date().toISOString().split('T')[0];

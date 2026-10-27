@@ -178,7 +178,7 @@
       }
 
       document.getElementById('complaintHeader').textContent = `${complaint.id}: ${complaint.title}`;
-      document.getElementById('valStudent').textContent = complaint.studentName;
+      document.getElementById('valStudent').textContent = complaint.isAnonymous ? '[Anonymous Whistleblower]' : complaint.studentName;
       document.getElementById('valCourse').textContent = complaint.course;
       document.getElementById('valDepartment').textContent = complaint.department;
       document.getElementById('valMessage').textContent = complaint.message;

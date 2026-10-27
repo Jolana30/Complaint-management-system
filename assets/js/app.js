@@ -218,6 +218,7 @@
       submittedDate: dateStr,
       incidentDate: data.incidentDate || dateStr,
       attachmentName: data.attachmentName || null,
+      isAnonymous: data.isAnonymous || false,
       timeline: timeline
     };
 
@@ -245,6 +246,7 @@
     if (updates.committeeDecision !== undefined) item.committeeDecision = updates.committeeDecision;
     if (updates.incidentDate !== undefined) item.incidentDate = updates.incidentDate;
     if (updates.attachmentName !== undefined) item.attachmentName = updates.attachmentName;
+    if (updates.isAnonymous !== undefined) item.isAnonymous = updates.isAnonymous;
 
     if (updates.timelineEvent) {
       item.timeline.push({
