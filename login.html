@@ -170,7 +170,14 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>    document.addEventListener('DOMContentLoaded', () => {
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('loginForm');
+      const pwdInput = document.getElementById('password');
+      const pwdToggle = document.getElementById('pwdToggle');
+      const roleSelect = document.getElementById('userRole');
+      const preRole = new URLSearchParams(window.location.search).get('role');
+      if (preRole && roleSelect) roleSelect.value = preRole;
       const loginForm = document.getElementById('loginForm');
       const pwdInput = document.getElementById('password');
       const pwdToggle = document.getElementById('pwdToggle');

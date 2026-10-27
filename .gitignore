@@ -37,3 +37,10 @@ Thumbs.db
 AGENTS.md
 GEMINI.md
 skills-lock.json
+
+# Prototypes & Local Dev Preview Servers
+preview_option_a/
+preview_option_b/
+index_option_a.html
+index_option_b.html
+serve_both.py
