@@ -63,7 +63,8 @@
             <button class="btn btn-sm btn-secondary" data-status="in_progress">In Progress</button>
             <button class="btn btn-sm btn-secondary" data-status="needs_confirmation">Needs Confirmation</button>
             <button class="btn btn-sm btn-secondary" data-status="resolved">Resolved</button>
-            <button class="btn btn-sm btn-secondary" data-status="escalated">Escalated</button>
+            <button class="btn btn-sm btn-secondary" data-status="committee_review">ASDC Dockets</button>
+            <button class="btn btn-sm btn-secondary" data-status="council_deliberation">Council & Decrees</button>
             <button class="btn btn-sm btn-secondary" data-status="declined">Declined</button>
           </div>
 
@@ -163,25 +164,44 @@
           return;
         }
 
+        const jur = window.AmboCMS.getUserJurisdiction(user);
         tbody.innerHTML = filtered.map(c => {
-          let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
+          const sanitized = window.AmboCMS.getSanitizedComplainant(c, user ? user.role : 'admin');
+          const compName = sanitized.isSealed 
+            ? `<span class="badge-sealed">🔒 Sealed Identity</span>` 
+            : c.studentName;
+
+          let statusBadge = `<span class="status-badge status-${c.status}">${window.AmboCMS.getStatusLabel(c.status, user ? user.role : 'admin')}</span>`;
           let teacherText = c.assignedTeacher || '<span style="color:var(--text-muted);">Unassigned</span>';
 
           let actions = `<a href="complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">View</a>`;
 
-          if (c.status === 'pending') {
-            actions += `<a href="admin_assign.html?id=${c.id}" class="action-btn-a action-assign-a">Assign</a>`;
-            actions += `<a href="admin_escalate.html?id=${c.id}" class="action-btn-a action-escalate-a" title="Escalate to Committee">Escalate</a>`;
-          } else if (c.status === 'needs_confirmation') {
-            actions += `<a href="admin_confirm.html?id=${c.id}" class="action-btn-a action-confirm-a">Confirm</a>`;
-          } else if (c.status === 'escalated' || c.status === 'committee_review') {
-            actions += `<a href="committee_complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">Dossier</a>`;
+          if (jur === 'president') {
+            if (c.status === 'council_deliberation' || c.status === 'pending_presidential_decree') {
+              actions += `<a href="admin_dashboard.html" class="action-btn-a action-confirm-a" style="background:#7c3aed;color:#fff;">Decree</a>`;
+            }
+          } else if (jur === 'hod') {
+            if (c.status === 'pending') {
+              if (c.track === 'academic') {
+                actions += `<a href="admin_assign.html?id=${c.id}" class="action-btn-a action-assign-a">Assign</a>`;
+              } else {
+                actions += `<a href="admin_escalate.html?id=${c.id}" class="action-btn-a action-escalate-a">Refer ASDC</a>`;
+              }
+            } else if (c.status === 'needs_confirmation') {
+              actions += `<a href="admin_confirm.html?id=${c.id}" class="action-btn-a action-confirm-a">Endorse</a>`;
+            }
+          } else {
+            if (c.status === 'pending') {
+              actions += `<a href="admin_assign.html?id=${c.id}" class="action-btn-a action-assign-a">Assign</a>`;
+            } else if (c.status === 'needs_confirmation') {
+              actions += `<a href="admin_confirm.html?id=${c.id}" class="action-btn-a action-confirm-a">Confirm</a>`;
+            }
           }
 
           return `
             <tr>
               <td><strong>${c.id}</strong></td>
-              <td>${c.studentName}</td>
+              <td>${compName}</td>
               <td><a href="complaint_details.html?id=${c.id}" class="table-link">${c.title}</a></td>
               <td>${c.course}</td>
               <td>${c.department}</td>

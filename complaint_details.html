@@ -342,15 +342,18 @@
       document.getElementById('complaintTitle').textContent = complaint.title;
       document.getElementById('statusBadgeContainer').innerHTML = `<span class="status-badge status-${displayStatus}" style="font-size:0.86rem; padding: 5px 14px;">${statusLabel}</span>`;
 
-      if (complaint.isAnonymous) {
-        document.getElementById('valStudentName').innerHTML = '[Anonymous Whistleblower] <span style="font-size:0.72rem; font-weight:600; background:rgba(245,158,11,0.12); color:#d97706; border:1px solid rgba(245,158,11,0.3); padding:2px 6px; border-radius:4px; margin-left:6px;">Whistleblower</span>';
-        document.getElementById('valStudentId').textContent = 'ugr/ANON/2026';
-      } else if (userRole === 'teacher' && complaint.severity === 'serious') {
-        document.getElementById('valStudentName').textContent = '[Complainant Identity Protected]';
-        document.getElementById('valStudentId').textContent = '[Protected by Disciplinary Code]';
+      const sanitized = window.AmboCMS.getSanitizedComplainant(complaint, userRole);
+      if (sanitized.isSealed) {
+        if (userRole === 'teacher') {
+          document.getElementById('valStudentName').innerHTML = '<span class="badge-sealed">🔒 Identity Sealed</span>';
+          document.getElementById('valStudentId').textContent = 'Identity protected during statutory inquiry';
+        } else {
+          document.getElementById('valStudentName').innerHTML = `<span class="badge-sealed" style="margin-right:6px;">🔒 Sealed Identity</span> ${complaint.studentName}`;
+          document.getElementById('valStudentId').textContent = `${complaint.studentId || ''} (Protected from Instructor)`;
+        }
       } else {
         document.getElementById('valStudentName').textContent = complaint.studentName;
-        document.getElementById('valStudentId').textContent = complaint.studentId;
+        document.getElementById('valStudentId').textContent = complaint.studentId || 'N/A';
       }
 
       document.getElementById('valDepartment').textContent = complaint.department;
@@ -444,104 +447,138 @@
       const topBackLink = document.getElementById('topBackLink');
       const backLabel = document.getElementById('backLinkLabel');
 
-      if (user && user.role === 'admin') {
-        backBtn.href = 'admin_all_complaints.html';
-        backBtn.textContent = 'Back to All Complaints';
-        topBackLink.href = 'admin_all_complaints.html';
-        backLabel.textContent = 'Back to All Complaints';
+      const jur = window.AmboCMS.getUserJurisdiction(user);
 
-        if (complaint.status === 'pending') {
-          const assignBtn = document.createElement('a');
-          assignBtn.href = `admin_assign.html?id=${complaint.id}`;
-          assignBtn.className = 'btn btn-primary';
-          assignBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="8.5" cy="7" r="4"></circle>
-              <line x1="20" y1="8" x2="20" y2="14"></line>
-              <line x1="23" y1="11" x2="17" y2="11"></line>
-            </svg>
-            <span>Assign Teacher</span>
-          `;
-          actionsEl.appendChild(assignBtn);
+      if (jur === 'president') {
+        backBtn.href = 'admin_dashboard.html';
+        backBtn.textContent = 'Back to Executive Portal';
+        topBackLink.href = 'admin_dashboard.html';
+        backLabel.textContent = 'Back to Executive Portal';
 
-          const escalateBtn = document.createElement('a');
-          escalateBtn.href = `admin_escalate.html?id=${complaint.id}`;
-          escalateBtn.className = 'btn btn-danger';
-          escalateBtn.innerHTML = `
+        if (complaint.status === 'council_deliberation' || complaint.status === 'pending_presidential_decree') {
+          const decreeBtn = document.createElement('button');
+          decreeBtn.type = 'button';
+          decreeBtn.className = 'btn btn-purple';
+          decreeBtn.innerHTML = `
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
             </svg>
-            <span>Escalate to Committee</span>
+            <span>Promulgate Presidential Sanction Decree</span>
           `;
-          actionsEl.appendChild(escalateBtn);
-
-          const declineBtn = document.createElement('button');
-          declineBtn.className = 'btn btn-secondary';
-          declineBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="15" y1="9" x2="9" y2="15"></line>
-              <line x1="9" y1="9" x2="15" y2="15"></line>
-            </svg>
-            <span>Decline Complaint</span>
-          `;
-          declineBtn.onclick = () => {
-            const reason = prompt('Enter administrative reason for declining this complaint:');
-            if (reason && reason.trim()) {
-              window.AmboCMS.declineComplaint(complaint.id, reason.trim());
-              window.AmboCMS.showToast('Complaint status updated to Declined', 'danger');
+          decreeBtn.onclick = () => {
+            const decreeNo = prompt('Confirm Executive Decree Number:', `AU/PRES/${new Date().getFullYear()}/${Math.floor(100 + Math.random() * 900)}`);
+            if (decreeNo) {
+              const remarks = prompt('Executive Directives to Academic Registrar & Finance:');
+              window.AmboCMS.issuePresidentDecree(complaint.id, {
+                decreeNumber: decreeNo,
+                sanction: complaint.sanctionOrdered || 'Statutory Sanction',
+                decreeText: remarks || 'Executive Decree promulgated by University President.'
+              });
+              window.AmboCMS.showToast(`Executive Decree ${decreeNo} promulgated!`, 'success');
               setTimeout(() => location.reload(), 400);
             }
           };
-          actionsEl.appendChild(declineBtn);
+          actionsEl.appendChild(decreeBtn);
+
+          const remandBtn = document.createElement('button');
+          remandBtn.type = 'button';
+          remandBtn.className = 'btn btn-secondary';
+          remandBtn.innerHTML = `<span>Remand to ASDC</span>`;
+          remandBtn.onclick = () => {
+            const reason = prompt('Specify procedural defect or directive for ASDC re-examination:');
+            if (reason && reason.trim()) {
+              window.AmboCMS.remandToCommittee(complaint.id, reason.trim());
+              window.AmboCMS.showToast('Docket remanded to ASDC for due process review.', 'warning');
+              setTimeout(() => location.reload(), 400);
+            }
+          };
+          actionsEl.appendChild(remandBtn);
+
+        } else if (complaint.status === 'appealed') {
+          const appBtn = document.createElement('button');
+          appBtn.type = 'button';
+          appBtn.className = 'btn btn-primary';
+          appBtn.innerHTML = `<span>Appoint Ad-Hoc Appellate Panel</span>`;
+          appBtn.onclick = () => {
+            const lead = prompt('Lead Reviewer / Commission Chair:', 'Dr. Alazar (Dean of Law)');
+            if (lead) {
+              window.AmboCMS.appointAppellatePanel(complaint.id, { leadReviewer: lead });
+              window.AmboCMS.showToast('Appellate Review Commission appointed under Senate Statute.', 'success');
+              setTimeout(() => location.reload(), 400);
+            }
+          };
+          actionsEl.appendChild(appBtn);
+        }
+
+      } else if (jur === 'hod') {
+        backBtn.href = 'admin_dashboard.html';
+        backBtn.textContent = 'Back to HoD Triage';
+        topBackLink.href = 'admin_dashboard.html';
+        backLabel.textContent = 'Back to HoD Triage';
+
+        if (complaint.status === 'pending') {
+          if (complaint.track === 'academic') {
+            const assignBtn = document.createElement('a');
+            assignBtn.href = `admin_assign.html?id=${complaint.id}`;
+            assignBtn.className = 'btn btn-primary';
+            assignBtn.innerHTML = `<span>Assign Faculty Reviewer</span>`;
+            actionsEl.appendChild(assignBtn);
+
+            const remarkBtn = document.createElement('button');
+            remarkBtn.type = 'button';
+            remarkBtn.className = 'btn btn-secondary';
+            remarkBtn.innerHTML = `<span>Convene Remark Panel</span>`;
+            remarkBtn.onclick = () => {
+              if (confirm('Convene 3-member Independent Academic Remarking Panel?')) {
+                window.AmboCMS.updateComplaintStatus(complaint.id, {
+                  status: 'in_progress',
+                  adminRemark: 'Independent Remarking Panel convened. Blind exam script re-evaluation in progress.',
+                  timelineEvent: {
+                    title: 'Independent Remarking Panel Convened',
+                    text: 'Department Head convened 3-member neutral faculty panel to re-evaluate exam paper.'
+                  }
+                });
+                window.AmboCMS.showToast('Remarking Panel convened.', 'success');
+                setTimeout(() => location.reload(), 400);
+              }
+            };
+            actionsEl.appendChild(remarkBtn);
+          } else {
+            const refBtn = document.createElement('a');
+            refBtn.href = `admin_escalate.html?id=${complaint.id}`;
+            refBtn.className = 'btn btn-danger';
+            refBtn.innerHTML = `<span>Refer to ASDC & Gender Office</span>`;
+            actionsEl.appendChild(refBtn);
+          }
         } else if (complaint.status === 'needs_confirmation') {
           const confirmBtn = document.createElement('a');
           confirmBtn.href = `admin_confirm.html?id=${complaint.id}`;
           confirmBtn.className = 'btn btn-purple';
-          confirmBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
-            <span>Confirm Resolution</span>
-          `;
+          confirmBtn.innerHTML = `<span>Endorse Grade Resolution</span>`;
           actionsEl.appendChild(confirmBtn);
-        } else if (complaint.status === 'escalated' || complaint.status === 'committee_review') {
-          const dossierBtn = document.createElement('a');
-          dossierBtn.href = `committee_complaint_details.html?id=${complaint.id}`;
-          dossierBtn.className = 'btn btn-secondary';
-          dossierBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-            </svg>
-            <span>View Committee Docket</span>
-          `;
-          actionsEl.appendChild(dossierBtn);
         }
-      } else if (user && user.role === 'teacher') {
-        backBtn.href = 'teacher_dashboard.html';
-        backBtn.textContent = 'Back to Teacher Dashboard';
-        topBackLink.href = 'teacher_dashboard.html';
-        backLabel.textContent = 'Back to Teacher Dashboard';
 
-        if (complaint.status === 'assigned' || complaint.status === 'in_progress') {
-          const respondBtn = document.createElement('a');
-          respondBtn.href = `teacher_respond.html?id=${complaint.id}`;
-          respondBtn.className = 'btn btn-primary';
-          respondBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 20h9"></path>
-              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-            </svg>
-            <span>Write Faculty Resolution</span>
-          `;
-          actionsEl.appendChild(respondBtn);
-        }
-      } else if (user && user.role === 'committee') {
+      } else if (jur === 'gender') {
+        backBtn.href = 'admin_dashboard.html';
+        backBtn.textContent = 'Back to Safe Harbor';
+        topBackLink.href = 'admin_dashboard.html';
+        backLabel.textContent = 'Back to Safe Harbor';
+
+        const injBtn = document.createElement('button');
+        injBtn.type = 'button';
+        injBtn.className = 'btn btn-danger';
+        injBtn.innerHTML = `<span>Issue Retaliation Injunction</span>`;
+        injBtn.onclick = () => {
+          const order = prompt('Specify protective directive:', 'Instructor prohibited from assigning grades; student transferred to parallel section.');
+          if (order) {
+            window.AmboCMS.issueGenderInjunction(complaint.id, { protectiveOrder: order });
+            window.AmboCMS.showToast('Anti-retaliation protective injunction registered.', 'danger');
+            setTimeout(() => location.reload(), 400);
+          }
+        };
+        actionsEl.appendChild(injBtn);
+
+      } else if (jur === 'committee') {
         backBtn.href = 'committee_dashboard.html';
         backBtn.textContent = 'Back to Committee Docket';
         topBackLink.href = 'committee_dashboard.html';
@@ -551,30 +588,49 @@
           const decisionBtn = document.createElement('a');
           decisionBtn.href = `committee_decision.html?id=${complaint.id}`;
           decisionBtn.className = 'btn btn-danger';
-          decisionBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-            </svg>
-            <span>Render Statutory Decision</span>
-          `;
+          decisionBtn.innerHTML = `<span>Register ASDC Hearing Finding & Proposal</span>`;
           actionsEl.appendChild(decisionBtn);
         }
+
+      } else if (jur === 'teacher') {
+        backBtn.href = 'teacher_dashboard.html';
+        backBtn.textContent = 'Back to Faculty Cases';
+        topBackLink.href = 'teacher_dashboard.html';
+        backLabel.textContent = 'Back to Faculty Cases';
+
+        if (complaint.status === 'assigned' || complaint.status === 'in_progress') {
+          const respondBtn = document.createElement('a');
+          respondBtn.href = `teacher_respond.html?id=${complaint.id}`;
+          respondBtn.className = 'btn btn-primary';
+          respondBtn.innerHTML = `<span>Draft Faculty Resolution for HoD</span>`;
+          actionsEl.appendChild(respondBtn);
+        }
+
       } else {
+        // Student
         backBtn.href = 'my_complaints.html';
         topBackLink.href = 'my_complaints.html';
         backLabel.textContent = 'Back to Complaints History';
 
-        if (complaint.status === 'pending') {
+        if (complaint.status === 'resolved') {
+          const appealBtn = document.createElement('button');
+          appealBtn.type = 'button';
+          appealBtn.className = 'btn btn-secondary';
+          appealBtn.innerHTML = `<span>File 7-Day Statutory Appeal to President</span>`;
+          appealBtn.onclick = () => {
+            const grounds = prompt('State statutory grounds of appeal to the University President:');
+            if (grounds && grounds.trim()) {
+              window.AmboCMS.fileStatutoryAppeal(complaint.id, { grounds: grounds.trim() });
+              window.AmboCMS.showToast('Statutory appeal lodged to the Office of the President.', 'success');
+              setTimeout(() => location.reload(), 400);
+            }
+          };
+          actionsEl.appendChild(appealBtn);
+        } else if (complaint.status === 'pending') {
           const editBtn = document.createElement('a');
           editBtn.href = `submit_complaint.html?edit=${complaint.id}`;
           editBtn.className = 'btn btn-primary';
-          editBtn.innerHTML = `
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-            </svg>
-            <span>Edit Complaint</span>
-          `;
+          editBtn.innerHTML = `<span>Edit Complaint</span>`;
           actionsEl.appendChild(editBtn);
         }
       }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta name="theme-color" content="#1e3a8a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -11,13 +11,10 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
   <title>Submit Complaint - Ambo University CMS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
   <style>
     :root {
@@ -26,21 +23,19 @@
       --ambo-brand-cobalt: #1e40af;
       --ambo-brand-amber: #f59e0b;
       --ambo-brand-amber-hover: #d97706;
-      --ambo-brand-amber-subtle: rgba(245, 158, 11, 0.15);
       --ambo-brand-subtle: #eff6ff;
-      --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .submit-header-banner {
       background: radial-gradient(circle at 85% 25%, rgba(37, 99, 235, 0.35) 0%, transparent 60%), linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-      border-radius: 20px;
-      padding: 30px 34px;
+      border-radius: 16px;
+      padding: 24px 20px;
       color: #ffffff;
-      margin: 16px 0 28px;
+      margin: 12px 0 20px;
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 20px 40px -10px rgba(30, 58, 138, 0.35);
+      box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.3);
     }
     .submit-header-banner::before {
       content: '';
@@ -56,11 +51,11 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       color: var(--ambo-brand-amber);
     }
     .kicker-dot {
@@ -68,102 +63,104 @@
       height: 7px;
       border-radius: 50%;
       background: var(--ambo-brand-amber);
-      box-shadow: 0 0 10px rgba(245, 158, 11, 0.9);
       flex-shrink: 0;
     }
 
     .submit-header-banner h1 {
-      font-size: 1.85rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: #ffffff;
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       letter-spacing: -0.02em;
+      line-height: 1.25;
     }
     .submit-header-banner p {
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       color: rgba(255, 255, 255, 0.9);
       max-width: 680px;
-      margin: 0 0 20px;
-      line-height: 1.55;
+      margin: 0 0 14px;
+      line-height: 1.5;
     }
 
-    .submit-stepper-row {
-      display: flex;
-      align-items: center;
+    /* Track Selector Tabs */
+    .track-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
-      flex-wrap: wrap;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.16);
-    }
-    .step-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: #ffffff;
-    }
-    .step-chip.active {
-      background: rgba(245, 158, 11, 0.25);
-      border-color: rgba(245, 158, 11, 0.6);
-      color: #fef3c7;
-    }
-    .step-chip-num {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.70rem;
-      font-weight: 800;
-    }
-    .step-chip.active .step-chip-num {
-      background: var(--ambo-brand-amber);
-      color: #1e3a8a;
-    }
-
-    .card-elevated {
-      background: var(--surface);
-      border: 1px solid var(--border-color);
-      border-radius: 18px;
-      padding: 34px 32px;
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), var(--shadow-sm);
+      margin-bottom: 20px;
     }
     @media (max-width: 640px) {
-      .card-elevated {
-        padding: 22px 18px;
+      .track-selector-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    .whistleblower-plate {
-      background: rgba(56, 189, 248, 0.06);
-      border: 1px solid rgba(56, 189, 248, 0.25);
+    .track-card {
+      border: 2px solid var(--border-color);
       border-radius: 12px;
-      padding: 14px 18px;
-      margin-bottom: 22px;
+      padding: 16px;
+      background: var(--surface);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .track-card:hover {
+      border-color: var(--primary);
+      background: var(--surface-hover);
+    }
+    .track-card.active {
+      border-color: var(--primary);
+      background: var(--primary-subtle);
+    }
+    .track-card.active.disciplinary {
+      border-color: #dc2626;
+      background: rgba(220, 38, 38, 0.08);
+    }
+
+    .track-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .track-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .track-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Sealed Identity Banner */
+    .shield-plate {
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
       transition: all 0.2s ease;
     }
-    .whistleblower-plate:hover {
-      border-color: rgba(56, 189, 248, 0.45);
-      background: rgba(56, 189, 248, 0.09);
+    .shield-plate:hover {
+      border-color: rgba(99, 102, 241, 0.5);
     }
 
     .checkbox-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
     }
     .checkbox-label {
       background: var(--surface-alt);
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 10px 14px;
+      padding: 10px 12px;
       font-size: 0.86rem;
       font-weight: 500;
       color: var(--text-main);
@@ -171,11 +168,7 @@
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .checkbox-label:hover {
-      border-color: var(--ambo-brand-blue);
-      background: rgba(37, 99, 235, 0.04);
+      min-height: 44px;
     }
 
     .btn-submit-action {
@@ -188,15 +181,16 @@
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25);
       transition: all 0.2s ease;
-      font-size: 0.92rem;
+      font-size: 0.95rem;
+      min-height: 46px;
     }
     .btn-submit-action:hover {
       background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35);
     }
   </style>
 </head>
@@ -213,7 +207,7 @@
       </a>
       <ul class="nav-menu" id="navLinks"></ul>
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme"><svg class="theme-switch-svg light" width="46" height="24" viewBox="0 0 46 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="0.5" y="0.5" width="45" height="23" rx="11.5" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/><path d="M34.5 7.5a4.5 4.5 0 0 0 4.2 4.2 5 5 0 1 1-4.2-4.2z" fill="#94a3b8" opacity="0.45"/><circle cx="38" cy="8.5" r="0.8" fill="#94a3b8" opacity="0.45"/><g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.18))"><circle cx="12" cy="12" r="9.5" fill="#ffffff" /><circle cx="12" cy="12" r="4.2" fill="#f59e0b" /><path d="M12 4.8v1.4M12 17.8v1.4M4.8 12h1.4M17.8 12h1.4M6.9 6.9l1 1M16.1 16.1l1 1M6.9 17.1l1-1M16.1 7.9l1-1" stroke="#f59e0b" stroke-width="1.3" stroke-linecap="round"/></g></svg></button>
+        <button class="theme-toggle-btn" aria-label="Toggle theme"></button>
         <div id="navUserBadge"></div>
         <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -228,38 +222,47 @@
 
   <main class="main-content">
     <div class="container container-narrow">
-      <!-- Elevated Institutional Intake Banner -->
       <section class="submit-header-banner">
         <div class="submit-kicker">
           <span class="kicker-dot"></span>
-          <span>Academic Appeals Office &bull; Senate Protected Intake</span>
+          <span>Higher Education Proclamation No. 1152/2019 Protected Intake</span>
         </div>
-        <h1>Formal Academic &amp; Assessment Appeal</h1>
-        <p>Register continuous assessment discrepancies, exam mark arithmetic errors, or departmental grievances. Submissions are auditable and protected under Senate anti-retaliation rules.</p>
-        
-        <div class="submit-stepper-row">
-          <div class="step-chip active">
-            <span class="step-chip-num">1</span>
-            <span>Appeal Details &amp; Category</span>
-          </div>
-          <div class="step-chip">
-            <span class="step-chip-num">2</span>
-            <span>Documentary Evidence</span>
-          </div>
-          <div class="step-chip">
-            <span class="step-chip-num">3</span>
-            <span>Faculty &amp; Registrar Review</span>
-          </div>
-        </div>
+        <h1 id="pageTitleHeading">File Formal Student Complaint</h1>
+        <p id="pageSubtitle">Submit academic grievances or report misconduct under verified statutory protection. Real identity is authenticated via your student login and sealed from accused faculty.</p>
       </section>
 
-      <div class="card card-elevated">
+      <!-- Track Selection (Statutory Bifurcation) -->
+      <div class="track-selector-grid">
+        <div class="track-card active" id="trackAcademicCard">
+          <div class="track-header">
+            <span class="track-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              Academic Redress
+            </span>
+            <span class="badge-statutory">Academic Track</span>
+          </div>
+          <p class="track-desc">For continuous assessment discrepancies, exam remark requests, or attendance disputes. Handled by Department Head &amp; Vice Director.</p>
+        </div>
+
+        <div class="track-card" id="trackDisciplinaryCard">
+          <div class="track-header">
+            <span class="track-title" style="color: #dc2626;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Misconduct / Harassment
+            </span>
+            <span class="badge-statutory" style="color: #dc2626; border-color: rgba(220,38,38,0.3);">Conduct Track</span>
+          </div>
+          <p class="track-desc">For sexual harassment, intimidation, bribery/extortion, or physical threats. Handled under seal by ASDC &amp; Gender Directorate.</p>
+        </div>
+      </div>
+
+      <div class="card">
         <form id="complaintForm">
-          
+          <!-- Student Credentials (Read-only Authenticated) -->
           <div class="form-row">
             <div class="form-group">
-              <label for="studentName">Full Student Name <span class="required">*</span></label>
-              <input type="text" id="studentName" name="studentName" readonly style="background: var(--surface-alt); cursor: not-allowed; opacity: 0.9;" placeholder="Auto-filled from account" required>
+              <label for="studentName">Authenticated Student Name <span class="required">*</span></label>
+              <input type="text" id="studentName" name="studentName" readonly style="background: var(--surface-alt); cursor: not-allowed; opacity: 0.9;" placeholder="Auto-filled from login" required>
             </div>
             <div class="form-group">
               <label for="studentId">Student ID Number <span class="required">*</span></label>
@@ -267,16 +270,17 @@
             </div>
           </div>
 
-          <div class="whistleblower-plate">
+          <!-- Verified Student, Sealed Identity Switch -->
+          <div class="shield-plate">
             <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-              <label for="anonymousToggle" style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin: 0; font-size: 0.88rem; font-weight: 700; color: var(--text-main);">
-                <input type="checkbox" id="anonymousToggle" name="isAnonymous" style="width: 18px; height: 18px; cursor: pointer; accent-color: #0284c7;">
-                <span>Submit as Confidential Whistleblower (Mask Complainant Identity)</span>
+              <label for="isIdentitySealed" style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin: 0; font-size: 0.9rem; font-weight: 700; color: var(--text-main);">
+                <input type="checkbox" id="isIdentitySealed" name="isIdentitySealed" style="width: 20px; height: 20px; cursor: pointer; accent-color: #4f46e5;">
+                <span>Seal My Identity from Accused Faculty Member</span>
               </label>
-              <span style="font-size: 0.74rem; font-weight: 700; background: rgba(56, 189, 248, 0.15); color: #0284c7; border: 1px solid rgba(56, 189, 248, 0.35); padding: 3px 10px; border-radius: 999px;">Senate Masked Docket</span>
+              <span class="badge-sealed">Confidential Shield</span>
             </div>
-            <div id="anonymousNotice" style="display: none; margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; border-top: 1px dashed rgba(56, 189, 248, 0.3); padding-top: 8px;">
-              <strong>Whistleblower Safeguard Protocol:</strong> Your identity will be masked as <em>[Anonymous Complainant]</em> on the departmental dossier. For mark recalculations, academic scripts are audited objectively under Department Academic Committee supervision to eliminate faculty bias.
+            <div id="sealedNotice" style="display: none; margin-top: 10px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; border-top: 1px dashed rgba(99, 102, 241, 0.3); padding-top: 8px;">
+              <strong>Identity Sealing Protocol:</strong> Your identity is authenticated and preserved strictly under confidential seal by the Disciplinary Committee and Gender Directorate. The accused instructor will only see: <em>[Complainant: Verified Enrolled Student &bull; Protected under Article 38]</em>.
             </div>
           </div>
 
@@ -284,27 +288,25 @@
             <div class="form-group">
               <label for="department">Department <span class="required">*</span></label>
               <select id="department" name="department" required>
-                <option value="" disabled selected>-- Select Department --</option>
+                <option value="" disabled selected>-- Select Academic Department --</option>
                 <option value="Information Technology">Information Technology (IT)</option>
                 <option value="Computer Science">Computer Science (CS)</option>
-                <option value="Electrical and Computer Engineering">Electrical & Computer Engineering (ECE)</option>
+                <option value="Electrical and Computer Engineering">Electrical &amp; Computer Engineering (ECE)</option>
                 <option value="Civil Engineering">Civil Engineering (CE)</option>
                 <option value="Mechanical Engineering">Mechanical Engineering (ME)</option>
-                <option value="Water Resources Engineering">Water Resources Engineering (HWRE)</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label for="courseName">Course Name / Code <span class="required">*</span></label>
+              <label for="courseName">Course Code / Accused Faculty <span class="required">*</span></label>
               <select id="courseName" name="course" required>
-                <option value="" disabled selected>-- Select Course --</option>
-                <option value="SAD">System Analysis & Design (SAD) — Mr. Eyuel</option>
-                <option value="IP">Internet Programming (IP) — Mr. Eyuel</option>
-                <option value="DSA">Data Structures & Algorithms (DSA) — Dr. Daniel</option>
-                <option value="FDBS">Fundamentals of Database Systems (FDBS) — Dept Faculty</option>
-                <option value="OS">Operating Systems (OS) — Mr. Bekele</option>
+                <option value="" disabled selected>-- Select Course / Instructor --</option>
+                <option value="SAD">SAD — Mr. Eyuel</option>
+                <option value="IP">IP — Mr. Eyuel</option>
+                <option value="DSA">DSA — Dr. Daniel</option>
+                <option value="OS">OS — Mr. Bekele</option>
                 <option value="Discrete Maths">Discrete Mathematics — Dr. Worku</option>
-                <option value="Other">Other Academic Subject</option>
+                <option value="Department General">Department Administration / Non-Course</option>
               </select>
             </div>
 
@@ -317,172 +319,93 @@
           <div class="form-row">
             <div class="form-group form-flex-2">
               <label for="complaintTitle">Complaint Subject / Title <span class="required">*</span></label>
-              <input type="text" id="complaintTitle" name="title" placeholder="e.g. Discrepancy on Mid-Exam Question 4 Mark" required>
+              <input type="text" id="complaintTitle" name="title" placeholder="e.g. Arithmetic error on mid-exam question 4" required>
             </div>
 
             <div class="form-group form-flex-1">
-              <label for="urgency">Urgency Level <span class="required">*</span></label>
+              <label for="urgency">Urgency Level &amp; Dynamic SLA <span class="required">*</span></label>
               <select id="urgency" name="urgency" required>
-                <option value="low">Low (General inquiry)</option>
-                <option value="medium" selected>Medium Urgency (Standard Complaint)</option>
-                <option value="high">High (Impacting semester grading)</option>
-                <option value="critical">Critical (Immediate deadline)</option>
+                <option value="low">Low (General Inquiry — 7 Days SLA)</option>
+                <option value="medium" selected>Medium (Standard Grievance — 5 Days SLA)</option>
+                <option value="high">High (Semester Grade Impact — 3 Days SLA)</option>
+                <option value="critical">Critical (Immediate Harm / Threat — 2 Days SLA)</option>
               </select>
-            </div>
-
-            <div class="form-group form-flex-1">
-              <label for="severity">Severity Assessment <span class="required">*</span></label>
-              <select id="severity" name="severity" required>
-                <option value="normal" selected>Academic Mark / Evaluation Complaint</option>
-                <option value="serious">Severe Misconduct (Committee Track)</option>
-              </select>
-            </div>
-          </div>
-
-          <div id="seriousBypassNotice" class="dossier-directive-banner info" style="display: none; margin-bottom: 20px;">
-            <div class="directive-icon info">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <div class="directive-content">
-              <h4>Severe Misconduct Track Activated</h4>
-              <p>Under university regulations, severe allegations undergo preliminary <strong>Administrative Screening</strong> before formal referral to the Disciplinary Committee. Verifiable supporting evidence is mandatory.</p>
             </div>
           </div>
 
           <div class="form-group">
-            <label>Complaint Category <span class="required">*</span></label>
-            <div class="checkbox-grid">
+            <label>Complaint Specific Category <span class="required">*</span></label>
+            <div class="checkbox-grid" id="categoryContainer">
+              <!-- Dynamically populated or switchable by track -->
               <label class="checkbox-label">
-                <input type="radio" name="category" value="Assessment & Grading" checked> Assessment & Grading
+                <input type="radio" name="category" value="Assessment & Grading" checked> Assessment &amp; Grading
               </label>
               <label class="checkbox-label">
-                <input type="radio" name="category" value="Attendance Policy"> Attendance Policy
+                <input type="radio" name="category" value="Attendance Policy"> Attendance Record Discrepancy
               </label>
               <label class="checkbox-label">
-                <input type="radio" name="category" value="Communication"> Communication & Announcements
+                <input type="radio" name="category" value="Communication"> Delayed Mark Announcements
               </label>
               <label class="checkbox-label">
-                <input type="radio" name="category" value="Teaching Quality"> Teaching Quality & Content
+                <input type="radio" name="category" value="Teaching Quality"> Course Delivery &amp; Syllabi
               </label>
               <label class="checkbox-label">
-                <input type="radio" name="category" value="Lab Resources"> Lab & Practical Resources
+                <input type="radio" name="category" value="Severe Misconduct / Harassment"> Misconduct / Harassment (Art. 38(1)(e))
               </label>
               <label class="checkbox-label">
-                <input type="radio" name="category" value="Severe Misconduct / Harassment"> Severe Misconduct / Ethics
-              </label>
-              <label class="checkbox-label">
-                <input type="radio" name="category" value="Other"> Other Academic Issue
+                <input type="radio" name="category" value="Other"> Other Academic Matter
               </label>
             </div>
           </div>
 
           <div class="form-group">
             <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
-              <label for="complaintMessage" style="margin-bottom: 0;">Detailed Complaint Description <span class="required">*</span></label>
-              <span id="charCountLabel" style="font-size: 0.78rem; color: var(--text-muted); font-variant-numeric: tabular-nums;">0 / 50 min characters</span>
+              <label for="complaintMessage" style="margin-bottom: 0;">Factual Description <span class="required">*</span></label>
+              <span id="charCountLabel" style="font-size: 0.78rem; color: var(--text-muted); font-family: monospace;">0 / 50 min characters</span>
             </div>
-            <textarea id="complaintMessage" name="message" rows="6" minlength="50" placeholder="Provide factual details, incident dates, question numbers, or syllabus references to support your complaint (minimum 50 characters required)..." required></textarea>
+            <textarea id="complaintMessage" name="message" rows="5" minlength="50" placeholder="Detail the factual events, dates, question numbers, or specific statements (minimum 50 characters)..." required></textarea>
           </div>
 
           <div class="form-group">
-            <label for="attachment" id="attachmentLabel">Supporting Document / Evidence (Optional)</label>
-            <input type="file" id="attachment" name="attachment" accept=".pdf,.png,.jpg,.jpeg,.doc,.docx">
-            <span class="form-hint" id="attachmentHint">
-              Accepted formats: PDF, JPG, PNG, DOCX (Max size: 5MB).
-            </span>
+            <label for="attachment">Documentary Evidence (Optional, Mandatory for Misconduct)</label>
+            <input type="file" id="attachment" name="attachment" accept=".pdf,.png,.jpg,.jpeg,.docx">
+            <span class="form-hint">Accepted formats: PDF, JPG, PNG, DOCX (Max: 5MB). Camera EXIF metadata is scrubbed on upload.</span>
           </div>
 
-          <div class="defamation-warning-box">
-            <div class="defamation-header">
-              <div class="defamation-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                  <line x1="12" y1="9" x2="12" y2="13"></line>
-                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                </svg>
-              </div>
+          <!-- Legal Certification (Anti-Perjury Article 39(1)(d)) -->
+          <div class="defamation-warning-box" style="background: var(--surface-alt); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; margin-bottom: 20px;">
+            <div style="display: flex; gap: 10px; align-items: flex-start;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
               <div>
-                <h4>Institutional Submission Guidelines</h4>
-                <p>All complaints are officially recorded and linked to your student credentials. Under Ambo University student conduct regulations and complaint policies, submitting false allegations, fabricating evidence, or filing defamatory claims against faculty members is strictly prohibited and subject to institutional disciplinary review.</p>
+                <h4 style="margin: 0 0 4px; font-size: 0.9rem; color: var(--text-main);">Truth & Integrity Declaration</h4>
+                <p style="margin: 0 0 10px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.45;">Complaints must be factual and submitted in good faith. Submitting fabricated claims is subject to disciplinary action.</p>
+                <label style="display: flex; align-items: center; gap: 8px; font-size: 0.84rem; font-weight: 600; cursor: pointer; color: var(--text-main);">
+                  <input type="checkbox" id="defamationAckCheck" name="defamationAck" required style="width: 18px; height: 18px;">
+                  <span>I declare that this complaint is factual and submitted in good faith under university statutes.</span>
+                </label>
               </div>
-            </div>
-
-            <div class="defamation-checkbox-wrap">
-              <label class="defamation-check-label">
-                <input type="checkbox" id="defamationAckCheck" name="defamationAck" required>
-                <span><strong>Mandatory Declaration:</strong> I certify that this complaint is truthful, factual, and submitted in good faith. I understand that submitting false allegations or defamatory claims carries formal disciplinary consequences.</span>
-              </label>
             </div>
           </div>
 
-          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 20px;">
             <a href="student_dashboard.html" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-submit-action"><span>Submit Academic Appeal &rarr;</span></button>
+            <button type="submit" class="btn btn-submit-action"><span>Submit Formal Complaint &rarr;</span></button>
           </div>
         </form>
 
-        <div id="submissionSuccessCard" class="submission-success-card" style="display: none;">
-          <div class="success-icon-badge">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
+        <!-- Success Modal View -->
+        <div id="submissionSuccessCard" class="submission-success-card" style="display: none; padding: 20px 10px;">
+          <h2 style="font-size: 1.3rem; margin-bottom: 8px;" id="successHeading">Complaint Registered Successfully</h2>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">Your complaint has been verified and registered into the Ambo University CMS ledger.</p>
+
+          <div style="background: var(--surface-alt); border: 1px solid var(--border-color); border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+            <span style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Tracking Identifier</span>
+            <div style="font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--primary); margin: 6px 0;" id="generatedTrackingId">CMP-100</div>
           </div>
 
-          <h2 id="successHeading">Complaint Submitted Successfully</h2>
-          <p class="success-subtitle">Your complaint has been registered into the Ambo University CMS ledger and assigned an official tracking reference number.</p>
-
-          <div class="tracking-box-outer">
-            <span class="tracking-box-label">Official Tracking Reference Number</span>
-            <div class="tracking-number-row">
-              <span class="tracking-number-val" id="generatedTrackingId">CMP-100</span>
-              <button type="button" class="copy-tracking-btn" id="copyTrackingBtn" title="Copy tracking ID to clipboard">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <span>Copy Tracking ID</span>
-              </button>
-            </div>
-            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">Save this number to check status on the home page or in your student dashboard.</p>
-          </div>
-
-          <div class="success-details-summary">
-            <div class="success-detail-item">
-              <span class="success-detail-label">Subject / Title</span>
-              <span class="success-detail-val" id="successTitle">-</span>
-            </div>
-            <div class="success-detail-item">
-              <span class="success-detail-label">Department & Course</span>
-              <span class="success-detail-val" id="successDeptCourse">-</span>
-            </div>
-            <div class="success-detail-item">
-              <span class="success-detail-label">Category & Urgency</span>
-              <span class="success-detail-val" id="successCategoryUrgency">-</span>
-            </div>
-            <div class="success-detail-item">
-              <span class="success-detail-label">Date Submitted</span>
-              <span class="success-detail-val" id="successDate">-</span>
-            </div>
-          </div>
-
-          <div id="successRoutingBanner" class="success-routing-banner">
-            <div class="success-routing-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-              </svg>
-            </div>
-            <div id="successRoutingDesc"></div>
-          </div>
-
-          <div class="success-actions">
-            <a id="viewDetailsBtn" href="#" class="btn">View Complaint Timeline</a>
-            <a href="student_dashboard.html" class="btn btn-secondary">Go to Student Dashboard</a>
-            <button type="button" id="submitAnotherBtn" class="btn btn-secondary" style="background: transparent; border-color: var(--border-color);">Submit Another Complaint</button>
+          <div class="form-actions" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <a id="viewDetailsBtn" href="#" class="btn btn-primary">View Case Timeline</a>
+            <a href="student_dashboard.html" class="btn btn-secondary">Return to Dashboard</a>
           </div>
         </div>
       </div>
@@ -496,12 +419,9 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>    document.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const editId = urlParams.get('edit');
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
       const user = window.AmboCMS.getCurrentUser();
-      let editingComplaint = null;
-
       if (!user) {
         window.location.href = 'login.html';
         return;
@@ -510,26 +430,43 @@
       const nameInput = document.getElementById('studentName');
       const idInput = document.getElementById('studentId');
       const deptInput = document.getElementById('department');
-      const anonToggle = document.getElementById('anonymousToggle');
-      const anonNotice = document.getElementById('anonymousNotice');
+      const sealedToggle = document.getElementById('isIdentitySealed');
+      const sealedNotice = document.getElementById('sealedNotice');
 
       if (nameInput) nameInput.value = user.name || 'Abebe Kebede';
       if (idInput) idInput.value = user.studentId || 'ugr/12345/16';
       if (deptInput && user.department) deptInput.value = user.department;
 
-      if (anonToggle) {
-        anonToggle.addEventListener('change', () => {
-          if (anonToggle.checked) {
-            if (nameInput) nameInput.value = '[Anonymous Whistleblower]';
-            if (idInput) idInput.value = 'ugr/ANON/2026';
-            if (anonNotice) anonNotice.style.display = 'block';
-          } else {
-            if (nameInput) nameInput.value = user.name || 'Abebe Kebede';
-            if (idInput) idInput.value = user.studentId || 'ugr/12345/16';
-            if (anonNotice) anonNotice.style.display = 'none';
-          }
+      if (sealedToggle && sealedNotice) {
+        sealedToggle.addEventListener('change', () => {
+          sealedNotice.style.display = sealedToggle.checked ? 'block' : 'none';
         });
       }
+
+      // Track card switcher
+      const trackAcademicCard = document.getElementById('trackAcademicCard');
+      const trackDisciplinaryCard = document.getElementById('trackDisciplinaryCard');
+      let currentTrack = 'academic';
+
+      trackAcademicCard.addEventListener('click', () => {
+        currentTrack = 'academic';
+        trackAcademicCard.classList.add('active');
+        trackDisciplinaryCard.classList.remove('active', 'disciplinary');
+        const catRadio = document.querySelector('input[name="category"][value="Assessment & Grading"]');
+        if (catRadio) catRadio.checked = true;
+      });
+
+      trackDisciplinaryCard.addEventListener('click', () => {
+        currentTrack = 'disciplinary';
+        trackDisciplinaryCard.classList.add('active', 'disciplinary');
+        trackAcademicCard.classList.remove('active');
+        const catRadio = document.querySelector('input[name="category"][value="Severe Misconduct / Harassment"]');
+        if (catRadio) catRadio.checked = true;
+        if (sealedToggle) {
+          sealedToggle.checked = true;
+          sealedNotice.style.display = 'block';
+        }
+      });
 
       const incidentDateInput = document.getElementById('incidentDate');
       const today = new Date().toISOString().split('T')[0];
@@ -541,229 +478,57 @@
       const messageTextarea = document.getElementById('complaintMessage');
       const charCountLabel = document.getElementById('charCountLabel');
       if (messageTextarea && charCountLabel) {
-        const updateCount = () => {
+        messageTextarea.addEventListener('input', () => {
           const len = messageTextarea.value.trim().length;
           charCountLabel.textContent = `${len} / 50 min characters`;
-          if (len >= 50) {
-            charCountLabel.style.color = 'var(--success)';
-          } else {
-            charCountLabel.style.color = 'var(--text-muted)';
-          }
-        };
-        messageTextarea.addEventListener('input', updateCount);
-        updateCount();
-      }
-
-      const severityEl = document.getElementById('severity');
-      const bypassNotice = document.getElementById('seriousBypassNotice');
-      const attachmentInput = document.getElementById('attachment');
-      const attachmentLabel = document.getElementById('attachmentLabel');
-      const attachmentHint = document.getElementById('attachmentHint');
-
-      function updateSeverityRequirements() {
-        if (!severityEl) return;
-        const isSevere = severityEl.value === 'serious';
-        
-        if (bypassNotice) {
-          bypassNotice.style.display = isSevere ? 'flex' : 'none';
-        }
-
-        if (attachmentInput && attachmentLabel) {
-          if (isSevere) {
-            attachmentLabel.innerHTML = 'Supporting Document / Evidence <span class="required" style="color:#dc2626;">* (Mandatory for Severe Category)</span>';
-            attachmentInput.required = true;
-            if (attachmentHint) attachmentHint.textContent = 'Mandatory: Attach exam script, marked paper, or verifiable record (PDF, JPG, PNG, DOCX).';
-          } else {
-            attachmentLabel.textContent = 'Supporting Document / Evidence (Optional)';
-            attachmentInput.required = false;
-            if (attachmentHint) attachmentHint.textContent = 'Accepted formats: PDF, JPG, PNG, DOCX (Max size: 5MB).';
-          }
-        }
-      }
-
-      if (severityEl) {
-        severityEl.addEventListener('change', updateSeverityRequirements);
-        updateSeverityRequirements();
-      }
-
-      if (editId) {
-        editingComplaint = window.AmboCMS.getComplaintById(editId);
-        if (!editingComplaint || editingComplaint.status !== 'pending') {
-          alert('Complaints can only be modified while in Pending triage status.');
-          window.location.href = 'my_complaints.html';
-          return;
-        }
-
-        document.querySelector('.page-header h1').textContent = `Edit Complaint (${editingComplaint.id})`;
-        document.querySelector('.page-header p').textContent = 'Update your complaint details before departmental triage begins.';
-        document.querySelector('#complaintForm button[type="submit"]').textContent = 'Save Changes';
-
-        if (nameInput) nameInput.value = editingComplaint.studentName || '';
-        if (idInput) idInput.value = editingComplaint.studentId || '';
-        if (deptInput) deptInput.value = editingComplaint.department || '';
-        document.getElementById('courseName').value = editingComplaint.course || '';
-        document.getElementById('complaintTitle').value = editingComplaint.title || '';
-        document.getElementById('urgency').value = editingComplaint.urgency || 'medium';
-        if (severityEl) severityEl.value = editingComplaint.severity || 'normal';
-        if (incidentDateInput && editingComplaint.incidentDate) incidentDateInput.value = editingComplaint.incidentDate;
-        if (messageTextarea) {
-          messageTextarea.value = editingComplaint.message || '';
-          messageTextarea.dispatchEvent(new Event('input'));
-        }
-
-        const radio = document.querySelector(`input[name="category"][value="${editingComplaint.category}"]`);
-        if (radio) radio.checked = true;
-
-        updateSeverityRequirements();
+          charCountLabel.style.color = len >= 50 ? 'var(--success)' : 'var(--text-muted)';
+        });
       }
 
       const form = document.getElementById('complaintForm');
       form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const studentName = nameInput.value.trim();
-        const studentId = idInput.value.trim();
-        const department = deptInput.value;
-        const course = document.getElementById('courseName').value;
-        const incidentDate = incidentDateInput ? incidentDateInput.value : today;
-        const title = document.getElementById('complaintTitle').value.trim();
-        const urgency = document.getElementById('urgency').value;
-        const severity = severityEl ? severityEl.value : 'normal';
-        const selectedCatEl = document.querySelector('input[name="category"]:checked');
-        const category = selectedCatEl ? selectedCatEl.value : 'General';
         const message = messageTextarea.value.trim();
-
         if (message.length < 50) {
-          window.AmboCMS.showToast('Please provide at least 50 characters in your detailed description.', 'warning');
+          window.AmboCMS.showToast('Please provide at least 50 characters in your factual description.', 'warning');
           messageTextarea.focus();
           return;
         }
 
-        if (severity === 'serious' && (!attachmentInput.files || attachmentInput.files.length === 0) && !editingComplaint) {
-          window.AmboCMS.showToast('Evidence document upload is strictly mandatory for severe misconduct complaints.', 'danger');
-          attachmentInput.focus();
-          return;
-        }
+        const isSealed = sealedToggle ? sealedToggle.checked : false;
+        const selectedCat = document.querySelector('input[name="category"]:checked');
+        const category = selectedCat ? selectedCat.value : 'Assessment & Grading';
+        const fileInput = document.getElementById('attachment');
+        const attachmentName = (fileInput && fileInput.files && fileInput.files[0]) ? fileInput.files[0].name : null;
 
-        if (!editingComplaint) {
-          const allComplaints = window.AmboCMS.getComplaints();
-          const duplicate = allComplaints.find(c =>
-            c.studentId === studentId &&
-            c.course === course &&
-            c.title.toLowerCase() === title.toLowerCase() &&
-            c.status !== 'resolved' && c.status !== 'declined'
-          );
-          if (duplicate) {
-            window.AmboCMS.showToast(`Duplicate Detected: You already have an active complaint (${duplicate.id}) for ${course} with this title.`, 'warning', 5000);
-            return;
-          }
-        }
+        const newComplaint = {
+          studentName: user.name,
+          studentId: user.studentId,
+          isIdentitySealed: isSealed,
+          department: deptInput.value,
+          course: document.getElementById('courseName').value,
+          track: currentTrack,
+          category: category,
+          title: document.getElementById('complaintTitle').value.trim(),
+          urgency: document.getElementById('urgency').value,
+          severity: currentTrack === 'disciplinary' ? 'serious' : 'normal',
+          incidentDate: incidentDateInput.value,
+          message: message,
+          attachmentName: attachmentName
+        };
 
-        const attachmentName = (attachmentInput.files && attachmentInput.files[0]) ? attachmentInput.files[0].name : (editingComplaint ? editingComplaint.attachmentName : null);
+        const created = window.AmboCMS.addComplaint(newComplaint);
 
-        if (editingComplaint) {
-          const updates = {
-            department,
-            course,
-            incidentDate,
-            title,
-            urgency,
-            severity,
-            category,
-            message,
-            attachmentName
-          };
+        form.style.display = 'none';
+        document.getElementById('generatedTrackingId').textContent = created.id;
+        document.getElementById('viewDetailsBtn').href = `complaint_details.html?id=${created.id}`;
+        document.getElementById('submissionSuccessCard').style.display = 'block';
 
-          window.AmboCMS.editComplaint(editingComplaint.id, updates);
-          window.AmboCMS.showToast(`Complaint ${editingComplaint.id} updated successfully!`, 'success');
-
-          setTimeout(() => {
-            window.location.href = `complaint_details.html?id=${editingComplaint.id}`;
-          }, 400);
-        } else {
-          const newComplaint = {
-            studentName,
-            studentId,
-            department,
-            course,
-            incidentDate,
-            title,
-            urgency,
-            severity,
-            category,
-            message,
-            attachmentName
-          };
-
-          const created = window.AmboCMS.addComplaint(newComplaint);
-
-          const badgeEl = document.querySelector('.page-header .header-badge');
-          if (badgeEl) badgeEl.textContent = 'Submission Confirmed';
-          const titleEl = document.querySelector('.page-header h1');
-          if (titleEl) titleEl.textContent = 'Complaint Registered';
-          const descEl = document.querySelector('.page-header p');
-          if (descEl) descEl.textContent = 'Your official tracking reference has been generated. Use it to check review progress anytime.';
-
-          form.style.display = 'none';
-          document.getElementById('generatedTrackingId').textContent = created.id;
-          document.getElementById('successTitle').textContent = created.title;
-          document.getElementById('successDeptCourse').textContent = `${created.department} (${created.course})`;
-          document.getElementById('successCategoryUrgency').textContent = `${created.category} • ${(created.urgency || 'medium').toUpperCase()}`;
-          document.getElementById('successDate').textContent = created.submittedDate || created.date || today;
-
-          const routingBanner = document.getElementById('successRoutingBanner');
-          const routingDesc = document.getElementById('successRoutingDesc');
-          const viewDetailsBtn = document.getElementById('viewDetailsBtn');
-          viewDetailsBtn.href = `complaint_details.html?id=${created.id}`;
-
-          if (created.severity === 'serious') {
-            document.getElementById('successHeading').textContent = 'Complaint Submitted & Flagged for Screening';
-            routingBanner.className = 'success-routing-banner committee';
-            routingDesc.innerHTML = '<strong>Administrative Screening Track:</strong> Your severe case has been registered and routed for high-priority Administrative Screening by Academic Affairs before referral to the Disciplinary Committee.';
-            window.AmboCMS.showToast(`Case ${created.id} registered for Administrative Screening!`, 'success', 4500);
-          } else {
-            document.getElementById('successHeading').textContent = 'Complaint Submitted Successfully';
-            routingBanner.className = 'success-routing-banner';
-            routingDesc.innerHTML = '<strong>Departmental Triage:</strong> This complaint is queued for review by the Department Head and will be assigned to the appropriate course lecturer.';
-            window.AmboCMS.showToast(`Complaint ${created.id} registered successfully!`, 'success', 3500);
-          }
-
-          document.getElementById('submissionSuccessCard').style.display = 'block';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        window.AmboCMS.showToast(`Complaint ${created.id} registered under statutory protection!`, 'success', 3500);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
-
-      const copyBtn = document.getElementById('copyTrackingBtn');
-      if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-          const trackingId = document.getElementById('generatedTrackingId').textContent;
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(trackingId).then(() => {
-              copyBtn.classList.add('copied');
-              copyBtn.innerHTML = `
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                <span>Copied!</span>
-              `;
-              setTimeout(() => {
-                copyBtn.classList.remove('copied');
-                copyBtn.innerHTML = `
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                  <span>Copy Tracking ID</span>
-                `;
-              }, 2000);
-            }).catch(() => {
-              window.AmboCMS.showToast(`Tracking ID: ${trackingId}`, 'info');
-            });
-          } else {
-            window.AmboCMS.showToast(`Tracking ID: ${trackingId}`, 'info');
-          }
-        });
-      }
-    });</script>
+    });
+  </script>
 </body>
 </html>
