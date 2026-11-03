@@ -81,7 +81,7 @@
 
       <div class="card" id="docketTable">
         <div class="card-title">
-          <h3>Formal Misconduct Dockets Awaiting Committee Hearing</h3>
+          <h3>Escalated Cases Awaiting Committee Review</h3>
           <span style="font-size: 0.88rem; color: var(--text-muted);">Formal Statutory Inquiry Docket</span>
         </div>
 
@@ -95,7 +95,7 @@
                 <th>Department</th>
                 <th>Severity</th>
                 <th>Docket Status</th>
-                <th>Date Referred to ASDC</th>
+                <th>Date Escalated</th>
                 <th>Committee Action</th>
               </tr>
             </thead>
@@ -171,22 +171,14 @@
 
         if (c.status === 'escalated' || c.status === 'committee_review') {
           actionBtns += `
-            <a href="committee_decision.html?id=${c.id}" class="action-btn-a action-confirm-a" style="white-space: nowrap;">Record Hearing Minutes</a>
+            <a href="committee_decision.html?id=${c.id}" class="action-btn-a action-escalate-a">Record Meeting Decision</a>
           `;
         }
 
-        const sanitized = window.AmboCMS.getSanitizedComplainant(c, 'committee');
-        const complainantDisplay = sanitized.isSealed
-          ? `<span class="badge-sealed">🔒 Sealed Identity</span><br><span style="font-size:0.75rem; color:var(--text-muted);">Verified Enrolled Student</span>`
-          : `<strong>${c.studentName}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${c.studentId || ''}</span>`;
-
-        const sla = window.AmboCMS.calculateSla(c.submittedDate, c.urgency);
-        const slaBadge = `<span class="badge-sla ${sla.isOverdue ? 'overdue' : ''}">${sla.badgeText}</span>`;
-
         return `
           <tr>
-            <td><strong>${c.id}</strong><br>${slaBadge}</td>
-            <td>${complainantDisplay}</td>
+            <td><strong>${c.id}</strong></td>
+            <td>${c.studentName}</td>
             <td><a href="committee_complaint_details.html?id=${c.id}" class="table-link">${c.title}</a></td>
             <td>${c.department}</td>
             <td>${severityBadge}</td>

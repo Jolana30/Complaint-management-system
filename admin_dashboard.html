@@ -10,95 +10,15 @@
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-  <title id="pageTitle">Executive & Governance Portal - Ambo University CMS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>Admin Dashboard - Ambo University CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/nav.css">
-  <style>
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(4px);
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .modal-overlay.active {
-      display: flex;
-    }
-    .modal-card {
-      background: var(--surface);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      width: 100%;
-      max-width: 580px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-      animation: modalFadeIn 0.2s ease-out;
-      overflow: hidden;
-    }
-    @keyframes modalFadeIn {
-      from { opacity: 0; transform: translateY(12px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .modal-header {
-      padding: 18px 24px;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--surface-alt);
-    }
-    .modal-header h3 {
-      margin: 0;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-    .modal-close-btn {
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      line-height: 1;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 4px;
-    }
-    .modal-body {
-      padding: 24px;
-      max-height: calc(85vh - 120px);
-      overflow-y: auto;
-    }
-    .modal-footer {
-      padding: 16px 24px;
-      border-top: 1px solid var(--border-color);
-      display: flex;
-      justify-content: flex-end;
-      gap: 12px;
-      background: var(--surface-alt);
-    }
-    .decree-stamp-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      background: rgba(124, 58, 237, 0.1);
-      border: 1px solid rgba(124, 58, 237, 0.3);
-      border-radius: 8px;
-      color: #6d28d9;
-      font-weight: 600;
-      font-size: 0.82rem;
-      margin-bottom: 16px;
-    }
-    [data-theme="dark"] .decree-stamp-badge {
-      color: #c4b5fd;
-      background: rgba(124, 58, 237, 0.2);
-    }
-  </style>
 </head>
 <body>
 
@@ -129,59 +49,64 @@
   <main class="main-content" style="padding: 24px 0 40px;">
     <div class="container">
       
-      <div class="welcome-header" id="portalHeaderBox">
-        <h1 id="portalTitle">Executive & Governance Portal</h1>
-        <p id="portalSubtitle">Complaint Management System — Ambo University Academic & Administrative Authority</p>
+      <div class="welcome-header">
+        <h1>Admin Dashboard</h1>
+        <p>Complaint Management System — Department Head & Administration</p>
       </div>
 
-      <div class="quick-links" id="portalQuickLinks">
-        <h3>Role Actions</h3>
+      <div class="quick-links">
+        <h3>Quick Actions</h3>
         <a href="admin_all_complaints.html">All Complaints</a>
         <a href="admin_all_complaints.html?status=pending">Pending Triage</a>
         <a href="admin_all_complaints.html?status=needs_confirmation">Awaiting Confirmation</a>
+        <a href="admin_all_complaints.html?status=escalated">Escalated to Committee</a>
       </div>
 
-      <div class="stats-row" id="portalStatsRow">
+      <div class="stats-row">
         <div class="stat-card">
-          <h2 id="stat1Val">0</h2>
-          <p id="stat1Lbl">Total Dockets</p>
+          <h2 id="statTotalAll">0</h2>
+          <p>Total Complaints</p>
         </div>
         <div class="stat-card">
-          <h2 id="stat2Val" style="color: #b45309;">0</h2>
-          <p id="stat2Lbl">Action Required</p>
+          <h2 id="statAdminPending" style="color: #b45309;">0</h2>
+          <p>Pending Triage</p>
         </div>
         <div class="stat-card">
-          <h2 id="stat3Val" style="color: #2563EB;">0</h2>
-          <p id="stat3Lbl">Under Deliberation</p>
+          <h2 id="statAdminProgress" style="color: #2563EB;">0</h2>
+          <p>In Progress</p>
         </div>
         <div class="stat-card">
-          <h2 id="stat4Val" style="color: #7c3aed;">0</h2>
-          <p id="stat4Lbl">Appellate & Review</p>
+          <h2 id="statAdminConfirm" style="color: #7c3aed;">0</h2>
+          <p>Needs Confirmation</p>
         </div>
         <div class="stat-card">
-          <h2 id="stat5Val" style="color: #059669;">0</h2>
-          <p id="stat5Lbl">Concluded</p>
+          <h2 id="statAdminEscalated" style="color: #dc2626;">0</h2>
+          <p>Escalated Cases</p>
+        </div>
+        <div class="stat-card">
+          <h2 id="statAdminResolved" style="color: #059669;">0</h2>
+          <p>Resolved</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-title">
-          <h3 id="tableTitle">Dockets Requiring Your Authority</h3>
+          <h3>Complaints Requiring Immediate Action</h3>
           <a href="admin_all_complaints.html" class="action-btn-a action-view-a">View All Complaints</a>
         </div>
 
         <div class="table-responsive">
           <table class="data-table">
             <thead>
-              <tr id="tableHeaderRow">
-                <th>Docket ID</th>
-                <th>Complainant</th>
-                <th>Subject Matter</th>
+              <tr>
+                <th>ID</th>
+                <th>Student</th>
+                <th>Title</th>
                 <th>Department</th>
-                <th>Statutory Track</th>
+                <th>Course</th>
                 <th>Status</th>
                 <th>Urgency</th>
-                <th>Official Authority Action</th>
+                <th>Administrative Action</th>
               </tr>
             </thead>
             <tbody id="actionRequiredTableBody">
@@ -193,122 +118,6 @@
     </div>
   </main>
 
-  <!-- PRESIDENT: Executive Decree Modal -->
-  <div id="decreeModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Promulgate Presidential Sanction Decree</h3>
-        <button type="button" class="modal-close-btn" onclick="closeModals()">&times;</button>
-      </div>
-      <form id="decreeForm">
-        <div class="modal-body">
-          <div class="decree-stamp-badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            <span>Office of the University President &bull; Executive Decree</span>
-          </div>
-
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
-            Case: <strong id="modalDecreeCaseTitle">-</strong>
-          </p>
-
-          <input type="hidden" id="decreeComplaintId">
-
-          <div class="form-group">
-            <label for="decreeNumber">Executive Decree Identifier</label>
-            <input type="text" id="decreeNumber" required readonly style="background: var(--surface-alt); font-family: monospace;">
-          </div>
-
-          <div class="form-group">
-            <label for="decreeSanction">Ratified Statutory Sanction <span class="required">*</span></label>
-            <select id="decreeSanction" required>
-              <option value="Final Formal Written Reprimand (University Level)">Final Formal Written Reprimand (Senate Level)</option>
-              <option value="Salary Fine: 1 Month Salary Deduction">Salary Fine: 1 Month Salary Deduction</option>
-              <option value="Salary Fine: Up to 3 Months Salary Deduction">Salary Fine: Up to 3 Months Salary Deduction</option>
-              <option value="Withholding of Next Academic Rank Promotion (1 to 2 Years)">Withholding of Promotion (1 to 2 Years)</option>
-              <option value="Withholding of Annual Salary Increment (1 to 2 Years)">Withholding of Annual Salary Increment (1 to 2 Years)</option>
-              <option value="Temporary Suspension from Teaching & Campus Privileges">Temporary Suspension from Campus Privileges</option>
-              <option value="Dismissal & Termination of Employment Contract">Dismissal & Termination of Contract</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="decreeRemarks">Executive Order & Directives <span class="required">*</span></label>
-            <textarea id="decreeRemarks" rows="4" placeholder="Detail executive enforcement directives to Academic Registrar, Dean, and Finance Directorate..." required></textarea>
-            <span class="form-hint">Promulgating this decree activates the 7-day statutory appellate review window.</span>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="closeModals()">Cancel</button>
-          <button type="submit" class="btn btn-purple">Promulgate Executive Decree</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- PRESIDENT: Remand to ASDC Modal -->
-  <div id="remandModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Remand Docket to Disciplinary Committee</h3>
-        <button type="button" class="modal-close-btn" onclick="closeModals()">&times;</button>
-      </div>
-      <form id="remandForm">
-        <div class="modal-body">
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
-            Remanding Case: <strong id="modalRemandCaseTitle">-</strong>
-          </p>
-          <input type="hidden" id="remandComplaintId">
-
-          <div class="form-group">
-            <label for="remandReason">Procedural Defect / Directives for ASDC Re-examination <span class="required">*</span></label>
-            <textarea id="remandReason" rows="4" placeholder="e.g. Right to be heard incomplete; respondent must be granted opportunity to examine witness affidavits..." required></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="closeModals()">Cancel</button>
-          <button type="submit" class="btn btn-danger">Issue Remand Order</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- PRESIDENT: Appoint Appellate Panel Modal -->
-  <div id="appellateModal" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Appoint Ad-Hoc Appellate Review Panel</h3>
-        <button type="button" class="modal-close-btn" onclick="closeModals()">&times;</button>
-      </div>
-      <form id="appellateForm">
-        <div class="modal-body">
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
-            Statutory Appeal for: <strong id="modalAppellateCaseTitle">-</strong>
-          </p>
-          <input type="hidden" id="appellateComplaintId">
-
-          <div class="form-group">
-            <label for="panelLead">Lead Reviewer / Commission Chair <span class="required">*</span></label>
-            <input type="text" id="panelLead" value="Dr. Alazar (Dean, College of Law & Governance)" required>
-          </div>
-
-          <div class="form-group">
-            <label for="panelMembers">Panel Composition (3 to 5 Neutral Members) <span class="required">*</span></label>
-            <input type="text" id="panelMembers" value="3 Senior Academic Staff Members + 1 Student Representative" required>
-          </div>
-
-          <div class="form-group">
-            <label for="panelDirective">Appellate Directive & Scope <span class="required">*</span></label>
-            <textarea id="panelDirective" rows="3" placeholder="Conduct de novo review of disputed evidence and report findings within 15 working days..." required>Conduct de novo examination of evidentiary records. Submit formal appellate report within 15 working days.</textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="closeModals()">Cancel</button>
-          <button type="submit" class="btn btn-primary">Appoint Commission</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
   <footer class="site-footer">
     <div class="container">
       <p>Copyright &copy; 2026 Ambo University Complaint Management System. All rights reserved.</p>
@@ -316,304 +125,58 @@
   </footer>
 
   <script src="assets/js/app.js"></script>
-  <script>
-    function closeModals() {
-      document.querySelectorAll('.modal-overlay').forEach(el => el.classList.remove('active'));
-    }
-
-    function openDecreeModal(id) {
-      const c = window.AmboCMS.getComplaintById(id);
-      if (!c) return;
-      document.getElementById('decreeComplaintId').value = c.id;
-      document.getElementById('modalDecreeCaseTitle').textContent = `${c.id}: ${c.title}`;
-      document.getElementById('decreeNumber').value = `AU/PRES/${new Date().getFullYear()}/${Math.floor(100 + Math.random() * 900)}`;
-      if (c.sanctionOrdered) {
-        const sel = document.getElementById('decreeSanction');
-        for (let i = 0; i < sel.options.length; i++) {
-          if (sel.options[i].value === c.sanctionOrdered || sel.options[i].text.includes(c.sanctionOrdered)) {
-            sel.selectedIndex = i;
-            break;
-          }
-        }
-      }
-      document.getElementById('decreeModal').classList.add('active');
-    }
-
-    function openRemandModal(id) {
-      const c = window.AmboCMS.getComplaintById(id);
-      if (!c) return;
-      document.getElementById('remandComplaintId').value = c.id;
-      document.getElementById('modalRemandCaseTitle').textContent = `${c.id}: ${c.title}`;
-      document.getElementById('remandModal').classList.add('active');
-    }
-
-    function openAppellateModal(id) {
-      const c = window.AmboCMS.getComplaintById(id);
-      if (!c) return;
-      document.getElementById('appellateComplaintId').value = c.id;
-      document.getElementById('modalAppellateCaseTitle').textContent = `${c.id}: ${c.title}`;
-      document.getElementById('appellateModal').classList.add('active');
-    }
-
-    function conveneRemarkPanel(id) {
-      const c = window.AmboCMS.getComplaintById(id);
-      if (!c) return;
-      if (confirm(`Convene 3-member Independent Academic Remarking Panel for ${c.id}?`)) {
-        window.AmboCMS.updateComplaintStatus(c.id, {
-          status: 'in_progress',
-          adminRemark: 'Independent Remarking Panel convened. Blind exam script review in progress.',
-          timelineEvent: {
-            title: 'Independent Remarking Panel Convened',
-            text: 'Department Head convened 3-member neutral faculty panel to re-evaluate exam paper.'
-          }
-        });
-        window.AmboCMS.showToast('Remarking Panel successfully convened.', 'success');
-        setTimeout(() => location.reload(), 400);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
+  <script>    document.addEventListener('DOMContentLoaded', () => {
       const user = window.AmboCMS.getCurrentUser();
       if (!user) {
         window.location.href = 'login.html';
         return;
       }
 
-      const jur = window.AmboCMS.getUserJurisdiction(user);
       const all = window.AmboCMS.getComplaints();
 
-      // Setup forms
-      document.getElementById('decreeForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const cid = document.getElementById('decreeComplaintId').value;
-        const decreeNo = document.getElementById('decreeNumber').value;
-        const sanction = document.getElementById('decreeSanction').value;
-        const text = document.getElementById('decreeRemarks').value.trim();
+      document.getElementById('statTotalAll').textContent = all.length;
+      document.getElementById('statAdminPending').textContent = all.filter(c => c.status === 'pending').length;
+      document.getElementById('statAdminProgress').textContent = all.filter(c => c.status === 'in_progress' || c.status === 'assigned').length;
+      document.getElementById('statAdminConfirm').textContent = all.filter(c => c.status === 'needs_confirmation').length;
+      document.getElementById('statAdminEscalated').textContent = all.filter(c => c.status === 'escalated' || c.status === 'committee_review').length;
+      document.getElementById('statAdminResolved').textContent = all.filter(c => c.status === 'resolved').length;
 
-        window.AmboCMS.issuePresidentDecree(cid, {
-          decreeNumber: decreeNo,
-          sanction: sanction,
-          decreeText: text
-        });
-
-        window.AmboCMS.showToast(`Executive Decree ${decreeNo} promulgated successfully!`, 'success');
-        closeModals();
-        setTimeout(() => location.reload(), 400);
-      });
-
-      document.getElementById('remandForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const cid = document.getElementById('remandComplaintId').value;
-        const reason = document.getElementById('remandReason').value.trim();
-
-        window.AmboCMS.remandToCommittee(cid, reason);
-        window.AmboCMS.showToast(`Case ${cid} remanded to ASDC for due process review.`, 'warning');
-        closeModals();
-        setTimeout(() => location.reload(), 400);
-      });
-
-      document.getElementById('appellateForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const cid = document.getElementById('appellateComplaintId').value;
-        const lead = document.getElementById('panelLead').value.trim();
-        const directive = document.getElementById('panelDirective').value.trim();
-
-        window.AmboCMS.appointAppellatePanel(cid, {
-          leadReviewer: lead,
-          directive: directive
-        });
-
-        window.AmboCMS.showToast(`Ad-Hoc Appellate Commission appointed for ${cid}.`, 'success');
-        closeModals();
-        setTimeout(() => location.reload(), 400);
-      });
-
-      // Role-specific tailoring
-      const pTitle = document.getElementById('portalTitle');
-      const pSubtitle = document.getElementById('portalSubtitle');
-      const tableTitle = document.getElementById('tableTitle');
-      const qLinks = document.getElementById('portalQuickLinks');
-
-      let actionable = [];
-
-      if (jur === 'president') {
-        document.title = 'Executive Adjudication & Appeals - Office of the President';
-        pTitle.textContent = 'Office of the University President — Executive Adjudication';
-        pSubtitle.textContent = 'Executive review of disciplinary council transmittals and student appeals.';
-
-        qLinks.innerHTML = `
-          <h3>Executive Actions</h3>
-          <a href="#actionTable">Dockets Requiring Decree</a>
-          <a href="admin_all_complaints.html">University Registry Archive</a>
-          <a href="admin_all_complaints.html?status=council_deliberation">Council Transmittals</a>
-        `;
-
-        const councilDockets = all.filter(c => c.status === 'council_deliberation' || c.status === 'pending_presidential_decree');
-        const appealDockets = all.filter(c => c.status === 'appealed' || c.status === 'appellate_review');
-        const resolvedDecrees = all.filter(c => c.executiveDecreeNo || (c.status === 'resolved' && c.sanctionOrdered));
-
-        document.getElementById('stat1Lbl').textContent = 'Total Dockets';
-        document.getElementById('stat1Val').textContent = all.length;
-
-        document.getElementById('stat2Lbl').textContent = 'Awaiting Executive Decree';
-        document.getElementById('stat2Val').textContent = councilDockets.length;
-
-        document.getElementById('stat3Lbl').textContent = 'Appellate Petitions';
-        document.getElementById('stat3Val').textContent = appealDockets.length;
-
-        document.getElementById('stat4Lbl').textContent = 'Inquiry Dockets (ASDC)';
-        document.getElementById('stat4Val').textContent = all.filter(c => c.status === 'committee_review').length;
-
-        document.getElementById('stat5Lbl').textContent = 'Decrees Promulgated';
-        document.getElementById('stat5Val').textContent = resolvedDecrees.length;
-
-        actionable = all.filter(c => c.status === 'council_deliberation' || c.status === 'pending_presidential_decree' || c.status === 'appealed' || c.status === 'appellate_review');
-        tableTitle.textContent = 'University Council Transmittals & Appellate Petitions Awaiting President Action';
-
-      } else if (jur === 'hod') {
-        document.title = 'Department Head Academic Triage - Ambo University';
-        pTitle.textContent = 'Department Head Academic Triage & Resolution';
-        pSubtitle.textContent = 'Department of Information Technology & Computing — Academic grievance triage and resolution.';
-
-        qLinks.innerHTML = `
-          <h3>Department Actions</h3>
-          <a href="admin_all_complaints.html?status=pending">Pending Intake</a>
-          <a href="admin_all_complaints.html?status=needs_confirmation">Awaiting HoD Endorsement</a>
-          <a href="admin_all_complaints.html?status=in_progress">Under Faculty Review</a>
-        `;
-
-        document.getElementById('stat1Lbl').textContent = 'Department Complaints';
-        document.getElementById('stat1Val').textContent = all.filter(c => c.department.includes('Information Technology') || c.department.includes('Computer')).length;
-
-        document.getElementById('stat2Lbl').textContent = 'Pending Intake Triage';
-        document.getElementById('stat2Val').textContent = all.filter(c => c.status === 'pending').length;
-
-        document.getElementById('stat3Lbl').textContent = 'Under Instructional Review';
-        document.getElementById('stat3Val').textContent = all.filter(c => c.status === 'in_progress' || c.status === 'assigned').length;
-
-        document.getElementById('stat4Lbl').textContent = 'Awaiting Grade Endorsement';
-        document.getElementById('stat4Val').textContent = all.filter(c => c.status === 'needs_confirmation').length;
-
-        document.getElementById('stat5Lbl').textContent = 'Resolved at Unit Level';
-        document.getElementById('stat5Val').textContent = all.filter(c => c.status === 'resolved').length;
-
-        actionable = all.filter(c => c.status === 'pending' || c.status === 'needs_confirmation');
-        tableTitle.textContent = 'Complaints Requiring Department Head Triage & Grade Sign-off';
-
-      } else if (jur === 'gender') {
-        document.title = 'Gender Directorate Safe Harbor - Ambo University';
-        pTitle.textContent = 'Gender & Social Inclusion Directorate — Safe Harbor Docket';
-        pSubtitle.textContent = 'Support docket for confidential student grievances and conduct inquiries.';
-
-        qLinks.innerHTML = `
-          <h3>Directorate Actions</h3>
-          <a href="#actionTable">Active Misconduct Dockets</a>
-          <a href="admin_all_complaints.html?status=committee_review">ASDC Joint Inquiries</a>
-          <a href="submission_guide.html">Anti-Harassment Legislation</a>
-        `;
-
-        const genderDockets = all.filter(c => c.isIdentitySealed || c.category.includes('Harassment') || c.category.includes('Misconduct'));
-
-        document.getElementById('stat1Lbl').textContent = 'Misconduct Dockets';
-        document.getElementById('stat1Val').textContent = genderDockets.length;
-
-        document.getElementById('stat2Lbl').textContent = 'Sealed Identities Protected';
-        document.getElementById('stat2Val').textContent = all.filter(c => c.isIdentitySealed).length;
-
-        document.getElementById('stat3Lbl').textContent = 'Joint ASDC Inquiries';
-        document.getElementById('stat3Val').textContent = all.filter(c => c.status === 'committee_review').length;
-
-        document.getElementById('stat4Lbl').textContent = 'Council Deliberations';
-        document.getElementById('stat4Val').textContent = all.filter(c => c.status === 'council_deliberation').length;
-
-        document.getElementById('stat5Lbl').textContent = 'Concluded Cases';
-        document.getElementById('stat5Val').textContent = genderDockets.filter(c => c.status === 'resolved').length;
-
-        actionable = genderDockets;
-        tableTitle.textContent = 'Protected Whistleblower & Gender Affairs Inquiries';
-
-      } else {
-        // General Academic Administration
-        document.getElementById('stat1Val').textContent = all.length;
-        document.getElementById('stat2Val').textContent = all.filter(c => c.status === 'pending').length;
-        document.getElementById('stat3Val').textContent = all.filter(c => c.status === 'in_progress' || c.status === 'assigned').length;
-        document.getElementById('stat4Val').textContent = all.filter(c => c.status === 'needs_confirmation').length;
-        document.getElementById('stat5Val').textContent = all.filter(c => c.status === 'resolved').length;
-
-        actionable = all.filter(c => c.status === 'pending' || c.status === 'needs_confirmation');
-      }
-
-      // Render Table
+      const actionable = all.filter(c => c.status === 'pending' || c.status === 'needs_confirmation');
       const tbody = document.getElementById('actionRequiredTableBody');
+
       if (actionable.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 32px; color: var(--text-muted);">🎉 Docket Clear — No pending cases requiring action for this role.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding: 28px; color: var(--text-muted);">🎉 All complaints have been triaged and confirmed!</td></tr>`;
         return;
       }
 
       tbody.innerHTML = actionable.map(c => {
-        const sanitized = window.AmboCMS.getSanitizedComplainant(c, user.role);
-        const complainantDisplay = sanitized.isSealed
-          ? `<span class="badge-sealed">🔒 Sealed Identity</span><br><span style="font-size:0.75rem; color:var(--text-muted);">${sanitized.name}</span>`
-          : `<strong>${c.studentName}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${c.studentId || ''}</span>`;
+        let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
+        let urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
 
-        const sla = window.AmboCMS.calculateSla(c.submittedDate, c.urgency);
-        const slaBadge = `<span class="badge-sla ${sla.isOverdue ? 'overdue' : ''}">${sla.badgeText}</span>`;
-        const statusBadge = `<span class="status-badge status-${c.status}">${window.AmboCMS.getStatusLabel(c.status, user.role)}</span>`;
-        const urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
+        let actionBtns = `<a href="complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">View</a>`;
 
-        let actionBtns = `<a href="complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">View Docket</a>`;
-
-        if (jur === 'president') {
-          if (c.status === 'council_deliberation' || c.status === 'pending_presidential_decree') {
-            actionBtns += `
-              <button type="button" class="btn btn-sm btn-purple" onclick="openDecreeModal('${c.id}')" title="Sign executive decree">Promulgate Decree</button>
-              <button type="button" class="btn btn-sm btn-secondary" onclick="openRemandModal('${c.id}')" title="Remand to ASDC for due process defect">Remand to ASDC</button>
-            `;
-          } else if (c.status === 'appealed') {
-            actionBtns += `
-              <button type="button" class="btn btn-sm btn-primary" onclick="openAppellateModal('${c.id}')" title="Appoint 3-5 member Ad-Hoc Review Panel">Appoint Review Panel</button>
-            `;
-          }
-        } else if (jur === 'hod') {
-          if (c.status === 'pending') {
-            if (c.track === 'academic') {
-              actionBtns += `
-                <a href="admin_assign.html?id=${c.id}" class="action-btn-a action-assign-a">Assign Faculty</a>
-                <button type="button" class="btn btn-sm btn-secondary" onclick="conveneRemarkPanel('${c.id}')" title="Convene independent exam remark panel">Remark Panel</button>
-              `;
-            } else {
-              actionBtns += `
-                <a href="admin_escalate.html?id=${c.id}" class="action-btn-a action-escalate-a" title="Statutory Referral to Disciplinary Committee & Gender Office">Refer to ASDC & Gender</a>
-              `;
-            }
-          } else if (c.status === 'needs_confirmation') {
-            actionBtns += `
-              <a href="admin_confirm.html?id=${c.id}" class="action-btn-a action-confirm-a">Endorse Grade</a>
-            `;
-          }
-        } else if (jur === 'gender') {
+        if (c.status === 'pending') {
           actionBtns += `
-            <a href="admin_escalate.html?id=${c.id}" class="action-btn-a action-escalate-a">Co-Sign ASDC Transmittal</a>
+            <a href="admin_assign.html?id=${c.id}" class="action-btn-a action-assign-a">Assign</a>
+            <a href="admin_escalate.html?id=${c.id}" class="action-btn-a action-escalate-a" title="Escalate to Committee">Escalate</a>
           `;
-        } else {
-          if (c.status === 'pending') {
-            actionBtns += `<a href="admin_assign.html?id=${c.id}" class="action-btn-a action-assign-a">Assign</a>`;
-          } else if (c.status === 'needs_confirmation') {
-            actionBtns += `<a href="admin_confirm.html?id=${c.id}" class="action-btn-a action-confirm-a">Confirm</a>`;
-          }
+        } else if (c.status === 'needs_confirmation') {
+          actionBtns += `
+            <a href="admin_confirm.html?id=${c.id}" class="action-btn-a action-confirm-a">Confirm</a>
+          `;
         }
 
         return `
           <tr>
-            <td><strong>${c.id}</strong><br>${slaBadge}</td>
-            <td>${complainantDisplay}</td>
+            <td><strong>${c.id}</strong></td>
+            <td>${c.studentName}</td>
             <td><a href="complaint_details.html?id=${c.id}" class="table-link">${c.title}</a></td>
             <td>${c.department}</td>
-            <td><span class="badge" style="background:var(--surface-alt); border:1px solid var(--border-color); font-size:0.75rem;">${c.track === 'academic' ? 'Academic Dispute' : 'Misconduct Docket'}</span></td>
+            <td>${c.course}</td>
             <td>${statusBadge}</td>
             <td>${urgencyBadge}</td>
             <td>
-              <div class="actions-cell" style="flex-wrap: wrap;">
+              <div class="actions-cell">
                 ${actionBtns}
               </div>
             </td>

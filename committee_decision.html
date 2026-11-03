@@ -50,8 +50,8 @@
     <div class="container container-narrow">
       <div class="page-header" style="background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);">
         <span class="header-badge" style="background: rgba(255, 255, 255, 0.22);">Statutory Adjudication</span>
-        <h1>Register ASDC Hearing Minutes & Propose Sanction</h1>
-        <p>Record formal hearing proceedings and transmit investigation dossier to the University Council for Executive Presidential Decree.</p>
+        <h1>Register Committee Meeting Decision</h1>
+        <p>Register official findings, agreed resolutions, and corrective actions decided during the disciplinary committee meeting.</p>
       </div>
 
       <div class="card" style="margin-bottom: 24px;">
@@ -98,9 +98,10 @@
             <div class="form-group">
               <label for="findingRuling">Formal Committee Finding <span class="required">*</span></label>
               <select id="findingRuling" name="findingRuling" required>
-                <option value="Substantiated (Violation Proven)" selected>Substantiated (Violation Proven)</option>
-                <option value="Partially Substantiated (Mitigated Circumstances)">Partially Substantiated (Mitigated Circumstances)</option>
-                <option value="Unsubstantiated (Exonerated)">Unsubstantiated (Exonerated)</option>
+                <option value="Substantiated" selected>Substantiated (Violation Proven)</option>
+                <option value="Partially Substantiated">Partially Substantiated (Mitigated)</option>
+                <option value="Unsubstantiated">Unsubstantiated (Allegation Dismissed)</option>
+                <option value="Administrative Settlement">Administrative Settlement Reached</option>
               </select>
             </div>
           </div>
@@ -118,7 +119,7 @@
           <div class="form-group">
             <label for="decisionText">Committee Meeting Resolution & Minutes <span class="required">*</span></label>
             <textarea id="decisionText" name="decisionText" rows="6" placeholder="Detail the evidence reviewed during the committee meeting, findings, agreed sanctions, and institutional rationale..." required></textarea>
-            <span class="form-hint">This dossier will be transmitted to the University Council and University President for Executive Decree.</span>
+            <span class="form-hint">This text will be officially sealed in the permanent complaint audit ledger and visible to the Department Head.</span>
           </div>
 
           <div class="form-group">
@@ -130,7 +131,7 @@
 
           <div class="form-actions">
             <a href="committee_dashboard.html" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-danger">Transmit Dossier & Sanction Proposal to University Council</button>
+            <button type="submit" class="btn btn-danger">Register & Save Committee Decision</button>
           </div>
         </form>
       </div>
@@ -156,10 +157,7 @@
       }
 
       document.getElementById('complaintHeader').textContent = `Case #${complaint.id}: ${complaint.title}`;
-      const sanitized = window.AmboCMS.getSanitizedComplainant(complaint, 'committee');
-      document.getElementById('valStudent').innerHTML = sanitized.isSealed
-        ? `<span class="badge-sealed">🔒 Sealed Identity</span> Verified Enrolled Student`
-        : complaint.studentName;
+      document.getElementById('valStudent').textContent = complaint.studentName;
       document.getElementById('valDepartment').textContent = complaint.department;
       document.getElementById('valCourse').textContent = complaint.course;
       document.getElementById('valMessage').textContent = complaint.message;
@@ -184,7 +182,7 @@
         };
 
         window.AmboCMS.submitCommitteeDecision(complaint.id, decisionData);
-        window.AmboCMS.showToast(`Dossier transmitted to University Council for Executive Presidential Decree!`, 'success');
+        window.AmboCMS.showToast(`Statutory Decision sealed for ${complaint.id}. Case marked as Resolved!`, 'success');
 
         setTimeout(() => {
           window.location.href = 'committee_dashboard.html';

@@ -50,8 +50,8 @@
     <div class="container container-narrow">
       <div class="page-header">
         <span class="header-badge">Statutory Escalation</span>
-        <h1>Statutory Referral to ASDC & Gender Directorate</h1>
-        <p>Transfer jurisdiction of severe misconduct or ethics breach exceeding unit-level authority to the Academic Staff Disciplinary Committee (ASDC) & Gender Directorate.</p>
+        <h1>Escalate Complaint to Disciplinary Committee</h1>
+        <p>Transfer jurisdiction of severe misconduct, ethics violations, or retaliatory grading to the University Disciplinary Committee.</p>
       </div>
 
       <div class="card" style="margin-bottom: 24px;">
@@ -93,9 +93,9 @@
           <div class="form-group">
             <label for="escalationAuthority">Target Disciplinary Body <span class="required">*</span></label>
             <select id="escalationAuthority" name="escalationAuthority" required>
-              <option value="Academic Staff Disciplinary Committee (ASDC)" selected>Academic Staff Disciplinary Committee (ASDC - Formal Hearing Docket)</option>
-              <option value="Gender & Social Inclusion Directorate">Gender & Social Inclusion Directorate (Safe Harbor & Protection)</option>
-              <option value="Independent Academic Remarking Panel">Independent Academic Remarking Panel (Faculty Exam Review)</option>
+              <option value="University Disciplinary Committee" selected>University Disciplinary Committee (UDC - Institutional Ethics)</option>
+              <option value="College Academic Commission">College Academic Commission (CAC - Academic Integrity)</option>
+              <option value="Student Ombudsperson Directorate">Office of the Student Ombudsperson (Confidential Inquiry)</option>
             </select>
             <span class="form-hint">Department mediation will pause; the case is transferred to committee docket.</span>
           </div>
@@ -119,7 +119,7 @@
 
           <div class="form-actions">
             <a href="admin_all_complaints.html" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-danger">Transmit Statutory Referral Order</button>
+            <button type="submit" class="btn btn-danger">Confirm Escalation to Committee</button>
           </div>
         </form>
       </div>
@@ -145,10 +145,7 @@
       }
 
       document.getElementById('complaintHeader').textContent = `${complaint.id}: ${complaint.title}`;
-      const sanitized = window.AmboCMS.getSanitizedComplainant(complaint, 'admin');
-      document.getElementById('valStudent').innerHTML = sanitized.isSealed
-        ? `<span class="badge-sealed">🔒 Sealed Identity</span> ${complaint.studentName}`
-        : complaint.studentName;
+      document.getElementById('valStudent').textContent = complaint.studentName;
       document.getElementById('valDepartment').textContent = complaint.department;
       document.getElementById('valCategory').textContent = complaint.category;
       document.getElementById('valStatus').textContent = window.AmboCMS.getStatusLabel(complaint.status, 'admin');
@@ -160,8 +157,8 @@
         const reason = document.getElementById('escalationReason').value.trim();
         const authority = document.getElementById('escalationAuthority').value;
 
-        window.AmboCMS.referToAsdc(complaint.id, { referralReason: reason, targetAuthority: authority });
-        window.AmboCMS.showToast(`Statutory referral order dispatched to ${authority}!`, 'success');
+        window.AmboCMS.escalateComplaint(complaint.id, `${authority}: ${reason}`);
+        window.AmboCMS.showToast(`Complaint ${complaint.id} successfully escalated to ${authority}!`, 'success');
         setTimeout(() => {
           window.location.href = 'admin_all_complaints.html';
         }, 500);

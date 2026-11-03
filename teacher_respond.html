@@ -51,7 +51,7 @@
       <div class="page-header" style="padding: 24px 20px;">
         <span class="header-badge">Faculty Response</span>
         <h1>Respond to Student Complaint</h1>
-        <p>Review the student complaint, examine course and exam records, and submit your official explanation to the Department Head.</p>
+        <p>Review the student's complaint, examine academic records, and draft an official resolution for administrative confirmation.</p>
       </div>
 
       <div class="card" style="margin-bottom: 24px;">
@@ -98,7 +98,7 @@
           <div class="form-group">
             <label for="actionType">Resolution Action</label>
             <select id="actionType" name="actionType" required>
-              <option value="needs_confirmation" selected>Submit to Department Head for Grade Endorsement</option>
+              <option value="needs_confirmation" selected>Submit to Admin for Final Confirmation (Resolution Ready)</option>
               <option value="in_progress">Keep In Progress (Under Continued Investigation)</option>
             </select>
           </div>
@@ -133,14 +133,13 @@
 
       document.getElementById('complaintHeader').textContent = `${complaint.id}: ${complaint.title}`;
       document.getElementById('statusBadge').innerHTML = `<span class="status-badge status-${complaint.status}">${complaint.status.replace('_', ' ')}</span>`;
-      const sanitized = window.AmboCMS.getSanitizedComplainant(complaint, 'teacher');
-      document.getElementById('valStudent').innerHTML = sanitized.isSealed
-        ? '<span class="badge-sealed">🔒 Verified Enrolled Student — Identity Sealed</span>'
+      const isSevere = complaint.severity === 'serious';
+      document.getElementById('valStudent').innerHTML = isSevere
+        ? '<span style="color:#b45309; font-style:italic;">[Complainant Identity Protected during Initial Faculty Review]</span>'
         : complaint.studentName;
       document.getElementById('valCourse').textContent = complaint.course;
       document.getElementById('valCategory').textContent = complaint.category;
-      const sla = window.AmboCMS.calculateSla(complaint.submittedDate, complaint.urgency);
-      document.getElementById('valUrgency').innerHTML = `<span class="urgency-badge urgency-${complaint.urgency}">${complaint.urgency}</span> <span class="badge-sla ${sla.isOverdue ? 'overdue' : ''}" style="margin-left:6px;">${sla.badgeText}</span>`;
+      document.getElementById('valUrgency').innerHTML = `<span class="urgency-badge urgency-${complaint.urgency}">${complaint.urgency}</span>`;
       document.getElementById('valMessage').textContent = complaint.message;
 
       if (complaint.adminRemark) {
@@ -168,7 +167,7 @@
           teacherAttachmentName: teacherAttachmentName,
           assignedTeacher: teacherName,
           timelineEvent: {
-            title: action === 'needs_confirmation' ? 'Resolution Submitted to Department Head' : 'Teacher Progress Update',
+            title: action === 'needs_confirmation' ? 'Resolution Submitted to Admin' : 'Teacher Progress Update',
             text: `Teacher ${teacherName} submitted response: "${responseText.substring(0, 80)}..."`
           }
         });

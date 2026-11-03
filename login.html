@@ -131,13 +131,11 @@
             <div class="form-group">
               <label for="userRole">Login as Role <span class="required">*</span></label>
               <select id="userRole" name="role" required>
-                <option value="" disabled selected>-- Select statutory role --</option>
-                <option value="student">Student (Abebe Kebede - ugr/12345/16)</option>
-                <option value="teacher">Teacher / Faculty (Mr. Eyuel)</option>
-                <option value="hod">Department Head (Dr. Gemechu)</option>
-                <option value="gender">Gender Directorate (Sister Aster)</option>
-                <option value="committee">ASDC Disciplinary Chair (Dr. Daniel)</option>
-                <option value="president">University President (Prof. Bayisa)</option>
+                <option value="" disabled selected>-- Select your role --</option>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher / Faculty</option>
+                <option value="admin">University Administrator</option>
+                <option value="committee">Disciplinary Committee</option>
               </select>
             </div>
 
@@ -153,13 +151,11 @@
 
           <div class="demo-accounts">
             <span style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Quick 1-Click Demo Login</span>
-            <div class="demo-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px;">
+            <div class="demo-buttons">
               <button type="button" class="btn btn-secondary btn-sm" id="demoStudentBtn">👤 Student</button>
               <button type="button" class="btn btn-secondary btn-sm" id="demoTeacherBtn">👨‍🏫 Teacher</button>
-              <button type="button" class="btn btn-secondary btn-sm" id="demoHodBtn">🏛️ Dept Head</button>
-              <button type="button" class="btn btn-secondary btn-sm" id="demoGenderBtn">⚖️ Gender Director</button>
-              <button type="button" class="btn btn-secondary btn-sm" id="demoCommitteeBtn">📜 ASDC Chair</button>
-              <button type="button" class="btn btn-secondary btn-sm" id="demoPresidentBtn">🎓 President</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="demoAdminBtn">🛡️ Admin</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="demoCommitteeBtn">⚖️ Committee</button>
             </div>
           </div>
         </div>
@@ -182,6 +178,9 @@
       const roleSelect = document.getElementById('userRole');
       const preRole = new URLSearchParams(window.location.search).get('role');
       if (preRole && roleSelect) roleSelect.value = preRole;
+      const loginForm = document.getElementById('loginForm');
+      const pwdInput = document.getElementById('password');
+      const pwdToggle = document.getElementById('pwdToggle');
 
       const eyeOpenIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
       const eyeOffIcon = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
@@ -193,25 +192,84 @@
         pwdToggle.setAttribute('aria-label', isPwd ? 'Hide password' : 'Show password');
       });
 
-      function doRoleLogin(roleKey) {
-        window.AmboCMS.switchDemoRole(roleKey);
-      }
+      document.getElementById('demoStudentBtn').addEventListener('click', () => {
+        window.AmboCMS.setCurrentUser({
+          username: 'johndoe',
+          name: 'John Doe',
+          role: 'student',
+          studentId: 'ugr/12345/16',
+          department: 'Information Technology'
+        });
+        window.AmboCMS.showToast('Logged in as Student John Doe', 'success');
+        setTimeout(() => window.location.href = 'student_dashboard.html', 300);
+      });
 
-      document.getElementById('demoStudentBtn').addEventListener('click', () => doRoleLogin('student'));
-      document.getElementById('demoTeacherBtn').addEventListener('click', () => doRoleLogin('teacher'));
-      document.getElementById('demoHodBtn').addEventListener('click', () => doRoleLogin('hod'));
-      document.getElementById('demoGenderBtn').addEventListener('click', () => doRoleLogin('gender'));
-      document.getElementById('demoCommitteeBtn').addEventListener('click', () => doRoleLogin('committee'));
-      document.getElementById('demoPresidentBtn').addEventListener('click', () => doRoleLogin('president'));
+      document.getElementById('demoTeacherBtn').addEventListener('click', () => {
+        window.AmboCMS.setCurrentUser({
+          username: 'eyuel',
+          name: 'Mr. Eyuel',
+          role: 'teacher',
+          department: 'Information Technology',
+          courses: ['SAD', 'IP', 'DSA']
+        });
+        window.AmboCMS.showToast('Logged in as Teacher Mr. Eyuel', 'success');
+        setTimeout(() => window.location.href = 'teacher_dashboard.html', 300);
+      });
+
+      document.getElementById('demoAdminBtn').addEventListener('click', () => {
+        window.AmboCMS.setCurrentUser({
+          username: 'admin',
+          name: 'Dean of Academic Affairs',
+          role: 'admin'
+        });
+        window.AmboCMS.showToast('Logged in as University Administrator', 'success');
+        setTimeout(() => window.location.href = 'admin_dashboard.html', 300);
+      });
+
+      document.getElementById('demoCommitteeBtn').addEventListener('click', () => {
+        window.AmboCMS.setCurrentUser({
+          username: 'daniel',
+          name: 'Dr. Daniel',
+          role: 'committee',
+          staffId: 'UDC/7710/05',
+          jurisdiction: 'University Disciplinary Committee (UDC)'
+        });
+        window.AmboCMS.showToast('Logged in as Disciplinary Committee Dr. Daniel', 'success');
+        setTimeout(() => window.location.href = 'committee_dashboard.html', 300);
+      });
 
       loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        const username = document.getElementById('username').value.trim();
         const role = document.getElementById('userRole').value;
+
         if (!role) {
-          window.AmboCMS.showToast('Please select your statutory role.', 'warning');
+          window.AmboCMS.showToast('Please select your role.', 'warning');
           return;
         }
-        doRoleLogin(role);
+
+        let name = username;
+        if (role === 'student' && !name) name = 'John Doe';
+        if (role === 'teacher' && !name) name = 'Mr. Eyuel';
+        if (role === 'admin' && !name) name = 'Administrator';
+        if (role === 'committee' && !name) name = 'Dr. Daniel';
+
+        window.AmboCMS.setCurrentUser({
+          username: username,
+          name: name,
+          role: role,
+          studentId: role === 'student' ? 'ugr/12345/16' : null,
+          department: 'Information Technology'
+        });
+
+        window.AmboCMS.showToast(`Welcome back, ${name}!`, 'success');
+
+        setTimeout(() => {
+          if (role === 'student') window.location.href = 'student_dashboard.html';
+          else if (role === 'teacher') window.location.href = 'teacher_dashboard.html';
+          else if (role === 'admin') window.location.href = 'admin_dashboard.html';
+          else if (role === 'committee') window.location.href = 'committee_dashboard.html';
+        }, 300);
       });
     });
   </script>

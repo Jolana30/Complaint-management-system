@@ -75,7 +75,7 @@
         </div>
         <div class="stat-card">
           <h2 id="statPendingAdmin" style="color: #7C3AED;">0</h2>
-          <p>Submitted to HoD</p>
+          <p>Sent to Admin</p>
         </div>
         <div class="stat-card">
           <h2 id="statResolvedTeacher" style="color: #059669;">0</h2>
@@ -90,26 +90,14 @@
             <span style="font-size: 0.86rem; color: var(--text-muted);">Active assessment & academic complaints under your instructional review</span>
           </div>
           
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button type="button" id="openWeeklyReportBtn" class="btn btn-primary" style="font-size: 0.84rem; padding: 7px 14px; display: inline-flex; align-items: center; gap: 8px;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-              <span>Weekly Summary Report</span>
-            </button>
-            <button type="button" id="openFacultyDrawerBtn" class="btn btn-secondary" style="font-size: 0.84rem; padding: 7px 14px; display: inline-flex; align-items: center; gap: 8px;">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-              </svg>
-              <span>Faculty Bulletins</span>
-              <span class="status-badge status-pending" style="padding: 1px 7px; font-size: 0.72rem; border-radius: 9999px;">2</span>
-            </button>
-          </div>
+          <button type="button" id="openFacultyDrawerBtn" class="btn btn-secondary" style="font-size: 0.84rem; padding: 7px 14px; display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span>Faculty Bulletins & Guidelines</span>
+            <span class="status-badge status-pending" style="padding: 1px 7px; font-size: 0.72rem; border-radius: 9999px;">2</span>
+          </button>
         </div>
 
         <div class="table-responsive">
@@ -180,15 +168,8 @@
       }
 
       tbody.innerHTML = assigned.map(c => {
-        const sanitized = window.AmboCMS.getSanitizedComplainant(c, 'teacher');
-        const complainantDisplay = sanitized.isSealed
-          ? `<span class="badge-sealed">🔒 Sealed Identity</span><br><span style="font-size:0.75rem; color:var(--text-muted);">Verified Enrolled Student</span>`
-          : `<strong>${c.studentName}</strong><br><span style="font-size:0.75rem; color:var(--text-muted);">${c.studentId || ''}</span>`;
-
-        const sla = window.AmboCMS.calculateSla(c.submittedDate, c.urgency);
-        const slaBadge = `<span class="badge-sla ${sla.isOverdue ? 'overdue' : ''}">${sla.badgeText}</span>`;
-        const statusBadge = `<span class="status-badge status-${c.status}">${window.AmboCMS.getStatusLabel(c.status, 'teacher')}</span>`;
-        const urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
+        let statusBadge = `<span class="status-badge status-${c.status}">${c.status.replace('_', ' ')}</span>`;
+        let urgencyBadge = `<span class="urgency-badge urgency-${c.urgency}">${c.urgency}</span>`;
 
         let actionBtns = `
           <a href="complaint_details.html?id=${c.id}" class="action-btn-a action-view-a">View</a>
@@ -196,14 +177,14 @@
 
         if (c.status === 'assigned' || c.status === 'in_progress') {
           actionBtns += `
-            <a href="teacher_respond.html?id=${c.id}" class="action-btn-a action-confirm-a" style="white-space: nowrap;">Respond to HoD</a>
+            <a href="teacher_respond.html?id=${c.id}" class="action-btn-a action-confirm-a">Respond</a>
           `;
         }
 
         return `
           <tr>
-            <td><strong>${c.id}</strong><br>${slaBadge}</td>
-            <td>${complainantDisplay}</td>
+            <td><strong>${c.id}</strong></td>
+            <td>${c.severity === 'serious' ? '<span style="color:#b45309; font-style:italic; font-size:0.82rem;">[Protected Identity]</span>' : c.studentName}</td>
             <td><a href="complaint_details.html?id=${c.id}" class="table-link">${c.title}</a></td>
             <td>${c.course}</td>
             <td>${urgencyBadge}</td>
@@ -301,199 +282,6 @@
           closeDrawer();
         }
       });
-    })();
-  </script>
-  <!-- WEEKLY REPORT MODAL -->
-  <div id="weeklyReportModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="reportModalTitle">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3 id="reportModalTitle" style="margin: 0; font-size: 1.12rem; font-weight: 700; color: var(--text-main);">Weekly Faculty Resolution Report</h3>
-        <button type="button" id="closeReportModalBtn" class="drawer-close-btn" aria-label="Close Report">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <div style="border-bottom: 2px solid var(--border-color); padding-bottom: 14px; margin-bottom: 18px;">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
-            <div>
-              <h2 style="font-size: 1.25rem; font-weight: 800; margin: 0 0 4px; color: var(--primary);">Ambo University</h2>
-              <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">Faculty of Computing & Informatics &bull; Department of Information Technology</p>
-            </div>
-            <div style="text-align: right;">
-              <span class="badge" style="background: rgba(37,99,235,0.1); color: #2563eb; font-weight: 700; padding: 4px 10px; border-radius: 6px;">Faculty Resolution Memo</span>
-              <p style="margin: 4px 0 0; font-size: 0.82rem; color: var(--text-muted);" id="reportDateRange">Academic Week Current</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 20px;">
-          <div style="background: var(--surface-alt); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <div style="font-size: 1.35rem; font-weight: 800; color: var(--primary);" id="repTotal">0</div>
-            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">Assigned</div>
-          </div>
-          <div style="background: var(--surface-alt); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <div style="font-size: 1.35rem; font-weight: 800; color: #059669;" id="repResolved">0</div>
-            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">Resolved</div>
-          </div>
-          <div style="background: var(--surface-alt); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <div style="font-size: 1.35rem; font-weight: 800; color: #7c3aed;" id="repPendingHoD">0</div>
-            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">Sent to HoD</div>
-          </div>
-          <div style="background: var(--surface-alt); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <div style="font-size: 1.35rem; font-weight: 800; color: #2563eb;" id="repInProgress">0</div>
-            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">In Review</div>
-          </div>
-          <div style="background: var(--surface-alt); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center;">
-            <div style="font-size: 1.35rem; font-weight: 800; color: #059669;" id="repSlaRate">100%</div>
-            <div style="font-size: 0.74rem; color: var(--text-muted); text-transform: uppercase;">SLA Rate</div>
-          </div>
-        </div>
-
-        <h4 style="font-size: 0.92rem; margin: 0 0 10px; color: var(--text-main);">Itemized Complaint Ledger</h4>
-        <div class="table-responsive" style="margin-bottom: 20px;">
-          <table class="data-table" style="font-size: 0.85rem; width: 100%;">
-            <thead>
-              <tr>
-                <th>Case ID</th>
-                <th>Course</th>
-                <th>Student</th>
-                <th>Category</th>
-                <th>Status</th>
-                <th>Resolution Summary</th>
-              </tr>
-            </thead>
-            <tbody id="reportTableBody">
-            </tbody>
-          </table>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; border-top: 1px dashed var(--border-color); padding-top: 16px; margin-top: 14px; font-size: 0.85rem;">
-          <div>
-            <p style="margin: 0; font-weight: 600; color: var(--text-main);">Instructor: <span id="repInstructorName">Mr. Eyuel</span></p>
-            <p style="margin: 2px 0 0; color: var(--text-muted); font-size: 0.78rem;">Signature: _______________________</p>
-          </div>
-          <div style="text-align: right;">
-            <p style="margin: 0; font-weight: 600; color: var(--text-main);">Department Head: Dr. Gemechu</p>
-            <p style="margin: 2px 0 0; color: var(--text-muted); font-size: 0.78rem;">Verified: _______________________</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="closeReportFooterBtn">Close</button>
-        <button type="button" class="btn btn-secondary" id="exportReportCsvBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          <span>Download CSV</span>
-        </button>
-        <button type="button" class="btn btn-primary" id="printReportBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-          <span>Print / Save PDF</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    (function setupWeeklyReport() {
-      const openBtn = document.getElementById('openWeeklyReportBtn');
-      const modal = document.getElementById('weeklyReportModal');
-      const closeBtn = document.getElementById('closeReportModalBtn');
-      const footerCloseBtn = document.getElementById('closeReportFooterBtn');
-      const printBtn = document.getElementById('printReportBtn');
-      const csvBtn = document.getElementById('exportReportCsvBtn');
-
-      function openModal() {
-        if (!modal) return;
-        populateReportData();
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeModal() {
-        if (!modal) return;
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      function populateReportData() {
-        const user = window.AmboCMS.getCurrentUser();
-        const teacherName = (user && user.name) ? user.name : 'Mr. Eyuel';
-        document.getElementById('repInstructorName').textContent = teacherName;
-
-        const now = new Date();
-        const startWeek = new Date(now);
-        startWeek.setDate(now.getDate() - 7);
-        const fmt = d => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        document.getElementById('reportDateRange').textContent = `${fmt(startWeek)} – ${fmt(now)}`;
-
-        const all = window.AmboCMS.getComplaints();
-        const assigned = all.filter(c => c.assignedTeacher === teacherName || c.assignedTeacher === 'Mr. Eyuel' || c.course === 'IP' || c.course === 'SAD');
-
-        const resolved = assigned.filter(c => c.status === 'resolved');
-        const pendingHoD = assigned.filter(c => c.status === 'needs_confirmation');
-        const inProgress = assigned.filter(c => c.status === 'in_progress' || c.status === 'assigned');
-
-        document.getElementById('repTotal').textContent = assigned.length;
-        document.getElementById('repResolved').textContent = resolved.length;
-        document.getElementById('repPendingHoD').textContent = pendingHoD.length;
-        document.getElementById('repInProgress').textContent = inProgress.length;
-        document.getElementById('repSlaRate').textContent = '100%';
-
-        const tbody = document.getElementById('reportTableBody');
-        if (assigned.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:18px; color:var(--text-muted);">No cases assigned to instructor this week.</td></tr>';
-          return;
-        }
-
-        tbody.innerHTML = assigned.map(c => {
-          const sanitized = window.AmboCMS.getSanitizedComplainant(c, 'teacher');
-          const studentName = sanitized.isSealed ? '[Sealed Identity]' : c.studentName;
-          const statusText = window.AmboCMS.getStatusLabel(c.status, 'teacher');
-          const resolutionText = c.teacherReply ? c.teacherReply : (c.status === 'resolved' ? 'Resolved & Recorded' : 'Under Investigation');
-
-          return `
-            <tr>
-              <td><strong>${c.id}</strong></td>
-              <td>${c.course}</td>
-              <td>${studentName}</td>
-              <td>${c.category}</td>
-              <td><span class="status-badge status-${c.status}">${statusText}</span></td>
-              <td style="max-width: 200px; white-space: normal; font-size: 0.8rem; color: var(--text-main);">${resolutionText}</td>
-            </tr>
-          `;
-        }).join('');
-      }
-
-      function exportCsv() {
-        const user = window.AmboCMS.getCurrentUser();
-        const teacherName = (user && user.name) ? user.name : 'Mr. Eyuel';
-        const all = window.AmboCMS.getComplaints();
-        const assigned = all.filter(c => c.assignedTeacher === teacherName || c.assignedTeacher === 'Mr. Eyuel' || c.course === 'IP' || c.course === 'SAD');
-
-        let csv = 'Case ID,Course,Category,Urgency,Status,Student,Teacher Resolution\n';
-        assigned.forEach(c => {
-          const sanitized = window.AmboCMS.getSanitizedComplainant(c, 'teacher');
-          const sName = sanitized.isSealed ? 'Sealed Identity' : c.studentName;
-          const reply = (c.teacherReply || '').replace(/,/g, ';').replace(/\n/g, ' ');
-          csv += `${c.id},${c.course},${c.category},${c.urgency},${c.status},"${sName}","${reply}"\n`;
-        });
-
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Faculty_Weekly_Report_${teacherName.replace(/\s+/g, '_')}.csv`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.AmboCMS.showToast('Weekly CSV report downloaded!', 'success');
-      }
-
-      if (openBtn) openBtn.addEventListener('click', openModal);
-      if (closeBtn) closeBtn.addEventListener('click', closeModal);
-      if (footerCloseBtn) footerCloseBtn.addEventListener('click', closeModal);
-      if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-      if (printBtn) printBtn.addEventListener('click', () => window.print());
-      if (csvBtn) csvBtn.addEventListener('click', exportCsv);
     })();
   </script>
 </body>
